@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="detail_page_title">Style Detail - Aurora UI</title>
+    <!-- Google Fonts (Include Inter or other suitable fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+    <!-- Page-specific and global translations -->
+    <script src="../translations_pages/aurora-ui-translations.js"></script>
+    <script src="../translations.js"></script>
+</head>
+<!-- 关键：应用 Aurora UI 主题类 -->
+<body class="theme-aurora-ui">
+    <header>
+        <div class="container">
+            <h1 data-translate="detail_header_title">Aurora UI</h1>
+            <p data-translate="detail_header_subtitle">Explore the features and applications of the <span class="highlight">Aurora UI</span> web design style</p>
+            <button id="language-switcher" class="language-btn">
+                <img src="../img/cnen.svg" alt="Switch Language">
+            </button>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="detail_back_to_list">Back to Style List</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="detail_about_style_title">About This Style</h2>
+            <p data-translate="detail_about_p1">Aurora UI is an interface design style inspired by the natural phenomenon of the aurora borealis. It creates an ethereal, dreamy, and light-filled visual effect by using <strong>large, soft, highly blurred colorful glows</strong> (often dominated by blue-green tones) in the background.</p>
+            <p data-translate="detail_about_p2">This style is often combined with dark mode to better highlight the flowing color glows in the background and is frequently accompanied by smooth animation effects to enhance its dynamism.</p>
+            <h3 data-translate="detail_features_title">Main Features:</h3>
+            <ul>
+                <li data-translate="detail_feature_1"><strong>Blurred Background Shapes:</strong> Uses CSS's `filter: blur()` property to highly blur absolutely or fixed positioned colored gradient elements, forming soft light spots.</li>
+                <li data-translate="detail_feature_2"><strong>Blue-Green Focused Gradients:</strong> Background glows primarily use vibrant greens, teals, blues, and can be accented with small amounts of purple or pink to simulate aurora color variations.</li>
+                <li data-translate="detail_feature_3"><strong>Dark Background:</strong> A dark or near-black base background better accentuates the brightness and saturation of the aurora colors.</li>
+                <li data-translate="detail_feature_4"><strong>Depth and Layering:</strong> Blurred background glows are positioned beneath the content layer, creating a distinct sense of spatial depth.</li>
+                <li data-translate="detail_feature_5"><strong>Flowing Animations:</strong> Optional smooth animations (like slow movement, rotation, or color changes of light spots) can enhance the dynamic feel of the aurora.</li>
+                <li data-translate="detail_feature_6"><strong>Clean Foreground:</strong> Foreground content (text, icons, buttons, cards) is usually kept simple and clean, using clear fonts and sufficient contrast to ensure information is clearly conveyed against the dynamic background. Elements like cards might use semi-transparent dark backgrounds or gradients.</li>
+            </ul>
+            <p data-translate="detail_about_p3">Aurora UI is suitable for websites and applications that need to create a sense of technology, futurism, tranquility, or a dreamlike atmosphere, such as SaaS platforms, data visualization, and creative portfolios.</p>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="detail_prompt_title">Example AI Prompt</h2>
+            <pre><code>Design a web application interface with an Aurora UI style. Use a very dark background (e.g., #0d1117). Create large, intensely blurred (e.g., filter: blur(140px)) background gradient shapes (opacity: 0.7) primarily using aurora-like colors: vibrant green (e.g., #34d399), teal (e.g., #2dd4bf), deep blue (e.g., #3b82f6), and a touch of violet (e.g., #8b5cf6). Position these shapes dynamically, partially overlapping and extending off-screen. Apply a subtle, slow, and wide-ranging animation to simulate aurora movement. Foreground cards should use a semi-transparent blue-green gradient background (e.g., linear-gradient(135deg, rgba(20, 184, 166, 0.85), rgba(59, 130, 246, 0.85))) to ensure text readability. Use 'Inter' font. Buttons should use a saturated teal (e.g., #14b8a6) with white text.</code></pre>
+            <p data-translate="detail_prompt_example_p1">（中文解释：设计一个具有极光 UI 风格的 Web 应用界面。使用非常深的背景（例如 #0d1117）。创建大型、强烈模糊（例如 filter: blur(140px)）、透明度为0.7的背景渐变形状，主要使用类似极光的颜色：鲜绿色（例如 #34d399）、青色（例如 #2dd4bf）、深蓝色（例如 #3b82f6）和少量紫色（例如 #8b5cf6）。动态地放置这些形状，使其部分重叠并延伸到屏幕外。应用微妙、缓慢且范围广泛的动画来模拟极光运动。前景卡片应使用半透明的蓝绿渐变背景（例如 linear-gradient(135deg, rgba(20, 184, 166, 0.85), rgba(59, 130, 246, 0.85))）以确保文本的可读性。使用 'Inter' 字体。按钮应使用饱和的青色（例如 #14b8a6）和白色文本。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section (Updated to reflect higher saturation version) -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="detail_css_title">Theme CSS Snippets</h2>
+            <p data-translate="detail_css_p1">以下是将此极光 UI 风格（蓝绿色调，动态效果，更高饱和度）应用为全局主题的核心 CSS 代码 (<code>body.theme-aurora-ui</code>)。它通过伪元素创建模糊的背景光晕效果，并包含动画：</p>
+            <pre><code class="language-css">
+                <pre><code class="language-css">
+                    /* ==========================================================================
+                       14. Aurora UI Theme (Blue-Green Focus, Dynamic - Enhanced Readability)
+                       ========================================================================== */
+                    
+                    body.theme-aurora-ui {
+                        /* Base Colors & Typography */
+                        --page-bg: #0d1117;
+                        --text-color: #d0d8f0; /* General page text */
+                        --heading-color: #e8f0ff; /* General page headings */
+                        --link-color: #14b8a6;
+                        --link-hover-color: #0d9488;
+                        --border-color: rgba(255, 255, 255, 0.2);
+                    
+                        /* Card & Section Styles - Enhanced Readability */
+                        --card-bg: rgba(23, 37, 59, 0.92); /* Darker, highly opaque for content areas */
+                        --card-text-color: #e0e7ff;
+                        --card-heading-color: #f0f5ff;
+                        --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+                        --card-hover-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+                        --card-border-radius: 14px;
+                    
+                        /* Header & Footer Styles */
+                        --header-bg: rgba(13, 17, 23, 0.88);
+                        --header-text-color: var(--heading-color);
+                        --footer-bg: rgba(13, 17, 23, 0.88);
+                        --footer-text-color: #a1a1aa;
+                    
+                        /* Button Styles */
+                        --button-bg: var(--link-color);
+                        --button-text-color: #ffffff;
+                        /* ... (其他按钮变量) ... */
+                    
+                        /* Prompt Area & Code Block Styles */
+                        --prompt-bg: rgba(0, 0, 0, 0.45);
+                        --prompt-text-color: var(--card-text-color);
+                    
+                        /* Aurora Specific Colors (Background Glows) */
+                        --aurora-color-1: #34d399; /* ... */
+                        --aurora-color-2: #2dd4bf; /* ... */
+                        --aurora-color-3: #3b82f6; /* ... */
+                        --aurora-color-4: #8b5cf6; /* ... */
+                    
+                        position: relative; overflow-x: hidden;
+                        background-color: var(--page-bg);
+                        color: var(--text-color);
+                        font-family: var(--base-font);
+                    }
+                    
+                    /* Aurora Effect Background Shapes */
+                    body.theme-aurora-ui::before,
+                    body.theme-aurora-ui::after {
+                        content: ""; position: fixed; z-index: -1;
+                        filter: blur(140px); opacity: 0.65; /* Adjusted opacity */
+                        /* ... (其他伪元素样式) ... */
+                    }
+                    /* ... (动画和其他相关规则如文本阴影等，可在此处补充或说明在外部应用) ... */
+                    /*
+                      Note: Specific text colors for content within cards/sections
+                      (var(--card-text-color), var(--card-heading-color)) and
+                      text-shadows for headings are applied via additional CSS rules
+                      when this theme is active to ensure readability.
+                    */
+                                </code></pre>
+            </code></pre>
+            <p><small data-translate="detail_css_note">注意：极光 UI 的效果很大程度上取决于模糊度、颜色选择、透明度、形状大小和位置的微调。动画效果是可选的，但可以增加动态感。请注意此效果可能对性能有一定要求。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="detail_download_title">Resource Download (Example)</h2>
+            <p data-translate="detail_download_p1">下载包含此风格更完整 CSS 定义的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/aurora-ui.zip" class="btn btn-download" download data-translate="detail_download_button">
+                下载 aurora-ui.zip
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="detail_footer_text">AI Website Style Gallery</span></p>
+        </div>
+    </footer>
+
+    <!-- Link to main JS file -->
+    <script src="../script.js" defer></script>
+</body>
+</html>

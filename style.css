@@ -1,0 +1,1485 @@
+/* --- Global Styles & CSS Variables --- */
+:root {
+    /* Default Theme Variables (Light/Standard) */
+    --page-bg: #eef2f7;
+    --page-bg-gradient: linear-gradient(to bottom right, #eef2f7, #dbe6f2);
+    --text-color: #333;
+    --heading-color: #111;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --border-color: #ddd;
+    --card-bg: #fff;
+    --card-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    --card-hover-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    --header-bg: #343a40;
+    --header-text-color: white;
+    --footer-text-color: #6c757d;
+    --button-bg: var(--link-color);
+    --button-text-color: white;
+    --button-hover-bg: var(--link-hover-color);
+    --prompt-bg: #f8f8f8;
+    --prompt-text-color: #555;
+
+    /* Fonts */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Default */
+    --font-inter: 'Inter', sans-serif; /* Specifically for Minimalist (Now removed, but keep variable just in case) */
+    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif; /* Added Georgia for Skeuo */
+    --font-mono: 'Roboto Mono', 'Source Code Pro', monospace;
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-pop: 'Poppins', sans-serif; /* Modern, 3D, Aurora, Clay */
+    --font-roboto: 'Roboto', sans-serif; /* Material (Now removed, but keep variable) */
+    --font-lato: 'Lato', sans-serif; /* Flat (Removed), Natural */
+    --font-montserrat: 'Montserrat', sans-serif; /* Illustration, Bold, Abstract */
+    --font-open-sans: 'Open Sans', sans-serif; /* Dark Mode */
+    --font-space-mono: 'Space Mono', monospace; /* Y2K */
+    --font-times: 'Times New Roman', Times, serif; /* 90s */
+    --font-helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Swiss */
+    --font-grunge: 'Courier New', Courier, monospace, 'Special Elite', cursive; /* Grunge - Example */
+
+    /* Base Theme Font (can be overridden by themes) */
+    --base-font: var(--font-sans);
+    --heading-font: var(--font-sans);
+
+    /* Radii & Shadows */
+    --base-border-radius: 8px;
+    --card-border-radius: var(--base-border-radius);
+    --button-border-radius: 4px;
+    --material-shadow-dp2: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); /* Keep for reference */
+    --material-shadow-dp4: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2); /* Keep for reference */
+    --clay-shadow-inset: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -3px -3px 7px rgba(255, 255, 255, 0.7);
+    --clay-shadow-outset: 3px 3px 5px rgba(0, 0, 0, 0.1), -3px -3px 7px rgba(255, 255, 255, 0.7);
+    --skeuo-shadow-inset: inset 1px 1px 3px rgba(0,0,0,0.4), inset -1px -1px 3px rgba(255,255,255,0.6);
+    --skeuo-shadow-outset: 1px 1px 2px rgba(255,255,255,0.5), -1px -1px 3px rgba(0,0,0,0.3);
+}
+
+/* --- Base Styles --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--base-font); line-height: 1.6; color: var(--text-color); background-color: var(--page-bg); background-image: var(--page-bg-gradient); transition: background-color 0.3s ease, color 0.3s ease; min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--link-color); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--link-hover-color); text-decoration: underline; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; flex-grow: 1; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); color: var(--heading-color); margin-bottom: 0.75rem; }
+
+/* --- Header & Footer --- */
+header { background-color: var(--header-bg); color: var(--header-text-color); padding: 1.5rem 1rem; text-align: center; margin-bottom: 2rem; transition: background-color 0.3s ease, color 0.3s ease; box-shadow: var(--header-shadow, none); }
+header h1 { font-size: 2em; margin-bottom: 0.5rem; color: inherit; }
+header p { font-size: 1.1em; opacity: 0.9; color: inherit; }
+header .highlight { color: yellow; font-weight: bold; }
+footer { text-align: center; margin-top: 3rem; padding: 1.5rem 1rem; font-size: 0.9em; color: var(--footer-text-color); border-top: 1px solid var(--border-color); transition: color 0.3s ease, border-color 0.3s ease; background-color: var(--footer-bg, transparent); }
+
+/* --- Base Button Styles --- */
+.btn { display: inline-block; padding: 0.6em 1.2em; background-color: var(--button-bg); color: var(--button-text-color) !important; border: var(--button-border, none); border-radius: var(--button-border-radius); text-align: center; cursor: pointer; transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; text-decoration: none !important; font-size: 0.90em; font-family: inherit; line-height: 1.4; margin: 0.2em; box-shadow: var(--button-shadow, none); }
+.btn:hover { background-color: var(--button-hover-bg); transform: translateY(-1px); box-shadow: var(--button-hover-shadow, 0 2px 4px rgba(0,0,0,0.1)); }
+.btn-secondary { background-color: var(--button-secondary-bg, #6c757d); color: var(--button-secondary-text-color, white) !important; border: var(--button-secondary-border, none); font-size: 0.8em; padding: 0.4em 0.8em; }
+.btn-secondary:hover { background-color: var(--button-secondary-hover-bg, #5a6268); color: var(--button-secondary-hover-text-color, white) !important; }
+
+/* --- Card Layout (Homepage) --- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; padding-bottom: 2rem; }
+
+/* --- Base Card Styles (Layout & Structure - NO IMAGE) --- */
+.card { border: 1px solid var(--border-color); border-radius: var(--card-border-radius); background-color: var(--card-bg); background-image: var(--card-bg-image, none); /* For textures */ box-shadow: var(--card-shadow); transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.3s ease, border-color 0.3s ease; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); }
+
+/* --- Card Content Area Styles (Adjusted for No Image) --- */
+.card-content { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; z-index: 1; }
+.card-content h3 { margin-bottom: 0.5rem; font-size: 1.15em; font-weight: 700; line-height: 1.3; color: var(--heading-color); transition: color 0.3s ease; }
+.card-content .prompt-label { font-weight: bold; font-size: 0.85em; margin-top: 0.5rem; margin-bottom: 0.2rem; color: inherit; opacity: 0.8; }
+.card-content .prompt-text { font-size: 0.85em; color: var(--prompt-text-color); background-color: var(--prompt-bg); background-image: var(--prompt-bg-image, none); /* For textures */ padding: 0.6em; border-radius: 4px; margin-bottom: 1.2rem; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; border: 1px solid transparent; transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; box-shadow: var(--prompt-shadow, none); }
+.card-buttons { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: space-between; }
+
+
+/* --- INDIVIDUAL Card Themes (Styling the card itself) --- */
+
+/* 1. Skeuomorphism Card (NEW) */
+.card[data-style-id="skeuomorphism"] {
+    background-color: #d2b48c; /* Tan */
+    background-image: var(--skeuo-texture-light, linear-gradient(rgba(255,255,255,0.05), rgba(0,0,0,0.05))); /* Subtle texture */
+    border: 1px solid #a0522d; /* Sienna border */
+    border-radius: 6px;
+    box-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2);
+}
+.card[data-style-id="skeuomorphism"] h3 { font-family: var(--font-serif); color: #5e3a1d; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
+.card[data-style-id="skeuomorphism"] .prompt-text {
+    background-color: #f5f5dc; /* Beige paper */
+    color: #4a3c2a;
+    border: 1px solid #e0d8c0;
+    box-shadow: var(--skeuo-shadow-inset);
+}
+.card[data-style-id="skeuomorphism"] .btn {
+    font-family: var(--font-serif); border-radius: 4px;
+    background: linear-gradient(to bottom, #b8860b, #cd853f); /* Goldenrod gradient */
+    color: white !important; text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid #8b4513; /* SaddleBrown */
+    box-shadow: var(--skeuo-shadow-outset);
+}
+.card[data-style-id="skeuomorphism"] .btn:hover { background: linear-gradient(to bottom, #cd853f, #b8860b); }
+.card[data-style-id="skeuomorphism"] .btn-secondary {
+    background: linear-gradient(to bottom, #f0e68c, #eee8aa); /* Khaki gradient */
+    color: #5e3a1d !important; text-shadow: none;
+    border-color: #bdb76b; /* DarkKhaki */
+}
+.card[data-style-id="skeuomorphism"] .btn-secondary:hover { background: linear-gradient(to bottom, #eee8aa, #f0e68c); }
+
+/* 2. Swiss Style Card (NEW) */
+.card[data-style-id="swiss-style"] {
+    background-color: #fff; border: 1px solid #e0e0e0; border-radius: 0; box-shadow: none;
+}
+.card[data-style-id="swiss-style"] h3 {
+    font-family: var(--font-helvetica); font-weight: 700; /* Bold */
+    font-size: 1.5em; line-height: 1.2; color: #111; text-transform: lowercase; /* Common in Swiss Style */
+}
+.card[data-style-id="swiss-style"] .prompt-label { font-family: var(--font-helvetica); font-weight: 400; color: #555; }
+.card[data-style-id="swiss-style"] .prompt-text { background-color: #f5f5f5; color: #333; border: none; font-family: var(--font-helvetica); font-size: 0.9em; }
+.card[data-style-id="swiss-style"] .btn {
+    font-family: var(--font-helvetica); border-radius: 0; text-transform: uppercase; font-size: 0.8em; padding: 0.5em 1em;
+}
+.card[data-style-id="swiss-style"] .btn:not(.btn-secondary) { background-color: #e60000; /* Strong Red */ color: white !important; }
+.card[data-style-id="swiss-style"] .btn:not(.btn-secondary):hover { background-color: #b30000; }
+.card[data-style-id="swiss-style"] .btn-secondary { background-color: #333; color: white !important; }
+.card[data-style-id="swiss-style"] .btn-secondary:hover { background-color: #000; }
+
+/* 3. Grunge Card (NEW) */
+.card[data-style-id="grunge"] {
+    background-color: #4a4a4a; /* Dark Grey */
+    /* Add subtle noise/texture background image if possible */
+    background-image: var(--grunge-texture, linear-gradient(rgba(255,255,255,0.02), rgba(0,0,0,0.02)));
+    border: 1px solid #222;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transform: rotate(-0.5deg); /* Slight tilt */
+}
+.card[data-style-id="grunge"]:hover { transform: rotate(0.5deg) translateY(-3px); } /* Adjust hover */
+.card[data-style-id="grunge"] h3 {
+    font-family: var(--font-grunge); color: #ccc; font-weight: normal;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); text-transform: uppercase;
+}
+.card[data-style-id="grunge"] .prompt-text {
+    background-color: rgba(0,0,0,0.2); color: #aaa;
+    border: 1px dashed #666; font-family: var(--font-grunge); font-size: 0.9em;
+}
+.card[data-style-id="grunge"] .btn {
+    font-family: var(--font-grunge); border-radius: 2px; text-transform: none;
+    border: 1px solid #777;
+}
+.card[data-style-id="grunge"] .btn:not(.btn-secondary) { background-color: #8b0000; /* Dark Red */ color: #ccc !important; }
+.card[data-style-id="grunge"] .btn:not(.btn-secondary):hover { background-color: #a52a2a; /* Brown */ }
+.card[data-style-id="grunge"] .btn-secondary { background-color: #333; color: #aaa !important; }
+.card[data-style-id="grunge"] .btn-secondary:hover { background-color: #555; color: #ccc !important; }
+
+/* 4. Modern Tech Card (ENHANCED TECH FEEL) */
+.card[data-style-id="modern-tech"] {
+    background-color: #49efed;
+    border: 1px solid #e8eef3; /* Use new border color */
+    border-radius: 4px; /* Use new sharper radius */
+    box-shadow: 0 3px 10px rgba(29, 35, 42, 0.08); /* Use new shadow */
+}
+.card[data-style-id="modern-tech"] h3 {
+    font-family: var(--font-pop);
+    color: #0b132b; /* Use new heading color */
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+.card[data-style-id="modern-tech"] .prompt-text {
+    background-color: #eef2f7; /* Use new prompt bg */
+    color: #343a40; /* Use new prompt text color */
+    font-family: var(--mono-font, monospace);
+    font-size: 0.85em;
+    border-color: transparent;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); /* Add inset shadow */
+    border-radius: 2px; /* Sharper radius */
+}
+.card[data-style-id="modern-tech"] .btn {
+    font-family: var(--font-pop);
+    border-radius: 2px; /* Use new sharper radius */
+}
+.card[data-style-id="modern-tech"] .btn:not(.btn-secondary) {
+    background: linear-gradient(to bottom, #5a6aff, #4d5bff); /* Use new button gradient */
+    color: white !important;
+    box-shadow: 0 1px 2px rgba(77, 91, 255, 0.2); /* Use new button shadow */
+}
+.card[data-style-id="modern-tech"] .btn:not(.btn-secondary):hover {
+    background: linear-gradient(to bottom, #4d5bff, #3a4bf0); /* Use new button hover gradient */
+    /* Add glow effect on hover for the card button too */
+    box-shadow: 0 2px 4px rgba(77, 91, 255, 0.2), 0 0 8px rgba(77, 91, 255, 0.3);
+}
+.card[data-style-id="modern-tech"] .btn-secondary {
+    background-color: #e9ecef;
+    color: #495057 !important;
+}
+.card[data-style-id="modern-tech"] .btn-secondary:hover {
+    background-color: #dee2e6; /* Use new secondary hover bg */
+}
+/* 5. Brutalism Card */
+body.theme-brutalism .highlight {
+    color: rgb(142, 0, 0); /* Brutalism 风格的亮黄色高亮 */
+    background-color: transparent; /* 通常背景透明 */
+}
+
+.card[data-style-id="brutalism"] { background-color: #f0f0f0; border: 2px solid #000000; border-radius: 0; box-shadow: 4px 4px 0px #000000; }
+.card[data-style-id="brutalism"] h3 { font-family: var(--font-mono); color: #000; font-weight: bold; text-transform: uppercase; font-size: 1.1em; }
+.card[data-style-id="brutalism"] .prompt-text { background-color: #e0e0e0; color: #111; font-family: var(--font-mono); border: 1px solid #aaa; }
+.card[data-style-id="brutalism"] .btn { border: 2px solid black; border-radius: 0; font-family: var(--font-mono); font-weight: bold; }
+.card[data-style-id="brutalism"] .btn:not(.btn-secondary) { background-color: yellow; color: black !important; }
+.card[data-style-id="brutalism"] .btn:not(.btn-secondary):hover { background-color: black; color: yellow !important; }
+.card[data-style-id="brutalism"] .btn-secondary { background-color: black; color: yellow !important; }
+.card[data-style-id="brutalism"] .btn-secondary:hover { background-color: yellow; color: black !important; }
+
+/* 6. Retro - 90s Web Card */
+.card[data-style-id="retro-90s"] { background-color: #c0c0c0; border: 2px outset #eee; border-radius: 0; box-shadow: none; }
+.card[data-style-id="retro-90s"] h3,
+.card[data-style-id="retro-90s"] .prompt-label,
+.card[data-style-id="retro-90s"] .prompt-text,
+.card[data-style-id="retro-90s"] .btn { font-family: var(--font-times) !important; }
+.card[data-style-id="retro-90s"] h3 { color: #000080; font-weight: bold; }
+.card[data-style-id="retro-90s"] .prompt-text { background-color: #fff; border: 1px solid #000; color: #000; }
+.card[data-style-id="retro-90s"] .btn { border-radius: 0; border: 2px outset #eee; padding: 0.3em 0.8em; font-size: 0.9em; }
+.card[data-style-id="retro-90s"] .btn:not(.btn-secondary) { background-color: #0000ff; color: yellow !important; }
+.card[data-style-id="retro-90s"] .btn:not(.btn-secondary):hover { background-color: yellow; color: #0000ff !important; }
+.card[data-style-id="retro-90s"] .btn-secondary { background-color: #ff0000; color: white !important; }
+.card[data-style-id="retro-90s"] .btn-secondary:hover { background-color: #800000; }
+
+/* 7. Retro - Y2K Aesthetic Card */
+body.theme-retro-y2k .highlight {
+    color: #FF69B4; /* Y2K 风格的亮粉色高亮 */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* 可选：添加轻微文字阴影以增强效果 */
+}
+
+.card[data-style-id="retro-y2k"] { background: linear-gradient(135deg, #ffccde 0%, #c4f1f9 100%); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 10px; box-shadow: 0 0 15px rgba(255, 105, 180, 0.3); }
+.card[data-style-id="retro-y2k"] h3 { font-family: var(--font-space-mono); color: #3d3d5c; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7); }
+.card[data-style-id="retro-y2k"] .prompt-text { background-color: rgba(255, 255, 255, 0.3); color: #5c5c8a; backdrop-filter: blur(2px); border-radius: 5px; border: none; }
+.card[data-style-id="retro-y2k"] .btn { font-family: var(--font-space-mono); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.5); }
+.card[data-style-id="retro-y2k"] .btn:not(.btn-secondary) { background-color: #ff69b4; color: white !important; }
+.card[data-style-id="retro-y2k"] .btn:not(.btn-secondary):hover { background-color: #ff1493; }
+.card[data-style-id="retro-y2k"] .btn-secondary { background-color: rgba(255, 255, 255, 0.5); color: #ff69b4 !important; }
+.card[data-style-id="retro-y2k"] .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.8); }
+
+/* 8. Retro - Pixel Art Card */
+.card[data-style-id="retro-pixel"] { background-color: #1a1a1a; border: 2px solid #00ff00; border-radius: 0; }
+.card[data-style-id="retro-pixel"] h3,
+.card[data-style-id="retro-pixel"] .prompt-label,
+.card[data-style-id="retro-pixel"] .prompt-text,
+.card[data-style-id="retro-pixel"] .btn { font-family: var(--font-pixel) !important; }
+.card[data-style-id="retro-pixel"] h3,
+.card[data-style-id="retro-pixel"] .prompt-label { color: #00ff00; font-size: 0.8em; text-shadow: 1px 1px #111; }
+.card[data-style-id="retro-pixel"] .prompt-text { background-color: #2a2a2a; border: 1px dashed #00ff00; padding: 0.4em; color: #00dd00; font-size: 0.8em; }
+.card[data-style-id="retro-pixel"] .btn { border: 1px solid #00ff00; border-radius: 0; padding: 0.5em 0.8em; font-size: 0.7em; }
+.card[data-style-id="retro-pixel"] .btn:not(.btn-secondary) { background-color: #ff00ff; color: #1a1a1a !important; }
+.card[data-style-id="retro-pixel"] .btn:not(.btn-secondary):hover { background-color: #00ff00; }
+.card[data-style-id="retro-pixel"] .btn-secondary { background-color: #00ff00; color: #1a1a1a !important; }
+.card[data-style-id="retro-pixel"] .btn-secondary:hover { background-color: #ff00ff; }
+
+/* 9. Illustration Focused Card */
+.card[data-style-id="illustration"] { background-color: #fffaf0; border: 2px dashed #f4a261; border-radius: 12px; }
+.card[data-style-id="illustration"] h3 { font-family: var(--font-montserrat); color: #e76f51; font-weight: 700; }
+.card[data-style-id="illustration"] .prompt-text { background-color: #fefae0; color: #606c38; border: 1px solid #dda15e; }
+.card[data-style-id="illustration"] .btn { font-family: var(--font-montserrat); border-radius: 20px; }
+.card[data-style-id="illustration"] .btn:not(.btn-secondary) { background-color: #2a9d8f; color: white !important; }
+.card[data-style-id="illustration"] .btn:not(.btn-secondary):hover { background-color: #264653; }
+.card[data-style-id="illustration"] .btn-secondary { background-color: #f4a261; color: white !important; }
+.card[data-style-id="illustration"] .btn-secondary:hover { background-color: #e76f51; }
+
+/* 10. 3D Elements / Interactive Card */
+.card[data-style-id="3d-interactive"] { background: linear-gradient(45deg, #6a85b6 0%, #bac8e0 100%); border: 1px solid #bac8e0; border-radius: 8px; box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1); }
+.card[data-style-id="3d-interactive"] h3 { font-family: var(--font-pop); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+.card[data-style-id="3d-interactive"] .prompt-text { background-color: rgba(0, 0, 0, 0.1); color: #f0f0f0; border: none; }
+.card[data-style-id="3d-interactive"] .btn { font-family: var(--font-pop); border-radius: 5px; }
+.card[data-style-id="3d-interactive"] .btn:not(.btn-secondary) { background-color: rgba(255, 255, 255, 0.2); color: white !important; }
+.card[data-style-id="3d-interactive"] .btn:not(.btn-secondary):hover { background-color: rgba(255, 255, 255, 0.4); }
+.card[data-style-id="3d-interactive"] .btn-secondary { background-color: rgba(0, 0, 0, 0.2); color: #ddd !important; }
+.card[data-style-id="3d-interactive"] .btn-secondary:hover { background-color: rgba(0, 0, 0, 0.4); }
+
+/* 11. Dark Mode Card */
+.card[data-style-id="dark-mode"] { background-color: #121212; border-color: #333333; border-radius: 6px; }
+.card[data-style-id="dark-mode"] h3,
+.card[data-style-id="dark-mode"] .prompt-label { color: #e0e0e0; font-family: var(--font-open-sans); }
+.card[data-style-id="dark-mode"] .prompt-text { background-color: #222222; color: #b0b0b0; border-color: #444444; }
+.card[data-style-id="dark-mode"] .btn { font-family: var(--font-open-sans); font-weight: 600; }
+.card[data-style-id="dark-mode"] .btn:not(.btn-secondary) { background-color: #0a84ff; color: white !important; }
+.card[data-style-id="dark-mode"] .btn:not(.btn-secondary):hover { background-color: #005ecb; }
+.card[data-style-id="dark-mode"] .btn-secondary { background-color: #333333; color: #b0b0b0 !important; }
+.card[data-style-id="dark-mode"] .btn-secondary:hover { background-color: #444444; color: white !important; }
+
+/* 12. Bold Typography Card */
+.card[data-style-id="bold-typography"] { background-color: #fff; border: 2px solid #000; border-radius: 0; }
+.card[data-style-id="bold-typography"] h3 { font-family: var(--font-montserrat); font-weight: 900; font-size: 1.8em; line-height: 1.1; text-transform: uppercase; color: #000; margin-bottom: 1rem; }
+.card[data-style-id="bold-typography"] .prompt-label { display: none; }
+.card[data-style-id="bold-typography"] .prompt-text { font-family: var(--font-mono); background: none; border: none; padding: 0; color: #555; font-size: 0.8em; }
+.card[data-style-id="bold-typography"] .btn { background-color: #000; color: #fff !important; border-radius: 0; font-family: var(--font-montserrat); font-weight: 700; }
+.card[data-style-id="bold-typography"] .btn:hover { background-color: #444; }
+.card[data-style-id="bold-typography"] .btn-secondary { background-color: #eee; color: #000 !important; }
+.card[data-style-id="bold-typography"] .btn-secondary:hover { background-color: #ccc; }
+
+/* 13. Glassmorphism Card */
+.card[data-style-id="glassmorphism"] { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
+.card[data-style-id="glassmorphism"] h3,
+.card[data-style-id="glassmorphism"] .prompt-label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.card[data-style-id="glassmorphism"] .prompt-text { background-color: rgba(0, 0, 0, 0.15); color: #f0f0f0; border-color: rgba(255, 255, 255, 0.1); }
+.card[data-style-id="glassmorphism"] .btn { border: 1px solid rgba(255, 255, 255, 0.3); }
+.card[data-style-id="glassmorphism"] .btn:not(.btn-secondary) { background-color: rgba(255, 255, 255, 0.25); color: #fff !important; }
+.card[data-style-id="glassmorphism"] .btn:not(.btn-secondary):hover { background-color: rgba(255, 255, 255, 0.4); }
+.card[data-style-id="glassmorphism"] .btn-secondary { background-color: rgba(0, 0, 0, 0.2); color: #eee !important; }
+.card[data-style-id="glassmorphism"] .btn-secondary:hover { background-color: rgba(0, 0, 0, 0.4); }
+
+/* 14. Aurora UI Card */
+.card[data-style-id="aurora-ui"] { background-color: #1a1f2c; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+.card[data-style-id="aurora-ui"]::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(170, 156, 252, 0.3) 0%, rgba(170, 156, 252, 0) 50%), radial-gradient(circle at top left, rgba(150, 220, 255, 0.3) 0%, rgba(150, 220, 255, 0) 40%), radial-gradient(circle at bottom right, rgba(255, 150, 200, 0.3) 0%, rgba(255, 150, 200, 0) 45%); animation: aurora-spin 15s linear infinite; z-index: 0; }
+@keyframes aurora-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.card[data-style-id="aurora-ui"] h3,
+.card[data-style-id="aurora-ui"] .prompt-label,
+.card[data-style-id="aurora-ui"] .prompt-text { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+.card[data-style-id="aurora-ui"] .prompt-text { background-color: rgba(0, 0, 0, 0.2); border-color: rgba(255, 255, 255, 0.1); }
+.card[data-style-id="aurora-ui"] .btn { background-color: rgba(255, 255, 255, 0.15); color: #fff !important; border: 1px solid rgba(255, 255, 255, 0.2); }
+.card[data-style-id="aurora-ui"] .btn:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+/* 15. Natural / Organic Card */
+.card[data-style-id="natural-organic"] { background-color: #f5f0e1; border: 1px solid #d4c8a8; border-radius: 6px; }
+.card[data-style-id="natural-organic"] h3 { font-family: var(--font-lato); color: #5e4a30; font-weight: 700; }
+.card[data-style-id="natural-organic"] .prompt-text { background-color: #e8e0c9; color: #6b5b40; border-color: #d4c8a8; }
+.card[data-style-id="natural-organic"] .btn { font-family: var(--font-lato); }
+.card[data-style-id="natural-organic"] .btn:not(.btn-secondary) { background-color: #8b7e66; color: white !important; }
+.card[data-style-id="natural-organic"] .btn:not(.btn-secondary):hover { background-color: #7a6f5a; }
+.card[data-style-id="natural-organic"] .btn-secondary { background-color: #d4c8a8; color: #5e4a30 !important; }
+.card[data-style-id="natural-organic"] .btn-secondary:hover { background-color: #c8bca0; }
+
+/* 16. Monochromatic Card */
+.card[data-style-id="monochromatic"] { background-color: #e6f0ff; border: 1px solid #b3d1ff; border-radius: 5px; }
+.card[data-style-id="monochromatic"] h3 { font-family: var(--font-roboto); color: #004080; }
+.card[data-style-id="monochromatic"] .prompt-text { background-color: #cce0ff; color: #0059b3; border-color: #99c2ff; }
+.card[data-style-id="monochromatic"] .btn { font-family: var(--font-roboto); border-radius: 5px; }
+.card[data-style-id="monochromatic"] .btn:not(.btn-secondary) { background-color: #007bff; color: white !important; }
+.card[data-style-id="monochromatic"] .btn:not(.btn-secondary):hover { background-color: #0056b3; }
+.card[data-style-id="monochromatic"] .btn-secondary { background-color: #66b3ff; color: #004080 !important; }
+.card[data-style-id="monochromatic"] .btn-secondary:hover { background-color: #99c2ff; }
+
+/* 17. Maximalism / Collage Card */
+.card[data-style-id="maximalism"] { background-color: #ffcc00; border: 3px dotted #ff00ff; border-radius: 0; box-shadow: 5px 5px 0 #00ffff; overflow: visible; }
+.card[data-style-id="maximalism"] h3 { font-family: var(--font-serif); color: #ff00ff; font-weight: bold; text-transform: uppercase; font-size: 1.3em; text-align: center; background-color: #00ff00; padding: 0.2em; }
+.card[data-style-id="maximalism"] .prompt-text { font-family: var(--font-mono); background-color: #fff; color: #000; border: 1px solid #000; font-size: 0.8em; line-height: 1.2; padding: 0.3em; }
+.card[data-style-id="maximalism"] .btn { font-family: var(--font-pixel); border-radius: 0; border: 2px solid #000; font-size: 0.8em; text-transform: uppercase; }
+.card[data-style-id="maximalism"] .btn:not(.btn-secondary) { background-color: #00ffff; color: #000 !important; }
+.card[data-style-id="maximalism"] .btn:not(.btn-secondary):hover { background-color: #ff00ff; color: #ffff00 !important; }
+.card[data-style-id="maximalism"] .btn-secondary { background-color: #ff0000; color: #ffffff !important; }
+.card[data-style-id="maximalism"] .btn-secondary:hover { background-color: #0000ff; }
+
+/* 18. Claymorphism Card */
+.card[data-style-id="claymorphism"] { background-color: #e8c3a0; border-radius: 20px; border: none; box-shadow: var(--clay-shadow-outset); }
+.card[data-style-id="claymorphism"] h3 { color: #6b5e3c; font-family: var(--font-pop); font-weight: 600; text-shadow: 1px 1px 1px rgba(255,255,255,0.5); }
+.card[data-style-id="claymorphism"] .prompt-text { background-color: #e8c3a0; color: #7a6f5a; border-radius: 10px; box-shadow: var(--clay-shadow-inset); border: none; padding: 0.6em; }
+.card[data-style-id="claymorphism"] .btn { border-radius: 15px; border: none; box-shadow: var(--clay-shadow-outset); font-family: var(--font-pop); font-weight: 600; transition: box-shadow 0.1s ease; }
+.card[data-style-id="claymorphism"] .btn:active { box-shadow: var(--clay-shadow-inset); transform: translateY(1px); }
+.card[data-style-id="claymorphism"] .btn:not(.btn-secondary) { background-color: #c8a078; color: #fff !important; }
+.card[data-style-id="claymorphism"] .btn:not(.btn-secondary):hover { background-color: #b89068; }
+.card[data-style-id="claymorphism"] .btn-secondary { background-color: #f5e6d5; color: #8b5e3c !important; }
+.card[data-style-id="claymorphism"] .btn-secondary:hover { background-color: #ffffff; }
+
+/* 19. Abstract Shapes / Geometric Card */
+.card[data-style-id="abstract-geometric"] { background-color: #f8a1d1; border: none; border-radius: 50% 20% / 10% 40%; padding-bottom: 1rem; }
+.card[data-style-id="abstract-geometric"] h3 { font-family: var(--font-montserrat); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); text-align: center; }
+.card[data-style-id="abstract-geometric"] .prompt-text { background-color: rgba(255, 255, 255, 0.2); color: #444; border-radius: 5px; font-size: 0.8em; border: none; }
+.card[data-style-id="abstract-geometric"] .btn { font-family: var(--font-montserrat); border-radius: 30px; }
+.card[data-style-id="abstract-geometric"] .btn:not(.btn-secondary) { background-color: #b870a9; color: white !important; }
+.card[data-style-id="abstract-geometric"] .btn:not(.btn-secondary):hover { background-color: #935b87; }
+.card[data-style-id="abstract-geometric"] .btn-secondary { background-color: rgba(255, 255, 255, 0.4); color: #b870a9 !important; }
+.card[data-style-id="abstract-geometric"] .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.7); }
+
+/* 20. Sustainable / Green Design Card */
+.card[data-style-id="sustainable-green"] { background-color: #f0f4f0; border: 1px solid #c8d8c8; border-radius: 4px; box-shadow: none; }
+.card[data-style-id="sustainable-green"] h3 { font-family: var(--font-sans); color: #3c5242; font-weight: 400; }
+.card[data-style-id="sustainable-green"] .prompt-text { background-color: #e4eae4; color: #4a6a5a; border: none; font-size: 0.8em; }
+.card[data-style-id="sustainable-green"] .btn { font-family: var(--font-sans); border-radius: 4px; }
+.card[data-style-id="sustainable-green"] .btn:not(.btn-secondary) { background-color: #6b8e7a; color: white !important; }
+.card[data-style-id="sustainable-green"] .btn:not(.btn-secondary):hover { background-color: #5a7a6a; }
+.card[data-style-id="sustainable-green"] .btn-secondary { background-color: #c8d8c8; color: #3c5242 !important; }
+.card[data-style-id="sustainable-green"] .btn-secondary:hover { background-color: #b8c8b8; }
+
+/* 21. Art Deco Card (NEW) */
+.card[data-style-id="art-deco"] {
+    background-color: #1a1a1a; /* Dark base */
+    border: 2px solid #daa520; /* Goldenrod border */
+    border-radius: 4px; /* Subtle radius */
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.3); /* Gold glow */
+    position: relative;
+    overflow: hidden; /* Clip potential pseudo elements */
+}
+/* Add geometric pattern overlay */
+.card[data-style-id="art-deco"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+        linear-gradient(45deg, rgba(218, 165, 32, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(218, 165, 32, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(218, 165, 32, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(218, 165, 32, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.5;
+    z-index: 0;
+}
+.card[data-style-id="art-deco"] .card-content { z-index: 1; } /* Ensure content is above pattern */
+.card[data-style-id="art-deco"] h3 {
+    font-family: var(--font-pop); /* Use Poppins geometrically */
+    font-weight: 600;
+    color: #daa520; /* Goldenrod */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(218, 165, 32, 0.5);
+    padding-bottom: 0.3em;
+    margin-bottom: 1em;
+}
+.card[data-style-id="art-deco"] .prompt-text {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ccc;
+    border: 1px solid rgba(218, 165, 32, 0.3);
+    font-family: var(--font-sans); /* Use a cleaner font for prompt */
+    font-size: 0.8em;
+}
+.card[data-style-id="art-deco"] .btn {
+    font-family: var(--font-pop); font-weight: 500;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card[data-style-id="art-deco"] .btn:not(.btn-secondary) {
+    background-color: #daa520; color: #1a1a1a !important;
+    border: 1px solid #b8860b;
+}
+.card[data-style-id="art-deco"] .btn:not(.btn-secondary):hover { background-color: #b8860b; }
+.card[data-style-id="art-deco"] .btn-secondary {
+    background-color: transparent; color: #daa520 !important;
+    border: 1px solid #daa520;
+}
+.card[data-style-id="art-deco"] .btn-secondary:hover { background-color: rgba(218, 165, 32, 0.1); }
+
+
+/* --- GLOBAL THEME DEFINITIONS --- */
+
+/* 1. Skeuomorphism Theme (NEW) */
+body.theme-skeuomorphism {
+    --skeuo-texture-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); /* Example subtle texture */
+    --skeuo-texture-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23a0522d' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    --page-bg: #e5d9b3; /* Old paper */
+    --page-bg-gradient: none; background-image: var(--skeuo-texture-dark);
+    --text-color: #3b2f2f; /* Dark brown text */
+    --heading-color: #6b4423;
+    --link-color: #8b4513; /* SaddleBrown */
+    --link-hover-color: #a0522d; /* Sienna */
+    --border-color: #a0522d;
+    --card-bg: #d2b48c; --card-bg-image: var(--skeuo-texture-light); --card-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2); --card-hover-shadow: var(--skeuo-shadow-outset), 0 5px 8px rgba(0,0,0,0.3);
+    --header-bg: #8b4513; --header-text-color: #f5f5dc; --header-shadow: inset 0 -3px 5px rgba(0,0,0,0.3);
+    --footer-text-color: #6b4423; --footer-bg: #e5d9b3;
+    --button-bg: linear-gradient(to bottom, #b8860b, #cd853f); --button-text-color: white; --button-hover-bg: linear-gradient(to bottom, #cd853f, #b8860b); --button-border: 1px solid #8b4513; --button-shadow: var(--skeuo-shadow-outset); --button-hover-shadow: var(--button-shadow);
+    --button-secondary-bg: linear-gradient(to bottom, #f0e68c, #eee8aa); --button-secondary-text-color: #5e3a1d; --button-secondary-hover-bg: linear-gradient(to bottom, #eee8aa, #f0e68c); --button-secondary-border: 1px solid #bdb76b;
+    --prompt-bg: #f5f5dc; --prompt-text-color: #4a3c2a; --prompt-shadow: var(--skeuo-shadow-inset); --prompt-bg-image: none;
+    --base-font: var(--font-serif); --heading-font: var(--font-serif);
+    --card-border-radius: 6px; --button-border-radius: 4px;
+}
+
+/* 2. Swiss Style Theme (NEW) */
+body.theme-swiss-style {
+    --page-bg: #ffffff; --page-bg-gradient: none;
+    --text-color: #000000; --heading-color: #000000;
+    --link-color: #e60000; --link-hover-color: #b30000;
+    --border-color: #e0e0e0;
+    --card-bg: #ffffff; --card-shadow: none; --card-hover-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    --header-bg: #000000; --header-text-color: #ffffff; --header-shadow: none;
+    --footer-text-color: #555555; --footer-bg: #ffffff;
+    --button-bg: #e60000; --button-text-color: white; --button-hover-bg: #b30000; --button-border: none;
+    --button-secondary-bg: #333; --button-secondary-text-color: white; --button-secondary-hover-bg: #000; --button-secondary-border: none;
+    --prompt-bg: #f5f5f5; --prompt-text-color: #333;
+    --base-font: var(--font-helvetica); --heading-font: var(--font-helvetica);
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-swiss-style h1, body.theme-swiss-style h2, body.theme-swiss-style h3 { font-weight: 700; text-transform: lowercase; } /* Emphasis on typography */
+body.theme-swiss-style .btn { text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.5px; }
+body.theme-swiss-style .card { border: 1px solid var(--border-color); }
+
+/* 3. Grunge Theme (NEW) */
+body.theme-grunge {
+    --grunge-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+    --page-bg: #3a3a3a; --page-bg-gradient: none; background-image: var(--grunge-texture);
+    --text-color: #b0b0b0; --heading-color: #dcdcdc;
+    --link-color: #a52a2a; /* Brown */ --link-hover-color: #cd5c5c; /* IndianRed */
+    --border-color: #555;
+    --card-bg: #4a4a4a; --card-bg-image: var(--grunge-texture); --card-shadow: 2px 2px 5px rgba(0,0,0,0.3); --card-hover-shadow: 3px 3px 7px rgba(0,0,0,0.4);
+    --header-bg: #2a2a2a; --header-text-color: #aaa; --header-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
+    --footer-text-color: #888; --footer-bg: #3a3a3a;
+    --button-bg: #8b0000; --button-text-color: #ccc; --button-hover-bg: #a52a2a; --button-border: 1px solid #777;
+    --button-secondary-bg: #333; --button-secondary-text-color: #aaa; --button-secondary-hover-bg: #555; --button-secondary-border: 1px solid #666;
+    --prompt-bg: rgba(0,0,0,0.2); --prompt-text-color: #aaa; --prompt-bg-image: none;
+    --base-font: var(--font-grunge); --heading-font: var(--font-grunge);
+    --card-border-radius: 3px; --button-border-radius: 2px;
+}
+body.theme-grunge .card { border: 1px solid #222; }
+body.theme-grunge a { text-decoration: none; border-bottom: 1px dashed var(--link-color); }
+body.theme-grunge a:hover { border-bottom-style: solid; background-color: rgba(255,255,255,0.05); }
+
+/* 4. Modern Tech Theme (ENHANCED TECH FEEL) */
+body.theme-modern-tech {
+    /* Slightly darker, cooler background with subtle gradient */
+    --page-bg: #49efed;
+    --page-bg-gradient: linear-gradient(to bottom, #8ff8fc, #e3fa8f);
+    --text-color: #181c22; /* Slightly darker text */
+    --heading-color: #0b132b; /* Keep dark blue heading */
+    /* More vibrant tech blue */
+    --link-color: #4d5bff;
+    --link-hover-color: #3a4bf0;
+    --border-color: #000000; /* Even subtler border */
+    --card-bg: #49ecef;
+    /* Slightly more defined shadow */
+    --card-shadow: 0 3px 10px rgba(29, 35, 42, 0.08);
+    --card-hover-shadow: 0 5px 15px rgba(29, 35, 42, 0.12);
+    --header-bg: #ffffff;
+    --header-text-color: var(--text-color);
+    /* Keep subtle header shadow */
+    --header-shadow: 0 1px 3px rgba(29, 35, 42, 0.05);
+    --footer-text-color: #6c757d;
+    --footer-bg: var(--page-bg);
+    /* Button with subtle gradient and glow on hover */
+    --button-bg: linear-gradient(to bottom, #5a6aff, #4d5bff);
+    --button-text-color: white;
+    --button-hover-bg: linear-gradient(to bottom, #4d5bff, #3a4bf0);
+    --button-border: none;
+    --button-shadow: 0 1px 2px rgba(77, 91, 255, 0.2);
+    /* Add hover shadow/glow */
+    --button-hover-shadow: 0 2px 4px rgba(77, 91, 255, 0.2), 0 0 8px rgba(77, 91, 255, 0.3);
+    --button-secondary-bg: #e9ecef;
+    --button-secondary-text-color: #495057;
+    --button-secondary-hover-bg: #dee2e6; /* Slightly darker hover */
+    --button-secondary-border: none;
+    --prompt-bg: #eef2f7;
+    --prompt-text-color: #343a40;
+    --base-font: var(--font-pop);
+    --heading-font: var(--font-pop);
+    /* Sharper corners */
+    --card-border-radius: 4px;
+    --button-border-radius: 2px;
+    --mono-font: var(--font-roboto-mono);
+}
+
+/* --- Modern Tech Specific Element Adjustments (ENHANCED) --- */
+body.theme-modern-tech .highlight {
+    color: #0056b3; /* 一个更深的蓝色，或者根据需要调整为您认为合适的颜色 */
+    background-color: transparent; /* 确保背景透明，除非您想给它一个背景色 */
+}
+
+body.theme-modern-tech header {
+    border-bottom: none;
+    box-shadow: var(--header-shadow);
+    /* Optional: Add subtle gradient to header */
+    /* background-image: linear-gradient(to right, #ffffff, #f8faff); */
+}
+
+body.theme-modern-tech h1,
+body.theme-modern-tech h2,
+body.theme-modern-tech h3 {
+    font-weight: 600;
+    color: var(--heading-color);
+    letter-spacing: -0.2px; /* Slightly tighter spacing for headings */
+}
+
+/* Enhanced code blocks */
+body.theme-modern-tech pre,
+body.theme-modern-tech code {
+    font-family: var(--mono-font);
+    background-color: var(--prompt-bg);
+    color: var(--prompt-text-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--button-border-radius); /* Match sharp button radius */
+    padding: 0.1em 0.4em;
+    font-size: 0.9em;
+    /* Add subtle inset shadow for depth */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+body.theme-modern-tech pre {
+    padding: 1em;
+    overflow-x: auto;
+}
+body.theme-modern-tech pre code {
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none; /* Remove inset shadow from code inside pre */
+}
+
+/* Style links for clarity */
+body.theme-modern-tech a {
+    /* Optional: Remove underline for cleaner look, rely on color */
+    /* text-decoration: none; */
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+body.theme-modern-tech a:hover {
+    /* Optional: Add subtle background on hover */
+    /* background-color: rgba(77, 91, 255, 0.08); */
+    /* border-radius: 2px; */
+}
+
+/* Ensure buttons use the hover shadow */
+body.theme-modern-tech .btn:hover {
+     box-shadow: var(--button-hover-shadow);
+}
+
+/* 5. Brutalism Theme */
+body.theme-brutalism {
+    --page-bg: #ffffff; --page-bg-gradient: none;
+    --text-color: #000000; --heading-color: #000000;
+    --link-color: #0000ff; --link-hover-color: #ff00ff;
+    --border-color: #000000;
+    --card-bg: #f0f0f0; --card-shadow: 4px 4px 0px #000000; --card-hover-shadow: 6px 6px 0px #000000;
+    --header-bg: yellow; --header-text-color: #000000; --header-shadow: none; border-bottom: 2px solid #000;
+    --footer-text-color: #000000; --footer-bg: #f0f0f0;
+    --button-bg: yellow; --button-text-color: black; --button-hover-bg: black; --button-hover-text-color: yellow; --button-border: 2px solid black;
+    --button-secondary-bg: black; --button-secondary-text-color: yellow; --button-secondary-hover-bg: yellow; --button-secondary-hover-text-color: black; --button-secondary-border: 2px solid black;
+    --prompt-bg: #e0e0e0; --prompt-text-color: #111;
+    --base-font: var(--font-mono); --heading-font: var(--font-mono);
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-brutalism .card { border: 2px solid var(--border-color); }
+body.theme-brutalism h1, body.theme-brutalism h2, body.theme-brutalism h3 { text-transform: uppercase; font-weight: bold; }
+
+/* 6. Retro - 90s Web Theme */
+body.theme-retro-90s {
+    --page-bg: #000080; --page-bg-gradient: none; /* Dark Blue */
+    --text-color: #ffffff; --heading-color: yellow;
+    --link-color: #00ff00; --link-hover-color: #ff00ff;
+    --border-color: #c0c0c0;
+    --card-bg: #c0c0c0; --card-shadow: none; --card-hover-shadow: none;
+    --header-bg: #c0c0c0; --header-text-color: #000000; --header-shadow: none; border-bottom: 2px outset #eee;
+    --footer-text-color: #ffffff; --footer-bg: transparent;
+    --button-bg: #0000ff; --button-text-color: yellow; --button-hover-bg: yellow; --button-hover-text-color: #0000ff; --button-border: 2px outset #eee;
+    --button-secondary-bg: #ff0000; --button-secondary-text-color: white; --button-secondary-hover-bg: #800000; --button-secondary-border: 2px outset #eee;
+    --prompt-bg: #fff; --prompt-text-color: #000;
+    --base-font: var(--font-times); --heading-font: var(--font-times);
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-retro-90s .card { border: 2px outset #eee; }
+body.theme-retro-90s h1, body.theme-retro-90s h2, body.theme-retro-90s h3 { font-weight: bold; }
+body.theme-retro-90s a:hover { background-color: yellow; color: blue; text-decoration: none; } /* Blinking effect simulation */
+
+/* 7. Retro - Y2K Aesthetic Theme */
+body.theme-retro-y2k {
+    --page-bg: #d1f7ff; --page-bg-gradient: linear-gradient(135deg, #ffccde 0%, #c4f1f9 100%);
+    --text-color: #5c5c8a; --heading-color: #3d3d5c;
+    --link-color: #ff69b4; --link-hover-color: #ff1493;
+    --border-color: rgba(255, 255, 255, 0.5);
+    --card-bg: rgba(255, 255, 255, 0.3); --card-shadow: 0 0 15px rgba(255, 105, 180, 0.3); --card-hover-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    --header-bg: rgba(255, 255, 255, 0.2); --header-text-color: #3d3d5c; --header-shadow: none; backdrop-filter: blur(5px); border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    --footer-text-color: #5c5c8a; --footer-bg: transparent;
+    --button-bg: #ff69b4; --button-text-color: white; --button-hover-bg: #ff1493; --button-border: 1px solid rgba(255, 255, 255, 0.5);
+    --button-secondary-bg: rgba(255, 255, 255, 0.5); --button-secondary-text-color: #ff69b4; --button-secondary-hover-bg: rgba(255, 255, 255, 0.8); --button-secondary-border: 1px solid rgba(255, 255, 255, 0.5);
+    --prompt-bg: rgba(255, 255, 255, 0.4); --prompt-text-color: #5c5c8a;
+    --base-font: var(--font-space-mono); --heading-font: var(--font-space-mono);
+    --card-border-radius: 10px; --button-border-radius: 15px;
+}
+body.theme-retro-y2k .card { backdrop-filter: blur(2px); }
+body.theme-retro-y2k h1, body.theme-retro-y2k h2, body.theme-retro-y2k h3 { text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7); }
+
+/* 8. Retro - Pixel Art Theme */
+body.theme-retro-pixel {
+    --page-bg: #1a1a1a; --page-bg-gradient: none;
+    --text-color: #cccccc; --heading-color: #00ff00;
+    --link-color: #ff00ff; --link-hover-color: #ffff00;
+    --border-color: #00ff00;
+    --card-bg: #1a1a1a; --card-shadow: none; --card-hover-shadow: none;
+    --header-bg: #111111; --header-text-color: #00ff00; --header-shadow: none; border-bottom: 2px solid #00ff00;
+    --footer-text-color: #888888; --footer-bg: #111111; border-top: 1px solid #00ff00;
+    --button-bg: #ff00ff; --button-text-color: #1a1a1a; --button-hover-bg: #00ff00; --button-border: 1px solid #00ff00;
+    --button-secondary-bg: #00ff00; --button-secondary-text-color: #1a1a1a; --button-secondary-hover-bg: #ff00ff; --button-secondary-border: 1px solid #00ff00;
+    --prompt-bg: #2a2a2a; --prompt-text-color: #00dd00;
+    --base-font: var(--font-pixel); --heading-font: var(--font-pixel);
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-retro-pixel .card { border: 2px solid var(--border-color); }
+body.theme-retro-pixel h1, body.theme-retro-pixel h2, body.theme-retro-pixel h3 { font-size: 1.2em; text-shadow: 1px 1px #111; }
+body.theme-retro-pixel p, body.theme-retro-pixel a, body.theme-retro-pixel .btn { font-size: 0.9em; }
+
+/* 9. Illustration Focused Theme */
+body.theme-illustration {
+    --page-bg: #fefae0; --page-bg-gradient: none;
+    --text-color: #606c38; --heading-color: #e76f51;
+    --link-color: #2a9d8f; --link-hover-color: #264653;
+    --border-color: #dda15e;
+    --card-bg: #fffaf0; --card-shadow: 0 3px 8px rgba(0,0,0,0.08); --card-hover-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    --header-bg: #f4a261; --header-text-color: #ffffff; --header-shadow: none;
+    --footer-text-color: #606c38; --footer-bg: #fefae0;
+    --button-bg: #2a9d8f; --button-text-color: white; --button-hover-bg: #264653; --button-border: none;
+    --button-secondary-bg: #f4a261; --button-secondary-text-color: white; --button-secondary-hover-bg: #e76f51; --button-secondary-border: none;
+    --prompt-bg: #fffef5; --prompt-text-color: #606c38;
+    --base-font: var(--font-lato); --heading-font: var(--font-montserrat);
+    --card-border-radius: 12px; --button-border-radius: 20px;
+}
+body.theme-illustration .card { border: 2px dashed var(--border-color); }
+body.theme-illustration h1, body.theme-illustration h2, body.theme-illustration h3 { font-weight: 700; }
+
+/* 10. 3D Interactive Theme (Further Enhanced CSS 3D simulation) */
+body.theme-3d-interactive {
+    /* Dark, techy background */
+    --page-bg: #0f172a; /* Even darker base */
+    --page-bg-gradient: linear-gradient(to bottom, #1e293b, #0f172a);
+    --text-color: #cbd5e1; /* Slightly brighter text for contrast */
+    --heading-color: #f8fafc; /* White headings */
+    --link-color: #38bdf8; /* Brighter cyan-blue link */
+    --link-hover-color: #7dd3fc; /* Lighter cyan-blue hover */
+    --border-color: #334155; /* Slightly more visible border */
+    --card-bg: #1e293b; /* Dark slate card background */
+    /* Enhanced shadow for depth - Base State */
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    /* Further Enhanced shadow for depth - Hover State */
+    --card-hover-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --header-bg: rgba(15, 23, 42, 0.85); /* Darker, more opaque header */
+    --header-text-color: var(--heading-color);
+    --header-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px); /* Slightly stronger blur */
+    border-bottom: 1px solid var(--border-color);
+    --footer-text-color: #94a3b8;
+    --footer-bg: #0f172a; /* Match page bottom */
+    border-top: 1px solid var(--border-color);
+    --button-bg: var(--link-color);
+    --button-text-color: #0f172a; /* Dark text on bright button */
+    --button-hover-bg: var(--link-hover-color);
+    --button-border: none;
+    /* Add more pronounced button shadow for depth */
+    --button-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
+    --button-hover-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+    --button-secondary-bg: #334155; /* Darker secondary button */
+    --button-secondary-text-color: #cbd5e1;
+    --button-secondary-hover-bg: #475569;
+    --button-secondary-border: none;
+    --prompt-bg: #1e293b; /* Consistent dark prompt area */
+    --prompt-text-color: #818cf8; /* Brighter indigo prompt text */
+    --base-font: var(--font-inter);
+    --heading-font: var(--font-inter);
+    --card-border-radius: 8px; /* Slightly larger radius */
+    --button-border-radius: 5px;
+    --mono-font: var(--font-roboto-mono);
+}
+
+/* 3D Interactive Specific Adjustments - Further Enhanced */
+/* These rules target elements *within* a page using the theme */
+
+/* Apply perspective to the container of elements you want to transform in 3D */
+/* IMPORTANT: Ensure the container holding your cards/buttons has perspective */
+/* Example for the main content area in the detail page: */
+.style-detail-container { /* Or use .style-grid if that's the direct parent */
+     perspective: 1200px; /* Increased perspective for more depth */
+}
+
+body.theme-3d-interactive .card {
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: var(--card-shadow);
+    /* Optional: give cards a very slight initial "pop" or angle */
+    /* transform: translateZ(5px) rotateX(1deg); */
+}
+
+body.theme-3d-interactive .card:hover {
+    /* Increased translateY, translateZ, and rotation for more pronounced effect */
+    transform: translateY(-20px) translateZ(60px) rotateX(8deg) rotateY(-4deg);
+    box-shadow: var(--card-hover-shadow); /* Enhance shadow on hover */
+}
+
+body.theme-3d-interactive .btn {
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: var(--button-shadow);
+    transform: translateZ(0); /* Establish base Z position */
+}
+
+body.theme-3d-interactive .btn:hover {
+    /* Increased lift for buttons */
+    transform: translateY(-5px) translateZ(15px);
+    box-shadow: var(--button-hover-shadow);
+}
+
+body.theme-3d-interactive .btn:active {
+    transform: translateY(-2px) translateZ(8px); /* Simulate pressing down more clearly */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+/* Style for the placeholder where the 3D canvas would go */
+/* This styles the demo element on the detail page specifically */
+body.theme-3d-interactive .three-d-placeholder {
+    background: radial-gradient(ellipse at center, #2a3a57 0%, #0f172a 70%); /* More dynamic background */
+    border: 1px solid var(--border-color);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563; /* Muted placeholder text */
+    font-style: italic;
+    font-size: 1.1em;
+    margin-bottom: 1.5rem;
+    border-radius: var(--card-border-radius);
+    text-align: center;
+    padding: 1rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 0 0 15px rgba(56, 189, 248, 0.1); /* Inner shadow + subtle outer glow */
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* 11. Dark Mode Theme */
+body.theme-dark-mode {
+    --page-bg: #121212; --page-bg-gradient: none;
+    --text-color: #e0e0e0; --heading-color: #ffffff;
+    --link-color: #0a84ff; --link-hover-color: #64d2ff;
+    --border-color: #333333;
+    --card-bg: #1e1e1e; --card-shadow: 0 2px 5px rgba(0,0,0,0.2); --card-hover-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    --header-bg: #1e1e1e; --header-text-color: #ffffff; --header-shadow: none; border-bottom: 1px solid #333;
+    --footer-text-color: #aaaaaa; --footer-bg: #121212;
+    --button-bg: #0a84ff; --button-text-color: white; --button-hover-bg: #005ecb; --button-border: none;
+    --button-secondary-bg: #333333; --button-secondary-text-color: #b0b0b0; --button-secondary-hover-bg: #444444; --button-secondary-hover-text-color: white; --button-secondary-border: none;
+    --prompt-bg: #2c2c2c; --prompt-text-color: #b0b0b0;
+    --base-font: var(--font-open-sans); --heading-font: var(--font-open-sans);
+    --card-border-radius: 6px; --button-border-radius: 4px;
+}
+body.theme-dark-mode .card { border: 1px solid var(--border-color); }
+
+/* 12. Bold Typography Theme */
+body.theme-bold-typography {
+    --page-bg: #ffffff; --page-bg-gradient: none;
+    --text-color: #000000; --heading-color: #000000;
+    --link-color: #000000; --link-hover-color: #555555;
+    --border-color: #000000;
+    --card-bg: #ffffff; --card-shadow: none; --card-hover-shadow: none;
+    --header-bg: #000000; --header-text-color: #ffffff; --header-shadow: none;
+    --footer-text-color: #555555; --footer-bg: #ffffff;
+    --button-bg: #000; --button-text-color: #fff; --button-hover-bg: #444; --button-border: none;
+    --button-secondary-bg: #eee; --button-secondary-text-color: #000; --button-secondary-hover-bg: #ccc; --button-secondary-border: none;
+    --prompt-bg: #f5f5f5; --prompt-text-color: #555;
+    --base-font: var(--font-sans); --heading-font: var(--font-montserrat);
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-bold-typography .card { border: 2px solid var(--border-color); }
+body.theme-bold-typography h1, body.theme-bold-typography h2, body.theme-bold-typography h3 { font-weight: 900; font-size: 2.5em; line-height: 1.1; text-transform: uppercase; } /* Example of oversized */
+body.theme-bold-typography p { font-family: var(--font-mono); } /* Contrast with mono */
+body.theme-bold-typography a { text-decoration: underline; }
+body.theme-bold-typography a:hover { background-color: yellow; }
+
+/* 13. Glassmorphism Theme */
+body.theme-glassmorphism {
+    --page-bg: #6a85b6; --page-bg-gradient: linear-gradient(to bottom right, #b3ffab, #12fff7); /* Example vibrant background */
+    --text-color: #000; --heading-color: #000;
+    --link-color: #fff; --link-hover-color: #eee;
+    --border-color: rgba(255, 255, 255, 0.2);
+    --card-bg: rgba(255, 255, 255, 0.15); --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); --card-hover-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    --header-bg: rgba(255, 255, 255, 0.1); --header-text-color: #fff; --header-shadow: none; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    --footer-text-color: #eee; --footer-bg: transparent;
+    --button-bg: rgba(255, 255, 255, 0.25); --button-text-color: #000; --button-hover-bg: rgba(255, 255, 255, 0.4); --button-border: 1px solid rgba(255, 255, 255, 0.3);
+    --button-secondary-bg: rgba(0, 0, 0, 0.2); --button-secondary-text-color: #eee; --button-secondary-hover-bg: rgba(0, 0, 0, 0.4); --button-secondary-border: 1px solid rgba(255, 255, 255, 0.3);
+    --prompt-bg: rgba(0, 0, 0, 0.15); --prompt-text-color: #f0f0f0;
+    --base-font: var(--font-pop); --heading-font: var(--font-pop);
+    --card-border-radius: 12px; --button-border-radius: 8px;
+}
+body.theme-glassmorphism .card { backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); border: 1px solid var(--border-color); }
+body.theme-glassmorphism h1, body.theme-glassmorphism h2, body.theme-glassmorphism h3 { text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+/* ==========================================================================
+   14. Aurora UI Theme (Blue-Green Focus, Dynamic - Enhanced Readability)
+   (Adjusted comment number if it's the 14th theme in your list)
+   ========================================================================== */
+
+   body.theme-aurora-ui {
+    /* Base Colors & Typography */
+    --page-bg: #0d1117; /* Even darker background */
+    --text-color: #d0d8f0; /* General page text, slightly adjusted for clarity */
+    --heading-color: #e8f0ff; /* General page headings, slightly adjusted */
+    --link-color: #14b8a6; /* Saturated Teal */
+    --link-hover-color: #0d9488; /* Deeper Teal */
+    --border-color: rgba(255, 255, 255, 0.2); /* Border slightly more visible */
+
+    /* Card & Section Styles - Enhanced Readability */
+    --card-bg: rgba(23, 37, 59, 0.5); /* Darker, highly opaque desaturated blue for cards/sections */
+    --card-text-color: #e0e7ff;       /* Brighter, neutral light text for content on dark card/section bg */
+    --card-heading-color: #f0f5ff;    /* Brighter, neutral light heading for content on dark card/section bg */
+    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Shadow slightly adjusted */
+    --card-hover-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    --card-border-radius: 14px;
+
+    /* Header & Footer Styles */
+    --header-bg: rgba(13, 17, 23, 0.88); /* Slightly more opaque header */
+    --header-text-color: var(--heading-color);
+    --header-shadow: none;
+    --footer-bg: rgba(13, 17, 23, 0.88); /* Slightly more opaque footer */
+    --footer-text-color: #a1a1aa;
+
+    /* Button Styles */
+    --button-bg: var(--link-color);
+    --button-text-color: #ffffff;
+    --button-hover-bg: var(--link-hover-color);
+    --button-border: none;
+    --button-border-radius: 8px;
+    --button-secondary-bg: rgba(55, 65, 81, 0.75);
+    --button-secondary-text-color: var(--card-text-color); /* Use brighter text for secondary buttons */
+    --button-secondary-hover-bg: rgba(71, 85, 105, 0.85);
+    --button-secondary-border: 1px solid var(--border-color);
+
+    /* Prompt Area & Code Block Styles (within cards/sections) */
+    --prompt-bg: rgba(0, 0, 0, 0.45); /* Darker prompt/code background */
+    --prompt-text-color: var(--card-text-color); /* Use brighter card text color */
+
+    /* Aurora Specific Colors (Background Glows) */
+    --aurora-color-1: #34d399; /* Vibrant Green */
+    --aurora-color-2: #2dd4bf; /* Teal */
+    --aurora-color-3: #3b82f6; /* Deep Blue */
+    --aurora-color-4: #8b5cf6; /* Violet accent */
+
+    position: relative;
+    overflow-x: hidden;
+    background-color: var(--page-bg);
+    color: var(--text-color); /* General text color for the page */
+    font-family: var(--base-font);
+}
+
+/* Aurora Effect Background Shapes (using pseudo-elements) */
+body.theme-aurora-ui::before,
+body.theme-aurora-ui::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    filter: blur(140px);
+    opacity: 0.65; /* Slightly reduced main aurora opacity to not overpower new text contrast */
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+/* Aurora Shape 1 (Green/Teal) */
+body.theme-aurora-ui::before {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--aurora-color-1), var(--aurora-color-2), transparent 70%);
+    top: -25%; left: -15%;
+    animation: aurora-float-1 45s infinite alternate ease-in-out;
+}
+
+/* Aurora Shape 2 (Blue/Violet) */
+body.theme-aurora-ui::after {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, var(--aurora-color-3), var(--aurora-color-4), transparent 70%);
+    bottom: -30%; right: -20%;
+    opacity: 0.6; /* Second shape slightly less opaque */
+    animation: aurora-float-2 55s infinite alternate ease-in-out 5s;
+}
+
+/* Keyframe Animations (remain the same) */
+@keyframes aurora-float-1 { /* ... */ }
+@keyframes aurora-float-2 { /* ... */ }
+
+/* Ensure content elements are clearly above the aurora background */
+body.theme-aurora-ui .container,
+body.theme-aurora-ui header,
+body.theme-aurora-ui footer,
+body.theme-aurora-ui .style-detail-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Card styling within the Aurora theme (Homepage cards) */
+body.theme-aurora-ui .card {
+    background: var(--card-bg); /* Uses the new darker, opaque --card-bg */
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    border-radius: var(--card-border-radius);
+    position: relative;
+    z-index: 1;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+body.theme-aurora-ui .card:hover {
+     box-shadow: var(--card-hover-shadow);
+     transform: translateY(-5px);
+}
+
+/* Text Readability Enhancements for content within cards (Homepage) */
+body.theme-aurora-ui .card .card-content h3 { /* Assuming H3 for card titles */
+    color: var(--card-heading-color);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+body.theme-aurora-ui .card .card-content p,
+body.theme-aurora-ui .card .card-content .prompt-label {
+    color: var(--card-text-color);
+}
+body.theme-aurora-ui .card .card-content .prompt-text {
+    background-color: var(--prompt-bg);
+    color: var(--prompt-text-color);
+    border: 1px solid rgba(255,255,255,0.1); /* Subtle border for prompt box */
+}
+
+
+/* Text Readability Enhancements for content within sections (Detail Pages like aurora-ui.html) */
+/* Note: .style-detail-section already uses --card-bg via global CSS, so it gets the dark bg */
+body.theme-aurora-ui .style-detail-section h2 {
+    color: var(--card-heading-color);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* Slightly stronger shadow for larger headings */
+}
+body.theme-aurora-ui .style-detail-section p,
+body.theme-aurora-ui .style-detail-section ul,
+body.theme-aurora-ui .style-detail-section li {
+    color: var(--card-text-color);
+}
+
+/* Styling for Prompt and Code Snippet blocks on detail pages */
+body.theme-aurora-ui .style-detail-section.style-prompt pre,
+body.theme-aurora-ui .style-detail-section.style-css pre {
+    background-color: var(--prompt-bg);
+    color: var(--prompt-text-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--base-border-radius); /* Consistent radius */
+}
+body.theme-aurora-ui .style-detail-section.style-prompt pre code, /* AI Prompt code */
+body.theme-aurora-ui .style-detail-section.style-css pre code { /* CSS Snippet code */
+    color: inherit; /* Inherit from pre's --prompt-text-color */
+    background: none;
+    font-family: var(--font-mono); /* Ensure monospace font */
+}
+
+
+/* Header and Footer specific z-index and backdrop-filter */
+body.theme-aurora-ui header {
+    z-index: 2;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px); /* Slightly stronger blur for header */
+    -webkit-backdrop-filter: blur(8px);
+}
+body.theme-aurora-ui header h1 { /* Main page title in header */
+    color: var(--header-text-color);
+    /* text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Optional: if title is hard to read */
+}
+
+body.theme-aurora-ui footer {
+    z-index: 2;
+    background: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    /* backdrop-filter: blur(5px); */
+    /* -webkit-backdrop-filter: blur(5px); */
+}
+
+/* General Links and Buttons */
+body.theme-aurora-ui a {
+    color: var(--link-color);
+}
+body.theme-aurora-ui a:hover {
+    color: var(--link-hover-color);
+}
+body.theme-aurora-ui .btn {
+    background-color: var(--button-bg);
+    color: var(--button-text-color) !important;
+    border: var(--button-border);
+    border-radius: var(--button-border-radius);
+}
+body.theme-aurora-ui .btn:hover {
+    background-color: var(--button-hover-bg);
+}
+body.theme-aurora-ui .btn-secondary {
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-text-color) !important;
+    border: var(--button-secondary-border);
+}
+body.theme-aurora-ui .btn-secondary:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+/* 15. Natural / Organic Theme */
+body.theme-natural-organic {
+    --page-bg: #f5f0e1; --page-bg-gradient: none; /* Beige background */
+    --text-color: #5e4a30; --heading-color: #3c2f2f;
+    --link-color: #8b7e66; --link-hover-color: #7a6f5a;
+    --border-color: #d4c8a8;
+    --card-bg: #ffffff; --card-shadow: 0 1px 3px rgba(0,0,0,0.05); --card-hover-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    --header-bg: #8b7e66; --header-text-color: #ffffff; --header-shadow: none;
+    --footer-text-color: #8b7e66; --footer-bg: #f5f0e1;
+    --button-bg: #8b7e66; --button-text-color: white; --button-hover-bg: #7a6f5a; --button-border: none;
+    --button-secondary-bg: #d4c8a8; --button-secondary-text-color: #5e4a30; --button-secondary-hover-bg: #c8bca0; --button-secondary-border: none;
+    --prompt-bg: #e8e0c9; --prompt-text-color: #6b5b40;
+    --base-font: var(--font-lato); --heading-font: var(--font-lato);
+    --card-border-radius: 6px; --button-border-radius: 4px;
+}
+body.theme-natural-organic .card { border: 1px solid var(--border-color); }
+body.theme-natural-organic h1, body.theme-natural-organic h2, body.theme-natural-organic h3 { font-weight: 700; }
+
+/* 16. Monochromatic Theme (Example: Blue) */
+body.theme-monochromatic {
+    --mono-base: #0d6efd; /* Base Blue */
+    --mono-lightest: #e6f0ff;
+    --mono-lighter: #b3d1ff;
+    --mono-light: #66a3ff;
+    --mono-dark: #0059b3;
+    --mono-darker: #004080;
+    --mono-darkest: #00264d;
+    --mono-text-light: #fff;
+    --mono-text-dark: #00264d;
+
+    --page-bg: var(--mono-lightest); --page-bg-gradient: none;
+    --text-color: var(--mono-darker); --heading-color: var(--mono-darkest);
+    --link-color: var(--mono-base); --link-hover-color: var(--mono-dark);
+    --border-color: var(--mono-lighter);
+    --card-bg: #ffffff; --card-shadow: 0 2px 4px rgba(0, 64, 128, 0.1); --card-hover-shadow: 0 4px 8px rgba(0, 64, 128, 0.15);
+    --header-bg: var(--mono-base); --header-text-color: var(--mono-text-light); --header-shadow: none;
+    --footer-text-color: var(--mono-dark); --footer-bg: var(--mono-lightest);
+    --button-bg: var(--mono-base); --button-text-color: var(--mono-text-light); --button-hover-bg: var(--mono-dark); --button-border: none;
+    --button-secondary-bg: var(--mono-light); --button-secondary-text-color: var(--mono-text-dark); --button-secondary-hover-bg: var(--mono-lighter); --button-secondary-border: none;
+    --prompt-bg: var(--mono-lighter); --prompt-text-color: var(--mono-darker);
+    --base-font: var(--font-roboto); --heading-font: var(--font-roboto);
+    --card-border-radius: 5px; --button-border-radius: 5px;
+}
+body.theme-monochromatic .card { border: 1px solid var(--border-color); }
+
+/* 17. Maximalism / Collage Theme */
+body.theme-maximalism {
+    --max-c1: #ffcc00; /* Yellow */
+    --max-c2: #ff00ff; /* Magenta */
+    --max-c3: #00ffff; /* Cyan */
+    --max-c4: #00ff00; /* Lime */
+    --max-c5: #ff0000; /* Red */
+    --max-c6: #0000ff; /* Blue */
+
+    --page-bg: var(--max-c1); --page-bg-gradient: none;
+    /* Add more patterns/textures if desired */
+    background-image: repeating-linear-gradient(45deg, var(--max-c2) 0, var(--max-c2) 10px, transparent 10px, transparent 20px);
+    --text-color: #000000; --heading-color: var(--max-c6);
+    --link-color: var(--max-c5); --link-hover-color: var(--max-c4);
+    --border-color: var(--max-c2);
+    --card-bg: #fff; --card-shadow: 5px 5px 0 var(--max-c3); --card-hover-shadow: 8px 8px 0 var(--max-c4);
+    --header-bg: var(--max-c4); --header-text-color: var(--max-c5); --header-shadow: none; border-bottom: 3px dashed var(--max-c6);
+    --footer-text-color: #000; --footer-bg: var(--max-c1);
+    --button-bg: var(--max-c3); --button-text-color: #000; --button-hover-bg: var(--max-c2); --button-hover-text-color: var(--max-c1); --button-border: 2px solid #000;
+    --button-secondary-bg: var(--max-c5); --button-secondary-text-color: #ffffff; --button-secondary-hover-bg: var(--max-c6); --button-secondary-border: 2px solid #000;
+    --prompt-bg: #fff; --prompt-text-color: #000;
+    --base-font: var(--font-times); --heading-font: var(--font-serif); /* Mix fonts */
+    --card-border-radius: 0px; --button-border-radius: 0px;
+}
+body.theme-maximalism .card { border: 3px dotted var(--border-color); overflow: visible; }
+body.theme-maximalism h1, body.theme-maximalism h2, body.theme-maximalism h3 { font-family: var(--font-pixel); text-transform: uppercase; background-color: var(--max-c2); padding: 0.1em 0.3em; display: inline-block; }
+body.theme-maximalism .btn { font-family: var(--font-pixel); text-transform: uppercase; }
+
+/* 18. Claymorphism Theme */
+/* 18. Claymorphism Theme (Updated to match card style) */
+body.theme-claymorphism {
+    /* Base colors for Claymorphism - Updated to earthy tones from card */
+    --clay-bg: #e8c3a0;                     /* Page/Card background from card */
+    --clay-text: #7a6f5a;                   /* General text color, from card prompt text */
+    --clay-heading: #6b5e3c;                /* Heading color from card h3 */
+    --clay-accent: #b89068;                 /* Accent, from card primary button hover */
+    --clay-highlight-for-text: rgba(255,255,255,0.5); /* For text shadow, from card h3 text-shadow */
+
+    /* Shadow colors - these define the general shadow appearance */
+    --clay-shadow-color-dark: rgba(0, 0, 0, 0.1);
+    --clay-shadow-color-light: rgba(255, 255, 255, 0.7); /* For element inner/outer light part of shadow */
+
+    /* Claymorphism shadows (using the above color variables) */
+    --clay-shadow-inset: inset 2px 2px 5px var(--clay-shadow-color-dark),
+                         inset -3px -3px 7px var(--clay-shadow-color-light);
+    --clay-shadow-outset: 3px 3px 5px var(--clay-shadow-color-dark),
+                          -3px -3px 7px var(--clay-shadow-color-light);
+    --clay-shadow-outset-hover: 5px 5px 10px var(--clay-shadow-color-dark),
+                                -5px -5px 10px var(--clay-shadow-color-light); /* Stronger for hover */
+
+
+    /* Apply Claymorphism variables to theme properties */
+    --page-bg: var(--clay-bg);
+    --page-bg-gradient: none;
+    --text-color: var(--clay-text);
+    --heading-color: var(--clay-heading);
+    --link-color: var(--clay-heading); /* Links use heading color */
+    --link-hover-color: var(--clay-accent); /* Use accent for link hover */
+
+    --border-color: transparent; /* Claymorphism usually avoids hard borders */
+
+    /* Card-like sections on detail pages will use these */
+    --card-bg: var(--clay-bg);
+    --card-shadow: var(--clay-shadow-outset);
+    --card-hover-shadow: var(--clay-shadow-outset-hover);
+
+    --header-bg: var(--clay-bg);
+    --header-text-color: var(--clay-heading);
+    --header-shadow: var(--clay-shadow-outset); /* Header can also have clay effect */
+
+    --footer-text-color: var(--clay-text);
+    --footer-bg: var(--clay-bg);
+    border-top: none; /* Footer might not need a border if bg is same as page */
+
+    /* Button styles to match card buttons */
+    --button-bg: #c8a078;                         /* Primary button bg from card */
+    --button-text-color: #ffffff;                 /* Primary button text from card */
+    --button-hover-bg: #b89068;                   /* Primary button hover from card */
+    --button-border: none;
+    --button-shadow: var(--clay-shadow-outset);
+    --button-hover-shadow: var(--clay-shadow-outset-hover); /* Can also be var(--clay-shadow-outset) if hover is just bg change */
+
+    --button-secondary-bg: #f5e6d5;               /* Secondary button bg from card */
+    --button-secondary-text-color: #8b5e3c;       /* Secondary button text from card */
+    --button-secondary-hover-bg: #ffffff;         /* Secondary button hover from card */
+    --button-secondary-border: none;
+    /* Assuming secondary buttons also use outset shadow, or define a flatter one if needed */
+    --button-secondary-shadow: var(--clay-shadow-outset);
+
+
+    /* Prompt area within detail sections */
+    --prompt-bg: var(--clay-bg); /* Matches card's prompt area background */
+    --prompt-text-color: var(--clay-text); /* Matches card's prompt text color */
+    --prompt-shadow: var(--clay-shadow-inset); /* Inset shadow for prompt area */
+
+    --base-font: var(--font-pop); /* Poppins is a good fit */
+    --heading-font: var(--font-pop);
+
+    --card-border-radius: 20px; /* Significant rounding */
+    --button-border-radius: 15px; /* Also very rounded */
+}
+
+/* Specific adjustments for the Claymorphism theme (these should remain largely the same) */
+body.theme-claymorphism .card { /* This applies to general cards if not overridden by data-style-id */
+    border: none; /* Remove default border if any */
+    background-color: var(--card-bg); /* Ensures general cards use the theme's card bg */
+    box-shadow: var(--card-shadow);
+    border-radius: var(--card-border-radius);
+}
+body.theme-claymorphism .card:hover {
+    box-shadow: var(--card-hover-shadow);
+}
+
+
+body.theme-claymorphism .btn {
+    transition: box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out, background-color 0.15s ease-in-out;
+    /* Button colors are now set by variables above */
+}
+body.theme-claymorphism .btn:active { /* Pressed state */
+    box-shadow: var(--clay-shadow-inset);
+    transform: translateY(1px); /* Slight press down effect */
+}
+
+body.theme-claymorphism h1,
+body.theme-claymorphism h2,
+body.theme-claymorphism h3 {
+    /* Updated to use the specific highlight color from card's h3 text-shadow */
+    text-shadow: 1px 1px 1px var(--clay-highlight-for-text);
+    font-weight: 600; /* Poppins often looks good semi-bold */
+}
+
+/* Ensure prompt/code areas within sections get the inset shadow */
+body.theme-claymorphism .style-detail-section pre {
+    background-color: var(--prompt-bg);
+    color: var(--prompt-text-color);
+    box-shadow: var(--prompt-shadow);
+    border-radius: var(--button-border-radius); /* Match button radius for consistency */
+    border: none;
+}
+/* 19. Abstract Shapes / Geometric Theme */
+body.theme-abstract-geometric {
+    --abs-c1: #f8a1d1; /* Pink */
+    --abs-c2: #b870a9; /* Purple */
+    --abs-c3: #f6eacc; /* Cream */
+    --abs-c4: #7fdee1; /* Teal */
+
+    --page-bg: var(--abs-c3); --page-bg-gradient: none;
+    /* Add abstract shapes background */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.1'%3E%3Ccircle fill='%23f8a1d1' cx='50' cy='50' r='50'/%3E%3Ccircle fill='%23b870a9' cx='100' cy='100' r='50'/%3E%3Ccircle fill='%237fdee1' cx='0' cy='100' r='30'/%3E%3Crect fill='%23f8a1d1' width='20' height='20' x='70' y='10' transform='rotate(30 70 10)'/%3E%3C/g%3E%3C/svg%3E");
+    --text-color: #333; --heading-color: var(--abs-c2);
+    --link-color: var(--abs-c2); --link-hover-color: var(--abs-c1);
+    --border-color: var(--abs-c4);
+    --card-bg: rgba(255, 255, 255, 0.8); --card-shadow: 0 3px 8px rgba(0,0,0,0.08); --card-hover-shadow: 0 5px 12px rgba(0,0,0,0.12);
+    --header-bg: var(--abs-c1); --header-text-color: #fff; --header-shadow: none;
+    --footer-text-color: var(--abs-c2); --footer-bg: var(--abs-c3);
+    --button-bg: var(--abs-c2); --button-text-color: white; --button-hover-bg: #935b87; --button-border: none;
+    --button-secondary-bg: rgba(255, 255, 255, 0.4); --button-secondary-text-color: var(--abs-c2); --button-secondary-hover-bg: rgba(255, 255, 255, 0.7); --button-secondary-border: none;
+    --prompt-bg: rgba(255, 255, 255, 0.5); --prompt-text-color: #444;
+    --base-font: var(--font-montserrat); --heading-font: var(--font-montserrat);
+    --card-border-radius: 15px; --button-border-radius: 30px;
+}
+body.theme-abstract-geometric .card { border: 1px solid var(--border-color); border-radius: 50% 20% / 10% 40%; } /* Irregular shape */
+body.theme-abstract-geometric h1, body.theme-abstract-geometric h2, body.theme-abstract-geometric h3 { text-align: center; font-weight: 700; }
+
+/* 20. Sustainable / Green Design Theme */
+body.theme-sustainable-green {
+    --green-bg: #f0f4f0;
+    --green-text: #3c5242;
+    --green-heading: #2a3a2f;
+    --green-accent: #6b8e7a;
+    --green-border: #c8d8c8;
+
+    --page-bg: var(--green-bg); --page-bg-gradient: none;
+    --text-color: var(--green-text); --heading-color: var(--green-heading);
+    --link-color: var(--green-accent); --link-hover-color: var(--green-heading);
+    --border-color: var(--green-border);
+    --card-bg: #ffffff; --card-shadow: none; --card-hover-shadow: 0 2px 5px rgba(60, 82, 66, 0.1);
+    --header-bg: #fff; --header-text-color: var(--green-heading); --header-shadow: none; border-bottom: 1px solid var(--green-border);
+    --footer-text-color: var(--green-text); --footer-bg: var(--green-bg);
+    --button-bg: var(--green-accent); --button-text-color: white; --button-hover-bg: #5a7a6a; --button-border: none;
+    --button-secondary-bg: var(--green-border); --button-secondary-text-color: var(--green-text); --button-secondary-hover-bg: #b8c8b8; --button-secondary-border: none;
+    --prompt-bg: #e4eae4; --prompt-text-color: #4a6a5a;
+    --base-font: var(--font-sans); --heading-font: var(--font-sans); /* Use system/simple fonts */
+    --card-border-radius: 4px; --button-border-radius: 4px;
+}
+body.theme-sustainable-green .card { border: 1px solid var(--border-color); }
+body.theme-sustainable-green h1, body.theme-sustainable-green h2, body.theme-sustainable-green h3 { font-weight: 400; } /* Lighter font weight */
+
+
+
+/* 21. Art Deco Theme (Corrected) */
+body.theme-art-deco {
+    --art-deco-gold: #daa520;
+    --art-deco-black: #1a1a1a;
+    --art-deco-cream: #f5f5dc;
+    --art-deco-blue: #004e64; /* Example accent */
+
+    --page-bg: var(--art-deco-black);
+    --page-bg-gradient: none;
+    /* Optional: Add a subtle geometric pattern to the body background */
+    /* background-image: linear-gradient(45deg, #2a2a2a 25%, transparent 25%), linear-gradient(-45deg, #2a2a2a 25%, transparent 25%), ...; background-size: 40px 40px; */
+    --text-color: var(--art-deco-cream);
+    --heading-color: var(--art-deco-gold);
+    --link-color: var(--art-deco-gold);
+    --link-hover-color: #fff;
+    --border-color: rgba(218, 165, 32, 0.5); /* Gold border */
+    --card-bg: var(--art-deco-black);
+    --card-shadow: 0 0 15px rgba(218, 165, 32, 0.2);
+    --card-hover-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+    --header-bg: var(--art-deco-black);
+    --header-text-color: var(--art-deco-gold);
+    --header-shadow: none; /* Header shadow variable */
+    --footer-text-color: #aaa;
+    --footer-bg: var(--art-deco-black); /* Footer background variable */
+    --button-bg: var(--art-deco-gold);
+    --button-text-color: var(--art-deco-black);
+    --button-hover-bg: #b8860b;
+    --button-border: 1px solid #b8860b;
+    --button-secondary-bg: transparent;
+    --button-secondary-text-color: var(--art-deco-gold);
+    --button-secondary-hover-bg: rgba(218, 165, 32, 0.1);
+    --button-secondary-border: 1px solid var(--art-deco-gold);
+    --prompt-bg: rgba(255, 255, 255, 0.05);
+    --prompt-text-color: #ccc;
+    --base-font: var(--font-sans); /* Keep body text readable */
+    --heading-font: var(--font-pop); /* Use Poppins for headings */
+    --card-border-radius: 4px;
+    --button-border-radius: 2px;
+}
+
+/* Apply specific styles to elements when Art Deco theme is active */
+body.theme-art-deco header {
+    border-bottom: 2px solid var(--art-deco-gold); /* Apply border directly */
+}
+
+body.theme-art-deco footer {
+    border-top: 1px solid rgba(218, 165, 32, 0.5); /* Apply border directly */
+}
+
+body.theme-art-deco h1,
+body.theme-art-deco h2,
+body.theme-art-deco h3 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: 600;
+}
+
+body.theme-art-deco .btn {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Style specific card when theme is active */
+body.theme-art-deco .card[data-style-id="art-deco"] {
+    border-color: #fff; /* White border for contrast on the card itself */
+}
+/* --- Loading/Error States --- */
+.loading-message, .error-message { text-align: center; padding: 2rem; font-style: italic; color: #6c757d; }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) { header h1 { font-size: 1.6em; } header p { font-size: 1em; } }
+@media (max-width: 480px) { .card-grid { gap: 1rem; } .card-content { padding: 0.8rem; } .card-content h3 { font-size: 1.1em; } .card-content .prompt-text { font-size: 0.8em; } .btn { font-size: 0.85em; padding: 0.5em 1em; } .btn-secondary { font-size: 0.75em; padding: 0.3em 0.6em; } header { padding: 1rem; } header h1 { font-size: 1.4em; } header p { font-size: 0.9em; } }
+/* --- Style Detail Page Layout --- */
+.style-detail-container {
+    padding-top: 1rem; /* 顶部留白 */
+    padding-bottom: 2rem; /* 底部留白 */
+}
+
+.style-detail-section {
+    background-color: var(--card-bg, #fff); /* 使用卡片背景色 */
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--card-border-radius, 8px);
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.08));
+    border: 1px solid var(--border-color, #ddd);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.style-detail-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color, #eee);
+    color: var(--heading-color);
+    font-size: 1.4em;
+}
+
+.style-detail-section p,
+.style-detail-section ul {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+.style-detail-section ul { padding-left: 1.5rem; }
+.style-detail-section li { margin-bottom: 0.5rem; }
+
+/* 代码块样式 */
+.style-detail-section pre {
+    background-color: var(--prompt-bg, #f8f8f8); /* 使用提示背景色 */
+    color: var(--prompt-text-color, #555); /* 使用提示文字颜色 */
+    border: 1px solid var(--border-color, #eee);
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-x: auto; /* 长代码行允许水平滚动 */
+    font-family: var(--font-mono); /* 等宽字体 */
+    font-size: 0.9em;
+    line-height: 1.5;
+    white-space: pre; /* 保留空白符和换行 */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.style-detail-section code {
+    font-family: inherit; /* 继承 pre 的字体 */
+    background: none; /* 移除默认内联代码背景 */
+    padding: 0;
+    color: inherit; /* 继承 pre 的颜色 */
+}
+
+/* 下载按钮特定样式 */
+.btn-download {
+    background-color: var(--button-bg, #007bff);
+    color: var(--button-text-color, white) !important;
+    display: inline-block;
+    text-align: center;
+}
+.btn-download:hover {
+    background-color: var(--button-hover-bg, #0056b3);
+}
+
+/* 返回链接样式 */
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.95em;
+}
+.back-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+.back-link svg { /* 简单的左箭头图标 */
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em; /* 微调垂直对齐 */
+    margin-right: 0.3em;
+    fill: currentColor;
+}
+
+
+/* --- 响应式调整 --- */
+/* ... 保留现有的媒体查询 ... */
+/* 为详情页添加一些响应式调整 */
+@media (max-width: 768px) {
+    .style-detail-section { padding: 1rem; }
+    .style-detail-section h2 { font-size: 1.3em; }
+}
+@media (max-width: 480px) {
+    .style-detail-section { padding: 0.8rem; }
+    .style-detail-section h2 { font-size: 1.2em; }
+    .style-detail-section pre { padding: 0.8rem; font-size: 0.85em; }
+}

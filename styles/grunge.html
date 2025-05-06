@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">风格详情 - 垃圾摇滚 / 颓废风格</title>
+    <!-- Google Fonts (Include Grunge-appropriate fonts like Special Elite or Courier New - system font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file (Relative path from styles folder) -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+</head>
+<!-- 关键：直接应用 Grunge 主题类到 body -->
+<body class="theme-grunge">
+    <button type="button" class="language-btn" id="language-switcher" aria-label="Switch Language">
+        <img src="../img/cnen.svg" alt="Switch Language" id="language-toggle-img">
+    </button>
+    <header>
+        <div class="container">
+            <h1 data-translate="headerTitle">垃圾摇滚 / 颓废风格 (Grunge)</h1>
+            <p data-translate="headerSubtitle">探索 <span class="highlight">Grunge</span> 设计风格的特点与应用</p>
+            <!-- 主题切换按钮已移除 -->
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="backLink">返回风格列表</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="aboutTitle">关于此风格</h2>
+            <p data-translate="aboutP1">Grunge（垃圾摇滚/颓废风格）设计起源于 90 年代的音乐和亚文化场景，其视觉特征通常是故意显得粗糙、杂乱、不完美，甚至有些“脏”或“破坏感”。它反对干净、精致的设计，追求一种原始、真实、未经修饰的美学。</p>
+            <h3 data-translate="featuresTitle">主要特点:</h3>
+            <ul>
+                <li data-translate="feature1"><strong>脏旧纹理 (Distressed Textures):</strong> 大量使用模拟纸张褶皱、污渍、混凝土、划痕、胶带、喷溅等效果的纹理。</li>
+                <li data-translate="feature2"><strong>不规则布局 (Irregular Layouts):</strong> 元素排列看似随意、重叠，打破传统的网格和对齐规则。</li>
+                <li data-translate="feature3"><strong>深色调与对比 (Dark Tones & Contrast):</strong> 常用深灰、棕色、褪色的彩色，有时与亮色形成强烈对比，但整体偏暗沉。</li>
+                <li data-translate="feature4"><strong>手写或破坏感字体 (Handwritten or Distorted Fonts):</strong> 使用手写体、打字机字体、模板字体，或者对常规字体进行扭曲、模糊、破坏处理。</li>
+                <li data-translate="feature5"><strong>拼贴感 (Collage Elements):</strong> 像是随意撕下、粘贴在一起的图像、文字和图形元素。</li>
+                <li data-translate="feature6"><strong>边缘粗糙 (Rough Edges):</strong> 元素边缘可能不光滑，呈现撕裂、毛边或模糊的效果。</li>
+                <li data-translate="feature7"><strong>图层感 (Layering):</strong> 元素层层叠加，创造出深度和混乱感。</li>
+            </ul>
+            <p data-translate="aboutP3">虽然起源于印刷品和音乐海报，Grunge 风格在网页设计中也有应用，尤其适合需要表达叛逆、非主流、复古或手工感的网站，如乐队网站、艺术项目、独立品牌等。</p>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="promptTitle">示例 AI Prompt</h2>
+            <pre><code>Design a grunge-style band website. Use distressed paper or concrete textures, ripped edges, layered elements, maybe some 'dirty' brush strokes, dark colors (browns, greys, muted reds), and a typewriter or stencil font.</code></pre>
+            <p data-translate="promptP1">（中文解释：设计一个垃圾摇滚风格的乐队网站。使用破旧纸张或混凝土纹理、撕裂边缘、分层元素，或许加上一些“脏”的笔触效果，深色调（棕色、灰色、暗红色），以及打字机或模板字体。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="cssTitle">主题 CSS 代码片段</h2>
+            <p data-translate="cssP1">以下是将 Grunge 风格应用为全局主题的核心 CSS 代码 (<code>body.theme-grunge</code>):</p>
+            <pre><code class="language-css">/* 3. Grunge Theme */
+body.theme-grunge {
+    /* Subtle noise texture */
+    --grunge-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+    --page-bg: #3a3a3a; /* 深灰色背景 */
+    --page-bg-gradient: none;
+    background-image: var(--grunge-texture); /* 应用纹理 */
+    --text-color: #b0b0b0; /* 浅灰色文字 */
+    --heading-color: #dcdcdc; /* 亮灰色标题 */
+    --link-color: #a52a2a; /* 棕色链接 */
+    --link-hover-color: #cd5c5c; /* 印度红链接悬停 */
+    --border-color: #555; /* 深灰色边框 */
+    --card-bg: #4a4a4a; /* 稍亮的灰色卡片背景 */
+    --card-bg-image: var(--grunge-texture); /* 卡片也应用纹理 */
+    --card-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* 明显阴影 */
+    --card-hover-shadow: 3px 3px 7px rgba(0,0,0,0.4); /* 更深悬停阴影 */
+    --header-bg: #2a2a2a; /* 更深的页头背景 */
+    --header-text-color: #aaa; /* 页头文字 */
+    --header-shadow: inset 0 -2px 4px rgba(0,0,0,0.4); /* 内阴影 */
+    --footer-text-color: #888; /* 页脚文字 */
+    --footer-bg: #3a3a3a; /* 页脚背景同页面 */
+    --button-bg: #8b0000; /* 暗红色按钮 */
+    --button-text-color: #ccc; /* 按钮文字 */
+    --button-hover-bg: #a52a2a; /* 棕色按钮悬停 */
+    --button-border: 1px solid #777; /* 按钮边框 */
+    --button-secondary-bg: #333; /* 次要按钮背景 */
+    --button-secondary-text-color: #aaa; /* 次要按钮文字 */
+    --button-secondary-hover-bg: #555; /* 次要按钮悬停 */
+    --button-secondary-border: 1px solid #666; /* 次要按钮边框 */
+    --prompt-bg: rgba(0,0,0,0.2); /* 半透明黑色提示背景 */
+    --prompt-text-color: #aaa; /* 提示文字 */
+    --prompt-bg-image: none; /* 提示区无纹理 */
+    --base-font: var(--font-grunge); /* 使用 Grunge 字体 */
+    --heading-font: var(--font-grunge); /* 标题也用 Grunge 字体 */
+    --card-border-radius: 3px; /* 轻微圆角 */
+    --button-border-radius: 2px; /* 更小圆角 */
+}
+
+/* Grunge 风格特定元素调整 */
+body.theme-grunge .card {
+    border: 1px solid #222; /* 更深的卡片边框 */
+}
+body.theme-grunge a {
+    text-decoration: none; /* 移除默认下划线 */
+    border-bottom: 1px dashed var(--link-color); /* 使用虚线链接 */
+    transition: border-bottom-style 0.2s ease, background-color 0.2s ease;
+}
+body.theme-grunge a:hover {
+    border-bottom-style: solid; /* 悬停时变实线 */
+    background-color: rgba(255,255,255,0.05); /* 轻微背景高亮 */
+}
+/* 可以添加 transform: rotate(-1deg); 等效果给某些元素增加随意感 */
+            </code></pre>
+            <p><small data-translate="cssP2">注意：这只是核心主题 CSS。实际应用中可以通过添加更多纹理、元素叠加、不规则边框等方式进一步强化 Grunge 效果。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="downloadTitle">资源下载 (示例)</h2>
+            <p data-translate="downloadP1">下载包含此风格更完整 CSS 定义（可能包括特定组件样式、字体文件引用等）的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/grunge.zip" class="btn btn-download" download data-translate="downloadButton">
+                下载 grunge.zip
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="footerText">AI 网站样式展示</span></p>
+        </div>
+    </footer>
+
+    <!-- Order is important: global translations, then page-specific, then main script -->
+    <script src="../translations.js" defer></script>
+    <script src="../translations_pages/grunge-translations.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

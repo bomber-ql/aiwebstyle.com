@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitleSwissStyle">风格详情 - 瑞士风格</title>
+    <!-- Google Fonts (Helvetica/Arial are common system fonts, but include others for consistency) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file (Relative path from styles folder) -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+</head>
+<!-- 关键：直接应用瑞士风格主题类到 body -->
+<body class="theme-swiss-style">
+    <button type="button" id="language-switcher" class="language-btn" aria-label="Switch language">
+        <img src="../img/cnen.svg" alt="Switch Language">
+    </button>
+    <header>
+        <div class="container">
+            <h1 data-translate="headerTitleSwissStyle">瑞士风格 / 国际主义排版 (Swiss Style)</h1>
+            <p data-translate="headerSubtitleSwissStyle">探索 <span class="highlight">瑞士风格</span> 设计的特点与应用</p>
+            <!-- 主题切换按钮已移除 -->
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="backToList">返回风格列表</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="aboutThisStyle">关于此风格</h2>
+            <p data-translate="swissStyleDesc1">瑞士风格（Swiss Style），也称为国际主义排版风格（International Typographic Style），是一种强调清晰、客观、易读性和秩序感的图形设计和排版方法。它起源于 20 世纪 40-50 年代的瑞士。</p>
+            <h3 data-translate="mainFeatures">主要特点:</h3>
+            <ul>
+                <li data-translate="featureGridSystem"><strong>网格系统 (Grid System):</strong> 严格使用网格来组织页面元素，创造结构感和一致性。</li>
+                <li data-translate="featureSansSerif"><strong>无衬线字体 (Sans-serif Typefaces):</strong> 偏爱清晰、简洁的无衬线字体，如 Helvetica, Univers, Akzidenz-Grotesk。</li>
+                <li data-translate="featureAsymmetricalLayout"><strong>非对称布局 (Asymmetrical Layout):</strong> 布局通常是不对称的，但仍然保持平衡和动态感。</li>
+                <li data-translate="featureFlushLeftRaggedRight"><strong>左对齐，右不齐 (Flush Left, Ragged Right):</strong> 文本块通常采用左对齐、右边自然形成不规则边缘的方式。</li>
+                <li data-translate="featureObjectivityClarity"><strong>客观性与清晰度:</strong> 追求信息的清晰传达，避免过多的装饰和主观情感表达。</li>
+                <li data-translate="featurePhotographyOverIllustration"><strong>摄影优于插画:</strong> 倾向于使用高质量、客观的黑白或彩色摄影。</li>
+                <li data-translate="featureLimitedColors"><strong>有限的色彩:</strong> 通常使用有限的、有时是醒目的颜色（如红色）作为强调，并与黑白灰搭配。</li>
+                <li data-translate="featureTypographicHierarchy"><strong>排版层级:</strong> 通过字体大小、粗细、间距等建立清晰的信息层级。</li>
+            </ul>
+            <p data-translate="swissStyleUsage">这种风格对现代主义平面设计和网页设计产生了深远影响，至今仍在许多领域被广泛应用，尤其是在需要清晰传达信息和建立专业形象的场合。</p>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="exampleAiPrompt">示例 AI Prompt</h2>
+            <pre><code>Create a website layout in the Swiss Style for a design conference. Use a strict grid, Helvetica or Univers font, strong typographic hierarchy (different weights/sizes), maybe one bold accent color (like red), and black/white photography.</code></pre>
+            <p data-translate="swissStylePromptExplanation">（中文解释：为设计会议创建一个瑞士风格的网站布局。使用严格的网格，Helvetica 或 Univers 字体，强烈的排版层级（不同粗细/大小），或许使用一种醒目的强调色（如红色），以及黑白摄影。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="themeCssSnippet">主题 CSS 代码片段</h2>
+            <p data-translate="cssSnippetIntroSwissStyle">以下是将瑞士风格应用为全局主题的核心 CSS 代码 (<code>body.theme-swiss-style</code>):</p>
+            <pre><code class="language-css">/* 2. Swiss Style Theme */
+body.theme-swiss-style {
+    --page-bg: #ffffff; /* 白色背景 */
+    --page-bg-gradient: none;
+    --text-color: #000000; /* 黑色文字 */
+    --heading-color: #000000; /* 黑色标题 */
+    --link-color: #e60000; /* 强调红色链接 */
+    --link-hover-color: #b30000; /* 深红色链接悬停 */
+    --border-color: #e0e0e0; /* 浅灰色边框 */
+    --card-bg: #ffffff; /* 白色卡片背景 */
+    --card-shadow: none; /* 无卡片阴影 */
+    --card-hover-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 轻微悬停阴影 */
+    --header-bg: #000000; /* 黑色页头背景 */
+    --header-text-color: #ffffff; /* 白色页头文字 */
+    --header-shadow: none; /* 无页头阴影 */
+    --footer-text-color: #555555; /* 深灰色页脚文字 */
+    --footer-bg: #ffffff; /* 白色页脚背景 */
+    --button-bg: #e60000; /* 红色按钮背景 */
+    --button-text-color: white; /* 白色按钮文字 */
+    --button-hover-bg: #b30000; /* 深红按钮悬停 */
+    --button-border: none; /* 无按钮边框 */
+    --button-secondary-bg: #333; /* 深灰次要按钮 */
+    --button-secondary-text-color: white; /* 白色次要按钮文字 */
+    --button-secondary-hover-bg: #000; /* 黑色次要按钮悬停 */
+    --button-secondary-border: none; /* 无次要按钮边框 */
+    --prompt-bg: #f5f5f5; /* 浅灰提示背景 */
+    --prompt-text-color: #333; /* 深灰提示文字 */
+    --base-font: var(--font-helvetica); /* 使用 Helvetica 字体 */
+    --heading-font: var(--font-helvetica); /* 标题也用 Helvetica */
+    --card-border-radius: 0px; /* 无圆角 */
+    --button-border-radius: 0px; /* 无圆角 */
+}
+
+/* 瑞士风格特定元素调整 */
+body.theme-swiss-style h1,
+body.theme-swiss-style h2,
+body.theme-swiss-style h3 {
+    font-weight: 700; /* 粗体标题 */
+    text-transform: lowercase; /* 标题小写（常见特征） */
+}
+body.theme-swiss-style .btn {
+    text-transform: uppercase; /* 按钮文字大写 */
+    font-size: 0.85em; /* 稍小字号 */
+    letter-spacing: 0.5px; /* 轻微字间距 */
+}
+body.theme-swiss-style .card {
+    border: 1px solid var(--border-color); /* 确保卡片有边框 */
+}
+/* 可以在这里添加更多基于网格的布局样式，但这通常在具体页面结构中实现 */
+            </code></pre>
+            <p><small data-translate="swissStyleCssNote">注意：这只是核心主题 CSS。实际应用中可能还需要在特定页面结构中结合网格系统来实现完整的瑞士风格布局。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="resourceDownload">资源下载 (示例)</h2>
+            <p data-translate="downloadDescriptionSwissStyle">下载包含此风格更完整 CSS 定义（可能包括特定组件样式、字体文件引用等）的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/swiss-style.zip" class="btn btn-download" download>
+                <span data-translate="downloadButtonSwissStyle">下载 swiss-style.zip</span>
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="footerText">AI 网站样式展示</span></p>
+        </div>
+    </footer>
+
+    <!-- Link to main JS file (Relative path from styles folder) -->
+    <script src="../translations.js"></script>
+    <script src="../translations_pages/swiss-style-translations.js"></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

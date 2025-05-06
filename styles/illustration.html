@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">风格详情 - 插画风格</title>
+    <!-- Google Fonts (Include Poppins or other fonts used) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+</head>
+<!-- 关键：应用 Illustration 主题类 -->
+<body class="theme-illustration">
+    <button type="button" class="language-btn" id="language-switcher" aria-label="Switch Language">
+        <img src="../img/cnen.svg" alt="Switch Language" id="language-toggle-img">
+    </button>
+    <header>
+        <div class="container">
+            <h1 data-translate="headerTitle">插画风格 (Illustration Style)</h1>
+            <p data-translate="headerSubtitle">探索 <span class="highlight">插画风格</span> 网页设计风格的特点与应用</p>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="backLink">返回风格列表</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="aboutTitle">关于此风格</h2>
+            <p data-translate="aboutP1">插画风格的网页设计侧重于使用定制的、通常是手绘风格的图形元素来传达信息、营造氛围和增强品牌个性。它不仅仅是添加图片，而是将插画作为设计的核心组成部分。</p>
+            <p data-translate="aboutP2">这种风格可以非常多样化，从简约的线条画到复杂的场景插画，关键在于其独特性和艺术性。</p>
+            <h3 data-translate="featuresTitle">主要特点:</h3>
+            <ul>
+                <li data-translate="feature1"><strong>定制插画 (Custom Illustrations):</strong> 核心元素是为特定目的创作的独特插画，而非通用图库素材。</li>
+                <li data-translate="feature2"><strong>独特角色/场景 (Unique Characters/Scenes):</strong> 常常包含代表品牌或概念的原创角色、吉祥物或场景描绘。</li>
+                <li data-translate="feature3"><strong>叙事性 (Storytelling):</strong> 插画常被用来讲述品牌故事、解释复杂概念或引导用户流程。</li>
+                <li data-translate="feature4"><strong>特定调色板 (Specific Color Palette):</strong> 色彩方案通常与插画本身的风格紧密配合，可能柔和、鲜艳或具有特定主题。</li>
+                <li data-translate="feature5"><strong>手绘/有机感 (Hand-drawn/Organic Feel):</strong> 即使是数字创作，也常常带有手绘的质感、不规则的线条或有机的形状。</li>
+                <li data-translate="feature6"><strong>与布局融合 (Integration with Layout):</strong> 插画不仅仅是装饰，而是与文本、按钮和其他界面元素巧妙地结合在一起。</li>
+                <li data-translate="feature7"><strong>情感连接 (Emotional Connection):</strong> 通过艺术化的表达，更容易与用户建立情感联系。</li>
+            </ul>
+            <p data-translate="aboutP3">插画风格非常适合需要强调创意、友好、人性化或讲述故事的网站，如初创公司、创意机构、儿童产品、非营利组织以及个人作品集。</p>
+            <div class="illustration-placeholder" data-translate="illustrationPlaceholder">(这里通常会放置一个代表性的插画)</div>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="promptTitle">示例 AI Prompt</h2>
+            <pre><code>Design a website landing page using a friendly illustration style. Feature a custom illustration of diverse people collaborating, use a warm and inviting color palette (oranges, soft blues), Poppins font, rounded buttons, and integrate the illustration smoothly with the text content.</code></pre>
+            <p data-translate="promptP1">（中文解释：使用友好的插画风格设计一个网站着陆页。包含一个展示多元人群协作的定制插画，使用温暖且吸引人的调色板（橙色系、柔和蓝），Poppins 字体，圆角按钮，并将插画与文本内容流畅地结合起来。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="cssTitle">主题 CSS 代码片段</h2>
+            <p data-translate="cssP1">以下是将插画风格应用为全局主题的核心 CSS 代码 (<code>body.theme-illustration</code>):</p>
+            <pre><code class="language-css">/* 9. Illustration Style Theme */
+body.theme-illustration {
+    --page-bg: #fdf8f5; /* Soft, warm background */
+    --page-bg-gradient: none;
+    --text-color: #5c4e46; /* Earthy text color */
+    --heading-color: #d96c47; /* Warm, inviting heading color */
+    --link-color: #e07a5f; /* Coral link color */
+    --link-hover-color: #d96c47;
+    --border-color: #e8dccd; /* Soft border */
+    --card-bg: #ffffff; /* White card */
+    --card-shadow: 0 4px 15px rgba(92, 78, 70, 0.08); /* Soft shadow */
+    --card-hover-shadow: 0 6px 20px rgba(92, 78, 70, 0.12);
+    --header-bg: #ffffff;
+    --header-text-color: var(--heading-color);
+    --header-shadow: 0 2px 5px rgba(92, 78, 70, 0.05);
+    border-bottom: 1px solid var(--border-color);
+    --footer-text-color: #8a7a70;
+    --footer-bg: var(--page-bg);
+    --button-bg: #e07a5f; /* Coral button */
+    --button-text-color: white;
+    --button-hover-bg: #d96c47;
+    --button-border: none;
+    --button-secondary-bg: #f4f1ee; /* Light beige secondary */
+    --button-secondary-text-color: #8a7a70;
+    --button-secondary-hover-bg: #e8dccd;
+    --button-secondary-border: 1px solid #e8dccd;
+    --prompt-bg: #fefbf9; /* Very light prompt bg */
+    --prompt-text-color: #6b5e56;
+    --base-font: var(--font-pop); /* Friendly font like Poppins */
+    --heading-font: var(--font-pop);
+    --card-border-radius: 12px; /* Soft rounded corners */
+    --button-border-radius: 8px; /* Rounded buttons */
+}
+
+/* Illustration Specific Adjustments */
+body.theme-illustration h1,
+body.theme-illustration h2,
+body.theme-illustration h3 {
+    font-weight: 600; /* Slightly softer weight */
+}
+/* Add placeholder for where illustrations would go */
+body.theme-illustration .illustration-placeholder {
+    background-color: #e8dccd;
+    border-radius: var(--card-border-radius);
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--footer-text-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+    text-align: center; /* Center text */
+    padding: 1rem; /* Add some padding */
+}
+            </code></pre>
+            <p><small data-translate="cssP2">注意：插画风格的精髓在于高质量的定制插画本身。CSS 主要负责提供一个和谐的背景和界面元素，以衬托插画。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="downloadTitle">资源下载 (示例)</h2>
+            <p data-translate="downloadP1">下载包含此风格更完整 CSS 定义（可能包括特定组件样式、字体文件引用等）的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/illustration.zip" class="btn btn-download" download data-translate="downloadButton">
+                下载 illustration.zip
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="footerText">AI 网站样式展示</span></p>
+        </div>
+    </footer>
+
+    <!-- Order is important: global translations, then page-specific, then main script -->
+    <script src="../translations.js" defer></script>
+    <script src="../translations_pages/illustration-translations.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

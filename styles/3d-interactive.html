@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-translate="htmlLang">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="detail_page_title">Style Detail - 3D Interactive (Enhanced)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+    <!-- Page-specific and global translations -->
+    <script src="../translations_pages/3d-interactive-translations.js"></script>
+    <script src="../translations.js"></script>
+    <!-- Three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Add perspective to the container holding cards for better 3D effect */
+        .style-grid {
+            perspective: 1200px;
+        }
+        .style-detail-container {
+            perspective: 1200px;
+        }
+        #cube-canvas {
+            width: 100%;
+            height: 400px;
+            border-radius: var(--card-border-radius);
+            background: radial-gradient(ellipse at center, #2a3a57 0%, #0f172a 70%);
+        }
+    </style>
+</head>
+<body class="theme-3d-interactive">
+    <header>
+        <div class="container">
+            <h1 data-translate="detail_header_title">3D Interactive (Enhanced Effect)</h1>
+            <p data-translate="detail_header_subtitle">Explore the features and applications of the <span class="highlight">3D Interactive</span> web design style (effect enhanced)</p>
+            <button id="language-switcher" class="language-btn">
+                <img src="../img/cnen.svg" alt="Switch Language">
+            </button>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="detail_back_to_list">Back to Style List</span>
+        </a>
+
+        <section class="style-detail-section style-description">
+            <h2 data-translate="detail_about_style_title">About This Style (Enhanced Version)</h2>
+            <p data-translate="detail_about_p1">3D interactive web design utilizes technologies like WebGL to create interactive three-dimensional scenes, offering immersive experiences. The core of this style lies in JavaScript-driven 3D rendering, but its <strong>hosting UI</strong> often adopts designs with a sense of technology and depth to complement it.</p>
+            <p data-translate="detail_about_p2">Even without complex WebGL scenes, CSS tricks (like shadows, gradients, perspective, and transforms) can be used on elements like buttons and cards to <strong>simulate a more significant 3D spatial sense and interactive feedback</strong>, enhancing the overall style.</p>
+            <h3 data-translate="detail_features_title">Main Features:</h3>
+            <ul>
+                <li data-translate="detail_feature_1"><strong>Core: 3D Models & Interaction (JS/WebGL):</strong> Load, render, and allow user manipulation of 3D models or scenes.</li>
+                <li data-translate="detail_feature_2"><strong>UI Style: Tech & Depth:</strong> Often uses dark themes, clean fonts, subtle gloss or shadow effects to create a professional and cutting-edge atmosphere.</li>
+                <li data-translate="detail_feature_3"><strong>CSS Simulated 3D Effects (Enhanced):</strong> Utilizes `perspective`, `transform (translateZ, rotateX/Y)`, shadows, etc., to add more noticeable depth and 3D transformations during interaction to UI elements (cards, buttons).</li>
+                <li data-translate="detail_feature_4"><strong>Real-time Rendering & Performance:</strong> True 3D effects require real-time rendering and attention to performance optimization.</li>
+                <li data-translate="detail_feature_5"><strong>Lighting, Materials & Camera:</strong> Key elements for building realistic 3D scenes (implemented in WebGL).</li>
+                <li data-translate="detail_feature_6"><strong>Integration with UI:</strong> 3D scenes need to work seamlessly with HTML UI elements.</li>
+            </ul>
+            <p data-translate="detail_about_p3">This style is suitable for product showcases, data visualization, games, virtual tours, and other scenarios requiring a sense of space and deep interaction. Pure CSS can only simulate partial effects; the full experience relies on JavaScript and 3D libraries.</p>
+            <canvas id="cube-canvas"></canvas>
+        </section>
+
+        <!-- Other sections remain unchanged -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="detail_prompt_title">Example AI Prompt (for concept or UI layout)</h2>
+            <pre><code>Design a website UI layout for showcasing a 3D product model. Include a large central area for the 3D canvas (placeholder), minimal side controls, a modern tech aesthetic (dark theme, clean fonts like Inter), and apply more pronounced 3D hover effects (significant card lifting and tilting) to UI elements using CSS transforms.</code></pre>
+            <p data-translate="detail_prompt_example_p1"> (English explanation: Design a UI layout for a website showcasing a 3D product model. Include a large central area for the 3D canvas (placeholder), minimal side controls, a modern tech aesthetic (dark theme, clean fonts like Inter), and apply more pronounced 3D hover effects (significant card lifting and tilting) to UI elements using CSS transforms.)</p>
+            <p><small data-translate="detail_prompt_note">Note: AI can assist in designing layouts with a 3D feel and CSS concepts, but generating functional WebGL code remains a challenge.</small></p>
+        </section>
+
+        <section class="style-detail-section style-css">
+            <h2 data-translate="detail_css_title">Theme CSS Snippets (Further Enhanced 3D Feel)</h2>
+            <p data-translate="detail_css_p1">The following CSS code builds upon the original by adding more intense simulated 3D hover effects to cards and buttons (<code>body.theme-3d-interactive</code>):</p>
+            <pre><code class="language-css">/* 3D Interactive Theme (Further Enhanced CSS 3D simulation) */
+                body.theme-3d-interactive {
+                    /* Dark, techy background */
+                    --page-bg: #0f172a; /* Even darker base */
+                    --page-bg-gradient: linear-gradient(to bottom, #1e293b, #0f172a);
+                    --text-color: #cbd5e1; /* Slightly brighter text for contrast */
+                    --heading-color: #f8fafc; /* White headings */
+                    --link-color: #38bdf8; /* Brighter cyan-blue link */
+                    --link-hover-color: #7dd3fc; /* Lighter cyan-blue hover */
+                    --border-color: #334155; /* Slightly more visible border */
+                    --card-bg: #1e293b; /* Dark slate card background */
+                    /* Enhanced shadow for depth - Base State */
+                    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+                    /* Further Enhanced shadow for depth - Hover State */
+                    --card-hover-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                    --header-bg: rgba(15, 23, 42, 0.85); /* Darker, more opaque header */
+                    --header-text-color: var(--heading-color);
+                    --header-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(8px); /* Slightly stronger blur */
+                    border-bottom: 1px solid var(--border-color);
+                    --footer-text-color: #94a3b8;
+                    --footer-bg: #0f172a; /* Match page bottom */
+                    border-top: 1px solid var(--border-color);
+                    --button-bg: var(--link-color);
+                    --button-text-color: #0f172a; /* Dark text on bright button */
+                    --button-hover-bg: var(--link-hover-color);
+                    --button-border: none;
+                    /* Add more pronounced button shadow for depth */
+                    --button-shadow: 0 3px 7px rgba(0, 0, 0, 0.25);
+                    --button-hover-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+                    --button-secondary-bg: #334155; /* Darker secondary button */
+                    --button-secondary-text-color: #cbd5e1;
+                    --button-secondary-hover-bg: #475569;
+                    --button-secondary-border: none;
+                    --prompt-bg: #1e293b; /* Consistent dark prompt area */
+                    --prompt-text-color: #818cf8; /* Brighter indigo prompt text */
+                    --base-font: var(--font-inter);
+                    --heading-font: var(--font-inter);
+                    --card-border-radius: 8px; /* Slightly larger radius */
+                    --button-border-radius: 5px;
+                    --mono-font: var(--font-roboto-mono);
+                }
+                
+                /* 3D Interactive Specific Adjustments - Further Enhanced */
+                
+                /* Apply perspective to the container of elements you want to transform in 3D */
+                .style-detail-container {
+                     perspective: 1200px; /* Increased perspective for more depth */
+                     /* perspective-origin: center center; (default) */
+                }
+                
+                body.theme-3d-interactive .card {
+                    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    box-shadow: var(--card-shadow);
+                    /* Optional: give cards a very slight initial "pop" or angle */
+                    /* transform: translateZ(5px) rotateX(1deg); */
+                }
+                
+                body.theme-3d-interactive .card:hover {
+                    /* Increased translateY, translateZ, and rotation for more pronounced effect */
+                    transform: translateY(-20px) translateZ(60px) rotateX(8deg) rotateY(-4deg);
+                    box-shadow: var(--card-hover-shadow); /* Enhance shadow on hover */
+                }
+                
+                body.theme-3d-interactive .btn {
+                    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    box-shadow: var(--button-shadow);
+                    transform: translateZ(0); /* Establish base Z position */
+                }
+                
+                body.theme-3d-interactive .btn:hover {
+                    /* Increased lift for buttons */
+                    transform: translateY(-5px) translateZ(15px);
+                    box-shadow: var(--button-hover-shadow);
+                }
+                
+                body.theme-3d-interactive .btn:active {
+                    transform: translateY(-2px) translateZ(8px); /* Simulate pressing down more clearly */
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+                }
+                
+                
+                /* Style for the placeholder where the 3D canvas would go */
+                body.theme-3d-interactive .three-d-placeholder {
+                    background: radial-gradient(ellipse at center, #2a3a57 0%, #0f172a 70%); /* More dynamic background */
+                    border: 1px solid var(--border-color);
+                    min-height: 400px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #4b5563; /* Muted placeholder text */
+                    font-style: italic;
+                    font-size: 1.1em;
+                    margin-bottom: 1.5rem;
+                    border-radius: var(--card-border-radius);
+                    text-align: center;
+                    padding: 1rem;
+                    overflow: hidden;
+                    position: relative;
+                    box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 0 0 15px rgba(56, 189, 248, 0.1); /* Inner shadow + subtle outer glow */
+                    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+                }
+                           */</code></pre>
+            <p><small data-translate="detail_css_note">Note: These CSS effects are intended to significantly enhance the visual style and simulate a 3D interactive feel. True 3D rendering and complex interactions still require JavaScript and WebGL. The perceived effect may also vary depending on the browser and user settings. Overly strong effects can sometimes impact usability, so please balance accordingly.</small></p>
+        </section>
+
+        <section class="style-detail-section style-download">
+            <h2 data-translate="detail_download_title">Resource Download (Example)</h2>
+            <p data-translate="detail_download_p1">Download a zip file containing the UI CSS definitions for this style (including further enhanced simulated 3D effects) and potentially a basic JS framework setup.</p>
+            <a href="../zips/3d-interactive-ultra-enhanced.zip" class="btn btn-download" download data-translate="detail_download_button">
+                Download 3d-interactive-ultra-enhanced.zip
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="detail_footer_text">AI Website Style Gallery</span></p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+    <script>
+        // 创建场景
+        const scene = new THREE.Scene();
+        
+        // 创建相机
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
+        camera.position.z = 5;
+        
+        // 创建渲染器
+        const canvas = document.getElementById('cube-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setClearColor(0x000000, 0);
+        
+        // 创建立方体
+        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const materials = [
+            new THREE.MeshPhongMaterial({ color: 0xff0000 }), // 红色
+            new THREE.MeshPhongMaterial({ color: 0x00ff00 }), // 绿色
+            new THREE.MeshPhongMaterial({ color: 0x0000ff }), // 蓝色
+            new THREE.MeshPhongMaterial({ color: 0xffff00 }), // 黄色
+            new THREE.MeshPhongMaterial({ color: 0xff00ff }), // 紫色
+            new THREE.MeshPhongMaterial({ color: 0x00ffff }), // 青色
+        ];
+        const cube = new THREE.Mesh(geometry, materials);
+        scene.add(cube);
+        
+        // 添加光源
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+        
+        // 动画循环
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // 处理窗口大小变化
+        function onWindowResize() {
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        }
+        
+        window.addEventListener('resize', onWindowResize);
+        
+        // 开始动画
+        animate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">风格详情 - 玻璃拟态</title>
+    <!-- Google Fonts (Include fonts like Inter or Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+</head>
+<!-- 关键：应用 Glassmorphism 主题类 -->
+<body class="theme-glassmorphism">
+    <button type="button" class="language-btn" id="language-switcher" aria-label="Switch Language">
+        <img src="../img/cnen.svg" alt="Switch Language" id="language-toggle-img">
+    </button>
+    <header class="glass-effect"> <!-- Header can also have the effect -->
+        <div class="container">
+            <h1 data-translate="headerTitle">玻璃拟态 (Glassmorphism)</h1>
+            <p data-translate="headerSubtitle">探索 <span class="highlight">玻璃拟态</span> 网页设计风格的特点与应用</p>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link glass-effect"> <!-- Link can also have effect -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="backLink">返回风格列表</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="aboutTitle">关于此风格</h2>
+            <p data-translate="aboutP1">玻璃拟态（Glassmorphism）是一种模拟磨砂玻璃效果的界面设计风格。它通过背景模糊、半透明、微妙的边框和光泽效果，创造出一种轻盈、分层且具有现代感的视觉体验。</p>
+            <p data-translate="aboutP2">这种风格的关键在于元素看起来像是漂浮在彩色、模糊的背景之上，如同隔着一层磨砂玻璃看世界。</p>
+            <h3 data-translate="featuresTitle">主要特点:</h3>
+            <ul>
+                <li data-translate="feature1"><strong>背景模糊 (Background Blur):</strong> 最核心的特征，使用 CSS 的 `backdrop-filter: blur(Xpx);` 属性让元素背后的内容模糊化。</li>
+                <li data-translate="feature2"><strong>透明度 (Transparency):</strong> 元素背景通常是半透明的，允许下层内容（模糊后的）隐约可见。通过 `background-color` 的 RGBA 或 HSLA 值设置。</li>
+                <li data-translate="feature3"><strong>微妙的边框 (Subtle Borders):</strong> 通常会有一个非常细微、半透明的白色或浅色边框，以模拟玻璃的边缘反光，增强元素的轮廓感。</li>
+                <li data-translate="feature4"><strong>多层级感 (Layered Approach):</strong> 玻璃拟态元素常常叠加在彩色或带有图案的背景之上，模糊效果使得层级关系更加清晰。</li>
+                <li data-translate="feature5"><strong>光泽效果 (Glossy Highlights):</strong> 有时会添加微妙的线性渐变或内部阴影来模拟光线照射在玻璃表面的效果，增加立体感。</li>
+                <li data-translate="feature6"><strong>鲜艳的背景 (Vibrant Backgrounds):</strong> 为了让模糊效果更明显、更有趣，底层背景通常色彩鲜艳或包含丰富的视觉元素。</li>
+                <li data-translate="feature7"><strong>可访问性考量 (Accessibility Concerns):</strong> 需要确保文本和前景元素与玻璃背景之间有足够的对比度，避免因背景复杂或模糊导致内容难以阅读。</li>
+            </ul>
+            <p data-translate="aboutP3">玻璃拟态适用于需要现代感、科技感或轻盈感的界面，如仪表盘、卡片式布局、侧边栏、模态框等。但过度使用可能导致视觉混乱或性能问题（`backdrop-filter` 相对耗性能）。</p>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="promptTitle">示例 AI Prompt</h2>
+            <pre><code>Design a user interface element (like a settings card) using the glassmorphism style. It should have a frosted glass effect with a background blur (backdrop-filter), transparency (semi-transparent white background), a subtle 1px white border, and sit on top of a colorful, abstract gradient background. Ensure text inside has good contrast.</code></pre>
+            <p data-translate="promptP1">（中文解释：使用玻璃拟态风格设计一个用户界面元素（例如设置卡片）。它应该具有磨砂玻璃效果，包含背景模糊（backdrop-filter）、透明度（半透明白色背景）、一个微妙的 1px 白色边框，并放置在一个色彩丰富、抽象的渐变背景之上。确保内部文本具有良好的对比度。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="cssTitle">主题 CSS 代码片段</h2>
+            <p data-translate="cssP1">以下是将玻璃拟态风格应用为全局主题的核心 CSS 代码 (<code>body.theme-glassmorphism</code>):</p>
+            <pre><code class="language-css">/* 8. Glassmorphism Theme */
+body.theme-glassmorphism {
+    /* Vibrant background is key for the effect to pop */
+    --page-bg: #ffffff; /* Fallback */
+    /* Example Gradient: Use a more interesting one in practice */
+    --page-bg-gradient: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    /* Or use a background image */
+    /* background-image: url('path/to/your/vibrant-background.jpg'); */
+    /* background-size: cover; */
+    /* background-attachment: fixed; */
+
+    --text-color: #333333; /* Dark text for contrast on light glass */
+    --heading-color: #111111;
+    --link-color: #0056b3; /* Standard link color, ensure contrast */
+    --link-hover-color: #003d80;
+    --border-color: rgba(255, 255, 255, 0.3); /* The subtle glass border */
+
+    /* Glass Effect Variables */
+    --glass-bg: rgba(255, 255, 255, 0.25); /* Semi-transparent white */
+    --glass-blur: 10px; /* Blur intensity */
+    --glass-border-radius: 12px; /* Rounded corners common */
+    --glass-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    --glass-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    /* Apply glass effect to cards by default */
+    --card-bg: var(--glass-bg);
+    --card-shadow: var(--glass-shadow);
+    --card-hover-shadow: var(--glass-hover-shadow);
+    --card-border-radius: var(--glass-border-radius);
+    /* Add backdrop-filter and border directly to card or via a utility class */
+
+    --header-bg: rgba(255, 255, 255, 0.15); /* More transparent header */
+    --header-text-color: var(--heading-color);
+    --header-shadow: none; /* Shadow handled by glass effect */
+    /* backdrop-filter needed for header too */
+    border-bottom: 1px solid var(--border-color); /* Glass edge */
+
+    --footer-text-color: rgba(0, 0, 0, 0.7);
+    --footer-bg: rgba(255, 255, 255, 0.1); /* Glassy footer */
+    border-top: 1px solid var(--border-color);
+    /* backdrop-filter needed for footer too */
+
+    --button-bg: rgba(255, 255, 255, 0.4); /* Slightly less transparent button */
+    --button-text-color: #111;
+    --button-hover-bg: rgba(255, 255, 255, 0.6);
+    --button-border: 1px solid rgba(255, 255, 255, 0.5); /* Button border */
+    --button-secondary-bg: transparent;
+    --button-secondary-text-color: var(--text-color);
+    --button-secondary-hover-bg: rgba(255, 255, 255, 0.1);
+    --button-secondary-border: 1px solid var(--border-color);
+
+    --prompt-bg: rgba(0, 0, 0, 0.1); /* Darker glass for prompt */
+    --prompt-text-color: #f0f0f0;
+    /* backdrop-filter needed for prompt too */
+
+    --base-font: var(--font-inter);
+    --heading-font: var(--font-inter);
+    --button-border-radius: 8px;
+}
+
+/* Utility class or direct application for the glass effect */
+.glass-effect,
+body.theme-glassmorphism .card,
+body.theme-glassmorphism header, /* Apply directly if all headers are glass */
+body.theme-glassmorphism footer, /* Apply directly if all footers are glass */
+body.theme-glassmorphism .prompt-area /* Example */
+{
+    background: var(--glass-bg, rgba(255, 255, 255, 0.25));
+    backdrop-filter: blur(var(--glass-blur, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 10px)); /* Safari support */
+    border-radius: var(--glass-border-radius, 12px);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.3));
+    box-shadow: var(--glass-shadow, 0 5px 15px rgba(0, 0, 0, 0.1));
+    /* Ensure content inside doesn't leak out */
+    overflow: hidden; /* Can cause issues with dropdowns, use carefully */
+}
+
+/* Ensure the body has a background image or gradient for the effect */
+body.theme-glassmorphism {
+    background: var(--page-bg-gradient); /* Or background-image */
+    background-attachment: fixed; /* Important for blur effect consistency */
+    background-size: cover;
+}
+
+/* Adjust text color inside glass elements if needed for contrast */
+body.theme-glassmorphism .card,
+body.theme-glassmorphism .glass-effect {
+    color: var(--text-color); /* Ensure text color is set */
+}
+body.theme-glassmorphism .card h1,
+body.theme-glassmorphism .card h2,
+body.theme-glassmorphism .card h3,
+body.theme-glassmorphism .glass-effect h1,
+body.theme-glassmorphism .glass-effect h2,
+body.theme-glassmorphism .glass-effect h3 {
+    color: var(--heading-color);
+}
+
+/* Hover effect for cards */
+body.theme-glassmorphism .card:hover {
+    box-shadow: var(--glass-hover-shadow);
+    background: rgba(255, 255, 255, 0.35); /* Slightly less transparent on hover */
+    transform: translateY(-3px); /* Optional: slight lift */
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+            </code></pre>
+            <p><small data-translate="cssP2">注意：玻璃拟态效果依赖于 `backdrop-filter` 属性，请检查浏览器兼容性。同时，确保背景足够丰富多彩，模糊效果才能明显。性能也是一个考量因素。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="downloadTitle">资源下载 (示例)</h2>
+            <p data-translate="downloadP1">下载包含此风格更完整 CSS 定义（可能包括特定组件样式、字体文件引用等）的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/glassmorphism.zip" class="btn btn-download glass-effect" download data-translate="downloadButton"> <!-- Button can also have effect -->
+                下载 glassmorphism.zip
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="glass-effect"> <!-- Footer can also have the effect -->
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="footerText">AI 网站样式展示</span></p>
+        </div>
+    </footer>
+
+    <!-- Order is important: global translations, then page-specific, then main script -->
+    <script src="../translations.js" defer></script>
+    <script src="../translations_pages/glassmorphism-translations.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

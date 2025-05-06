@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitleSkeuomorphism">风格详情 - 拟物化设计</title>
+    <!-- Google Fonts (Ensure Playfair Display/Georgia are included) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- Link to main CSS file (Relative path from styles folder) -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../language-switcher.css">
+</head>
+<!-- 关键：直接应用拟物化主题类到 body -->
+<body class="theme-skeuomorphism">
+    <button type="button" id="language-switcher" class="language-btn" aria-label="Switch language">
+        <img src="../img/cnen.svg" alt="Switch Language">
+    </button>
+    <header>
+        <div class="container">
+            <h1 data-translate="headerTitleSkeuomorphism">拟物化设计 (Skeuomorphism) 风格详情</h1>
+            <p data-translate="headerSubtitleSkeuomorphism">探索 <span class="highlight">拟物化设计</span> 设计风格的特点与应用</p>
+            <!-- 主题切换按钮已移除 -->
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <!-- Back Link -->
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"></path></svg>
+            <span data-translate="backToList">返回风格列表</span>
+        </a>
+
+        <!-- Description Section -->
+        <section class="style-detail-section style-description">
+            <h2 data-translate="aboutThisStyle">关于此风格</h2>
+            <p data-translate="skeuomorphismDesc1">拟物化设计（Skeuomorphism）是一种界面设计方法，其核心在于模仿现实世界中对应物体的外观、材质、纹理和交互方式，力求在数字界面上创造出逼真、熟悉的感觉。</p>
+            <h3 data-translate="mainFeatures">主要特点:</h3>
+            <ul>
+                <li data-translate="featureRealisticMaterials"><strong>模仿现实材质:</strong> 大量使用皮革、木材、金属、布料、纸张等现实材质的纹理和视觉效果。</li>
+                <li data-translate="featureDepthSense"><strong>立体感与深度:</strong> 通过丰富的阴影（投影、内阴影）、高光和渐变来模拟光照效果，创造出元素的立体感和深度。</li>
+                <li data-translate="featurePhysicalMetaphors"><strong>物理隐喻:</strong> 界面元素（如按钮、开关、旋钮）的外观和交互方式直接模仿其在现实世界中的对应物，例如按钮看起来可以“按下”，书本可以“翻页”。</li>
+                <li data-translate="featureRichDetails"><strong>细节丰富:</strong> 注重细节刻画，如缝线、磨损效果、物理按钮的边缘等，以增强真实感。</li>
+                <li data-translate="featureFamiliarity"><strong>熟悉感:</strong> 利用用户对现实世界物体的熟悉感，降低学习成本，提供直观的操作体验。</li>
+            </ul>
+            <p data-translate="skeuomorphismUsage">这种风格在智能手机早期非常流行（如早期 iOS），旨在帮助用户理解和过渡到新的触摸屏交互。虽然现在扁平化和极简设计更为普遍，但拟物化在某些场景下（如游戏界面、特定应用或强调品牌质感时）仍然有其独特的魅力和价值。</p>
+        </section>
+
+        <!-- Prompt Section -->
+        <section class="style-detail-section style-prompt">
+            <h2 data-translate="exampleAiPrompt">示例 AI Prompt</h2>
+            <pre><code>Design a skeuomorphic UI element, like a leather-bound notebook app interface. Use realistic leather texture, stitching details, drop shadows, and maybe a textured paper background. Font like Georgia or a classic serif.</code></pre>
+            <p data-translate="skeuomorphismPromptExplanation">（中文解释：设计一个拟物化的 UI 元素，例如一个皮革封面的笔记本应用界面。使用逼真的皮革纹理、缝线细节、投影阴影，或许再加上有纹理的纸张背景。字体使用像 Georgia 或其他经典的衬线字体。）</p>
+        </section>
+
+        <!-- CSS Code Snippet Section -->
+        <section class="style-detail-section style-css">
+            <h2 data-translate="themeCssSnippet">主题 CSS 代码片段</h2>
+            <p data-translate="cssSnippetIntroSkeuomorphism">以下是将拟物化风格应用为全局主题的核心 CSS 代码 (<code>body.theme-skeuomorphism</code>):</p>
+            <pre><code class="language-css">/* 1. Skeuomorphism Theme (NEW) */
+body.theme-skeuomorphism {
+    --skeuo-texture-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); /* Example subtle texture */
+    --skeuo-texture-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23a0522d' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    --page-bg: #e5d9b3; /* Old paper */
+    --page-bg-gradient: none; background-image: var(--skeuo-texture-dark);
+    --text-color: #3b2f2f; /* Dark brown text */
+    --heading-color: #6b4423;
+    --link-color: #8b4513; /* SaddleBrown */
+    --link-hover-color: #a0522d; /* Sienna */
+    --border-color: #a0522d;
+    --card-bg: #d2b48c; --card-bg-image: var(--skeuo-texture-light); --card-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2); --card-hover-shadow: var(--skeuo-shadow-outset), 0 5px 8px rgba(0,0,0,0.3);
+    --header-bg: #8b4513; --header-text-color: #f5f5dc; --header-shadow: inset 0 -3px 5px rgba(0,0,0,0.3);
+    --footer-text-color: #6b4423; --footer-bg: #e5d9b3;
+    --button-bg: linear-gradient(to bottom, #b8860b, #cd853f); --button-text-color: white; --button-hover-bg: linear-gradient(to bottom, #cd853f, #b8860b); --button-border: 1px solid #8b4513; --button-shadow: var(--skeuo-shadow-outset); --button-hover-shadow: var(--button-shadow);
+    --button-secondary-bg: linear-gradient(to bottom, #f0e68c, #eee8aa); --button-secondary-text-color: #5e3a1d; --button-secondary-hover-bg: linear-gradient(to bottom, #eee8aa, #f0e68c); --button-secondary-border: 1px solid #bdb76b;
+    --prompt-bg: #f5f5dc; --prompt-text-color: #4a3c2a; --prompt-shadow: var(--skeuo-shadow-inset); --prompt-bg-image: none;
+    --base-font: var(--font-serif); --heading-font: var(--font-serif);
+    --card-border-radius: 6px; --button-border-radius: 4px;
+
+    /* --- Skeuomorphism Specific Shadows --- */
+    --skeuo-shadow-inset: inset 1px 1px 2px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(255,255,255,0.5);
+    --skeuo-shadow-outset: 1px 1px 2px rgba(0,0,0,0.3), -1px -1px 2px rgba(255,255,255,0.5);
+}
+
+/* --- Skeuomorphism Specific Element Styles --- */
+body.theme-skeuomorphism .card {
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top-color: rgba(255,255,255,0.2);
+    border-left-color: rgba(255,255,255,0.2);
+    background-color: var(--card-bg);
+    background-image: var(--card-bg-image); /* Apply texture to cards */
+}
+
+body.theme-skeuomorphism .btn {
+    box-shadow: var(--button-shadow);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+body.theme-skeuomorphism .btn:active {
+    box-shadow: var(--skeuo-shadow-inset); /* Inset shadow when pressed */
+    transform: translateY(1px);
+}
+
+body.theme-skeuomorphism .style-detail-section {
+    /* Make sections look like embossed paper or panels */
+    background-color: var(--card-bg); /* Use card background */
+    border: 1px solid var(--border-color);
+    border-top-color: rgba(255,255,255,0.3); /* Lighter top border */
+    border-left-color: rgba(255,255,255,0.3); /* Lighter left border */
+    box-shadow: var(--skeuo-shadow-outset); /* Outset shadow */
+    background-image: var(--card-bg-image); /* Apply texture */
+}
+
+body.theme-skeuomorphism pre {
+    /* Make code blocks look inset */
+    background-color: var(--prompt-bg);
+    box-shadow: var(--prompt-shadow); /* Inset shadow */
+    border: 1px solid rgba(0,0,0,0.15);
+    border-top-color: rgba(0,0,0,0.2);
+    border-left-color: rgba(0,0,0,0.2);
+    background-image: var(--prompt-bg-image); /* Remove texture if needed */
+}
+
+body.theme-skeuomorphism header {
+    /* Add some texture or depth to header */
+    background-image: var(--skeuo-texture-dark);
+}
+            </code></pre>
+            <p><small data-translate="skeuomorphismCssNote">注意：这只是核心主题代码。实际应用中可能还需要调整特定组件的样式以达到最佳拟物效果。</small></p>
+        </section>
+
+        <!-- Download Section -->
+        <section class="style-detail-section style-download">
+            <h2 data-translate="resourceDownload">资源下载 (示例)</h2>
+            <p data-translate="downloadDescriptionSkeuomorphism">下载包含此风格更完整 CSS 定义（可能包括特定组件样式、字体文件引用等）的压缩包。</p>
+            <!-- Ensure zips folder and file exist -->
+            <a href="../zips/skeuomorphism.zip" class="btn btn-download" download>
+                <span data-translate="downloadButtonSkeuomorphism">下载 skeuomorphism.zip</span>
+            </a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span data-translate="footerText">AI 网站样式展示</span></p>
+        </div>
+    </footer>
+
+    <!-- Link to main JS file (Relative path from styles folder) -->
+    <script src="../translations.js"></script>
+    <script src="../translations_pages/skeuomorphism-translations.js"></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
