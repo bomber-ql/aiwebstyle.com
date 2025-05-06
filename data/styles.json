@@ -1,0 +1,61 @@
+{
+    "styles": [
+        {
+            "id": "minimalist",
+            "name": "极简主义",
+            "description": "简约而优雅的设计风格，强调留白和基本元素的完美平衡。特点包括清晰的层次结构、简洁的色彩方案和精心设计的排版。",
+            "previewImage": "styles/minimalist/preview.png",
+            "downloadUrl": "styles/minimalist/code.zip",
+            "features": [
+                "简洁的布局设计",
+                "优雅的排版",
+                "精心选择的字体",
+                "适度的留白空间"
+            ],
+            "colors": {
+                "primary": "#ffffff",
+                "secondary": "#f5f5f5",
+                "accent": "#000000",
+                "text": "#333333"
+            }
+        },
+        {
+            "id": "cyberpunk",
+            "name": "赛博朋克",
+            "description": "未来主义与复古科技的完美融合，特点是霓虹色调、故障艺术效果和未来科技感的界面元素。",
+            "previewImage": "styles/cyberpunk/preview.png",
+            "downloadUrl": "styles/cyberpunk/code.zip",
+            "features": [
+                "霓虹色彩效果",
+                "故障艺术元素",
+                "科技感界面",
+                "动态视觉效果"
+            ],
+            "colors": {
+                "primary": "#0f1729",
+                "secondary": "#ff2a6d",
+                "accent": "#00fff5",
+                "text": "#ffffff"
+            }
+        },
+        {
+            "id": "nature",
+            "name": "自然生态",
+            "description": "灵感来自大自然的有机设计，使用柔和的色调、流畅的线条和生物启发的图案，创造出和谐平衡的视觉体验。",
+            "previewImage": "styles/nature/preview.png",
+            "downloadUrl": "styles/nature/code.zip",
+            "features": [
+                "有机曲线设计",
+                "自然色彩搭配",
+                "生物形态元素",
+                "和谐的视觉节奏"
+            ],
+            "colors": {
+                "primary": "#e8f5e9",
+                "secondary": "#81c784",
+                "accent": "#2e7d32",
+                "text": "#1b5e20"
+            }
+        }
+    ]
+}
