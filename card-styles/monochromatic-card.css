@@ -1,0 +1,9 @@
+/* Styles for Monochromatic Card */
+.card[data-style-id="monochromatic"] { background-color: #e6f0ff; border: 1px solid #b3d1ff; border-radius: 5px; }
+.card[data-style-id="monochromatic"] h3 { font-family: var(--font-roboto); color: #004080; }
+.card[data-style-id="monochromatic"] .prompt-text { background-color: #cce0ff; color: #0059b3; border-color: #99c2ff; }
+.card[data-style-id="monochromatic"] .btn { font-family: var(--font-roboto); border-radius: 5px; }
+.card[data-style-id="monochromatic"] .btn:not(.btn-secondary) { background-color: #007bff; color: white !important; }
+.card[data-style-id="monochromatic"] .btn:not(.btn-secondary):hover { background-color: #0056b3; }
+.card[data-style-id="monochromatic"] .btn-secondary { background-color: #66b3ff; color: #004080 !important; }
+.card[data-style-id="monochromatic"] .btn-secondary:hover { background-color: #99c2ff; }

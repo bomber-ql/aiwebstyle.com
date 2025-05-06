@@ -1,0 +1,14 @@
+/* Styles for Brutalism Card */
+body.theme-brutalism .highlight {
+    color: rgb(142, 0, 0); /* Brutalism 风格的亮黄色高亮 */
+    background-color: transparent; /* 通常背景透明 */
+}
+
+.card[data-style-id="brutalism"] { background-color: #f0f0f0; border: 2px solid #000000; border-radius: 0; box-shadow: 4px 4px 0px #000000; }
+.card[data-style-id="brutalism"] h3 { font-family: var(--font-mono); color: #000; font-weight: bold; text-transform: uppercase; font-size: 1.1em; }
+.card[data-style-id="brutalism"] .prompt-text { background-color: #e0e0e0; color: #111; font-family: var(--font-mono); border: 1px solid #aaa; }
+.card[data-style-id="brutalism"] .btn { border: 2px solid black; border-radius: 0; font-family: var(--font-mono); font-weight: bold; }
+.card[data-style-id="brutalism"] .btn:not(.btn-secondary) { background-color: yellow; color: black !important; }
+.card[data-style-id="brutalism"] .btn:not(.btn-secondary):hover { background-color: black; color: yellow !important; }
+.card[data-style-id="brutalism"] .btn-secondary { background-color: black; color: yellow !important; }
+.card[data-style-id="brutalism"] .btn-secondary:hover { background-color: yellow; color: black !important; }

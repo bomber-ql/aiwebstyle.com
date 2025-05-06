@@ -1,0 +1,9 @@
+/* Styles for Natural Organic Card */
+.card[data-style-id="natural-organic"] { background-color: #f5f0e1; border: 1px solid #d4c8a8; border-radius: 6px; }
+.card[data-style-id="natural-organic"] h3 { font-family: var(--font-lato); color: #5e4a30; font-weight: 700; }
+.card[data-style-id="natural-organic"] .prompt-text { background-color: #e8e0c9; color: #6b5b40; border-color: #d4c8a8; }
+.card[data-style-id="natural-organic"] .btn { font-family: var(--font-lato); }
+.card[data-style-id="natural-organic"] .btn:not(.btn-secondary) { background-color: #8b7e66; color: white !important; }
+.card[data-style-id="natural-organic"] .btn:not(.btn-secondary):hover { background-color: #7a6f5a; }
+.card[data-style-id="natural-organic"] .btn-secondary { background-color: #d4c8a8; color: #5e4a30 !important; }
+.card[data-style-id="natural-organic"] .btn-secondary:hover { background-color: #c8bca0; }

@@ -1,0 +1,43 @@
+/* Styles for Modern Tech Card */
+.card[data-style-id="modern-tech"] {
+    background-color: #49efed;
+    border: 1px solid #e8eef3; /* Use new border color */
+    border-radius: 4px; /* Use new sharper radius */
+    box-shadow: 0 3px 10px rgba(29, 35, 42, 0.08); /* Use new shadow */
+}
+.card[data-style-id="modern-tech"] h3 {
+    font-family: var(--font-pop);
+    color: #0b132b; /* Use new heading color */
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+.card[data-style-id="modern-tech"] .prompt-text {
+    background-color: #eef2f7; /* Use new prompt bg */
+    color: #343a40; /* Use new prompt text color */
+    font-family: var(--mono-font, monospace);
+    font-size: 0.85em;
+    border-color: transparent;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); /* Add inset shadow */
+    border-radius: 2px; /* Sharper radius */
+}
+.card[data-style-id="modern-tech"] .btn {
+    font-family: var(--font-pop);
+    border-radius: 2px; /* Use new sharper radius */
+}
+.card[data-style-id="modern-tech"] .btn:not(.btn-secondary) {
+    background: linear-gradient(to bottom, #5a6aff, #4d5bff); /* Use new button gradient */
+    color: white !important;
+    box-shadow: 0 1px 2px rgba(77, 91, 255, 0.2); /* Use new button shadow */
+}
+.card[data-style-id="modern-tech"] .btn:not(.btn-secondary):hover {
+    background: linear-gradient(to bottom, #4d5bff, #3a4bf0); /* Use new button hover gradient */
+    /* Add glow effect on hover for the card button too */
+    box-shadow: 0 2px 4px rgba(77, 91, 255, 0.2), 0 0 8px rgba(77, 91, 255, 0.3);
+}
+.card[data-style-id="modern-tech"] .btn-secondary {
+    background-color: #e9ecef;
+    color: #495057 !important;
+}
+.card[data-style-id="modern-tech"] .btn-secondary:hover {
+    background-color: #dee2e6; /* Use new secondary hover bg */
+}

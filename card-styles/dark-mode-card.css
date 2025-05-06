@@ -1,0 +1,10 @@
+/* Styles for Dark Mode Card */
+.card[data-style-id="dark-mode"] { background-color: #121212; border-color: #333333; border-radius: 6px; }
+.card[data-style-id="dark-mode"] h3,
+.card[data-style-id="dark-mode"] .prompt-label { color: #e0e0e0; font-family: var(--font-open-sans); }
+.card[data-style-id="dark-mode"] .prompt-text { background-color: #222222; color: #b0b0b0; border-color: #444444; }
+.card[data-style-id="dark-mode"] .btn { font-family: var(--font-open-sans); font-weight: 600; }
+.card[data-style-id="dark-mode"] .btn:not(.btn-secondary) { background-color: #0a84ff; color: white !important; }
+.card[data-style-id="dark-mode"] .btn:not(.btn-secondary):hover { background-color: #005ecb; }
+.card[data-style-id="dark-mode"] .btn-secondary { background-color: #333333; color: #b0b0b0 !important; }
+.card[data-style-id="dark-mode"] .btn-secondary:hover { background-color: #444444; color: white !important; }

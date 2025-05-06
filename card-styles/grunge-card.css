@@ -1,0 +1,27 @@
+/* Styles for Grunge Card */
+.card[data-style-id="grunge"] {
+    background-color: #4a4a4a; /* Dark Grey */
+    /* Add subtle noise/texture background image if possible */
+    background-image: var(--grunge-texture, linear-gradient(rgba(255,255,255,0.02), rgba(0,0,0,0.02)));
+    border: 1px solid #222;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transform: rotate(-0.5deg); /* Slight tilt */
+}
+.card[data-style-id="grunge"]:hover { transform: rotate(0.5deg) translateY(-3px); } /* Adjust hover */
+.card[data-style-id="grunge"] h3 {
+    font-family: var(--font-grunge); color: #ccc; font-weight: normal;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); text-transform: uppercase;
+}
+.card[data-style-id="grunge"] .prompt-text {
+    background-color: rgba(0,0,0,0.2); color: #aaa;
+    border: 1px dashed #666; font-family: var(--font-grunge); font-size: 0.9em;
+}
+.card[data-style-id="grunge"] .btn {
+    font-family: var(--font-grunge); border-radius: 2px; text-transform: none;
+    border: 1px solid #777;
+}
+.card[data-style-id="grunge"] .btn:not(.btn-secondary) { background-color: #8b0000; /* Dark Red */ color: #ccc !important; }
+.card[data-style-id="grunge"] .btn:not(.btn-secondary):hover { background-color: #a52a2a; /* Brown */ }
+.card[data-style-id="grunge"] .btn-secondary { background-color: #333; color: #aaa !important; }
+.card[data-style-id="grunge"] .btn-secondary:hover { background-color: #555; color: #ccc !important; }

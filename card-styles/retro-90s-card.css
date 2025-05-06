@@ -1,0 +1,19 @@
+/* Styles for Retro 90s Card */
+body.theme-retro-90s .highlight {
+    color: #FF00FF; /* 90s 风格的亮紫色高亮 */
+    background-color: yellow; /* 亮黄色背景 */
+    font-weight: bold;
+}
+
+.card[data-style-id="retro-90s"] { background-color: #c0c0c0; border: 2px outset #eee; border-radius: 0; box-shadow: none; }
+.card[data-style-id="retro-90s"] h3,
+.card[data-style-id="retro-90s"] .prompt-label,
+.card[data-style-id="retro-90s"] .prompt-text,
+.card[data-style-id="retro-90s"] .btn { font-family: var(--font-times) !important; }
+.card[data-style-id="retro-90s"] h3 { color: #000080; font-weight: bold; }
+.card[data-style-id="retro-90s"] .prompt-text { background-color: #fff; border: 1px solid #000; color: #000; }
+.card[data-style-id="retro-90s"] .btn { border-radius: 0; border: 2px outset #eee; padding: 0.3em 0.8em; font-size: 0.9em; }
+.card[data-style-id="retro-90s"] .btn:not(.btn-secondary) { background-color: #0000ff; color: yellow !important; }
+.card[data-style-id="retro-90s"] .btn:not(.btn-secondary):hover { background-color: yellow; color: #0000ff !important; }
+.card[data-style-id="retro-90s"] .btn-secondary { background-color: #ff0000; color: white !important; }
+.card[data-style-id="retro-90s"] .btn-secondary:hover { background-color: #800000; }

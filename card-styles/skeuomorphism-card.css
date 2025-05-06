@@ -1,0 +1,29 @@
+/* Styles for Skeuomorphism Card */
+.card[data-style-id="skeuomorphism"] {
+    background-color: #d2b48c; /* Tan */
+    background-image: var(--skeuo-texture-light, linear-gradient(rgba(255,255,255,0.05), rgba(0,0,0,0.05))); /* Subtle texture */
+    border: 1px solid #a0522d; /* Sienna border */
+    border-radius: 6px;
+    box-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2);
+}
+.card[data-style-id="skeuomorphism"] h3 { font-family: var(--font-serif); color: #5e3a1d; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
+.card[data-style-id="skeuomorphism"] .prompt-text {
+    background-color: #f5f5dc; /* Beige paper */
+    color: #4a3c2a;
+    border: 1px solid #e0d8c0;
+    box-shadow: var(--skeuo-shadow-inset);
+}
+.card[data-style-id="skeuomorphism"] .btn {
+    font-family: var(--font-serif); border-radius: 4px;
+    background: linear-gradient(to bottom, #b8860b, #cd853f); /* Goldenrod gradient */
+    color: white !important; text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid #8b4513; /* SaddleBrown */
+    box-shadow: var(--skeuo-shadow-outset);
+}
+.card[data-style-id="skeuomorphism"] .btn:hover { background: linear-gradient(to bottom, #cd853f, #b8860b); }
+.card[data-style-id="skeuomorphism"] .btn-secondary {
+    background: linear-gradient(to bottom, #f0e68c, #eee8aa); /* Khaki gradient */
+    color: #5e3a1d !important; text-shadow: none;
+    border-color: #bdb76b; /* DarkKhaki */
+}
+.card[data-style-id="skeuomorphism"] .btn-secondary:hover { background: linear-gradient(to bottom, #eee8aa, #f0e68c); }

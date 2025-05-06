@@ -1,0 +1,14 @@
+/* Styles for Retro Pixel Card */
+.card[data-style-id="retro-pixel"] { background-color: #1a1a1a; border: 2px solid #00ff00; border-radius: 0; }
+.card[data-style-id="retro-pixel"] h3,
+.card[data-style-id="retro-pixel"] .prompt-label,
+.card[data-style-id="retro-pixel"] .prompt-text,
+.card[data-style-id="retro-pixel"] .btn { font-family: var(--font-pixel) !important; }
+.card[data-style-id="retro-pixel"] h3,
+.card[data-style-id="retro-pixel"] .prompt-label { color: #00ff00; font-size: 0.8em; text-shadow: 1px 1px #111; }
+.card[data-style-id="retro-pixel"] .prompt-text { background-color: #2a2a2a; border: 1px dashed #00ff00; padding: 0.4em; color: #00dd00; font-size: 0.8em; }
+.card[data-style-id="retro-pixel"] .btn { border: 1px solid #00ff00; border-radius: 0; padding: 0.5em 0.8em; font-size: 0.7em; }
+.card[data-style-id="retro-pixel"] .btn:not(.btn-secondary) { background-color: #ff00ff; color: #1a1a1a !important; }
+.card[data-style-id="retro-pixel"] .btn:not(.btn-secondary):hover { background-color: #00ff00; }
+.card[data-style-id="retro-pixel"] .btn-secondary { background-color: #00ff00; color: #1a1a1a !important; }
+.card[data-style-id="retro-pixel"] .btn-secondary:hover { background-color: #ff00ff; }

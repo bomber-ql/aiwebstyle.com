@@ -1,0 +1,14 @@
+/* Styles for Retro Y2K Card */
+body.theme-retro-y2k .highlight {
+    color: #FF69B4; /* Y2K 风格的亮粉色高亮 */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* 可选：添加轻微文字阴影以增强效果 */
+}
+
+.card[data-style-id="retro-y2k"] { background: linear-gradient(135deg, #ffccde 0%, #c4f1f9 100%); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 10px; box-shadow: 0 0 15px rgba(255, 105, 180, 0.3); }
+.card[data-style-id="retro-y2k"] h3 { font-family: var(--font-space-mono); color: #3d3d5c; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7); }
+.card[data-style-id="retro-y2k"] .prompt-text { background-color: rgba(255, 255, 255, 0.3); color: #5c5c8a; backdrop-filter: blur(2px); border-radius: 5px; border: none; }
+.card[data-style-id="retro-y2k"] .btn { font-family: var(--font-space-mono); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.5); }
+.card[data-style-id="retro-y2k"] .btn:not(.btn-secondary) { background-color: #ff69b4; color: white !important; }
+.card[data-style-id="retro-y2k"] .btn:not(.btn-secondary):hover { background-color: #ff1493; }
+.card[data-style-id="retro-y2k"] .btn-secondary { background-color: rgba(255, 255, 255, 0.5); color: #ff69b4 !important; }
+.card[data-style-id="retro-y2k"] .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.8); }

@@ -1,0 +1,9 @@
+/* Styles for Bold Typography Card */
+.card[data-style-id="bold-typography"] { background-color: #fff; border: 2px solid #000; border-radius: 0; }
+.card[data-style-id="bold-typography"] h3 { font-family: var(--font-montserrat); font-weight: 900; font-size: 1.8em; line-height: 1.1; text-transform: uppercase; color: #000; margin-bottom: 1rem; }
+.card[data-style-id="bold-typography"] .prompt-label { display: none; }
+.card[data-style-id="bold-typography"] .prompt-text { font-family: var(--font-mono); background: none; border: none; padding: 0; color: #555; font-size: 0.8em; }
+.card[data-style-id="bold-typography"] .btn { background-color: #000; color: #fff !important; border-radius: 0; font-family: var(--font-montserrat); font-weight: 700; }
+.card[data-style-id="bold-typography"] .btn:hover { background-color: #444; }
+.card[data-style-id="bold-typography"] .btn-secondary { background-color: #eee; color: #000 !important; }
+.card[data-style-id="bold-typography"] .btn-secondary:hover { background-color: #ccc; }

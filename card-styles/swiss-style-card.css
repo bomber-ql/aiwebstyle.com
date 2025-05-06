@@ -1,0 +1,17 @@
+/* Styles for Swiss Style Card */
+.card[data-style-id="swiss-style"] {
+    background-color: #fff; border: 1px solid #e0e0e0; border-radius: 0; box-shadow: none;
+}
+.card[data-style-id="swiss-style"] h3 {
+    font-family: var(--font-helvetica); font-weight: 700; /* Bold */
+    font-size: 1.5em; line-height: 1.2; color: #111; text-transform: lowercase; /* Common in Swiss Style */
+}
+.card[data-style-id="swiss-style"] .prompt-label { font-family: var(--font-helvetica); font-weight: 400; color: #555; }
+.card[data-style-id="swiss-style"] .prompt-text { background-color: #f5f5f5; color: #333; border: none; font-family: var(--font-helvetica); font-size: 0.9em; }
+.card[data-style-id="swiss-style"] .btn {
+    font-family: var(--font-helvetica); border-radius: 0; text-transform: uppercase; font-size: 0.8em; padding: 0.5em 1em;
+}
+.card[data-style-id="swiss-style"] .btn:not(.btn-secondary) { background-color: #e60000; /* Strong Red */ color: white !important; }
+.card[data-style-id="swiss-style"] .btn:not(.btn-secondary):hover { background-color: #b30000; }
+.card[data-style-id="swiss-style"] .btn-secondary { background-color: #333; color: white !important; }
+.card[data-style-id="swiss-style"] .btn-secondary:hover { background-color: #000; }

@@ -1,0 +1,59 @@
+/* Styles for Art Deco Card */
+.card[data-style-id="art-deco"] {
+    background-color: #1a1a1a; /* Dark base */
+    border: 2px solid #daa520; /* Goldenrod border */
+    border-radius: 4px; /* Subtle radius */
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.3); /* Gold glow */
+    position: relative;
+    overflow: hidden; /* Clip potential pseudo elements */
+}
+/* Add geometric pattern overlay */
+.card[data-style-id="art-deco"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+        linear-gradient(45deg, rgba(218, 165, 32, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(218, 165, 32, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(218, 165, 32, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(218, 165, 32, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.5;
+    z-index: 0;
+}
+.card[data-style-id="art-deco"] .card-content { z-index: 1; } /* Ensure content is above pattern */
+.card[data-style-id="art-deco"] h3 {
+    font-family: var(--font-pop); /* Use Poppins geometrically */
+    font-weight: 600;
+    color: #daa520; /* Goldenrod */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(218, 165, 32, 0.5);
+    padding-bottom: 0.3em;
+    margin-bottom: 1em;
+}
+.card[data-style-id="art-deco"] .prompt-text {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ccc;
+    border: 1px solid rgba(218, 165, 32, 0.3);
+    font-family: var(--font-sans); /* Use a cleaner font for prompt */
+    font-size: 0.8em;
+}
+.card[data-style-id="art-deco"] .btn {
+    font-family: var(--font-pop); font-weight: 500;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card[data-style-id="art-deco"] .btn:not(.btn-secondary) {
+    background-color: #daa520; color: #1a1a1a !important;
+    border: 1px solid #b8860b;
+}
+.card[data-style-id="art-deco"] .btn:not(.btn-secondary):hover { background-color: #b8860b; }
+.card[data-style-id="art-deco"] .btn-secondary {
+    background-color: transparent; color: #daa520 !important;
+    border: 1px solid #daa520;
+}
+.card[data-style-id="art-deco"] .btn-secondary:hover { background-color: rgba(218, 165, 32, 0.1); }

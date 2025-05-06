@@ -1,0 +1,10 @@
+/* Styles for Claymorphism Card */
+.card[data-style-id="claymorphism"] { background-color: #e8c3a0; border-radius: 20px; border: none; box-shadow: var(--clay-shadow-outset); }
+.card[data-style-id="claymorphism"] h3 { color: #6b5e3c; font-family: var(--font-pop); font-weight: 600; text-shadow: 1px 1px 1px rgba(255,255,255,0.5); }
+.card[data-style-id="claymorphism"] .prompt-text { background-color: #e8c3a0; color: #7a6f5a; border-radius: 10px; box-shadow: var(--clay-shadow-inset); border: none; padding: 0.6em; }
+.card[data-style-id="claymorphism"] .btn { border-radius: 15px; border: none; box-shadow: var(--clay-shadow-outset); font-family: var(--font-pop); font-weight: 600; transition: box-shadow 0.1s ease; }
+.card[data-style-id="claymorphism"] .btn:active { box-shadow: var(--clay-shadow-inset); transform: translateY(1px); }
+.card[data-style-id="claymorphism"] .btn:not(.btn-secondary) { background-color: #c8a078; color: #fff !important; }
+.card[data-style-id="claymorphism"] .btn:not(.btn-secondary):hover { background-color: #b89068; }
+.card[data-style-id="claymorphism"] .btn-secondary { background-color: #f5e6d5; color: #8b5e3c !important; }
+.card[data-style-id="claymorphism"] .btn-secondary:hover { background-color: #ffffff; }
