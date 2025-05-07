@@ -1,0 +1,58 @@
+.theme-neomorphism .card[data-style-id='neomorphism'] {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism']:hover {
+    box-shadow: 4px 4px 10px #a3b1c6, -4px -4px 10px #ffffff;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] h3 {
+    color: #5c5c5c;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .prompt-label {
+    color: #777;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .prompt-text {
+    color: #666;
+    background-color: #d1d1d1;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: inset 3px 3px 5px #a3b1c6, inset -3px -3px 5px #ffffff;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-primary,
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-secondary {
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-primary {
+    background-color: #e0e0e0;
+    color: #337ab7; /* A slightly darker blue for better contrast */
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    border: 1px solid #cacaca;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-primary:hover {
+    background-color: #d1d9e6;
+    box-shadow: 3px 3px 7px #a3b1c6, -3px -3px 7px #ffffff;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-secondary {
+    background-color: #e0e0e0;
+    color: #555;
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    border: 1px solid #cacaca;
+}
+
+.theme-neomorphism .card[data-style-id='neomorphism'] .btn-secondary:hover {
+    background-color: #d1d9e6;
+    box-shadow: 3px 3px 7px #a3b1c6, -3px -3px 7px #ffffff;
+}

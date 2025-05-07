@@ -1,0 +1,92 @@
+目标： 在现有的网站项目中添加一个新的设计样式卡片，包括其在首页的展示、独立的详情页面、相关的多语言支持，并为该样式生成一个独立的、纯英文的、包含完整CSS的ZIP下载包。
+
+你需要提供以下信息：
+
+1. 样式ID (Style ID): 一个独特的、小写字母和连字符组成的标识符 (例如: my-new-style )。
+2. 样式名称翻译键 (Style Name Key): 用于翻译文件中该样式名称的键名 (例如: my_new_style_name )。
+3. 样式描述翻译键 (Style Description Key): 用于翻译文件中该样式描述的键名 (例如: my_new_style_description )。
+4. 样式AI Prompt翻译键 (Style AI Prompt Key): 用于翻译文件中该样式AI提示的键名 (例如: my_new_style_prompt )。
+5. 英文翻译文本 (English Translations):
+   - 样式名称 (对应 Style Name Key )
+   - 样式描述 (对应 Style Description Key )
+   - 样式AI Prompt (对应 Style AI Prompt Key )
+6. 中文翻译文本 (Chinese Translations):
+   - 样式名称 (对应 Style Name Key )
+   - 样式描述 (对应 Style Description Key )
+   - 样式AI Prompt (对应 Style AI Prompt Key )
+7. 详情页标题 (Detail Page Title - English & Chinese): 例如 "Style Detail - My New Style" / "风格详情 - 我的新风格"
+8. 详情页关于此风格的描述 (About This Style - English & Chinese): 一段关于这个新风格的详细介绍。
+9. 详情页主要特点 (Main Features - English & Chinese): 列出至少3-5个主要特点，可以使用 <strong> 标签强调关键词。
+10. 详情页AI Prompt示例 (Example AI Prompt - English & Chinese): 提供一个具体的AI Prompt示例，可以包含中文解释。
+11. （可选）详情页CSS代码片段说明 (CSS Snippets Note - English & Chinese): 如果需要展示CSS片段，提供相关的说明文字。
+12. （可选）详情页资源下载说明 (Resource Download Note - English & Chinese): 如果提供下载包，提供相关的说明文字。
+AI应执行以下操作步骤：
+
+第一部分：集成新样式到主网站
+
+1. 更新 `card-renderer.js` 文件：
+   
+   - 在 stylesData 数组中，添加一个新的对象，包含 id (使用提供的 Style ID ), name (使用提供的 Style Name Key ), description (使用提供的 Style Description Key ), 和 prompt (使用提供的 Style AI Prompt Key )。
+2. 更新 `translations.js` 文件：
+   
+   - 在 translations.en 和 translations.zh 对象中，添加对应的翻译键和文本。
+3. 创建新的卡片CSS文件：
+   
+   - 在 `card-styles` 目录下，创建 [Style ID]-card.css 文件，并添加基础样式。
+4. 更新 `index.html` 文件：
+   
+   - 在 <head> 中引入新创建的 [Style ID]-card.css 。
+5. 创建新的详情页面HTML文件：
+   
+   - 在 `styles` 目录下，创建 [Style ID].html 文件，基于现有详情页结构，确保包含所有必要区块和JS引用，并正确设置 pageType 和 styleId 变量。
+6. 创建新的详情页面翻译文件：
+   
+   - 在 `translations_pages` 目录下，创建 [Style ID]-translations.js 文件，并填充对应的英文和中文翻译。
+第二部分：生成独立的样式ZIP包
+
+7. 准备临时目录和文件：
+   
+   - 在项目根目录下，执行以下操作（如果存在同名临时目录或ZIP包，先删除）：
+     - 创建临时文件夹 temp_[Style ID] (例如: temp_my-new-style )。
+     - 将主项目中刚创建的详情页 styles/[Style ID].html 复制到 temp_[Style ID]/ 并重命名为 index.html 。
+     - 在 temp_[Style ID]/ 内创建一个新的CSS文件，命名为 [Style ID]-standalone.css (例如: my-new-style-standalone.css )。
+8. 合并CSS样式：
+   
+   - 将主项目中 card-styles/[Style ID]-card.css 的全部内容复制到 temp_[Style ID]/[Style ID]-standalone.css 。
+   - 然后，将主项目中 style.css 的全部内容追加到 temp_[Style ID]/[Style ID]-standalone.css 的末尾。 （确保 [Style ID]-standalone.css 现在包含了所有必要的全局和特定样式）。
+9. 修改独立的 index.html ( temp_[Style ID]/index.html )：
+   
+   - 更新CSS链接： 将所有 <link rel="stylesheet" ...> 指向本地的 [Style ID]-standalone.css 。移除对其他外部或项目根目录CSS文件（如旧的 style.css 或 language-switcher.css ）的引用。
+     html
+     
+     Open Folder
+     
+     1
+     
+     < link rel = "stylesheet" href = "[Style ID]
+     
+     -standalone.css" >
+   - 移除翻译系统和多语言功能：
+     - 删除所有 <script> 标签，这些标签引用了翻译文件 (如 translations_pages/[Style ID]-translations.js , translations.js ) 或语言管理脚本 ( language-manager.js )。
+     - 删除页面中用于语言切换的HTML元素（通常是一个按钮和相关的SVG图像）。
+     - 移除所有HTML元素上的 data-translate 属性。
+   - 确保内容为纯英文：
+     - 将 <html lang="..."> 设置为 lang="en" 。
+     - 手动或通过脚本将页面上所有可见的文本内容替换为其对应的 英文版本 。这包括标题、段落、列表项、按钮文字等。特别注意之前由 data-translate 控制的文本，现在需要直接写入英文内容。
+     - 移除任何明确的中文解释性文本，例如AI Prompt中的“（中文解释：...）”部分。
+   - 移除主项目脚本： 删除对主项目 script.js 的引用。
+   - 调整或移除不适用的链接：
+     - 修改或移除“返回列表”或类似的导航链接，因为此页面将作为独立包运行。可以替换为一个简单的说明性文本，如 <p>Standalone [Style Name] Style Page</p> 。
+     - 移除页面中对项目内部资源（如 ../img/cnen.svg ）的引用。
+   - （可选）清理其他不必要的脚本： 移除如Google AdSense等与独立展示无关的脚本。
+10. 打包ZIP文件：
+    
+    - 进入项目根目录下的 zips/ 文件夹（如果不存在则创建）。
+    - 将 temp_[Style ID] 文件夹整体压缩成 [Style ID].zip (例如: my-new-style.zip )，并确保压缩包内文件结构为 [Style ID].zip -> [Style ID]/index.html, [Style ID]/[Style ID]-standalone.css 。
+    - 删除临时文件夹 temp_[Style ID] 。
+重要注意事项：
+
+- 所有文件名、ID、CSS类名和JavaScript变量名中的 [Style ID] 部分必须完全一致，并替换为用户提供的实际 Style ID 。
+- 翻译键名必须在主项目相关文件中保持一致。
+- 确保新添加的代码遵循项目现有的编码风格和结构。
+- 在执行脚本（特别是 sed 或文件操作命令）时要格外小心，最好先在副本上测试。

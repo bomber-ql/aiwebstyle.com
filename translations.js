@@ -98,6 +98,10 @@ const translations = {
     art_deco_name: "Art Deco Style",
     art_deco_description: "Features geometric patterns, rich colors (often gold, black, silver), symmetry, streamlined forms, luxury, and decorative fonts.",
     art_deco_prompt: "Design a website header or invitation card in Art Deco style. Use strong geometric patterns (chevrons, sunbursts), a black and gold color scheme, sharp lines, and a stylized sans-serif font like 'Poppins' (used geometrically) or a specific Art Deco font.",
+    // Neomorphism
+    neomorphism_name: "Neomorphism",
+    neomorphism_description: "A style that uses soft shadows and highlights to create an illusion of elements extruding from or receding into the background, giving a soft, plastic-like feel.",
+    neomorphism_prompt: "Design a web interface using Neomorphism. Elements should appear as if they are extruding from the background or pressed into it, using subtle inner and outer shadows. Use a monochromatic color scheme with soft, rounded shapes.",
     // Prompt label
     promptLabel: "Example Prompt:"
   },
@@ -199,6 +203,10 @@ const translations = {
     art_deco_name: "装饰艺术风格",
     art_deco_description: "特点是几何图案、丰富色彩（常用金、黑、银等）、对称与流线型、奢华感和装饰性字体。",
     art_deco_prompt: "设计一个装饰艺术风格的网站页眉或邀请卡。使用强烈的几何图案（V形、旭日形），黑金配色方案，锐利的线条，以及风格化的无衬线字体，如 'Poppins'（几何化使用）或特定的装饰艺术字体。",
+    // Neomorphism
+    neomorphism_name: "新拟物化",
+    neomorphism_description: "一种利用柔和的阴影和高光来制造元素从背景中凸出或凹陷的错觉的风格，给人一种柔软、类似塑料的感觉。",
+    neomorphism_prompt: "使用新拟物化设计一个网页界面。元素应看起来像是从背景中挤压出来或压入背景中，使用微妙的内外阴影。采用单色配色方案和柔和的圆角形状。",
     // Prompt label
     promptLabel: "示例 Prompt:"
   }
