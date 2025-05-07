@@ -66,54 +66,54 @@
             <p data-translate="cssP1">以下是将粗野主义风格应用为全局主题的核心 CSS 代码 (<code>body.theme-brutalism</code>):</p>
             <pre><code class="language-css">/* 5. Brutalism Theme */
 body.theme-brutalism {
-    --page-bg: #ffffff; /* 通常是白色或高对比度背景 */
+    --page-bg: #ffffff; /* Usually white or high-contrast background */
     --page-bg-gradient: none;
-    --text-color: #000000; /* 黑色文字 */
+    --text-color: #000000; /* Black text */
     --heading-color: #000000;
-    --link-color: #0000ff; /* 默认蓝色链接 */
-    --link-hover-color: #ff00ff; /* 高对比度悬停色 */
-    --border-color: #000000; /* 黑色硬边框 */
-    --card-bg: #f0f0f0; /* 浅灰色卡片 */
-    --card-shadow: 4px 4px 0px #000000; /* 硬块状阴影 */
+    --link-color: #0000ff; /* Default blue link */
+    --link-hover-color: #ff00ff; /* High-contrast hover color */
+    --border-color: #000000; /* Black hard border */
+    --card-bg: #f0f0f0; /* Light gray card */
+    --card-shadow: 4px 4px 0px #000000; /* Hard block shadow */
     --card-hover-shadow: 6px 6px 0px #000000;
-    --header-bg: yellow; /* 高对比度页头 */
+    --header-bg: yellow; /* High-contrast header */
     --header-text-color: #000000;
-    --header-shadow: none; /* 无阴影 */
-    border-bottom: 2px solid #000; /* 页头底部硬边框 */
+    --header-shadow: none; /* No shadow */
+    border-bottom: 2px solid #000; /* Header bottom hard border */
     --footer-text-color: #000000;
-    --footer-bg: #f0f0f0; /* 页脚背景 */
-    --button-bg: yellow; /* 高对比度按钮 */
+    --footer-bg: #f0f0f0; /* Footer background */
+    --button-bg: yellow; /* High-contrast button */
     --button-text-color: black;
     --button-hover-bg: black;
     --button-hover-text-color: yellow;
-    --button-border: 2px solid black; /* 按钮硬边框 */
+    --button-border: 2px solid black; /* Button hard border */
     --button-secondary-bg: black;
     --button-secondary-text-color: yellow;
     --button-secondary-hover-bg: yellow;
     --button-secondary-hover-text-color: black;
     --button-secondary-border: 2px solid black;
-    --prompt-bg: #e0e0e0; /* 提示区背景 */
+    --prompt-bg: #e0e0e0; /* Prompt area background */
     --prompt-text-color: #111;
-    --base-font: var(--font-mono); /* 等宽字体 */
+    --base-font: var(--font-mono); /* Monospace font */
     --heading-font: var(--font-mono);
-    --card-border-radius: 0px; /* 无圆角 */
-    --button-border-radius: 0px; /* 无圆角 */
+    --card-border-radius: 0px; /* No rounded corners */
+    --button-border-radius: 0px; /* No rounded corners */
 }
 
 /* Brutalism Specific Adjustments */
 body.theme-brutalism .card {
-    border: 2px solid var(--border-color); /* 强调卡片边框 */
+    border: 2px solid var(--border-color); /* Emphasize card border */
 }
 body.theme-brutalism h1,
 body.theme-brutalism h2,
 body.theme-brutalism h3 {
-    text-transform: uppercase; /* 标题大写 */
-    font-weight: bold; /* 粗体 */
+    text-transform: uppercase; /* Uppercase headings */
+    font-weight: bold; /* Bold */
 }
 body.theme-brutalism a:hover {
-    text-decoration: none; /* 移除悬停下划线，依赖颜色变化 */
-    background-color: var(--link-hover-color); /* 用背景色强调 */
-    color: var(--page-bg); /* 反转文字颜色 */
+    text-decoration: none; /* Remove hover underline, rely on color change */
+    background-color: var(--link-hover-color); /* Emphasize with background color */
+    color: var(--page-bg); /* Invert text color */
 }
             </code></pre>
             <p><small data-translate="cssP2">注意：粗野主义的实现很大程度上依赖于内容的结构和布局选择，以及对装饰性元素的刻意省略。</small></p>

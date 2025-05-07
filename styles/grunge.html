@@ -67,54 +67,54 @@
 body.theme-grunge {
     /* Subtle noise texture */
     --grunge-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
-    --page-bg: #3a3a3a; /* 深灰色背景 */
+    --page-bg: #3a3a3a; /* Dark gray background */
     --page-bg-gradient: none;
-    background-image: var(--grunge-texture); /* 应用纹理 */
-    --text-color: #b0b0b0; /* 浅灰色文字 */
-    --heading-color: #dcdcdc; /* 亮灰色标题 */
-    --link-color: #a52a2a; /* 棕色链接 */
-    --link-hover-color: #cd5c5c; /* 印度红链接悬停 */
-    --border-color: #555; /* 深灰色边框 */
-    --card-bg: #4a4a4a; /* 稍亮的灰色卡片背景 */
-    --card-bg-image: var(--grunge-texture); /* 卡片也应用纹理 */
-    --card-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* 明显阴影 */
-    --card-hover-shadow: 3px 3px 7px rgba(0,0,0,0.4); /* 更深悬停阴影 */
-    --header-bg: #2a2a2a; /* 更深的页头背景 */
-    --header-text-color: #aaa; /* 页头文字 */
-    --header-shadow: inset 0 -2px 4px rgba(0,0,0,0.4); /* 内阴影 */
-    --footer-text-color: #888; /* 页脚文字 */
-    --footer-bg: #3a3a3a; /* 页脚背景同页面 */
-    --button-bg: #8b0000; /* 暗红色按钮 */
-    --button-text-color: #ccc; /* 按钮文字 */
-    --button-hover-bg: #a52a2a; /* 棕色按钮悬停 */
-    --button-border: 1px solid #777; /* 按钮边框 */
-    --button-secondary-bg: #333; /* 次要按钮背景 */
-    --button-secondary-text-color: #aaa; /* 次要按钮文字 */
-    --button-secondary-hover-bg: #555; /* 次要按钮悬停 */
-    --button-secondary-border: 1px solid #666; /* 次要按钮边框 */
-    --prompt-bg: rgba(0,0,0,0.2); /* 半透明黑色提示背景 */
-    --prompt-text-color: #aaa; /* 提示文字 */
-    --prompt-bg-image: none; /* 提示区无纹理 */
-    --base-font: var(--font-grunge); /* 使用 Grunge 字体 */
-    --heading-font: var(--font-grunge); /* 标题也用 Grunge 字体 */
-    --card-border-radius: 3px; /* 轻微圆角 */
-    --button-border-radius: 2px; /* 更小圆角 */
+    background-image: var(--grunge-texture); /* Apply texture */
+    --text-color: #b0b0b0; /* Light gray text */
+    --heading-color: #dcdcdc; /* Bright gray heading */
+    --link-color: #a52a2a; /* Brown link */
+    --link-hover-color: #cd5c5c; /* Indian red link hover */
+    --border-color: #555; /* Dark gray border */
+    --card-bg: #4a4a4a; /* Slightly lighter gray card background */
+    --card-bg-image: var(--grunge-texture); /* Card also applies texture */
+    --card-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Noticeable shadow */
+    --card-hover-shadow: 3px 3px 7px rgba(0,0,0,0.4); /* Deeper hover shadow */
+    --header-bg: #2a2a2a; /* Darker header background */
+    --header-text-color: #aaa; /* Header text */
+    --header-shadow: inset 0 -2px 4px rgba(0,0,0,0.4); /* Inner shadow */
+    --footer-text-color: #888; /* Footer text */
+    --footer-bg: #3a3a3a; /* Footer background same as page */
+    --button-bg: #8b0000; /* Dark red button */
+    --button-text-color: #ccc; /* Button text */
+    --button-hover-bg: #a52a2a; /* Brown button hover */
+    --button-border: 1px solid #777; /* Button border */
+    --button-secondary-bg: #333; /* Secondary button background */
+    --button-secondary-text-color: #aaa; /* Secondary button text */
+    --button-secondary-hover-bg: #555; /* Secondary button hover */
+    --button-secondary-border: 1px solid #666; /* Secondary button border */
+    --prompt-bg: rgba(0,0,0,0.2); /* Translucent black prompt background */
+    --prompt-text-color: #aaa; /* Prompt text */
+    --prompt-bg-image: none; /* No texture in prompt area */
+    --base-font: var(--font-grunge); /* Use Grunge font */
+    --heading-font: var(--font-grunge); /* Headings also use Grunge font */
+    --card-border-radius: 3px; /* Slight rounded corners */
+    --button-border-radius: 2px; /* Smaller rounded corners */
 }
 
-/* Grunge 风格特定元素调整 */
+/* Grunge Style Specific Element Adjustments */
 body.theme-grunge .card {
-    border: 1px solid #222; /* 更深的卡片边框 */
+    border: 1px solid #222; /* Darker card border */
 }
 body.theme-grunge a {
-    text-decoration: none; /* 移除默认下划线 */
-    border-bottom: 1px dashed var(--link-color); /* 使用虚线链接 */
+    text-decoration: none; /* Remove default underline */
+    border-bottom: 1px dashed var(--link-color); /* Use dashed link */
     transition: border-bottom-style 0.2s ease, background-color 0.2s ease;
 }
 body.theme-grunge a:hover {
-    border-bottom-style: solid; /* 悬停时变实线 */
-    background-color: rgba(255,255,255,0.05); /* 轻微背景高亮 */
+    border-bottom-style: solid; /* Change to solid line on hover */
+    background-color: rgba(255,255,255,0.05); /* Slight background highlight */
 }
-/* 可以添加 transform: rotate(-1deg); 等效果给某些元素增加随意感 */
+/* Can add effects like transform: rotate(-1deg); to some elements to add a sense of randomness */
             </code></pre>
             <p><small data-translate="cssP2">注意：这只是核心主题 CSS。实际应用中可以通过添加更多纹理、元素叠加、不规则边框等方式进一步强化 Grunge 效果。</small></p>
         </section>

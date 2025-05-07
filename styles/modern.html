@@ -74,51 +74,51 @@
             <p data-translate="cssP1">以下是将现代风格应用为全局主题的核心 CSS 代码 (<code>body.theme-modern</code>):</p>
             <pre><code class="language-css">/* 4. Modern Theme */
 body.theme-modern {
-    --page-bg: #f8f9fa; /* 浅灰色背景，比瑞士风格的纯白更柔和 */
+    --page-bg: #f8f9fa; /* Light gray background, softer than Swiss style's pure white */
     --page-bg-gradient: none;
-    --text-color: #212529; /* 深灰色文字，易读 */
-    --heading-color: #111; /* 接近纯黑的标题，对比清晰 */
-    --link-color: #007bff; /* 标准蓝色链接 */
-    --link-hover-color: #0056b3; /* 深蓝色链接悬停 */
-    --border-color: #dee2e6; /* 较浅的边框色 */
-    --card-bg: #ffffff; /* 纯白卡片背景 */
-    /* 柔和的卡片阴影，区别于瑞士风格的无阴影 */
+    --text-color: #212529; /* Dark gray text, easy to read */
+    --heading-color: #111; /* Near-black headings, clear contrast */
+    --link-color: #007bff; /* Standard blue link */
+    --link-hover-color: #0056b3; /* Dark blue link hover */
+    --border-color: #dee2e6; /* Lighter border color */
+    --card-bg: #ffffff; /* Pure white card background */
+    /* Soft card shadow, different from Swiss style's no shadow */
     --card-shadow: 0 4px 12px rgba(0,0,0,0.06);
     --card-hover-shadow: 0 6px 16px rgba(0,0,0,0.09);
-    --header-bg: #ffffff; /* 白色页头，常带有下边框 */
+    --header-bg: #ffffff; /* White header, often with bottom border */
     --header-text-color: #333;
-    --header-shadow: none; /* 页头通常无阴影，但可能有边框 */
-    --footer-text-color: #6c757d; /* 页脚文字 */
-    --footer-bg: #f8f9fa; /* 页脚背景同页面 */
-    --button-bg: var(--link-color); /* 按钮背景用链接色 */
+    --header-shadow: none; /* Header usually no shadow, but may have border */
+    --footer-text-color: #6c757d; /* Footer text */
+    --footer-bg: #f8f9fa; /* Footer background same as page */
+    --button-bg: var(--link-color); /* Button background uses link color */
     --button-text-color: white;
     --button-hover-bg: var(--link-hover-color);
-    --button-border: none; /* 按钮通常无边框 */
-    --button-secondary-bg: #e9ecef; /* 次要按钮背景 */
+    --button-border: none; /* Buttons usually no border */
+    --button-secondary-bg: #e9ecef; /* Secondary button background */
     --button-secondary-text-color: #495057;
     --button-secondary-hover-bg: #ced4da;
     --button-secondary-border: none;
-    --prompt-bg: #f1f3f5; /* 提示区背景 */
+    --prompt-bg: #f1f3f5; /* Prompt area background */
     --prompt-text-color: #495057;
-    /* 字体选择更灵活，这里用 Poppins，区别于瑞士风格固定的 Helvetica */
+    /* Font choice is more flexible, here Poppins is used, different from Swiss style's fixed Helvetica */
     --base-font: var(--font-pop);
     --heading-font: var(--font-pop);
-    /* 适度的圆角，增加亲和力，区别于瑞士风格的直角 */
+    /* Moderate rounded corners for approachability, different from Swiss style's right angles */
     --card-border-radius: 8px;
     --button-border-radius: 6px;
 }
 
-/* 现代风格特定元素调整 */
+/* Modern Style Specific Element Adjustments */
 body.theme-modern header {
-    /* 现代风格页头常有底部边框增加区分度 */
+    /* Modern style headers often have a bottom border for differentiation */
     border-bottom: 1px solid var(--border-color);
 }
-/* 现代风格通常依赖大量留白，这通过HTML结构和组件间距实现 */
-/* 字体排版层级清晰，但规则不如瑞士风格严格 */
+/* Modern style often relies on ample whitespace, achieved through HTML structure and component spacing */
+/* Typography hierarchy is clear, but rules are less strict than Swiss style */
 body.theme-modern h1,
 body.theme-modern h2,
 body.theme-modern h3 {
-    font-weight: 600; /* 例如使用 Semi-bold */
+    font-weight: 600; /* e.g., use Semi-bold */
 }
             </code></pre>
             <p><small data-translate="cssP2">注意：现代风格注重整体视觉效果和用户体验，除了核心 CSS 变量，具体实现还依赖于高质量的图片/视频素材、合理的布局间距和流畅的交互设计。</small></p>
