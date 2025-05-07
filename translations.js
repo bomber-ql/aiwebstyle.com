@@ -196,7 +196,7 @@ const translations = {
     sustainable_green_description: "简约、系统字体、优化图像、自然感。",
     sustainable_green_prompt: "为一个注重低环境影响的可持续品牌设计网站。使用系统字体、简洁的布局、优化的图像（可能是双色调或灰度图像）、暗黑模式选项，以及关于可持续性的清晰信息传递。",
     // Art Deco
-    art_deco_name: "装饰艺术风格 (Art Deco)",
+    art_deco_name: "装饰艺术风格",
     art_deco_description: "特点是几何图案、丰富色彩（常用金、黑、银等）、对称与流线型、奢华感和装饰性字体。",
     art_deco_prompt: "设计一个装饰艺术风格的网站页眉或邀请卡。使用强烈的几何图案（V形、旭日形），黑金配色方案，锐利的线条，以及风格化的无衬线字体，如 'Poppins'（几何化使用）或特定的装饰艺术字体。",
     // Prompt label

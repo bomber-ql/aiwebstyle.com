@@ -27,8 +27,8 @@ const pageTranslations = {
     detail_footer_text: "AI Website Style Gallery"
   },
   zh: {
-    detail_page_title: "风格详情 - 装饰艺术 (Art Deco)",
-    detail_header_title: "装饰艺术 (Art Deco)",
+    detail_page_title: "风格详情 - 装饰艺术",
+    detail_header_title: "装饰艺术",
     detail_header_subtitle: "探索 <span class='highlight'>装饰艺术</span> 网页设计风格的特点与应用",
     detail_back_to_list: "返回风格列表",
     detail_about_style_title: "关于此风格",

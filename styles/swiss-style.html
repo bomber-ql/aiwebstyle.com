@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
     <!-- Link to main CSS file (Relative path from styles folder) -->
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="swiss-style-page.css">
     <link rel="stylesheet" href="../language-switcher.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
      crossorigin="anonymous"></script>
@@ -64,56 +65,56 @@
         <section class="style-detail-section style-css">
             <h2 data-translate="themeCssSnippet">主题 CSS 代码片段</h2>
             <p data-translate="cssSnippetIntroSwissStyle">以下是将瑞士风格应用为全局主题的核心 CSS 代码 (<code>body.theme-swiss-style</code>):</p>
-            <pre><code class="language-css">/* 2. Swiss Style Theme */
-body.theme-swiss-style {
-    --page-bg: #ffffff; /* 白色背景 */
-    --page-bg-gradient: none;
-    --text-color: #000000; /* 黑色文字 */
-    --heading-color: #000000; /* 黑色标题 */
-    --link-color: #e60000; /* 强调红色链接 */
-    --link-hover-color: #b30000; /* 深红色链接悬停 */
-    --border-color: #e0e0e0; /* 浅灰色边框 */
-    --card-bg: #ffffff; /* 白色卡片背景 */
-    --card-shadow: none; /* 无卡片阴影 */
-    --card-hover-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 轻微悬停阴影 */
-    --header-bg: #000000; /* 黑色页头背景 */
-    --header-text-color: #ffffff; /* 白色页头文字 */
-    --header-shadow: none; /* 无页头阴影 */
-    --footer-text-color: #555555; /* 深灰色页脚文字 */
-    --footer-bg: #ffffff; /* 白色页脚背景 */
-    --button-bg: #e60000; /* 红色按钮背景 */
-    --button-text-color: white; /* 白色按钮文字 */
-    --button-hover-bg: #b30000; /* 深红按钮悬停 */
-    --button-border: none; /* 无按钮边框 */
-    --button-secondary-bg: #333; /* 深灰次要按钮 */
-    --button-secondary-text-color: white; /* 白色次要按钮文字 */
-    --button-secondary-hover-bg: #000; /* 黑色次要按钮悬停 */
-    --button-secondary-border: none; /* 无次要按钮边框 */
-    --prompt-bg: #f5f5f5; /* 浅灰提示背景 */
-    --prompt-text-color: #333; /* 深灰提示文字 */
-    --base-font: var(--font-helvetica); /* 使用 Helvetica 字体 */
-    --heading-font: var(--font-helvetica); /* 标题也用 Helvetica */
-    --card-border-radius: 0px; /* 无圆角 */
-    --button-border-radius: 0px; /* 无圆角 */
-}
-
-/* 瑞士风格特定元素调整 */
-body.theme-swiss-style h1,
-body.theme-swiss-style h2,
-body.theme-swiss-style h3 {
-    font-weight: 700; /* 粗体标题 */
-    text-transform: lowercase; /* 标题小写（常见特征） */
-}
-body.theme-swiss-style .btn {
-    text-transform: uppercase; /* 按钮文字大写 */
-    font-size: 0.85em; /* 稍小字号 */
-    letter-spacing: 0.5px; /* 轻微字间距 */
-}
-body.theme-swiss-style .card {
-    border: 1px solid var(--border-color); /* 确保卡片有边框 */
-}
-/* 可以在这里添加更多基于网格的布局样式，但这通常在具体页面结构中实现 */
-            </code></pre>
+            <pre><code class="language-css">/* Swiss Style Theme */
+                body.theme-swiss-style {
+                    --page-bg: #ffffff; /* White background */
+                    --page-bg-gradient: none;
+                    --text-color: #000000; /* Black text */
+                    --heading-color: #000000; /* Black headings */
+                    --link-color: #e60000; /* Accent red links */
+                    --link-hover-color: #b30000; /* Dark red link hover */
+                    --border-color: #e0e0e0; /* Light gray border */
+                    --card-bg: #ffffff; /* White card background */
+                    --card-shadow: none; /* No card shadow */
+                    --card-hover-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Slight hover shadow */
+                    --header-bg: #000000; /* Black header background */
+                    --header-text-color: #ffffff; /* White header text */
+                    --header-shadow: none; /* No header shadow */
+                    --footer-text-color: #555555; /* Dark gray footer text */
+                    --footer-bg: #ffffff; /* White footer background */
+                    --button-bg: #e60000; /* Red button background */
+                    --button-text-color: white; /* White button text */
+                    --button-hover-bg: #b30000; /* Dark red button hover */
+                    --button-border: none; /* No button border */
+                    --button-secondary-bg: #333; /* Dark gray secondary button */
+                    --button-secondary-text-color: white; /* White secondary button text */
+                    --button-secondary-hover-bg: #000; /* Black secondary button hover */
+                    --button-secondary-border: none; /* No secondary button border */
+                    --prompt-bg: #f5f5f5; /* Light gray prompt background */
+                    --prompt-text-color: #333; /* Dark gray prompt text */
+                    --base-font: var(--font-helvetica); /* Use Helvetica font */
+                    --heading-font: var(--font-helvetica); /* Headings also use Helvetica */
+                    --card-border-radius: 0px; /* No border radius */
+                    --button-border-radius: 0px; /* No border radius */
+                }
+                
+                /* Swiss Style specific element adjustments */
+                body.theme-swiss-style h1,
+                body.theme-swiss-style h2,
+                body.theme-swiss-style h3 {
+                    font-weight: 700; /* Bold headings */
+                    text-transform: lowercase; /* Lowercase headings (common feature) */
+                }
+                body.theme-swiss-style .btn {
+                    text-transform: uppercase; /* Uppercase button text */
+                    font-size: 0.85em; /* Slightly smaller font size */
+                    letter-spacing: 0.5px; /* Slight letter spacing */
+                }
+                body.theme-swiss-style .card {
+                    border: 1px solid var(--border-color); /* Ensure cards have a border */
+                }
+                /* More grid-based layout styles can be added here, but this is usually implemented in the specific page structure */
+                            </code></pre>
             <p><small data-translate="swissStyleCssNote">注意：这只是核心主题 CSS。实际应用中可能还需要在特定页面结构中结合网格系统来实现完整的瑞士风格布局。</small></p>
         </section>
 

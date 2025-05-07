@@ -88,27 +88,6 @@ footer { text-align: center; margin-top: 3rem; padding: 1.5rem 1rem; font-size: 
 .card-buttons { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: space-between; }
 
 
-/* --- INDIVIDUAL Card Themes (Styling the card itself) --- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* --- GLOBAL THEME DEFINITIONS --- */
@@ -124,14 +103,18 @@ body.theme-skeuomorphism {
     --link-color: #8b4513; /* SaddleBrown */
     --link-hover-color: #a0522d; /* Sienna */
     --border-color: #a0522d;
-    --card-bg: #d2b48c; --card-bg-image: var(--skeuo-texture-light); --card-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2); --card-hover-shadow: var(--skeuo-shadow-outset), 0 5px 8px rgba(0,0,0,0.3);
+    --card-bg: #d2b48c; /* This will be overridden by skeuomorphism-card.css for cards on index.html, but good for consistency if skeuomorphism theme is applied to a page without cards */
+    --card-bg-image: var(--skeuo-texture-light);
+    --card-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2);
+    --card-hover-shadow: var(--skeuo-shadow-outset), 0 5px 8px rgba(0,0,0,0.3);
     --header-bg: #8b4513; --header-text-color: #f5f5dc; --header-shadow: inset 0 -3px 5px rgba(0,0,0,0.3);
     --footer-text-color: #6b4423; --footer-bg: #e5d9b3;
     --button-bg: linear-gradient(to bottom, #b8860b, #cd853f); --button-text-color: white; --button-hover-bg: linear-gradient(to bottom, #cd853f, #b8860b); --button-border: 1px solid #8b4513; --button-shadow: var(--skeuo-shadow-outset); --button-hover-shadow: var(--button-shadow);
     --button-secondary-bg: linear-gradient(to bottom, #f0e68c, #eee8aa); --button-secondary-text-color: #5e3a1d; --button-secondary-hover-bg: linear-gradient(to bottom, #eee8aa, #f0e68c); --button-secondary-border: 1px solid #bdb76b;
     --prompt-bg: #f5f5dc; --prompt-text-color: #4a3c2a; --prompt-shadow: var(--skeuo-shadow-inset); --prompt-bg-image: none;
     --base-font: var(--font-serif); --heading-font: var(--font-serif);
-    --card-border-radius: 6px; --button-border-radius: 4px;
+    --card-border-radius: 6px; /* Consistent with skeuomorphism-card.css */
+    --button-border-radius: 4px;
 }
 
 /* 2. Swiss Style Theme (NEW) */
@@ -1128,6 +1111,21 @@ body.theme-art-deco .card[data-style-id="art-deco"] {
     fill: currentColor;
 }
 
+.style-illustration {
+    display: block; /* 使图片成为块级元素，方便控制边距 */
+    max-width: 100%; /* 图片最大宽度不超过其容器 */
+    height: auto;    /* 保持图片的宽高比 */
+    margin: 20px auto; /* 上下边距20px，左右自动居中 */
+    border-radius: 8px; /* 可以给图片加点圆角，如果符合风格的话 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 可选：添加一点柔和的阴影 */
+}
+
+/* 针对窄屏幕的响应式调整 (可选) */
+@media (max-width: 768px) {
+    .style-illustration {
+        margin: 15px auto;
+    }
+}
 
 /* --- 响应式调整 --- */
 /* ... 保留现有的媒体查询 ... */
