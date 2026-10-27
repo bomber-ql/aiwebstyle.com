@@ -1,0 +1,336 @@
+/* compares/compare.css
+   Style comparison pages. Uses the site's theme variables throughout. */
+
+.cmp-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 2.2rem 1.25rem 4rem;
+}
+
+.cmp-crumb {
+    font-size: .85rem;
+    margin-bottom: 1rem;
+}
+.cmp-crumb a { color: var(--link-color); text-decoration: none; }
+.cmp-crumb a:hover { text-decoration: underline; }
+
+.cmp-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: -.03em;
+    line-height: 1.15;
+    margin-bottom: .75rem;
+    color: var(--heading-color);
+}
+
+.cmp-lede {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-color);
+    max-width: 74ch;
+    margin-bottom: 1rem;
+}
+
+.cmp-verdict {
+    font-size: .96rem;
+    line-height: 1.75;
+    color: var(--heading-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--link-color);
+    border-radius: 0 8px 8px 0;
+    padding: .9rem 1.1rem;
+    margin: 1.4rem 0 1.6rem;
+    max-width: 80ch;
+}
+
+.cmp-h2 {
+    font-size: clamp(1.3rem, 2.6vw, 1.65rem);
+    letter-spacing: -.02em;
+    margin-bottom: .6rem;
+    color: var(--heading-color);
+}
+
+/* ---------- 并排预览 ---------- */
+
+.cmp-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 0 0 .7rem;
+    font-size: .82rem;
+    color: var(--footer-text-color, #6b7785);
+}
+
+.cmp-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    cursor: pointer;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .74rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--heading-color);
+}
+.cmp-switch input { width: 15px; height: 15px; accent-color: var(--link-color); cursor: pointer; }
+
+.cmp-hint { font-size: .8rem; }
+
+.cmp-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .9rem;
+    margin-bottom: 2.4rem;
+}
+
+.cmp-pane {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+}
+
+.cmp-pane-head {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .5rem .7rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--prompt-bg, #f7f9fc);
+}
+.cmp-tag {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .66rem;
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--heading-color);
+    color: var(--page-bg, #fff);
+    flex: 0 0 auto;
+}
+.cmp-pane-head h2 {
+    font-size: .85rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--heading-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cmp-pane-head a {
+    margin-left: auto;
+    font-size: .72rem;
+    color: var(--link-color);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.cmp-pane-head a:hover { text-decoration: underline; }
+
+.cmp-pane iframe {
+    display: block;
+    width: 100%;
+    height: 430px;
+    border: 0;
+    background: #fff;
+}
+
+/* ---------- 小节 ---------- */
+
+.cmp-section { margin-top: 2.6rem; }
+.cmp-section > h2 {
+    font-size: 1.15rem;
+    letter-spacing: -.01em;
+    margin-bottom: .8rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--heading-color);
+}
+.cmp-section p {
+    font-size: .95rem;
+    line-height: 1.78;
+    color: var(--text-color);
+    margin-bottom: .85rem;
+    max-width: 76ch;
+}
+.cmp-note {
+    font-size: .86rem !important;
+    color: var(--footer-text-color, #6b7785) !important;
+    border-left: 2px solid var(--border-color);
+    padding-left: .9rem;
+}
+
+/* ---------- 表格 ---------- */
+
+.cmp-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    background: var(--card-bg);
+    margin-top: .8rem;
+}
+
+.cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .88rem;
+    min-width: 560px;
+}
+.cmp-table th,
+.cmp-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: .72rem .85rem;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.6;
+}
+.cmp-table tbody tr:last-child th,
+.cmp-table tbody tr:last-child td { border-bottom: 0; }
+.cmp-table thead th {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .68rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--footer-text-color, #6b7785);
+    font-weight: 500;
+    background: var(--prompt-bg, #f7f9fc);
+    white-space: nowrap;
+}
+.cmp-table tbody th {
+    font-weight: 600;
+    color: var(--heading-color);
+    width: 22%;
+}
+.cmp-edge {
+    color: var(--link-color);
+    font-size: .7rem;
+    line-height: 1;
+}
+
+.cmp-code td { font-family: var(--font-mono, ui-monospace, monospace); font-size: .78rem; line-height: 1.55; }
+.cmp-code { min-width: 680px; }
+
+/* ---------- 何时适用 ---------- */
+
+.cmp-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    margin-top: .8rem;
+}
+.cmp-side {
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 1.05rem 1.15rem;
+    background: var(--card-bg);
+}
+.cmp-side h3 {
+    font-size: .95rem;
+    margin-bottom: .6rem;
+    color: var(--heading-color);
+}
+.cmp-side ul { margin: 0; padding-left: 1.1rem; }
+.cmp-side li {
+    font-size: .89rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: .5rem;
+}
+.cmp-side li:last-child { margin-bottom: 0; }
+
+/* ---------- 关联 ---------- */
+
+.cmp-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.cmp-chip {
+    font-size: .82rem;
+    padding: .36rem .85rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--heading-color);
+    text-decoration: none;
+    transition: border-color .15s ease, color .15s ease;
+}
+.cmp-chip:hover { border-color: var(--link-color); color: var(--link-color); text-decoration: none; }
+
+.cmp-chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1.3rem;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: .86rem;
+}
+.cmp-chain a { color: var(--link-color); text-decoration: none; }
+.cmp-chain a:hover { text-decoration: underline; }
+
+/* ---------- 索引 ---------- */
+
+.cmp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1.8rem 0 1rem;
+}
+
+.cmp-card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+    padding: 1.15rem 1.25rem 1.05rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.cmp-card:hover {
+    border-color: var(--link-color);
+    box-shadow: 0 12px 26px -18px rgba(24, 42, 66, .55);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.cmp-idx {
+    display: block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    color: var(--footer-text-color, #a3afbb);
+    margin-bottom: .4rem;
+}
+.cmp-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: .45rem;
+    color: var(--heading-color);
+    letter-spacing: -.01em;
+}
+.cmp-card p {
+    font-size: .87rem;
+    line-height: 1.62;
+    color: var(--text-color);
+    margin: 0 0 .85rem;
+}
+.cmp-go {
+    font-size: .75rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    color: var(--footer-text-color, #8592a1);
+    border-top: 1px solid var(--border-color);
+    padding-top: .55rem;
+    display: block;
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media (max-width: 860px) {
+    .cmp-dual { grid-template-columns: 1fr; }
+    .cmp-pane iframe { height: 340px; }
+    .cmp-split { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+    .cmp-wrap { padding: 1.6rem 1rem 3rem; }
+    .cmp-pane iframe { height: 300px; }
+    .cmp-chain { flex-direction: column; gap: .5rem; }
+}

@@ -1,0 +1,90 @@
+{
+  "slug": "brutalism-vs-neo-brutalism",
+  "a": "brutalism",
+  "b": "neo-brutalism",
+  "title": "Brutalism vs Neo-Brutalism",
+  "order": 2,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "The common claim is that neo-brutalism is brutalism with rounded corners. In this gallery that is simply wrong: both keep every corner square. What actually changed is the palette and the shadow.",
+  "verdict": "Brutalism is one accent on paper. Neo-brutalism is five candy fills on cream, with a deeper shadow stack — same skeleton, completely different temperature.",
+  "brief": [
+    "Compare the two stylesheets and the structure is nearly identical: 3px black borders, hard offset shadows with zero blur, no gradients, no border radius anywhere. Both refuse the same things.",
+    "The difference is in two declarations. Brutalism keeps a single acid yellow against black and white, and its shadow tops out at 6px. Neo-brutalism introduces five tints — butter, mint, lilac, peach, cream — and pushes the stack to 8px, so each card looks like a sticker peeled off a sheet rather than a block printed on paper."
+  ],
+  "dimensions": [
+    {
+      "name": "Palette",
+      "a": "One acid yellow, plus black and paper white",
+      "b": "Five candy tints against cream",
+      "edge": "b"
+    },
+    {
+      "name": "Border",
+      "a": "2 to 3px solid black",
+      "b": "3px solid black",
+      "edge": "tie"
+    },
+    {
+      "name": "Shadow",
+      "a": "Offset solid, up to 6px, zero blur",
+      "b": "Offset solid, up to 8px, zero blur",
+      "edge": "b"
+    },
+    {
+      "name": "Corner radius",
+      "a": "0 — no radius declared anywhere",
+      "b": "0 — declared explicitly three times",
+      "edge": "tie"
+    },
+    {
+      "name": "Typeface",
+      "a": "Arial, deliberately unsmoothed",
+      "b": "Inter via the shared base, at heavier weights",
+      "edge": "a"
+    },
+    {
+      "name": "Hover",
+      "a": "Element translates into its own shadow",
+      "b": "Element translates, shadow shrinks to match",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Accent",
+      "a": "--acid: #f7ff00; one value",
+      "b": "#ffd166 / #a8f0c6 / #c9b8ff / #ffb3a7 / #ffe08a"
+    },
+    {
+      "label": "Shadow",
+      "a": "box-shadow: 4px 4px 0 #000",
+      "b": "box-shadow: 8px 8px 0 #000"
+    },
+    {
+      "label": "Type",
+      "a": "font-family: Arial",
+      "b": "inherits Inter from the base stylesheet"
+    },
+    {
+      "label": "Radius",
+      "a": "undeclared",
+      "b": "border-radius: 0 (explicit, three rules)"
+    }
+  ],
+  "whenA": [
+    "You need one loud surface in an otherwise quiet page — a single acid panel reads as a statement",
+    "The content is editorial and the type should feel slightly wrong on purpose",
+    "The page has very few cards; a broad palette with three cards looks accidental rather than playful"
+  ],
+  "whenB": [
+    "The page is a grid of many items and colour is how you differentiate them",
+    "The audience is consumer or creative, where candy tints read as energy rather than as a warning",
+    "You want each card to feel individually placed, which deeper shadows and multiple fills achieve"
+  ],
+  "promptDelta": "Both prompts start with the same sentence about hard black borders and zero-blur offset shadows, so the model will produce a similar skeleton either way. The steering happens in the palette clause: name one accent and the ban on other colours for brutalism; name five specific tints and a cream ground for neo-brutalism. Also state the radius explicitly — a model asked for neo-brutalism will add 8px corners by default because that is what most blog posts describe, and it will not look like this page.",
+  "recipes": [
+    "pricing-page",
+    "launch-page"
+  ]
+}

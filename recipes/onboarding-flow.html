@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -140,14 +140,16 @@
                     <option value="a developer API, where the first value is a successful request returning real data">Developer API</option>
                     <option value="a creator tool, where the first value is publishing something that looks finished">Creator tool</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-FLOW">Flow length</label>
                 <select id="rc-FLOW" data-rc="FLOW">
-                    <option value="a three-step flow: account, workspace, invite">Three steps</option>
-                    <option value="a five-step flow: account, profile, workspace, preferences, invite">Five steps</option>
-                    <option value="a single-screen flow with three fields and one button, no stepping at all">Single screen</option>
+                    <option value="a three-step flow: account, workspace, invite" data-hint="The shortest flow that still produces a usable account.">Three steps</option>
+                    <option value="a five-step flow: account, profile, workspace, preferences, invite" data-hint="Only if each step genuinely changes the first session.">Five steps</option>
+                    <option value="a single-screen flow with three fields and one button, no stepping at all" data-hint="Best conversion, worst data. Everything else must be collected later.">Single screen</option>
                 </select>
+                <p class="rc-hint" data-hint-for="FLOW">The shortest flow that still produces a usable account.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-PROGRESS">Progress display</label>
@@ -156,14 +158,16 @@
                     <option value="a thin progress bar with the text Step 2 of 3 above it, and no step names">Bar with count</option>
                     <option value="no progress indicator at all for a single-screen flow">None</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STEPS">What each step asks</label>
                 <select id="rc-STEPS" data-rc="STEPS">
-                    <option value="Email and password, then workspace name with a live URL preview, then optional teammate invites with a skip link. Three fields total, two of them skippable.">Minimum viable</option>
-                    <option value="Email, then name and role, then workspace name, then a use-case choice of three options rendered as large radio cards, then invites. The use-case step changes which sample is seeded.">With personalisation</option>
+                    <option value="Email and password, then workspace name with a live URL preview, then optional teammate invites with a skip link. Three fields total, two of them skippable." data-hint="Ask only what the first session needs.">Minimum viable</option>
+                    <option value="Email, then name and role, then workspace name, then a use-case choice of three options rendered as large radio cards, then invites. The use-case step changes which sample is seeded." data-hint="Adds meaningfully different first sessions.">With personalisation</option>
                     <option value="Email, then company domain with automatic teammate discovery, then role, then invites pre-populated from the domain. Domain verification explains why it is worth doing, and is skippable.">Team-first</option>
                 </select>
+                <p class="rc-hint" data-hint-for="STEPS">Ask only what the first session needs.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-VALIDATION">Validation timing</label>
@@ -171,6 +175,7 @@
                     <option value="Validate on blur, clear on input, and never block the primary button. The click surfaces the first invalid field and moves focus to it.">On blur</option>
                     <option value="Validate on blur for the first pass, then live on every keystroke once a field has been marked invalid, so the error clears the instant it is fixed.">Live, after first blur</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -179,6 +184,7 @@
                     <option value="Warm minimal: cream background, no card — the fields sit directly on the page, 1px bottom borders only, one serif heading per step, accent used on the button and the progress dot.">Warm minimal</option>
                     <option value="Dark product: #101318 page, #171b22 inputs with 1px borders at 12 percent white, one bright accent for the primary action, focus ring at 2px offset so it is visible against the dark surface.">Dark product</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -186,6 +192,7 @@
                     <option value="A single 180ms horizontal slide between steps, direction matching forward or back, disabled entirely under prefers-reduced-motion. Nothing else animates.">Step transition only</option>
                     <option value="No transitions. The next step appears immediately, which is faster to use and easier to test.">None</option>
                 </select>
+                
             </div>
             </div>
 
@@ -336,8 +343,9 @@ A working flow with real validation and real state, not five screens of static m
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -376,12 +384,19 @@ A working flow with real validation and real state, not five screens of static m
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

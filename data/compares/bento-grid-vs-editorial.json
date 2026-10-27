@@ -1,0 +1,90 @@
+{
+  "slug": "bento-grid-vs-editorial",
+  "a": "bento-grid",
+  "b": "editorial",
+  "title": "Bento Grid vs Editorial",
+  "order": 4,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "These two look alike at a glance — quiet, type-led, no shadows, one accent — because both refuse decoration. They disagree about what a page is made of: modules, or a column of text.",
+  "verdict": "Bento tiles the page into modules of unequal size separated by one constant gap. Editorial has no modules at all: every text block is capped by line length, and the layout is whatever that cap produces.",
+  "brief": [
+    "The similarity is real but superficial. Neither page uses a gradient, a photograph, or a drop shadow; both hold their palette to three or four values; both put hierarchy in size and weight rather than colour. Scan either from across the room and they read as calm.",
+    "Structurally they have nothing in common. Bento is a four-column grid with a 16px gap that never changes, and the interest comes from tiles spanning different numbers of cells — one 2×2, some 2×1, the rest single. Editorial is a single column where the headline is capped at 17 characters per line and the standfirst at 46, so the page's shape is decided by text rather than by spans."
+  ],
+  "dimensions": [
+    {
+      "name": "Layout device",
+      "a": "Four-column tile grid, spans of 1 or 2",
+      "b": "Single column capped by character count",
+      "edge": "tie"
+    },
+    {
+      "name": "What varies",
+      "a": "Tile size and fill colour",
+      "b": "Line length only",
+      "edge": "a"
+    },
+    {
+      "name": "Vertical rhythm",
+      "a": "One constant 16px gap everywhere",
+      "b": "Section spacing at 1.8 to 2.4rem",
+      "edge": "b"
+    },
+    {
+      "name": "Surface",
+      "a": "Three fills — white, mint #eef1ea, dark ink",
+      "b": "One paper tone #fbfaf7",
+      "edge": "a"
+    },
+    {
+      "name": "Typeface",
+      "a": "Inter throughout",
+      "b": "Playfair Display headings against Lato body",
+      "edge": "b"
+    },
+    {
+      "name": "Corners",
+      "a": "10 to 18px radius",
+      "b": "0 everywhere",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Structure",
+      "a": "grid-template-columns: repeat(4, 1fr); gap: 16px",
+      "b": "max-width: 46ch on the standfirst, 17ch on the h1"
+    },
+    {
+      "label": "Fill",
+      "a": "background: #eef1ea / #ffffff / var(--ink) per tile",
+      "b": "background: #fbfaf7 (one value)"
+    },
+    {
+      "label": "Corners",
+      "a": "border-radius: 10px to 18px",
+      "b": "border-radius: 0"
+    },
+    {
+      "label": "Type",
+      "a": "font-family: Inter",
+      "b": "font-family: Playfair Display, Georgia, serif"
+    }
+  ],
+  "whenA": [
+    "The page has content of genuinely different weights — a hero claim, three features, a statistic — and you want the layout to say which is which",
+    "You need many items on one screen without using colour or imagery to separate them",
+    "The reader scans rather than reads: a landing page, a product overview, a dashboard summary"
+  ],
+  "whenB": [
+    "The page is read in sequence, and the reader should never lose the line they are on",
+    "There is little data and almost no parallel items — an essay, a case study, a letter",
+    "You want the type to carry the entire identity, which means no fills and no tiles competing with it"
+  ],
+  "promptDelta": "Ask for spans and a constant gap and you get Bento; ask for a measure in characters and you get Editorial. The failure is mixing them: a model told to build an editorial page will often return a three-card grid of equal weight, which is Bento without the variation and therefore the worst of both. If you want the calm of Editorial with more structure, say explicitly that the grid exists but no tile may have a fill.",
+  "recipes": [
+    "saas-landing",
+    "blog"
+  ]
+}

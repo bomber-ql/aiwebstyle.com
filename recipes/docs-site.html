@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -136,18 +136,20 @@
             <div class="rc-control">
                 <label for="rc-DOC_TYPE">Documentation type</label>
                 <select id="rc-DOC_TYPE" data-rc="DOC_TYPE">
-                    <option value="an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone.">API reference</option>
+                    <option value="an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone." data-hint="Parameter tables and copyable examples are the entire page.">API reference</option>
                     <option value="task-based product guides. Pages are organised by job to be done (Connect your first source, Set up an alert), and each one ends with a next step. Sequential navigation matters.">Product guides</option>
                     <option value="an SDK reference organised by language. The version selector picks the language as well as the release, and every code block has tabs for the supported languages, with the selected tab remembered across pages.">SDK documentation</option>
                 </select>
+                <p class="rc-hint" data-hint-for="DOC_TYPE">Parameter tables and copyable examples are the entire page.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-NAV">Navigation shape</label>
                 <select id="rc-NAV" data-rc="NAV">
-                    <option value="Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session.">Grouped tree</option>
+                    <option value="Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session." data-hint="The default for anything with more than ten pages.">Grouped tree</option>
                     <option value="Use a flat list of up to twelve items with no grouping, each one a single line. Works only when the whole product fits in a dozen concepts.">Flat list</option>
                     <option value="Use primary tabs across the top of the content column (Guides, Reference, Changelog) with the sidebar showing only the items of the active tab.">Two-level tabs</option>
                 </select>
+                <p class="rc-hint" data-hint-for="NAV">The default for anything with more than ten pages.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-CODE">Code presentation</label>
@@ -156,6 +158,7 @@
                     <option value="A single block per example with no tabs, labelled by language in the corner. Simpler, and honest when only one language is genuinely supported.">Single block</option>
                     <option value="Two adjacent blocks per example: request and response, side by side above 900px and stacked below. The response block is collapsed by default beyond twenty lines.">Blocks plus output</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -164,6 +167,7 @@
                     <option value="Dark console: #0d1117 page, #161b22 sidebar, 1px borders at 10 percent white, code blocks at #1c2129 with a left accent bar, one cyan accent, mono for identifiers and labels.">Dark console</option>
                     <option value="Swiss docs: pure white, black text, no tinted sidebar — a 1px vertical rule separates navigation from content, section labels in uppercase at 0.7rem with wide tracking, one red accent for the current page.">Swiss docs</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -171,6 +175,7 @@
                     <option value="No animation. Documentation is a tool used repeatedly; any movement becomes an obstacle on the second visit.">None</option>
                     <option value="Only 120ms colour transitions on links and buttons, and a 150ms fade when the table of contents updates its active item. Nothing slides, nothing reveals on scroll.">Transitions only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -324,8 +329,9 @@ One documentation page plus the layout shell. Self-contained, no build step.</pr
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -364,12 +370,19 @@ One documentation page plus the layout shell. Self-contained, no build step.</pr
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

@@ -242,14 +242,14 @@
     "name": "Claymorphism",
     "blurb": "Moulded pastel surfaces with double-sided light and no hard edges.",
     "standalone": false,
-    "analysis": "Clay is neomorphism with the contrast put back: bigger radii, a coloured surface instead of a grey one, and a light source that comes from above rather than from a corner. The inner top highlight plus a soft outer shadow reads as moulded rather than embossed. Saturation stays below full — a clay surface that reaches pure pastel looks like plastic, and the effect depends on looking slightly matte.",
+    "analysis": "Clay is neomorphism with colour and lift put back: the cards carry their own pastel fill instead of sharing the background, radii run to 26px, and the shadow pair sits entirely outside the card rather than being inset. Nothing here is pressed into the surface — every element rests on it, and hovering lifts it another 4px.",
     "notice": [
-      "An inner top highlight sits above a soft outer shadow",
-      "Radii are large enough to read as moulded, not rounded",
-      "Colours stay muted; nothing reaches full saturation"
+      "Two outer shadows, one light and one dark — no inset anywhere",
+      "Radii at 26px, large enough that corners stop reading as corners",
+      "Fills stay pastel; the numbers use a solid mint pill for contrast"
     ],
     "breaks": "In dense interfaces the softness removes every edge cue, so rows and dividers disappear and scanning a table becomes guesswork.",
-    "tech": "inner top highlight · large radii · muted fill"
+    "tech": "paired outer shadow · 26px radius · pastel fills"
   },
   {
     "styleId": "abstract-geometric",
@@ -326,14 +326,14 @@
     "name": "Liquid Glass",
     "blurb": "Edge-lit glass with refraction — depth without drop shadows.",
     "standalone": false,
-    "analysis": "The difference from glassmorphism is the edge. A 1px border made from a gradient — bright at the top, dark at the bottom — imitates the way a thick glass edge bends light, and an inset white shadow at the top adds the illusion of thickness. Blur is capped around 16px; beyond that the panel stops looking like glass and starts looking like fog.",
+    "analysis": "Both this and glassmorphism are blurred panels, so the difference is where the depth sits. Here the top edge is a single 1px inset highlight at 55 percent white — one hard line across the full width — the border is a heavier 28 percent, and there is no drop shadow at all. The card reads as a slab of material rather than a pane floating above the page, and the blur runs at 24px with 170 percent saturation.",
     "notice": [
-      "The border is a gradient, brighter at the top than the bottom",
-      "An inset top highlight creates the sense of thickness",
-      "Blur is capped — more blur reads as fog, not glass"
+      "A single hard inset line along the top edge, not a gradient streak",
+      "A 28% border and no drop shadow — separation comes from the edge, not from depth",
+      "Blur at 24px saturate 170%, the strongest in the gallery"
     ],
-    "breaks": "Gradient borders need a solid backdrop to sit on; over a photograph they vanish and the panel loses its edge entirely.",
-    "tech": "gradient border · inset highlight · capped blur"
+    "breaks": "Without a saturated field behind it the inset highlight has nothing to catch, and the panel collapses into a flat rectangle with a white line on top.",
+    "tech": "inset top light · heavy border · no drop shadow"
   },
   {
     "styleId": "editorial",
@@ -354,14 +354,14 @@
     "name": "Neo-Brutalism",
     "blurb": "Thick black edges, offset shadows and saturated pastel fills.",
     "standalone": false,
-    "analysis": "Neo-brutalism keeps the hard 3px border but adds two things brutalism refuses: rounded corners of about 10px and candy-bright fills. The shadow stays at zero blur, offset 8px, so the depth is still printed rather than floating. The tell is the hover state, which translates the element 4px toward the shadow while shrinking the shadow to match — a physical press, not a colour change.",
+    "analysis": "Neo-brutalism is usually described as brutalism with rounded corners. This page does the opposite: every corner is square, declared as 0 in three separate rules. What changed is the palette and the distance — five candy tints against cream, and a shadow stack that reaches 8px instead of 6px, so each block sits further off the page than a printed one would.",
     "notice": [
-      "Shadow is 8px with zero blur, in solid black",
-      "Corners are rounded, which is what separates it from brutalism",
-      "Hover moves the block and shrinks the shadow by the same amount"
+      "Corners are square; the change is palette, not radius",
+      "Shadow reaches 8px with zero blur",
+      "Five fills — butter, mint, lilac, peach, cream"
     ],
     "breaks": "The saturated fills and black outlines raise contrast everywhere at once, so a dense interface becomes a wall of competing boxes.",
-    "tech": "3px border · 8px hard shadow · candy fills"
+    "tech": "3px border · 8px hard shadow · five candy fills"
   },
   {
     "styleId": "neo-swiss",

@@ -1,0 +1,90 @@
+{
+  "slug": "acid-graphics-vs-neo-brutalism",
+  "a": "acid-graphics",
+  "b": "neo-brutalism",
+  "title": "Acid Graphics vs Neo-Brutalism",
+  "order": 10,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Both are loud, both use hard edges and flat colour, and both are frequently described as anti-design. One is dark and acidic; the other is light and sweet.",
+  "verdict": "Acid graphics runs on black, one lime accent and tightly packed negative tracking, with a fixed 5-degree skew. Neo-brutalism runs on cream, five pastel fills and 8px hard shadows, with everything upright.",
+  "brief": [
+    "The shapes are similar enough that a screenshot can be mistaken for the other: thick borders, no gradients, flat colour, type doing most of the work. The temperature is completely different.",
+    "Acid graphics compresses: letter-spacing at minus 0.03 to 0.04em, a headline skewed about five degrees, offsets held at a fixed 6px so the misalignment reads as a system rather than an accident. Neo-brutalism expands: cream ground, five candy fills, 8px shadows, and every block sitting squarely on the grid with no rotation at all."
+  ],
+  "dimensions": [
+    {
+      "name": "Ground",
+      "a": "Near-black #0a0a0a",
+      "b": "Cream #fdfdf7",
+      "edge": "tie"
+    },
+    {
+      "name": "Palette",
+      "a": "One acid lime, plus black",
+      "b": "Five pastels plus black borders",
+      "edge": "b"
+    },
+    {
+      "name": "Type",
+      "a": "Negative tracking, skewed headline",
+      "b": "Upright, heavy weights",
+      "edge": "tie"
+    },
+    {
+      "name": "Offset",
+      "a": "Fixed 6px displacement",
+      "b": "8px hard shadow",
+      "edge": "tie"
+    },
+    {
+      "name": "Corners",
+      "a": "2px",
+      "b": "0",
+      "edge": "tie"
+    },
+    {
+      "name": "Reading comfort",
+      "a": "Low by design",
+      "b": "Moderate — pastels are gentler than lime",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Ground",
+      "a": "background: #0a0a0a",
+      "b": "background: #fdfdf7"
+    },
+    {
+      "label": "Type",
+      "a": "letter-spacing: -.03em to -.04em",
+      "b": "upright, no negative tracking"
+    },
+    {
+      "label": "Offset",
+      "a": "fixed 6px displacement",
+      "b": "box-shadow: 8px 8px 0 #000000"
+    },
+    {
+      "label": "Radius",
+      "a": "2px",
+      "b": "0"
+    }
+  ],
+  "whenA": [
+    "The audience is young, the content is music or events, and the page is a poster rather than a document",
+    "You want a single loud screen — a launch hero, a cover, a teaser",
+    "The brand can afford to be disliked by part of the audience"
+  ],
+  "whenB": [
+    "The page has to stay usable for several minutes rather than five seconds",
+    "You need multiple cards or items differentiated by colour",
+    "The brand is playful but still wants to be trusted with a transaction"
+  ],
+  "promptDelta": "Name the ground first: black for acid, cream for neo-brutalism. That one line does more than the style name, because both names are vague. Then give the offset as a number and say whether it is a shadow or a displacement — acid displaces the element, neo-brutalism hangs a hard shadow beneath it. Finally, state the palette count: one accent for acid, five named pastels for neo-brutalism. A model asked for either without a count will produce four or five colours and land somewhere in between.",
+  "recipes": [
+    "launch-page",
+    "careers-page"
+  ]
+}

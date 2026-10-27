@@ -6,6 +6,7 @@
 // 这样对比才公平，也直接证明「风格 = CSS 而不是内容」。
 
 import fs from 'node:fs';
+import { Report, assertClean, validatePreviews } from './lib/validate.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -14,6 +15,14 @@ const write = (p, s) => fs.writeFileSync(path.join(ROOT, p), s);
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
 
 const previews = JSON.parse(read('data/previews.json'));
+// 数据守卫：字段缺失 / 类型错误 / 引用不到风格，都在生成前停下
+{
+    const styleIds = new Set(JSON.parse(read('data/styles.json')).map((s) => s.id));
+    const rep = new Report('previews');
+    validatePreviews(previews, { styleIds }, rep);
+    assertClean(rep);
+}
+
 
 const GF = 'https://fonts.googleapis.com/css2?family=';
 const FONTS = {
@@ -248,6 +257,7 @@ function indexPage(list) {
         <h2 class="pv-h2">Same markup, ${list.length} stylesheets</h2>
         <p class="pv-lede">Every preview below uses the same DOM: the same headline, the same three services, the same quote, the same footer. Nothing is duplicated per style except the CSS file. That is the argument this section is making — a style is a set of decisions about type, spacing, colour and depth, not a different website.</p>
         <p class="pv-note">Open two previews in separate tabs and compare the same sentence. The words never move; the voice changes completely.</p>
+        <p class="pv-crosslink"><a href="../compares/index.html">Compare two styles side by side →</a></p>
 
         <div class="pv-grid">
 ${list.map(indexCard).join('\n')}

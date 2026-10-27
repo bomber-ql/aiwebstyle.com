@@ -1,0 +1,90 @@
+{
+  "slug": "bento-grid-vs-neo-swiss",
+  "a": "bento-grid",
+  "b": "neo-swiss",
+  "title": "Bento Grid vs Neo-Swiss",
+  "order": 5,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Both are grids, both are quiet, and both look organised from a distance. The difference is what the grid is for: packing modules, or placing text at an offset.",
+  "verdict": "Bento's grid holds filled tiles of different sizes. Neo-Swiss's grid holds unfilled text blocks placed asymmetrically — a headline across nine columns, a standfirst starting at seven, deliberately overlapping.",
+  "brief": [
+    "Put the two previews side by side and the first thing you notice is that one has colour fields and the other has none at all. Bento's tiles are white, mint and dark ink; Neo-Swiss is white with a single red, and the red appears twice on the whole page.",
+    "The second difference is what the grid is asked to do. Bento uses columns to size containers — a tile spans two, the gap stays at 16px, the composition is the arrangement of boxes. Neo-Swiss uses columns to place text at horizontal offsets, so the interest is in where a line starts, not in how big a box is."
+  ],
+  "dimensions": [
+    {
+      "name": "Grid",
+      "a": "4 columns, spans of 1 or 2",
+      "b": "12 columns, spans of 4 to 12",
+      "edge": "tie"
+    },
+    {
+      "name": "Fill",
+      "a": "Three tile colours including a dark one",
+      "b": "White, plus one red used twice",
+      "edge": "a"
+    },
+    {
+      "name": "Corner radius",
+      "a": "10 to 18px",
+      "b": "0 everywhere",
+      "edge": "tie"
+    },
+    {
+      "name": "Gap",
+      "a": "16px, unchanged at every size",
+      "b": "24px, with text placed inside columns rather than between",
+      "edge": "tie"
+    },
+    {
+      "name": "Typeface",
+      "a": "Inter",
+      "b": "Helvetica Neue",
+      "edge": "tie"
+    },
+    {
+      "name": "Overlap",
+      "a": "None — tiles abut",
+      "b": "Headline and standfirst share columns 7 to 9",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Grid",
+      "a": "grid-template-columns: repeat(4, 1fr)",
+      "b": "grid-template-columns: repeat(12, 1fr)"
+    },
+    {
+      "label": "Headline span",
+      "a": "tile spans 2 columns",
+      "b": "grid-column: 1 / span 9"
+    },
+    {
+      "label": "Standfirst",
+      "a": "tile spans 2 columns",
+      "b": "grid-column: 7 / span 5"
+    },
+    {
+      "label": "Fill",
+      "a": "background per tile",
+      "b": "background: #ffffff only"
+    }
+  ],
+  "whenA": [
+    "The content is a set of items with different importance and no natural reading order",
+    "You have real material for each tile — a number, a screenshot, a short claim",
+    "The page is a summary or an index rather than an argument"
+  ],
+  "whenB": [
+    "The content is mostly text that has to be read in order",
+    "You want the layout to look composed without adding colour or images",
+    "The brand is institutional and the page is a statement rather than a catalogue"
+  ],
+  "promptDelta": "Both prompts mention a grid, which is why models produce something similar for each. The distinguishing instruction is what goes inside the cells: for Bento, name the fills and the span pattern; for Neo-Swiss, forbid fills entirely and specify the column spans of the headline and the standfirst. A Neo-Swiss prompt with no spans will come back as a centred single column, and a Bento prompt with no fills will come back as an ordinary card grid.",
+  "recipes": [
+    "pricing-page",
+    "portfolio"
+  ]
+}

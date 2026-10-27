@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -126,21 +126,24 @@
                     <option value="a product company where messages split between sales, support and partnership, and the page must route people before they write">Product company</option>
                     <option value="a personal site where the owner is the only reader and most messages are about the work itself">Personal site</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-CHANNEL">Primary channel</label>
                 <select id="rc-CHANNEL" data-rc="CHANNEL">
-                    <option value="a plain email address set at 1.3rem in body text as a mailto link, with the timezone noted beside it and a total absence of any form">Plain email</option>
+                    <option value="a plain email address set at 1.3rem in body text as a mailto link, with the timezone noted beside it and a total absence of any form" data-hint="The most trustworthy option and the least work to maintain.">Plain email</option>
                     <option value="a three-field form — name, email, message — with a real success state, plus the email address underneath for anyone who would rather not use a form">Three-field form</option>
                     <option value="the email address plus one scheduling link described as a 20-minute call, not as a demo or a discovery session">Email plus calendar</option>
                 </select>
+                <p class="rc-hint" data-hint-for="CHANNEL">The most trustworthy option and the least work to maintain.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-FIELDS">Form fields</label>
                 <select id="rc-FIELDS" data-rc="FIELDS">
-                    <option value="three fields: name, email, and one message box. No subject line, no topic dropdown.">Three</option>
-                    <option value="four fields: name, email, a topic select with three options that determines who receives it, and a message box.">Four with topic</option>
+                    <option value="three fields: name, email, and one message box. No subject line, no topic dropdown." data-hint="Fewest fields that still identify a person.">Three</option>
+                    <option value="four fields: name, email, a topic select with three options that determines who receives it, and a message box." data-hint="Only worth it when messages genuinely route to different people.">Four with topic</option>
                 </select>
+                <p class="rc-hint" data-hint-for="FIELDS">Fewest fields that still identify a person.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -149,6 +152,7 @@
                     <option value="Product neutral: white page, 1px bordered inputs at 44px, one accent on the submit button, section labels at 0.72rem uppercase, generous spacing between the four sections.">Product neutral</option>
                     <option value="Swiss: white page, strict twelve-column grid, the address aligned to column one at 2rem in Helvetica, one red rule under the page title, no rounded corners anywhere.">Swiss</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -156,6 +160,7 @@
                     <option value="No animation beyond the form's own state transitions. Nobody wants to watch a contact page perform.">None</option>
                     <option value="One 200ms fade on the success message replacing the form. Nothing else animates.">Success only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -307,8 +312,9 @@ One page. Self-contained. The form works without JavaScript up to the point of s
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -347,12 +353,19 @@ One page. Self-contained. The form works without JavaScript up to the point of s
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

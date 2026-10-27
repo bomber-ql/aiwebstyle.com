@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -134,6 +134,7 @@
                     <option value="brand and identity designer. Positioning should name the sector and the deliverable: identity systems for companies renaming after a funding round.">Brand and identity</option>
                     <option value="writer and editor. Positioning should name the format and the audience: long-form reporting for technical audiences, or product copy for developer tools.">Writer and editor</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-WORK_COUNT">How many projects</label>
@@ -142,14 +143,16 @@
                     <option value="four">Four</option>
                     <option value="six">Six</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-LAYOUT">Work layout</label>
                 <select id="rc-LAYOUT" data-rc="LAYOUT">
-                    <option value="Lay each entry out as a horizontal row: name and outcome on the left at two thirds width, a 160px thumbnail on the right. Single column regardless of viewport.">Rows with thumbnail</option>
-                    <option value="Lay each entry out as an index row with no image: project name at 1.4rem, context and outcome in a second column, year right-aligned in mono. Show one image on hover, anchored to the pointer, hidden on touch devices.">Index list, images on hover</option>
-                    <option value="Lay each entry out as a large cover: full-bleed image at 3:2 with the project name and one outcome line beneath it. Three entries only; this layout does not scale past four.">Three large covers</option>
+                    <option value="Lay each entry out as a horizontal row: name and outcome on the left at two thirds width, a 160px thumbnail on the right. Single column regardless of viewport." data-hint="Best when the projects are visually weak but the thinking is strong.">Rows with thumbnail</option>
+                    <option value="Lay each entry out as an index row with no image: project name at 1.4rem, context and outcome in a second column, year right-aligned in mono. Show one image on hover, anchored to the pointer, hidden on touch devices." data-hint="Reads as confident. Requires at least one strong image.">Index list, images on hover</option>
+                    <option value="Lay each entry out as a large cover: full-bleed image at 3:2 with the project name and one outcome line beneath it. Three entries only; this layout does not scale past four." data-hint="For work where the visual result is the argument.">Three large covers</option>
                 </select>
+                <p class="rc-hint" data-hint-for="LAYOUT">Best when the projects are visually weak but the thinking is strong.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-CONTACT">Contact method</label>
@@ -158,6 +161,7 @@
                     <option value="your email address plus a single scheduling link to a 20-minute call, described as a call rather than a discovery session">Email plus calendar</option>
                     <option value="a three-field form (name, email, what you are working on) with a visible success state and a fallback email address for anyone who would rather not use it">Short form</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -167,6 +171,7 @@
                     <option value="Neo-brutalist: 3px black borders, 6px hard offset shadows, one saturated accent, headings in a heavy grotesque, hover states that shift the whole block by 3px.">Neo-brutalist</option>
                     <option value="Monochrome: one hue, all values derived from it, no accent colour at all, hierarchy carried entirely by size and weight, images desaturated by default and restored on hover.">Monochrome</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -175,6 +180,7 @@
                     <option value="Each project row fades and rises 20px as it enters the viewport, using animation-timeline: view() with animation-range: entry 10% to cover 30%, plus an IntersectionObserver fallback. Stagger no more than 60ms.">Scroll reveal</option>
                     <option value="No animation. The page must be fully readable with JavaScript disabled, since the audience often opens links in a locked-down browser.">None</option>
                 </select>
+                
             </div>
             </div>
 
@@ -328,8 +334,9 @@ Two page types sharing one stylesheet: the index and one case study.</pre>
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -368,12 +375,19 @@ Two page types sharing one stylesheet: the index and one case study.</pre>
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

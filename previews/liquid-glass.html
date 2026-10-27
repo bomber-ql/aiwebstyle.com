@@ -95,18 +95,18 @@
         <div class="wrap">
             <p class="pv-label">About this preview</p>
             <h2>What the Liquid Glass style is doing</h2>
-            <p>The difference from glassmorphism is the edge. A 1px border made from a gradient — bright at the top, dark at the bottom — imitates the way a thick glass edge bends light, and an inset white shadow at the top adds the illusion of thickness. Blur is capped around 16px; beyond that the panel stops looking like glass and starts looking like fog.</p>
+            <p>Both this and glassmorphism are blurred panels, so the difference is where the depth sits. Here the top edge is a single 1px inset highlight at 55 percent white — one hard line across the full width — the border is a heavier 28 percent, and there is no drop shadow at all. The card reads as a slab of material rather than a pane floating above the page, and the blur runs at 24px with 170 percent saturation.</p>
             <ul>
-                <li>The border is a gradient, brighter at the top than the bottom</li>
-                <li>An inset top highlight creates the sense of thickness</li>
-                <li>Blur is capped — more blur reads as fog, not glass</li>
+                <li>A single hard inset line along the top edge, not a gradient streak</li>
+                <li>A 28% border and no drop shadow — separation comes from the edge, not from depth</li>
+                <li>Blur at 24px saturate 170%, the strongest in the gallery</li>
             </ul>
             <dl class="pv-specs">
                 <div><dt>Stylesheet</dt><dd>111 lines · 32 rules</dd></div>
                 <div><dt>Typeface</dt><dd>system fonts only</dd></div>
-                <div><dt>Built with</dt><dd>gradient border · inset highlight · capped blur</dd></div>
+                <div><dt>Built with</dt><dd>inset top light · heavy border · no drop shadow</dd></div>
             </dl>
-            <p class="pv-breaks"><strong>Where it breaks:</strong> Gradient borders need a solid backdrop to sit on; over a photograph they vanish and the panel loses its edge entirely.</p>
+            <p class="pv-breaks"><strong>Where it breaks:</strong> Without a saturated field behind it the inset highlight has nothing to catch, and the panel collapses into a flat rectangle with a white line on top.</p>
             <p class="pv-links">
                 <a href="../styles/liquid-glass.html">Full breakdown, CSS and prompt</a>
                 <a href="index.html">All 28 previews</a>

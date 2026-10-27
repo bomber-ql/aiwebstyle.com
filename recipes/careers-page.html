@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -129,26 +129,29 @@
             <div class="rc-control">
                 <label for="rc-COMPANY">Company type</label>
                 <select id="rc-COMPANY" data-rc="COMPANY">
-                    <option value="an early-stage company of 14 people, where roles are broad and the honest difficulty is that priorities change monthly">Seed-stage startup</option>
+                    <option value="an early-stage company of 14 people, where roles are broad and the honest difficulty is that priorities change monthly" data-hint="Specificity and honesty matter more than benefits here.">Seed-stage startup</option>
                     <option value="a product company of 180 people, where roles are narrow and well-defined and the honest difficulty is coordination cost">Established product company</option>
                     <option value="a studio of 30 people working on client projects, where the honest difficulty is context switching and uneven project quality">Agency or studio</option>
                 </select>
+                <p class="rc-hint" data-hint-for="COMPANY">Specificity and honesty matter more than benefits here.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-ROLES">Role list layout</label>
                 <select id="rc-ROLES" data-rc="ROLES">
-                    <option value="Render roles as rows in a table-like list: title and team on the left, location in the middle, salary right-aligned in mono. One row per role, no cards, no expand.">Table rows</option>
+                    <option value="Render roles as rows in a table-like list: title and team on the left, location in the middle, salary right-aligned in mono. One row per role, no cards, no expand." data-hint="Fastest to scan and easiest to keep current.">Table rows</option>
                     <option value="Group roles by team with a small heading per group, each role as a compact card carrying title, location and salary on one line and a one-sentence description beneath.">Grouped cards</option>
                     <option value="A table where each row expands in place to reveal a three-sentence description and the first interview stage, without navigating away.">Table with detail</option>
                 </select>
+                <p class="rc-hint" data-hint-for="ROLES">Fastest to scan and easiest to keep current.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-LOCATION">Location policy</label>
                 <select id="rc-LOCATION" data-rc="LOCATION">
-                    <option value="fully remote, with a requirement of four hours overlap with 09:00 to 17:00 CET. Contracts are local-entity or contractor depending on the country, and the page says which.">Remote with overlap</option>
+                    <option value="fully remote, with a requirement of four hours overlap with 09:00 to 17:00 CET. Contracts are local-entity or contractor depending on the country, and the page says which." data-hint="State the overlap in hours, not as flexible.">Remote with overlap</option>
                     <option value="hybrid, with two days per week in the office at a named address, and the specific days left to each team rather than fixed company-wide.">Hybrid</option>
                     <option value="on-site five days a week at a named address, with relocation support described in one sentence including the amount and the repayment terms.">On-site</option>
                 </select>
+                <p class="rc-hint" data-hint-for="LOCATION">State the overlap in hours, not as flexible.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-PROCESS">Hiring process</label>
@@ -157,6 +160,7 @@
                     <option value="three stages: a 30-minute call, a 90-minute working session with two people from the team, and a final conversation with the founder. Total elapsed time: ten working days.">Three stages</option>
                     <option value="three conversations and a reference check, with no take-home exercise. The page states why: the team believes exercises disadvantage candidates with caring responsibilities.">No exercise</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -165,6 +169,7 @@
                     <option value="Product neutral: white page, 1px borders, 10px radii on role cards, one accent for the apply link, section labels at 0.72rem uppercase, generous 5rem section spacing.">Product neutral</option>
                     <option value="Neo-brutalist: 3px black borders, 6px hard offset shadows, one saturated accent on the apply buttons, role rows that shift 3px on hover.">Neo-brutalist</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -172,6 +177,7 @@
                     <option value="No animation. This page is scanned for facts, and movement works against scanning.">None</option>
                     <option value="Role rows fade up 12px once as they enter the viewport, staggered by 40ms, disabled under reduced motion.">Rows only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -323,8 +329,9 @@ One page. Self-contained. Roles rendered from a small data array so the list can
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -363,12 +370,19 @@ One page. Self-contained. Roles rendered from a small data array so the list can
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

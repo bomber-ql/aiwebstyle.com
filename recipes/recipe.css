@@ -447,3 +447,14 @@
     line-height: 1.25;
     margin-bottom: .3rem;
 }
+
+/* 选项说明：解释选这一项会改变什么，而不是只改一句文案 */
+.rc-hint {
+    margin: .45rem 0 0;
+    font-size: .8rem;
+    line-height: 1.55;
+    color: var(--text-color, #5c6675);
+    padding-left: .65rem;
+    border-left: 2px solid var(--border-color, #d8dee7);
+}
+.rc-hint:empty { display: none; }

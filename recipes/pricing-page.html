@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -140,14 +140,16 @@
                     <option value="a developer tool bought bottom-up, where an individual signs up first and the company pays later">Developer tool</option>
                     <option value="a two-sided marketplace where the paying side is sellers and the free side is buyers">Marketplace</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MODEL">Pricing model</label>
                 <select id="rc-MODEL" data-rc="MODEL">
-                    <option value="per seat, with volume breaks at 10, 25 and 50 seats. Seat changes are prorated to the day.">Per seat</option>
-                    <option value="usage-based on events, with three worked examples of what a month costs at 10k, 100k and 1M events. Include the per-unit rate above the included allowance.">Usage-based</option>
+                    <option value="per seat, with volume breaks at 10, 25 and 50 seats. Seat changes are prorated to the day." data-hint="Simplest to explain and to forecast.">Per seat</option>
+                    <option value="usage-based on events, with three worked examples of what a month costs at 10k, 100k and 1M events. Include the per-unit rate above the included allowance." data-hint="Honest, but needs the worked examples or nobody can budget.">Usage-based</option>
                     <option value="a flat platform fee per tier plus named add-ons priced individually, with the add-on prices visible on this page rather than behind a sales call.">Flat + add-ons</option>
                 </select>
+                <p class="rc-hint" data-hint-for="MODEL">Simplest to explain and to forecast.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-TIERS">Tier shape</label>
@@ -156,6 +158,7 @@
                     <option value="two self-serve tiers plus one Enterprise column that lists what it adds (SSO, audit log, SLA, invoicing) and gives a starting price rather than hiding it entirely.">Two plus enterprise</option>
                     <option value="four tiers with a free entry point, but only one recommended; the fourth must be clearly for a different buyer, not a bigger version of the third.">Four tiers</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-TOGGLE">Billing toggle</label>
@@ -163,14 +166,16 @@
                     <option value="a monthly and annual toggle where annual shows the effective monthly price plus the total charged per year and the exact saving.">Monthly / annual</option>
                     <option value="no toggle at all: annual only, stated plainly, because the product is sold to finance departments and monthly billing creates work for everyone.">No toggle</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-COMPARE">Comparison layout</label>
                 <select id="rc-COMPARE" data-rc="COMPARE">
-                    <option value="a grouped comparison table with three sections (Limits, Collaboration, Security), six to ten rows total, and a checkmark, dash or number in each cell — never a vague word.">Grouped table</option>
-                    <option value="no comparison table. Each tier card carries its five most important differences as a list, and a short paragraph beneath the cards explains what does not change between plans.">Card lists only</option>
+                    <option value="a grouped comparison table with three sections (Limits, Collaboration, Security), six to ten rows total, and a checkmark, dash or number in each cell — never a vague word." data-hint="Best when the differences are genuinely tabular.">Grouped table</option>
+                    <option value="no comparison table. Each tier card carries its five most important differences as a list, and a short paragraph beneath the cards explains what does not change between plans." data-hint="Better on mobile and for products with few differences.">Card lists only</option>
                     <option value="cards for the decision, then a table for the detail, placed below the FAQ where only a careful reader will reach it.">Table plus cards</option>
                 </select>
+                <p class="rc-hint" data-hint-for="COMPARE">Best when the differences are genuinely tabular.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -179,6 +184,7 @@
                     <option value="Editorial: no cards at all — tiers separated by vertical rules, serif prices at 2.6rem, small caps labels, one accent line above the recommended column.">Editorial</option>
                     <option value="Neo-brutalist: 3px black borders, 6px hard shadows, one saturated fill on the recommended tier, prices in a heavy grotesque, buttons that translate 3px on press.">Neo-brutalist</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -186,6 +192,7 @@
                     <option value="No animation. A pricing page is read, compared and screenshotted; movement only gets in the way of that.">None</option>
                     <option value="The only transition is a 150ms crossfade when the billing toggle changes the numbers. Nothing enters, nothing lifts on hover.">Toggle only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -338,8 +345,9 @@ One page. Self-contained. A single stylesheet.</pre>
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -378,12 +386,19 @@ One page. Self-contained. A single stylesheet.</pre>
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

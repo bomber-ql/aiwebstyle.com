@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -155,6 +155,7 @@
                     <option value="People ops leads at 100 to 1000 person companies. They evaluate on onboarding time and whether payroll integrations are real or aspirational.">People operations</option>
                     <option value="Individual developers who will sign up without ever talking to sales. They evaluate on one question: can I get a real result inside the free tier tonight.">Self-serve developers</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-HERO_OBJECT">Hero visual</label>
@@ -163,6 +164,7 @@
                     <option value="a minimal diagram of three boxes and two arrows showing the before and after of the workflow, drawn at the same stroke weight as the page rules, in the accent colour only.">Abstract diagram</option>
                     <option value="a small working demo card the visitor can use in one click: one input, one button, one real result. No mock data, no login.">Interactive demo</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-PROOF">Proof type</label>
@@ -171,6 +173,7 @@
                     <option value="three metrics with units and a measurement date, for example: 4.2 hours saved per rep per week, measured across 38 teams, Q3 2026.">Metric row</option>
                     <option value="one sentence from a named customer with their role and company, set at 1.25rem, with no photograph and no five-star graphic.">Single quote</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-PRICING">Pricing shape</label>
@@ -179,6 +182,7 @@
                     <option value="two self-serve tiers plus a third contact-sales column that lists no price at all, with the middle tier marked Most popular.">Two tiers plus sales</option>
                     <option value="one usage-based plan with three worked examples of what a month costs at 10k, 100k and 1M events, and no tier table at all.">Usage-based</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -189,6 +193,7 @@
                     <option value="Dark product: near-black #0d1117 surface; one high-chroma accent; 1px borders in rgba white at 8 percent; monospace for numbers and labels; no gradients anywhere.">Dark product</option>
                     <option value="Liquid glass: a saturated colour field behind translucent panels; a 1px top highlight to suggest refraction; backdrop-filter blur capped at 16px; content in a 1120px column.">Liquid glass</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -197,6 +202,7 @@
                     <option value="Elements fade and rise 20px as they enter the viewport, using animation-timeline: view() with animation-range: entry 10% to cover 35%, plus an IntersectionObserver fallback. Never stagger siblings by more than 80ms.">Scroll reveal</option>
                     <option value="No animation of any kind. No fade-ins, no parallax, no hover lift. The page must be completely readable with JavaScript disabled.">None</option>
                 </select>
+                
             </div>
             </div>
 
@@ -355,8 +361,9 @@ One self-contained page. A single stylesheet or inline style block. No framework
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -395,12 +402,19 @@ One self-contained page. A single stylesheet or inline style block. No framework
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

@@ -3,7 +3,42 @@
   "url": "https://www.aiwebstyle.com",
   "contactEmail": "hello@aiwebstyle.com",
   "adsenseClient": "ca-pub-6334847497116545",
-  "adsExcludedFiles": ["404.html", "previews/index.html"],
-  "adsExcludedDirs": ["previews"],
-  "contactResponseTime": "two working days"
+  "adsExcludedFiles": [
+    "404.html",
+    "previews/index.html"
+  ],
+  "adsExcludedDirs": [
+    "previews"
+  ],
+  "contactResponseTime": "two working days",
+  "themeFonts": {
+    "3d-interactive": null,
+    "abstract-geometric": "Montserrat:wght@400;700;800",
+    "acid-graphics": "Space+Mono:wght@400;700",
+    "art-deco": "Playfair+Display:wght@400;700",
+    "bento-grid": null,
+    "bold-typography": "Montserrat:wght@400;700;800;900",
+    "brutalism": null,
+    "claymorphism": "Poppins:wght@400;600;700",
+    "dark-mode": "Open+Sans:wght@400;600",
+    "editorial": "Lato:wght@400;700&family=Playfair+Display:wght@400;700",
+    "glassmorphism": "Poppins:wght@400;600;700",
+    "grunge": null,
+    "illustration": "Lato:wght@400;700&family=Montserrat:wght@400;700",
+    "liquid-glass": null,
+    "maximalism": "Playfair+Display:wght@400;700",
+    "modern-tech": "Poppins:wght@400;600;700",
+    "monochromatic": "Roboto:wght@400;500;700",
+    "natural-organic": "Lato:wght@400;700",
+    "neo-brutalism": "Montserrat:wght@400;700;800",
+    "neo-swiss": null,
+    "neomorphism": "Poppins:wght@400;600;700",
+    "retro-90s": null,
+    "retro-pixel": "Press+Start+2P",
+    "retro-y2k": "Space+Mono:wght@400;700",
+    "skeuomorphism": "Playfair+Display:wght@400;700",
+    "sustainable-green": null,
+    "swiss-style": null,
+    "aurora-ui": null
+  }
 }

@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -133,22 +133,25 @@
                     <option value="a SaaS application where the five states include permission errors and empty query results inside the product, not just missing pages">SaaS application</option>
                     <option value="an online store where a 404 usually means a product was discontinued, and the page should offer the closest category rather than only the homepage">E-commerce store</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-PAGES">Which states</label>
                 <select id="rc-PAGES" data-rc="PAGES">
-                    <option value="the 404 state only, since it is the one that will actually be hit">404 only</option>
+                    <option value="the 404 state only, since it is the one that will actually be hit" data-hint="The minimum worth shipping.">404 only</option>
                     <option value="404 and 500, sharing the template with different copy and different primary actions">404 and 500</option>
                     <option value="all five: 404, 500, maintenance, empty search results, and no permission">All five</option>
                 </select>
+                <p class="rc-hint" data-hint-for="PAGES">The minimum worth shipping.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-TONE">Tone</label>
                 <select id="rc-TONE" data-rc="TONE">
-                    <option value="Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause.">Plain</option>
+                    <option value="Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause." data-hint="The safest choice for anything used repeatedly.">Plain</option>
                     <option value="Dry: one understated clause of acknowledgement, then straight to the fix. No jokes that depend on the reader being amused.">Dry</option>
                     <option value="Warm: acknowledge the interruption in one short sentence and take responsibility where the site is at fault, then give the way forward without further comment.">Warm</option>
                 </select>
+                <p class="rc-hint" data-hint-for="TONE">The safest choice for anything used repeatedly.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -157,6 +160,7 @@
                     <option value="Editorial: no card at all, the status code set large at 4rem in the serif face as the only decorative element, a 58-character measure for the explanation, and a plain underlined link instead of a button.">Editorial</option>
                     <option value="Swiss: white page, twelve-column grid, the code aligned to column one in Helvetica at 5rem, a single red rule beneath it, body copy starting at column four, no button fill.">Swiss</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-ACTION">Primary action</label>
@@ -165,6 +169,7 @@
                     <option value="a retry button that reloads in place for the 500 state, with the timestamp of the failed attempt shown beneath it">Retry</option>
                     <option value="an action matched to each state: home for 404, retry for 500, status page for maintenance, clear the query for empty search, request access for permission">Contextual</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -172,6 +177,7 @@
                     <option value="No animation at all. If the stylesheet failed to load, an animated page is the one thing that looks broken rather than deliberate.">None</option>
                     <option value="One 150ms fade on mount, disabled under reduced motion. Nothing moves after that.">Fade only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -324,8 +330,9 @@ Five states sharing one template and one stylesheet. Static where possible.</pre
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -364,12 +371,19 @@ Five states sharing one template and one stylesheet. Static where possible.</pre
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

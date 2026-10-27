@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -141,29 +141,33 @@
                     <option value="infrastructure monitoring. The four KPIs are error rate, p95 latency, saturation and deploy frequency; the primary question is whether the last hour is worse than the same hour yesterday.">Infrastructure</option>
                     <option value="support operations. The four KPIs are first response time, resolution time, reopen rate and backlog age; the primary question is where the queue is accumulating this week.">Support operations</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-CHART">Primary chart</label>
                 <select id="rc-CHART" data-rc="CHART">
-                    <option value="Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open.">Line with brush</option>
-                    <option value="Render the primary chart as stacked bars with at most three segments, a 2px gap between bars, and segment totals on hover only. The stack must always sum to a meaningful total.">Stacked bars</option>
-                    <option value="Render the primary chart as an area chart of the current period with the previous period as a dashed line behind it, no fill on the comparison, and the gap described in the text summary.">Area with comparison</option>
+                    <option value="Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open." data-hint="The default for time series with more than 30 points.">Line with brush</option>
+                    <option value="Render the primary chart as stacked bars with at most three segments, a 2px gap between bars, and segment totals on hover only. The stack must always sum to a meaningful total." data-hint="Use when composition matters as much as volume.">Stacked bars</option>
+                    <option value="Render the primary chart as an area chart of the current period with the previous period as a dashed line behind it, no fill on the comparison, and the gap described in the text summary." data-hint="Strongest for period-over-period questions.">Area with comparison</option>
                 </select>
+                <p class="rc-hint" data-hint-for="CHART">The default for time series with more than 30 points.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-TABLE">Table behaviour</label>
                 <select id="rc-TABLE" data-rc="TABLE">
-                    <option value="Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count.">Bulk actions</option>
-                    <option value="No checkboxes. A per-row overflow menu with three actions, keyboard accessible, closing on Escape or outside click.">Row menu</option>
-                    <option value="No actions in the table at all. Rows open the detail drawer and nothing else. Every column is sortable and the metric column shows a delta.">Read only</option>
+                    <option value="Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count." data-hint="For operational tables where the dashboard is also the tool.">Bulk actions</option>
+                    <option value="No checkboxes. A per-row overflow menu with three actions, keyboard accessible, closing on Escape or outside click." data-hint="For read-mostly tables with occasional intervention.">Row menu</option>
+                    <option value="No actions in the table at all. Rows open the detail drawer and nothing else. Every column is sortable and the metric column shows a delta." data-hint="For reporting screens where editing belongs elsewhere.">Read only</option>
                 </select>
+                <p class="rc-hint" data-hint-for="TABLE">For operational tables where the dashboard is also the tool.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STATES">State coverage</label>
                 <select id="rc-STATES" data-rc="STATES">
-                    <option value="Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link.">All four</option>
+                    <option value="Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link." data-hint="The version worth shipping.">All four</option>
                     <option value="Implement empty and loading states only, both matching the final layout exactly so nothing jumps when data arrives.">Empty and loading</option>
                 </select>
+                <p class="rc-hint" data-hint-for="STATES">The version worth shipping.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-DENSITY">Density</label>
@@ -171,6 +175,7 @@
                     <option value="Use 44px table rows, 1rem card padding, and 16px gaps between panels. Optimised for a first-time reader rather than a daily user.">Comfortable</option>
                     <option value="Use 32px table rows, 0.75rem card padding, 8px gaps, and 13px body text. Optimised for someone who opens this screen every morning and already knows what everything means.">Compact</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -179,6 +184,7 @@
                     <option value="Dark console: #0e1116 canvas, #151a21 panels, 1px borders at 9 percent white, one cyan accent, monospace for all numbers, no rounded corners above 4px.">Dark console</option>
                     <option value="Swiss reporting: white canvas, black rules at 1px, no panels at all — sections separated by rules only, one red accent for the primary series, all labels uppercase at 0.7rem with 0.08em tracking.">Swiss reporting</option>
                 </select>
+                
             </div>
             </div>
 
@@ -328,8 +334,9 @@ One screen, self-contained, with a mock data module at the top of the script so 
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -368,12 +375,19 @@ One screen, self-contained, with a mock data module at the top of the script so 
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

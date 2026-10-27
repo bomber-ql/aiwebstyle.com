@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -141,6 +141,7 @@
                     <option value="specialty food. The description carries provenance and ingredients, the trust strip states shelf life and shipping temperature, and the gallery shows packaging and the product out of it.">Food and drink</option>
                     <option value="homeware. Scale is the main doubt, so the gallery needs one shot beside a familiar object and the specification table must include dimensions and weight.">Homeware</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-GALLERY">Gallery behaviour</label>
@@ -149,6 +150,7 @@
                     <option value="Show the gallery as a single swipeable frame with dots below it, first image eager-loaded and the rest lazy. Add previous and next buttons for desktop. No autoplay under any circumstance.">Swipe carousel</option>
                     <option value="Show the gallery as a two by two grid of four images with no carousel at all. Every image is visible at once, which removes the discovery problem entirely.">Four-up grid</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-VARIANTS">Variant control</label>
@@ -157,6 +159,7 @@
                     <option value="one selector for the only meaningful choice, rendered as a native select so it works with keyboards and screen readers without custom code.">Single option</option>
                     <option value="no variant control at all, because there is one SKU; replace the space with a delivery estimate and a stock status line.">No variants</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-TRUST">Trust strip</label>
@@ -165,6 +168,7 @@
                     <option value="Four items: the rating summary moved up into the buy box, then a returns promise, a warranty line, and a support response time in hours.">Reviews first</option>
                     <option value="Four items: where it is made, the material specification, the repair or replacement policy, and the shipping origin with a realistic transit time.">Craft first</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -174,6 +178,7 @@
                     <option value="Neo-brutalist: 3px black borders on the buy box and gallery, 6px hard offset shadows, one saturated accent for price, headings in a heavy grotesque, buttons that translate 3px on press.">Neo-brutalist</option>
                     <option value="Dark premium: near-black background at #101214, product photography on matching dark plates, thin white rules at 12 percent opacity, price in large light-weight type, no gradients or gloss.">Dark premium</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -181,6 +186,7 @@
                     <option value="No animation beyond the native feel of a button press. Commerce pages lose money to motion that delays the buy box.">None</option>
                     <option value="Only micro-interactions: 120ms background transitions on buttons and swatches, and a 200ms fade when the gallery image swaps. Nothing enters, nothing scrolls, nothing parallaxes.">Micro only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -333,8 +339,9 @@ One page plus an inert cart drawer in the markup. Static where possible; mark th
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -373,12 +380,19 @@ One page plus an inert cart drawer in the markup. Static where possible; mark th
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

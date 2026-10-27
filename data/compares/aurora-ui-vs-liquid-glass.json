@@ -1,0 +1,90 @@
+{
+  "slug": "aurora-ui-vs-liquid-glass",
+  "a": "aurora-ui",
+  "b": "liquid-glass",
+  "title": "Aurora UI vs Liquid Glass",
+  "order": 7,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Both are dark pages with colour bleeding through translucent panels. One animates the light source; the other treats the panel as the material.",
+  "verdict": "Aurora moves the background: soft colour fields drift behind static glass. Liquid Glass holds the background still and puts the work into the panel edge — a hard inset highlight and a heavier border, with no shadow at all.",
+  "brief": [
+    "Aurora UI is a background technique. The panels barely change — a 1px border at 14 to 18 percent white and a modest blur — while the colour behind them drifts on 14 to 22 second cycles. Switch the animation off and the page still reads as aurora, because the colour field is the identity.",
+    "Liquid Glass is a surface technique. The field behind is two strong radial gradients pinned to the viewport, and it does not move. All the character is in the card: a 28 percent border, a 1px inset highlight at 55 percent along the top edge, and deliberately no drop shadow, so the panel reads as a slab rather than a floating pane."
+  ],
+  "dimensions": [
+    {
+      "name": "What moves",
+      "a": "Three gradient fields, 14 to 22s cycles",
+      "b": "Nothing",
+      "edge": "tie"
+    },
+    {
+      "name": "Panel edge",
+      "a": "1px at 14 to 18% white",
+      "b": "1px at 28% plus an inset top highlight",
+      "edge": "b"
+    },
+    {
+      "name": "Background",
+      "a": "#0a0d18 with drifting radials",
+      "b": "#0b1020 with two fixed radials at 50% scrim",
+      "edge": "tie"
+    },
+    {
+      "name": "Drop shadow",
+      "a": "None",
+      "b": "None",
+      "edge": "tie"
+    },
+    {
+      "name": "Radius",
+      "a": "16px",
+      "b": "24px",
+      "edge": "tie"
+    },
+    {
+      "name": "Failure mode",
+      "a": "Motion that becomes the subject",
+      "b": "A flat field leaves the highlight with nothing to catch",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Background motion",
+      "a": "three fields on 16s to 22s alternate loops",
+      "b": "none — two fixed radial gradients"
+    },
+    {
+      "label": "Panel border",
+      "a": "1px solid rgba(255,255,255,.14 to .18)",
+      "b": "1px solid rgba(255,255,255,.28)"
+    },
+    {
+      "label": "Top edge light",
+      "a": "none",
+      "b": "box-shadow: inset 0 1px 0 rgba(255,255,255,.55)"
+    },
+    {
+      "label": "Blur",
+      "a": "backdrop-filter: blur(18px)",
+      "b": "backdrop-filter: blur(24px) saturate(170%)"
+    }
+  ],
+  "whenA": [
+    "The page is a hero or a landing section where atmosphere is the point and reading is brief",
+    "You want the site to feel alive without any interaction",
+    "The content sits in one short block rather than a long scroll"
+  ],
+  "whenB": [
+    "Panels are the interface — cards, modals, sidebars — and each needs a clear edge",
+    "You want the look without any animation, which makes it far easier to keep accessible",
+    "The background is a photograph or a video rather than a gradient field"
+  ],
+  "promptDelta": "Ask for drifting radial gradients and you get Aurora; ask for an inset top highlight, a 28 percent border and no shadow and you get Liquid Glass. The two are often generated together by accident — a model asked for glassmorphism with a fancy background will produce both, and the result is a moving field under panels that also have drop shadows, which is three depth cues fighting. Pick one: motion behind static glass, or a static field with material panels.",
+  "recipes": [
+    "launch-page",
+    "dashboard"
+  ]
+}

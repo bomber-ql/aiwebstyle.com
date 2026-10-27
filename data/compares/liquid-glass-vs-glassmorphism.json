@@ -1,0 +1,90 @@
+{
+  "slug": "liquid-glass-vs-glassmorphism",
+  "a": "liquid-glass",
+  "b": "glassmorphism",
+  "title": "Liquid Glass vs Glassmorphism",
+  "order": 1,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "These two names get used interchangeably, and on a screenshot they nearly are. The difference appears when you look at where each one puts its depth: one builds it into the border, the other hangs it outside the card.",
+  "verdict": "Glassmorphism floats — a large soft outer shadow, a hover lift, and a light streak that fades at both ends. Liquid Glass sits — a hard uniform top highlight, a heavier border, and no shadow at all.",
+  "brief": [
+    "Both styles are the same three ingredients: a saturated field behind the page, translucent panels above it, and backdrop-filter to blur what is behind. That is why they read as siblings and why most comparisons end in a shrug.",
+    "The divergence is in the edge. In this gallery the Glassmorphism card draws its top light with a ::before element using a horizontal gradient that fades out at both ends, and then lifts the card 4px on hover above a 50px soft shadow. The Liquid Glass card does neither: it paints a single uniform line with box-shadow: inset 0 1px 0 at 55 percent, keeps the card still, and relies on a 28 percent border to separate it from the field."
+  ],
+  "dimensions": [
+    {
+      "name": "Top edge light",
+      "a": "One uniform 1px inset line at 55% white, full width",
+      "b": "A gradient streak that fades to transparent at both ends",
+      "edge": "b"
+    },
+    {
+      "name": "Depth cue",
+      "a": "Inside the border — the panel reads as thick material",
+      "b": "Outside the card — a 50px soft shadow, so it floats",
+      "edge": "b"
+    },
+    {
+      "name": "Border weight",
+      "a": "1px at 28% white",
+      "b": "1px at 22% white",
+      "edge": "a"
+    },
+    {
+      "name": "Card radius",
+      "a": "24px",
+      "b": "20px",
+      "edge": "tie"
+    },
+    {
+      "name": "Blur on cards",
+      "a": "blur(24px) saturate(170%)",
+      "b": "blur(20px) saturate(150%)",
+      "edge": "tie"
+    },
+    {
+      "name": "Hover",
+      "a": "Background lightens, card stays put",
+      "b": "Card lifts 4px, border brightens to 34%",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Top light",
+      "a": "box-shadow: inset 0 1px 0 rgba(255,255,255,.55)",
+      "b": "::before { height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent) }"
+    },
+    {
+      "label": "Outer depth",
+      "a": "none",
+      "b": "box-shadow: 0 20px 50px -30px rgba(0,0,0,.9)"
+    },
+    {
+      "label": "Border",
+      "a": "1px solid rgba(255,255,255,.28)",
+      "b": "1px solid rgba(255,255,255,.22)"
+    },
+    {
+      "label": "Hover",
+      "a": "background: rgba(255,255,255,.14)",
+      "b": "transform: translateY(-4px); border-color: rgba(255,255,255,.34)"
+    }
+  ],
+  "whenA": [
+    "The panel is large and sits over a photographic or video background, where a soft shadow would smear into the image",
+    "You want the card to read as a physical slab — a panel of frosted acrylic rather than a floating sheet",
+    "The page has many stacked panels; hover lifts on every one become a nervous, fidgety surface"
+  ],
+  "whenB": [
+    "The card is small and needs to separate from a busy field — the soft shadow does that work at a glance",
+    "You want a hover affordance on a grid of cards, where the lift reads as clickable",
+    "The background is dark and flat, so a 50px shadow has somewhere to fall and does not look like dirt"
+  ],
+  "promptDelta": "The words that steer a model between these are specific: ask for a single inset top highlight with no drop shadow and no hover transform, and you get Liquid Glass. Ask for a gradient streak on the top edge plus a large soft shadow and a 4px hover lift, and you get Glassmorphism. Naming the material rather than the style — slab versus pane — gets you there faster than naming the style at all, because both names are ambiguous enough that a model will pick either.",
+  "recipes": [
+    "saas-landing",
+    "dashboard"
+  ]
+}

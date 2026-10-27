@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -141,22 +141,25 @@
                     <option value="a reporting outlet. Pieces carry a dateline, named sources, and corrections when amended. The index must show the section and the byline.">Reporting</option>
                     <option value="a product changelog written as editorial. Each entry covers one change, states what it replaces, and links to the documentation. Reverse chronological, no featured piece.">Product changelog</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-LIST">Index layout</label>
                 <select id="rc-LIST" data-rc="LIST">
-                    <option value="Render the index as text rows: date in a 90px left column, then title at 1.25rem with the summary beneath, reading time right-aligned in mono. No images at all.">Text rows</option>
-                    <option value="Render the index as cards: 16:9 image, title, summary, and a meta line with date and reading time. Two columns above 900px, one below.">Cards with images</option>
-                    <option value="Render the index as a magazine grid: the newest piece spans two columns with a larger title, the next four sit in a two by two grid, and everything older becomes a plain text list beneath.">Magazine grid</option>
+                    <option value="Render the index as text rows: date in a 90px left column, then title at 1.25rem with the summary beneath, reading time right-aligned in mono. No images at all." data-hint="The most readable option and the hardest to make look empty.">Text rows</option>
+                    <option value="Render the index as cards: 16:9 image, title, summary, and a meta line with date and reading time. Two columns above 900px, one below." data-hint="Only worth it if you have real images for every piece.">Cards with images</option>
+                    <option value="Render the index as a magazine grid: the newest piece spans two columns with a larger title, the next four sit in a two by two grid, and everything older becomes a plain text list beneath." data-hint="Good for a publication with uneven piece lengths.">Magazine grid</option>
                 </select>
+                <p class="rc-hint" data-hint-for="LIST">The most readable option and the hardest to make look empty.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-READING">Reading typography</label>
                 <select id="rc-READING" data-rc="READING">
-                    <option value="Set body copy in a serif at 19px with 1.68 line height and a 68 character measure; headings in a sans at 600 weight. Serif at this size reads faster for long pieces.">Serif body</option>
-                    <option value="Set body copy in a sans at 18px with 1.65 line height and a 66 character measure; headings in the same family at 700 weight, differentiated by size only.">Sans body</option>
-                    <option value="Set body copy in a sans at 18px, but pull quotes and the deck in a serif italic at 1.3 times the body size. Use serif only where the reader is meant to slow down.">Mixed</option>
+                    <option value="Set body copy in a serif at 19px with 1.68 line height and a 68 character measure; headings in a sans at 600 weight. Serif at this size reads faster for long pieces." data-hint="Best for essays over 1,500 words.">Serif body</option>
+                    <option value="Set body copy in a sans at 18px with 1.65 line height and a 66 character measure; headings in the same family at 700 weight, differentiated by size only." data-hint="Best for technical writing with code.">Sans body</option>
+                    <option value="Set body copy in a sans at 18px, but pull quotes and the deck in a serif italic at 1.3 times the body size. Use serif only where the reader is meant to slow down." data-hint="Best for reporting with strong quotes.">Mixed</option>
                 </select>
+                <p class="rc-hint" data-hint-for="READING">Best for essays over 1,500 words.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -166,6 +169,7 @@
                     <option value="Technical: white background, one grotesque family, monospace for dates and metadata, 1px rules in #e6e9ee, links underlined rather than coloured, no decorative elements at all.">Technical</option>
                     <option value="Literary: cream background at #f7f4ee, serif throughout, drop cap on the first paragraph of each article, wide margins at 12 percent of viewport, and no accent colour besides the link underline.">Literary</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -173,6 +177,7 @@
                     <option value="No animation anywhere. Editorial sites date fastest when they move, and the reader came for the text.">None</option>
                     <option value="Only the article title fades up 12px over 400ms on load. Nothing else moves, including on scroll.">One entrance</option>
                 </select>
+                
             </div>
             </div>
 
@@ -325,8 +330,9 @@ Three page types sharing one stylesheet: index, article, archive.</pre>
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -365,12 +371,19 @@ Three page types sharing one stylesheet: index, article, archive.</pre>
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

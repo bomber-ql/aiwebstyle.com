@@ -7,6 +7,15 @@
 //   - 只改 <head> 与首页 #main-content、footer 导航，不动现有视觉结构
 
 import fs from 'node:fs';
+import {
+  Report,
+  assertClean,
+  validateStyles,
+  validatePreviews,
+  validateMotions,
+  validateRecipes,
+  validateCompares,
+} from './lib/validate.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -31,6 +40,16 @@ const motions = JSON.parse(read('data/motions.json'))
 const previews = JSON.parse(read('data/previews.json'))
   .filter((p) => exists(`previews/${p.styleId}.html`));
 
+// 对比页：data/compares/*.json，两个预览都存在才收录
+const compareList = fs.existsSync(path.join(ROOT, 'data', 'compares'))
+  ? fs
+      .readdirSync(path.join(ROOT, 'data', 'compares'))
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => JSON.parse(read(`data/compares/${f}`)))
+      .filter((c) => c.status !== 'draft' && exists(`compares/${c.slug}.html`))
+      .sort((a, b) => a.order - b.order)
+  : [];
+
 // 配方：data/recipes/*.json，一个文件一条，页面存在才收录
 const recipeList = fs.existsSync(path.join(ROOT, 'data', 'recipes'))
   ? fs
@@ -44,6 +63,28 @@ const recipeList = fs.existsSync(path.join(ROOT, 'data', 'recipes'))
 const motionsPlanned = JSON.parse(read('data/motions.json'))
   .filter((m) => m.status === 'published' && !exists(`motions/${m.slug}.html`))
   .map((m) => m.slug);
+
+/* ---------- 1.5 数据守卫 ----------
+   上面各集合已按「是否发布 / 页面是否存在」过滤过，缺页的条目会被悄悄跳过，
+   正好掩盖数据问题。这里改读原始 JSON 再校验一次，草稿除外（草稿本来就是半成品）。 */
+
+{
+  const live = (arr) => arr.filter((x) => x.status !== 'draft');
+  const rawMotions = live(JSON.parse(read('data/motions.json')));
+  const rawPreviews = live(JSON.parse(read('data/previews.json')));
+  const styleIds = new Set(styles.map((s) => s.id));
+
+  const rep = new Report('data');
+  validateStyles(styles, rep);
+  validateMotions(rawMotions, rep);
+  validatePreviews(rawPreviews, { styleIds }, rep);
+  validateCompares(live(compareList), { recipeSlugs: new Set(recipeList.map((r) => r.slug)) }, rep);
+  validateRecipes(live(recipeList), {
+    styleIds,
+    motionSlugs: new Set(rawMotions.map((m) => m.slug)),
+  }, rep);
+  assertClean(rep);
+}
 
 // 全英文站：界面文案直接内置，不再走词典
 const L = {
@@ -67,15 +108,15 @@ function cardHtml(s) {
                     <p class="prompt-label">${L.promptLabel || 'Example Prompt:'}</p>
                     <p class="prompt-text" title="${escapeAttr(s.prompt.en)}">${s.prompt.en}</p>
                     <div class="card-buttons">
-                        <a href="styles/${s.id}.html" class="btn btn-primary btn-view-details">${L.viewDetailsButton || 'View Details'}</a>
+                        <a href="${s.id}.html" class="btn btn-primary btn-view-details">${L.viewDetailsButton || 'View Details'}</a>
                         <button class="btn btn-secondary btn-apply-theme" data-theme-id="${s.id}">${L.applyThemeButton || 'Apply Theme'}</button>
                     </div>
                 </div>
             </div>`;
 }
 
-function prerenderHome() {
-  let html = read('index.html');
+function prerenderGallery() {
+  let html = read('styles/index.html');
 
   // 2a. 用真实卡片替换 "Loading styles..."（标记式，可重复执行）
   const cardsBlock = `<!-- build:cards -->
@@ -137,7 +178,7 @@ ${styles.map(cardHtml).join('\n')}
     html = html.replace(/(\s*<\/main>)/, intro + '$1');
   }
 
-  write('index.html', html);
+  write('styles/index.html', html);
   return html.length;
 }
 
@@ -225,8 +266,9 @@ function injectFooterNav(rel) {
   const up = depth ? '../' : '';
   const navInner = `<p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="${up}index.html">Gallery</a>
+                <a href="${up}styles/index.html">Gallery</a>
                 <a href="${up}previews/index.html">Previews</a>
+                <a href="${up}compares/index.html">Compare</a>
                 <a href="${up}motions/index.html">Motions</a>
                 <a href="${up}recipes/index.html">Prompt Recipes</a>
                 <a href="${up}about.html">About</a>
@@ -260,6 +302,8 @@ function injectNav(rel) {
   const up = depth ? '../' : '';
   const section = rel.startsWith('motions/')
     ? 'motions'
+    : rel.startsWith('compares/')
+    ? 'previews'
     : rel.startsWith('recipes/')
     ? 'recipes'
     : rel.startsWith('previews/')
@@ -276,7 +320,7 @@ function injectNav(rel) {
         <div class="nav-inner">
             <a class="nav-brand" href="${up}index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="${up}index.html"${act(section === 'home' || section === 'styles')}>Styles</a>
+                <a href="${up}styles/index.html"${act(section === 'home' || section === 'styles')}>Styles</a>
                 <a href="${up}previews/index.html"${act(section === 'previews')}>Previews</a>
                 <a href="${up}motions/index.html"${act(section === 'motions')}>Motions</a>
                 <a href="${up}recipes/index.html"${act(section === 'recipes')}>Prompts</a>
@@ -294,6 +338,112 @@ function injectNav(rel) {
   }
   write(rel, html);
   return true;
+}
+
+/* ---------- 5.5 首页随机风格 ----------
+   首页不锁死一个主题，每次加载随机挑一个（可用 ?style=xxx 指定，?style=none 关掉）。
+   这段脚本必须紧贴 <body> 之后同步执行：主题类是加在 body 上的，
+   等 DOMContentLoaded 再改就会出现一次默认配色的闪动（FOUC）。
+   字体按需加载：只有挑中的主题需要 webfont 时，才注入那一份 Google Fonts。 */
+
+function buildHomeTheme() {
+  const fontMap = site.themeFonts || {};
+  const themes = styles.map((s) => ({
+    id: s.id,
+    name: s.name.en,
+    font: fontMap[s.id] || null,
+  }));
+
+  const code = `    (function () {
+        var THEMES = ${JSON.stringify(themes)};
+        var want = new URLSearchParams(location.search).get('style');
+        var chip, nameEl, button;
+        var current = null;
+
+        function ensureFont(font) {
+            if (!font) return;
+            var key = 'home-font-' + font.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+            if (document.getElementById(key)) return;
+            var link = document.createElement('link');
+            link.id = key;
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css2?family=' + font + '&display=swap';
+            document.head.appendChild(link);
+        }
+
+        function syncChip() {
+            if (!nameEl || !current) return;
+            nameEl.textContent = current.name;
+            nameEl.href = 'styles/' + current.id + '.html';
+        }
+
+        function paint(theme) {
+            current = theme;
+            var body = document.body;
+            body.className = body.className
+                .replace(/\\btheme-[a-z0-9-]+\\b/g, '')
+                .replace(/\\s+/g, ' ')
+                .trim();
+            body.classList.add('theme-' + theme.id);
+            ensureFont(theme.font);
+            syncChip();
+        }
+
+        function pickDifferent() {
+            if (THEMES.length < 2) return THEMES[0];
+            var next;
+            do {
+                next = THEMES[Math.floor(Math.random() * THEMES.length)];
+            } while (next === current);
+            return next;
+        }
+
+        function resolveStart() {
+            for (var i = 0; i < THEMES.length; i++) {
+                if (THEMES[i].id === want) return THEMES[i];
+            }
+            return want === 'none' ? null : pickDifferent();
+        }
+
+        // Paint immediately, before any content is parsed
+        var start = resolveStart();
+        if (start) {
+            paint(start);
+        } else {
+            // ?style=none: leave a marker class so script.js does not re-apply the remembered theme
+            document.body.classList.add('theme-none');
+        }
+
+        function setup() {
+            chip = document.getElementById('home-style-chip');
+            nameEl = document.getElementById('home-style-name');
+            button = document.getElementById('home-style-another');
+            if (!chip) return;
+            if (!start) { chip.hidden = true; return; }
+            syncChip();
+            if (button) {
+                button.addEventListener('click', function () { paint(pickDifferent()); });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setup);
+        } else {
+            setup();
+        }
+    })();`
+
+  const block = `    <!-- build:home-theme -->
+    <script>
+${code}
+    </script>
+    <!-- /build:home-theme -->`;
+
+  let html = read('index.html');
+  html = html.replace(/[ \t]*<!-- build:home-theme -->[\s\S]*?<!-- \/build:home-theme -->\n?/, '');
+  html = html.replace(/(<body[^>]*>)\s*\n?/, `$1\n${block}\n`);
+  write('index.html', html);
+  return themes.length;
 }
 
 /* ---------- 6. 动效索引渲染 ---------- */
@@ -331,6 +481,7 @@ function buildSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
     { loc: `${SITE}/`, priority: '1.0', freq: 'weekly' },
+    { loc: `${SITE}/styles/index.html`, priority: '0.9', freq: 'monthly' },
     ...styles.map((s) => ({
       loc: `${SITE}/styles/${s.id}.html`,
       priority: '0.8',
@@ -349,6 +500,12 @@ function buildSitemap() {
       freq: 'monthly',
     })),
     { loc: `${SITE}/previews/index.html`, priority: '0.9', freq: 'monthly' },
+    { loc: `${SITE}/compares/index.html`, priority: '0.9', freq: 'monthly' },
+    ...compareList.map((c) => ({
+      loc: `${SITE}/compares/${c.slug}.html`,
+      priority: '0.8',
+      freq: 'monthly',
+    })),
     ...previews.map((p) => ({
       loc: `${SITE}/previews/${p.styleId}.html`,
       priority: '0.7',
@@ -384,22 +541,109 @@ Sitemap: ${SITE}/sitemap.xml
   );
 }
 
+/* ---------- 9.5 首页：板块入口与精选 ---------- */
+
+function buildHomeSections() {
+  const sections = [
+    {
+      href: 'styles/index.html',
+      label: 'Styles',
+      count: styles.length,
+      unit: 'styles',
+      text: 'Design directions with tokens, typography, layout rhythm and the failure cases that decide whether one survives a real page.',
+    },
+    {
+      href: 'previews/index.html',
+      label: 'Previews',
+      count: previews.length,
+      unit: 'pages',
+      text: 'Every style rendered on one identical page, so the only variable is the stylesheet.',
+    },
+    {
+      href: 'compares/index.html',
+      label: 'Compare',
+      count: compareList.length,
+      unit: 'comparisons',
+      text: 'Two styles, two live panels, one decision table — for a choice you are about to make.',
+    },
+    {
+      href: 'motions/index.html',
+      label: 'Motions',
+      count: motions.length,
+      unit: 'patterns',
+      text: 'Animation patterns with a working demo and a prompt precise enough to build them right the first time.',
+    },
+    {
+      href: 'recipes/index.html',
+      label: 'Prompts',
+      count: recipeList.length,
+      unit: 'recipes',
+      text: 'Whole-page prompts: section order, the variables worth changing, and how each page type fails.',
+    },
+  ];
+
+  const cards = sections
+    .map(
+      (x) => `                <a class="home-card" href="${x.href}">
+                    <span class="home-count">${x.count} ${x.unit}</span>
+                    <h3>${x.label}</h3>
+                    <p>${x.text}</p>
+                    <span class="home-go">Open →</span>
+                </a>`
+    )
+    .join('\n');
+
+  const block = `<!-- build:home-sections -->
+${cards}
+                <!-- /build:home-sections -->`;
+  const doc = read('index.html');
+  write('index.html', doc.replace(/<!-- build:home-sections -->[\s\S]*?<!-- \/build:home-sections -->/, block));
+  return sections.length;
+}
+
+function buildHomeFeatured() {
+  const featured = styles.filter((s) => s.isNew).slice(0, 6);
+  if (!featured.length) return 0;
+
+  const cards = featured
+    .map(
+      (s) => `                <a class="home-feature" href="styles/${s.id}.html">
+                    <h3>${escapeAttr(s.name.en)}</h3>
+                    <p>${escapeAttr(clip(s.description.en, 96))}</p>
+                    <span class="home-go">Breakdown →</span>
+                </a>`
+    )
+    .join('\n');
+
+  const block = `<!-- build:home-featured -->
+${cards}
+                <!-- /build:home-featured -->`;
+  const doc = read('index.html');
+  write('index.html', doc.replace(/<!-- build:home-featured -->[\s\S]*?<!-- \/build:home-featured -->/, block));
+  return featured.length;
+}
+
 /* ---------- 10. 执行 ---------- */
 
 
-prerenderHome();
+const homeThemes = buildHomeTheme();
 
-const homeSeo = seoBlock({
-  desc: `Browse ${styles.length} documented web design styles with copy-ready AI prompts, design tokens and downloadable CSS. Preview each style live, then build it.`,
-  canonical: `${SITE}/`,
+prerenderGallery();
+buildHomeSections();
+buildHomeFeatured();
+
+const gallerySeo = seoBlock({
+  desc: `All ${styles.length} documented web design styles with copy-ready AI prompts, design tokens and downloadable CSS. Each one links to a live preview built from identical markup.`,
+  canonical: `${SITE}/styles/index.html`,
   jsonLd: {
-    title: 'AI Website Style Gallery — Prompts, Tokens & Live Previews',
+    title: `All Styles — ${styles.length} web design styles with prompts`,
     data: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'AI Website Style Gallery',
+      name: 'All Styles',
       description: `A library of ${styles.length} web design styles with AI prompts and CSS.`,
-      url: `${SITE}/`,
+      url: `${SITE}/styles/index.html`,
+      isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
       mainEntity: {
         '@type': 'ItemList',
         numberOfItems: styles.length,
@@ -413,7 +657,32 @@ const homeSeo = seoBlock({
     },
   },
 });
-injectSeo('index.html', homeSeo);
+
+const siteSeo = seoBlock({
+  desc: `Design styles, live previews, motion patterns and whole-page prompts for building websites with AI — ${styles.length} styles, ${motions.length} motion patterns and ${recipeList.length} page recipes.`,
+  canonical: `${SITE}/`,
+  jsonLd: {
+    title: 'AI Website Style Gallery',
+    data: {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'AI Website Style Gallery',
+      url: `${SITE}/`,
+      description: `A reference library of ${styles.length} web design styles, their live previews, ${motions.length} motion patterns and ${recipeList.length} whole-page prompts.`,
+      inLanguage: 'en',
+      hasPart: [
+        { '@type': 'CollectionPage', name: 'All Styles', url: `${SITE}/styles/index.html` },
+        { '@type': 'CollectionPage', name: 'Style Previews', url: `${SITE}/previews/index.html` },
+        { '@type': 'CollectionPage', name: 'Style Comparisons', url: `${SITE}/compares/index.html` },
+        { '@type': 'CollectionPage', name: 'Web Motion Library', url: `${SITE}/motions/index.html` },
+        { '@type': 'CollectionPage', name: 'Prompt Recipes', url: `${SITE}/recipes/index.html` },
+      ],
+    },
+  },
+});
+
+injectSeo('styles/index.html', gallerySeo);
+injectSeo('index.html', siteSeo);
 
 let n = 0;
 for (const s of styles) {
@@ -453,6 +722,12 @@ const allHtml = [
         .readdirSync(path.join(ROOT, 'motions'))
         .filter((f) => f.endsWith('.html'))
         .map((f) => `motions/${f}`)
+    : []),
+  ...(exists('compares')
+    ? fs
+        .readdirSync(path.join(ROOT, 'compares'))
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => `compares/${f}`)
     : []),
   ...(exists('recipes')
     ? fs
@@ -665,17 +940,16 @@ for (const [rel, meta] of Object.entries(legalSeo)) {
 
 /* 确保首页 head 里有每个卡片的 card-styles 链接（新风格自动补） */
 function ensureCardCssLinks() {
-  let html = read('index.html');
+  let html = read('styles/index.html');
   const missing = styles.filter(
-    (s) => exists(`card-styles/${s.id}-card.css`) && !html.includes(`card-styles/${s.id}-card.css`)
+    (s) => exists(`card-styles/${s.id}-card.css`) && !html.includes(`../card-styles/${s.id}-card.css`)
   );
   if (!missing.length) return 0;
   const links = missing
-    .map((s) => `    <link rel="stylesheet" href="card-styles/${s.id}-card.css">`)
+    .map((s) => `    <link rel="stylesheet" href="../card-styles/${s.id}-card.css">`)
     .join('\n');
-  html = html.replace(/<link rel="stylesheet" href="language-switcher\.css">|<\/head>/,
-    (m) => (/<\/head>/.test(m) ? links + '\n</head>' : m + '\n' + links));
-  write('index.html', html);
+  html = html.replace(/<\/head>/, (m) => links + '\n</head>');
+  write('styles/index.html', html);
   return missing.length;
 }
 
@@ -712,10 +986,11 @@ for (const rel of allHtml) {
 
 buildSitemap();
 
-console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''}`);
+console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''} | 随机风格池：${homeThemes} 个`);
 console.log(`✓ 详情页 SEO：${n} 个`);
 console.log(`✓ 动效索引：${motions.length} 张卡片 | 动效页 SEO：${mn} 个`);
 console.log(`✓ 风格预览页：${pv} 个（含详情页入口）`);
+console.log(`✓ 对比页：${compareList.length} 个（navigation / footer / sitemap 已接入）`);
 console.log(`✓ 配方页：${recipeList.length} 个（导航 / 页脚 / sitemap 已接入）`);
 if (motionsPlanned.length) console.log(`ℹ 待补页面（已登记未建）：${motionsPlanned.join(', ')}`);
 console.log(`✓ Footer 导航：${nav} 个页面`);

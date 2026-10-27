@@ -1,0 +1,90 @@
+{
+  "slug": "editorial-vs-swiss-style",
+  "a": "editorial",
+  "b": "swiss-style",
+  "title": "Editorial vs Swiss Style",
+  "order": 3,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Both are typographic, both use a single accent, both refuse decoration. They disagree about what a page should constrain: the reader's line, or the page's columns.",
+  "verdict": "Editorial controls line length — a 17-character headline and a 46-character standfirst. Swiss controls column position — a headline across nine of twelve columns, with the standfirst starting at column seven, deliberately overlapping.",
+  "brief": [
+    "These two are the closest pair in the gallery in spirit and the furthest apart in method. Editorial is a single column with hard limits on how wide any text may run; Swiss is a twelve-column grid where the interest comes from where blocks start and how far they span.",
+    "That means they fail differently. Editorial collapses when content refuses to be narrow — a wide table, a code block, a four-up card row. Swiss collapses when the grid is dropped at a narrow breakpoint and everything simply stacks, because the asymmetry was the only idea the layout had."
+  ],
+  "dimensions": [
+    {
+      "name": "Layout constraint",
+      "a": "Line length: 17ch headline, 46ch standfirst, 32ch card copy",
+      "b": "Column position: 1/span 9 headline, 7/span 5 standfirst",
+      "edge": "tie"
+    },
+    {
+      "name": "Typeface",
+      "a": "Serif display against sans body",
+      "b": "Helvetica, one family throughout",
+      "edge": "a"
+    },
+    {
+      "name": "Grid",
+      "a": "Single column, collapsed by default",
+      "b": "Twelve columns, used asymmetrically",
+      "edge": "b"
+    },
+    {
+      "name": "Accent",
+      "a": "One colour on links and rules",
+      "b": "One red, appearing twice on the page",
+      "edge": "tie"
+    },
+    {
+      "name": "Labels",
+      "a": "Small caps, no tracking",
+      "b": "Uppercase at 0.1em tracking",
+      "edge": "b"
+    },
+    {
+      "name": "Density",
+      "a": "Generous vertical space, few elements per screen",
+      "b": "Tighter rows, more content above the fold",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Headline",
+      "a": "max-width: 17ch",
+      "b": "grid-column: 1 / span 9"
+    },
+    {
+      "label": "Standfirst",
+      "a": "max-width: 46ch",
+      "b": "grid-column: 7 / span 5"
+    },
+    {
+      "label": "Type",
+      "a": "serif headings, sans body",
+      "b": "Helvetica for everything"
+    },
+    {
+      "label": "Labels",
+      "a": "font-variant: small-caps",
+      "b": "text-transform: uppercase; letter-spacing: .1em"
+    }
+  ],
+  "whenA": [
+    "The page is read rather than scanned — an essay, a case study, a long product story",
+    "The content is text-first and there is little data to lay out",
+    "You want a warm, unhurried voice and the site has few competing elements"
+  ],
+  "whenB": [
+    "The page must carry several kinds of content on one screen — numbers, cards, a list, a quote",
+    "You want the layout itself to look designed without adding colour or decoration",
+    "The brand is institutional, technical or financial, where Helvetica reads as competence"
+  ],
+  "promptDelta": "Ask for a measure for editorial and column spans for Swiss — not the other way round. A model told to build an editorial page without a measure will produce the browser default of roughly 140 characters, and a model told to build Swiss without column spans will produce a single centred column that looks like a blog. Both styles are decided by one line of constraint, and it is a different line in each case.",
+  "recipes": [
+    "blog",
+    "portfolio"
+  ]
+}

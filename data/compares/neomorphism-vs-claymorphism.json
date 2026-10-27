@@ -1,0 +1,90 @@
+{
+  "slug": "neomorphism-vs-claymorphism",
+  "a": "neomorphism",
+  "b": "claymorphism",
+  "title": "Neomorphism vs Claymorphism",
+  "order": 6,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Both shape elements with a paired light and dark shadow instead of borders. The difference is whether the element is carved out of the background or resting on top of it.",
+  "verdict": "Neumorphism carves: the element is the same colour as the surface, and the shadow pair is what makes it appear raised or pressed. Claymorphism colours: each card has its own pastel fill, a 26px radius, and a shadow pair that sits entirely outside it.",
+  "brief": [
+    "The shared technique is easy to miss. Both styles refuse borders and gradients, and both build depth from two shadows — a light one from one direction and a dark one from the other. That is why they get lumped together.",
+    "What separates them is the relationship to the background. A neumorphic card is the same colour as the page, so it has no edge of its own; the only thing separating it from the surface is the shadow. A clay card is a different colour from the page, so it has a clear silhouette before any shadow is applied — and because it sits on the surface rather than being cut into it, hovering can lift it 4px without breaking the illusion."
+  ],
+  "dimensions": [
+    {
+      "name": "Card vs background",
+      "a": "Identical colour",
+      "b": "Own pastel fill, distinct from the page",
+      "edge": "b"
+    },
+    {
+      "name": "Shadow",
+      "a": "Paired light/dark, plus inset for pressed states",
+      "b": "Paired light/dark, outer only — no inset anywhere",
+      "edge": "tie"
+    },
+    {
+      "name": "Radius",
+      "a": "8 to 22px",
+      "b": "26 to 28px",
+      "edge": "b"
+    },
+    {
+      "name": "Interaction",
+      "a": "Pressed states use inset shadows",
+      "b": "Hover lifts the card 4px",
+      "edge": "b"
+    },
+    {
+      "name": "Contrast",
+      "a": "Labels routinely fall under 3:1",
+      "b": "Pastel fills keep text readable",
+      "edge": "b"
+    },
+    {
+      "name": "Palette",
+      "a": "One surface colour",
+      "b": "Four pastels — blue, mint, pink, cream",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Card fill",
+      "a": "background: var(--bg) — identical to the page",
+      "b": "background: #a8c8ff / #d8f0e4 / #ffe3e3"
+    },
+    {
+      "label": "Shadow",
+      "a": "var(--up) raised pair, inset pair when pressed",
+      "b": "two outer shadows, light and dark, no inset"
+    },
+    {
+      "label": "Radius",
+      "a": "8px to 22px",
+      "b": "26px to 28px"
+    },
+    {
+      "label": "Hover",
+      "a": "shadow direction reverses",
+      "b": "transform: translateY(-4px)"
+    }
+  ],
+  "whenA": [
+    "The interface is sparse and the surface is a single colour throughout — a smart-home panel, a single-purpose control",
+    "You want physicality without colour: buttons that look pressable, switches that look moulded",
+    "The audience sees the same screen repeatedly and learns the shadows as affordances"
+  ],
+  "whenB": [
+    "Cards need to be distinguished from each other, which colour does instantly and shadow does not",
+    "The content is friendly or consumer-facing, where pastel reads as approachable rather than washed out",
+    "You need enough contrast for body copy without abandoning the soft look"
+  ],
+  "promptDelta": "The single sentence that decides this is whether the element shares the background colour. Say that the card is the same value as the page and the model produces neumorphism; say the card has its own tint and a 26px radius and you get clay. Both prompts should forbid borders, because a 1px line immediately breaks either effect, and both should cap the shadow blur relative to the radius or the result reads as a soft drop shadow rather than moulded material.",
+  "recipes": [
+    "dashboard",
+    "onboarding-flow"
+  ]
+}

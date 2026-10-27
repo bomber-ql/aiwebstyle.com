@@ -31,7 +31,7 @@
         <div class="nav-inner">
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
-                <a href="../index.html">Styles</a>
+                <a href="../styles/index.html">Styles</a>
                 <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
@@ -134,14 +134,16 @@
                     <option value="a product launch streamed live. It runs for 45 minutes, has three things being shown with timestamps, and registration is an email capture that adds the event to a calendar. There is no venue.">Product launch</option>
                     <option value="a half-day hands-on workshop. It runs 10:00 to 14:00 with a capacity of 16, has prerequisites listed explicitly, and requires attendees to bring a laptop with one specified tool installed.">Workshop</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-SCHEDULE">Schedule format</label>
                 <select id="rc-SCHEDULE" data-rc="SCHEDULE">
-                    <option value="Render the schedule as a table with time on the left in monospace, item and speaker in the middle, and duration right-aligned. Include breaks and the closing time, which are the two rows people plan around.">Time table</option>
-                    <option value="Render the schedule as stacked cards, each with a time range as a label, a title, a speaker name and a one-line description. Cards stack naturally on mobile but make comparison harder.">Agenda cards</option>
-                    <option value="Render the schedule as a numbered list with a fixed-width time column, no table markup, so it reflows cleanly at any width. Suitable only for a single-track event.">Single track list</option>
+                    <option value="Render the schedule as a table with time on the left in monospace, item and speaker in the middle, and duration right-aligned. Include breaks and the closing time, which are the two rows people plan around." data-hint="The most scannable and the most robust on mobile if allowed to reflow.">Time table</option>
+                    <option value="Render the schedule as stacked cards, each with a time range as a label, a title, a speaker name and a one-line description. Cards stack naturally on mobile but make comparison harder." data-hint="Better when talk titles need describing.">Agenda cards</option>
+                    <option value="Render the schedule as a numbered list with a fixed-width time column, no table markup, so it reflows cleanly at any width. Suitable only for a single-track event." data-hint="The safest choice for a phone-first audience.">Single track list</option>
                 </select>
+                <p class="rc-hint" data-hint-for="SCHEDULE">The most scannable and the most robust on mobile if allowed to reflow.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-PROOF">Credibility block</label>
@@ -150,14 +152,16 @@
                     <option value="For a launch, replace speakers with three numbered items describing exactly what will be shown, each with a one-line claim and a timestamp in the stream.">Three demos</option>
                     <option value="Show three previous editions with the year, the attendance number, and one quoted line from an attendee, attributed with a role rather than a full name.">Past editions</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-REGISTRATION">Registration</label>
                 <select id="rc-REGISTRATION" data-rc="REGISTRATION">
-                    <option value="Use a two-field inline form (name, email) plus a submit button, with a visible success state that confirms the date and says a calendar file is on its way.">Inline form</option>
-                    <option value="Use a single button linking to an external ticketing page, with the price and capacity stated beside it and the link opening in the same tab.">External link</option>
-                    <option value="Use one email field and a button labelled Save my seat, with a secondary link that adds the event to a calendar without registering. State that the recording will be sent to registrants.">Email capture plus calendar</option>
+                    <option value="Use a two-field inline form (name, email) plus a submit button, with a visible success state that confirms the date and says a calendar file is on its way." data-hint="Fewest fields that still identify a person.">Inline form</option>
+                    <option value="Use a single button linking to an external ticketing page, with the price and capacity stated beside it and the link opening in the same tab." data-hint="Right when payment or seat selection is handled elsewhere.">External link</option>
+                    <option value="Use one email field and a button labelled Save my seat, with a secondary link that adds the event to a calendar without registering. State that the recording will be sent to registrants." data-hint="Right for streamed launches with no capacity limit.">Email capture plus calendar</option>
                 </select>
+                <p class="rc-hint" data-hint-for="REGISTRATION">Fewest fields that still identify a person.</p>
             </div>
             <div class="rc-control">
                 <label for="rc-STYLE">Visual style</label>
@@ -167,6 +171,7 @@
                     <option value="Technical: near-black background, one accent colour for times and the register button, monospace for every time and date, thin borders at 10 percent white, no imagery at all.">Technical</option>
                     <option value="Neo-brutalist: 3px black borders, hard offset shadows, one acid accent behind the register button, event name in a heavy grotesque at 800 weight, no border radii anywhere.">Neo-brutalist</option>
                 </select>
+                
             </div>
             <div class="rc-control">
                 <label for="rc-MOTION">Motion level</label>
@@ -174,6 +179,7 @@
                     <option value="No animation. The page has a deadline and the visitor has fifteen seconds; nothing should delay the four facts.">None</option>
                     <option value="One entrance on the hero facts: opacity and 16px translate over 450ms, once, on load. Nothing animates on scroll and the register button never moves.">Hero only</option>
                 </select>
+                
             </div>
             </div>
 
@@ -326,8 +332,9 @@ One page. No framework. The register action is a single form or a single link, u
         <div class="container">
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
-                <a href="../index.html">Gallery</a>
+                <a href="../styles/index.html">Gallery</a>
                 <a href="../previews/index.html">Previews</a>
+                <a href="../compares/index.html">Compare</a>
                 <a href="../motions/index.html">Motions</a>
                 <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
@@ -366,12 +373,19 @@ One page. No framework. The register action is a single form or a single link, u
         count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 

@@ -1,0 +1,90 @@
+{
+  "slug": "retro-90s-vs-retro-y2k",
+  "a": "retro-90s",
+  "b": "retro-y2k",
+  "title": "Retro 90s vs Retro Y2K",
+  "order": 8,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "Ten years apart and constantly confused. One is bevels and primary colours; the other is chrome and gloss.",
+  "verdict": "The 90s page has no gradients at all — depth comes from four-colour bevels on square boxes, navy and yellow, and links that are underlined by default. Y2K has gradients everywhere, rounded corners, white borders and a chrome finish.",
+  "brief": [
+    "The 90s preview is a reconstruction of browser defaults: a navy background, yellow Times text, and borders built from outset, inset and ridge styles that produce a four-colour bevel with no gradient involved. The radius is 0 on every element, because rounded corners were not available.",
+    "Y2K is the opposite: every surface is a linear gradient running light-dark-light to suggest metal, corners run to 18 to 22px, and a 1px white border traces each panel. Nothing is beveled, because by then the depth cue had moved from the border to the fill."
+  ],
+  "dimensions": [
+    {
+      "name": "Depth cue",
+      "a": "Four-colour bevel on the border",
+      "b": "Light-dark-light gradient fill",
+      "edge": "tie"
+    },
+    {
+      "name": "Corners",
+      "a": "0 everywhere",
+      "b": "18 to 22px",
+      "edge": "b"
+    },
+    {
+      "name": "Border",
+      "a": "3px outset #ffffff, 3px ridge #c0c0c0",
+      "b": "1px solid #ffffff",
+      "edge": "tie"
+    },
+    {
+      "name": "Palette",
+      "a": "Navy #000080, yellow, silver #c0c0c0",
+      "b": "Chrome greys, pink, cyan, lilac",
+      "edge": "b"
+    },
+    {
+      "name": "Typeface",
+      "a": "Times New Roman",
+      "b": "Wide geometric sans",
+      "edge": "tie"
+    },
+    {
+      "name": "Motion",
+      "a": "Blink and marquee, if anything",
+      "b": "Gloss sweeps and gentle float",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Depth",
+      "a": "border: 3px outset #ffffff / ridge #c0c0c0",
+      "b": "background: linear-gradient(180deg, #2b2e45, #8e97ad)"
+    },
+    {
+      "label": "Radius",
+      "a": "0",
+      "b": "18px to 22px"
+    },
+    {
+      "label": "Border",
+      "a": "3px inset or outset, four colours",
+      "b": "1px solid #ffffff"
+    },
+    {
+      "label": "Headline fill",
+      "a": "color: #ffff66 (flat)",
+      "b": "chrome gradient clipped to the glyphs"
+    }
+  ],
+  "whenA": [
+    "The joke is the point — a nostalgia play, an April Fool page, a deliberately dated brand",
+    "You want the page to feel like software from a specific era, not a style applied to modern layout",
+    "The audience is old enough to recognise it and the content is short"
+  ],
+  "whenB": [
+    "You want retro without the hostility: Y2K is dated but still comfortable to read",
+    "The brand is music, fashion or beauty, where chrome and gloss read as playful rather than broken",
+    "You need the look to survive on a phone, which bevels largely do not"
+  ],
+  "promptDelta": "The words matter here: ask for outset and inset borders and Times on navy for the 90s; ask for chrome gradients, 20px radii and a 1px white hairline for Y2K. Do not ask for retro in general — a model will give you Y2K for 90s roughly half the time, because that is the more documented reference. Also pin the palette explicitly: the 90s set is four values, and any additional colour immediately reads as the wrong decade.",
+  "recipes": [
+    "launch-page",
+    "portfolio"
+  ]
+}

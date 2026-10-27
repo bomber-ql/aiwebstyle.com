@@ -8,6 +8,7 @@
 // 依赖 previews/{id}.html 与 previews/{id}.css 已由 build-previews.mjs 生成。
 
 import fs from 'node:fs';
+import { Report, assertClean, validateNewStyles } from './lib/validate.mjs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -17,6 +18,14 @@ const write = (p, s) => fs.writeFileSync(path.join(ROOT, p), s);
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
 
 const styles = JSON.parse(read('data/new-styles.json'));
+
+// 数据守卫：themeCss 必须真的以 body.theme-{id} 开头，cardCss 必须选中自己的卡
+{
+    const rep = new Report('new-styles');
+    validateNewStyles(styles, rep);
+    assertClean(rep);
+}
+
 
 const esc = (s) =>
     String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -53,7 +62,7 @@ function detailPage(s) {
 
     <main class="container style-detail-container">
 
-        <a href="../index.html" class="back-link">
+        <a href="index.html" class="back-link">
             ${arrow}
             <span>Back to Style List</span>
         </a>

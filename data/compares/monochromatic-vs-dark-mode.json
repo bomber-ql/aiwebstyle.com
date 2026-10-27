@@ -1,0 +1,90 @@
+{
+  "slug": "monochromatic-vs-dark-mode",
+  "a": "monochromatic",
+  "b": "dark-mode",
+  "title": "Monochromatic vs Dark Mode",
+  "order": 9,
+  "status": "published",
+  "updatedAt": "2026-10-27",
+  "lede": "One restricts hue, the other restricts value. They are different constraints and they fail in opposite directions.",
+  "verdict": "Monochromatic uses a single hue and varies only its lightness — every grey on the page is the same blue. Dark mode uses neutral surfaces and varies value in tight steps, reserving colour for one accent.",
+  "brief": [
+    "Monochromatic is a palette rule: take one hue, derive nine values from near-white to near-black, and build everything from that ramp. The page reads as tinted rather than coloured, and hierarchy comes from how far up the ramp an element sits.",
+    "Dark mode is a contrast rule: surfaces step from #0e1116 to #1d232c, borders sit at 8 percent white, and a single accent is reserved for anything interactive. Nothing is tinted; the neutral is the point, because a dark interface has to stay out of the way of content and images."
+  ],
+  "dimensions": [
+    {
+      "name": "Constraint",
+      "a": "One hue, many values",
+      "b": "Neutral greys, one accent",
+      "edge": "tie"
+    },
+    {
+      "name": "Surfaces",
+      "a": "Tinted ramp --t0 to --t6",
+      "b": "#0e1116 to #1d232c in four steps",
+      "edge": "tie"
+    },
+    {
+      "name": "Status colour",
+      "a": "Nowhere to put it",
+      "b": "One accent, used only on controls",
+      "edge": "b"
+    },
+    {
+      "name": "Corners",
+      "a": "2 to 4px",
+      "b": "12px",
+      "edge": "tie"
+    },
+    {
+      "name": "Type",
+      "a": "One family, hierarchy by value",
+      "b": "One family, hierarchy by weight and opacity",
+      "edge": "tie"
+    },
+    {
+      "name": "Images",
+      "a": "Tint clashes with photography",
+      "b": "Needs dark assets or a filter",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Tokens",
+      "a": "--t0 #f5f9ff through --t6 #0a56c8",
+      "b": "#0e1116 / #141922 / #171c24 / #1d232c"
+    },
+    {
+      "label": "Border",
+      "a": "1px solid var(--t2)",
+      "b": "1px solid #232b36"
+    },
+    {
+      "label": "Radius",
+      "a": "2px to 4px",
+      "b": "12px"
+    },
+    {
+      "label": "Label tracking",
+      "a": "letter-spacing: .18em",
+      "b": "letter-spacing: .16em"
+    }
+  ],
+  "whenA": [
+    "The brand already has one strong colour and you want the interface to inherit it",
+    "The page is a document or a report where status colours are not needed",
+    "You want a distinctive look from a very small token set — nine values, no colour decisions"
+  ],
+  "whenB": [
+    "The product is used at night or alongside media, where a bright page is hostile",
+    "You need status colours and cannot afford to lose them",
+    "The interface is data-heavy and the content should dominate the chrome"
+  ],
+  "promptDelta": "For monochromatic, give the model the hue and the number of steps and tell it that no other hue may appear — including in borders and shadows, which are where a stray blue usually sneaks in. For dark mode, give the surface steps as exact hex values and state that the accent is for interactive elements only; without that clause a model will tint headings and borders and the page stops reading as neutral.",
+  "recipes": [
+    "blog",
+    "dashboard"
+  ]
+}

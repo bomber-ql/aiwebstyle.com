@@ -9,6 +9,7 @@
 //   - 交互只是「重新组装」，不改变任何服务端内容
 
 import fs from 'node:fs';
+import { Report, assertClean, validateRecipes } from './lib/validate.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -50,6 +51,16 @@ const recipes = fs
 
 const bySlug = new Map(recipes.map((r) => [r.slug, r]));
 
+// 数据守卫：控件与 {{TOKEN}} 必须一一对应，否则下拉框改了正文不变
+{
+    const styleIds = new Set(JSON.parse(read('data/styles.json')).map((s) => s.id));
+    const motionSlugs = new Set(JSON.parse(read('data/motions.json')).map((m) => m.slug));
+    const rep = new Report('recipes');
+    validateRecipes(recipes, { styleIds, motionSlugs }, rep);
+    assertClean(rep);
+}
+
+
 /* ---------- prompt 组装 ---------- */
 
 const defaultsFor = (r) =>
@@ -65,16 +76,27 @@ function assemble(r, values) {
 
 function controlsHtml(r) {
   return r.controls
-    .map(
-      (c) => `            <div class="rc-control">
+    .map((c) => {
+      const first = c.options[0] || {};
+      const hint = first.hint
+        ? `<p class="rc-hint" data-hint-for="${esc(c.id)}">${esc(first.hint)}</p>`
+        : '';
+      const options = c.options
+        .map(
+          (o) =>
+            `                    <option value="${esc(o.value)}"${
+              o.hint ? ` data-hint="${esc(o.hint)}"` : ''
+            }>${esc(o.label)}</option>`
+        )
+        .join('\n');
+      return `            <div class="rc-control">
                 <label for="rc-${c.id}">${esc(c.label)}</label>
                 <select id="rc-${c.id}" data-rc="${esc(c.id)}">
-${c.options
-  .map((o) => `                    <option value="${esc(o.value)}">${esc(o.label)}</option>`)
-  .join('\n')}
+${options}
                 </select>
-            </div>`
-    )
+                ${hint}
+            </div>`;
+    })
     .join('\n');
 }
 
@@ -329,12 +351,19 @@ ${relatedHtml(r)}
         count.textContent = text.split(/\\s+/).filter(Boolean).length + ' words';
     }
 
+    function syncHint(s) {
+        var el = document.querySelector('[data-hint-for="' + s.getAttribute('data-rc') + '"]');
+        if (!el) return;
+        var opt = s.options[s.selectedIndex];
+        el.textContent = (opt && opt.getAttribute('data-hint')) || '';
+    }
+
     selects.forEach(function (s) {
-        s.addEventListener('change', function () { render(current()); });
+        s.addEventListener('change', function () { render(current()); syncHint(s); });
     });
 
     document.getElementById('rcReset').addEventListener('click', function () {
-        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; syncHint(s); });
         render(src.defaults);
     });
 
