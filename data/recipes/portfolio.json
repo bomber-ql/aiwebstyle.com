@@ -62,6 +62,9 @@
     "STYLE",
     "{{STYLE}}",
     "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
     "COPY RULES",
     "- Banned words: passionate, creative, detail-oriented, storyteller, ninja, rockstar, unique perspective, loves challenges, pixel-perfect.",
     "- Every project line needs a constraint (budget, deadline, legacy system, one week, no photography) and an outcome.",
@@ -257,6 +260,14 @@
       "body": "The reader who is convinced will look for a way to reach you immediately. If that takes a scroll and a form, a fraction of them will close the tab instead."
     }
   ],
-  "styles": ["editorial", "swiss-style", "monochromatic", "neo-brutalism"],
-  "motions": ["scroll-reveal", "text-mask-reveal"]
+  "styles": [
+    "editorial",
+    "swiss-style",
+    "monochromatic",
+    "neo-brutalism"
+  ],
+  "motions": [
+    "scroll-reveal",
+    "text-mask-reveal"
+  ]
 }

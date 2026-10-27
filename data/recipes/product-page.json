@@ -64,6 +64,9 @@
     "STYLE",
     "{{STYLE}}",
     "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
     "COPY RULES",
     "- Price always carries a currency symbol and states whether tax is included.",
     "- Every measurement carries a unit. No size called large without a number beside it.",
@@ -253,6 +256,14 @@
       "body": "A 4.8 average from 2,341 reviews on a page that launched last week is both false and detectable. It is also the fastest route to a marketplace suspension if this is a real store."
     }
   ],
-  "styles": ["claymorphism", "editorial", "dark-mode", "neo-brutalism"],
-  "motions": ["card-spotlight", "scroll-reveal"]
+  "styles": [
+    "claymorphism",
+    "editorial",
+    "dark-mode",
+    "neo-brutalism"
+  ],
+  "motions": [
+    "card-spotlight",
+    "scroll-reveal"
+  ]
 }

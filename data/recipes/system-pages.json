@@ -1,0 +1,259 @@
+{
+  "slug": "system-pages",
+  "name": "Error and Empty States",
+  "category": "app",
+  "order": 12,
+  "updatedAt": "2026-10-27",
+  "readingTime": 7,
+  "summary": "Five screens nobody designs: 404, 500, maintenance, empty search, no permission. One template, one plain sentence, one way forward — and the correct status code.",
+  "lede": "These pages are the only ones a visitor sees when something has already gone wrong. They are also the pages most often shipped as an afterthought, which is why so many sites answer a broken link with a cheerful illustration and no information.",
+  "brief": [
+    "The technical failure matters as much as the visual one. An error page that returns HTTP 200 is a soft 404, and search engines will index it — a site with thirty soft 404s looks like thirty thin pages. A maintenance page with a countdown that expires but never opens is worse than no page at all.",
+    "The design rule is the same across all five states: one sentence saying what happened in plain language, one primary action, and a short list of real destinations. No mascot carrying the explanation, and no apology standing in for information."
+  ],
+  "sections": [
+    {
+      "name": "One template, five states",
+      "why": "Same layout, same type scale, different sentence and action. Five bespoke designs drift apart and cost five times as much to maintain."
+    },
+    {
+      "name": "The plain sentence",
+      "why": "What happened, in words a non-technical visitor understands. The status code is a small label, not the headline."
+    },
+    {
+      "name": "One primary action",
+      "why": "Go home, retry, search, or request access. Exactly one, matched to the state. Two actions means the page has not decided what the visitor should do."
+    },
+    {
+      "name": "Real destinations",
+      "why": "Three to five links that actually exist. A 404 that links to a section you removed is a second failure in the same visit."
+    },
+    {
+      "name": "Correct status code",
+      "why": "404 returns 404, 500 returns 500, maintenance returns 503 with Retry-After. Serving 200 turns an error into an indexable empty page."
+    },
+    {
+      "name": "Empty search specifics",
+      "why": "Repeat the query, show zero results explicitly, and offer two adjacent suggestions. Silently showing an empty list is the most confusing state of the five."
+    },
+    {
+      "name": "What not to do",
+      "why": "No auto-redirect after five seconds, no countdown that expires into another countdown, no advertising on an error page."
+    }
+  ],
+  "promptLines": [
+    "Build the system pages for {{SITE}}: {{PAGES}}",
+    "",
+    "AUDIENCE",
+    "A visitor who has just hit a dead end — a stale link, a server fault, a search with no results, or a page they are not allowed to see. They are mildly frustrated and will give the page about five seconds to offer a way forward.",
+    "",
+    "STRUCTURE (one shared template, repeated per state)",
+    "1. Layout: a centred single column, maximum 640px, vertically positioned at roughly 35 percent of the viewport rather than dead centre. No site navigation is required, but the wordmark sits top left as a link home.",
+    "2. Status line: the code or state as a small label above the heading — 404, 500, Maintenance, No results, No access. Monospace, 0.75rem, muted.",
+    "3. Heading: one sentence in plain language stating what happened. Sentence case, no exclamation mark, no pun.",
+    "4. Body: one or two sentences explaining the likely cause and what the visitor can do. If the visitor can fix it, say how.",
+    "5. Primary action: {{ACTION}}",
+    "6. Destinations: three to five text links, each a page that exists today. For empty search, show the query and two adjacent suggestions instead.",
+    "7. Footer line: the site name and a contact address. No social links, no newsletter.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
+    "COPY RULES",
+    "- {{TONE}}",
+    "- Never write oops, whoops, uh oh, or looks like you are lost.",
+    "- Never blame the visitor. A mistyped URL is the most common cause and the page still does not say you typed it wrong.",
+    "- Name the cause when it is known: the page moved, the server failed, the link is out of date.",
+    "- Keep the whole page under 80 words excluding navigation.",
+    "",
+    "CONSTRAINTS",
+    "- 404 must be served with HTTP status 404; 500 with 500; maintenance with 503 plus a Retry-After header.",
+    "- Error pages carry noindex and are excluded from the sitemap.",
+    "- No advertising on any error page.",
+    "- No automatic redirect. If a redirect is appropriate, use a 301 at the server level instead of a page.",
+    "- Links inside error pages are root-absolute, because an error page renders at any URL depth.",
+    "- The page must render correctly with no stylesheet, since a broken build is one of the cases it exists for.",
+    "",
+    "OUTPUT",
+    "Five states sharing one template and one stylesheet. Static where possible."
+  ],
+  "controls": [
+    {
+      "id": "SITE",
+      "label": "Site type",
+      "options": [
+        {
+          "label": "Reference gallery",
+          "value": "a reference gallery of documented styles and prompts, where a 404 is most often a stale bookmark from an older URL structure"
+        },
+        {
+          "label": "SaaS application",
+          "value": "a SaaS application where the five states include permission errors and empty query results inside the product, not just missing pages"
+        },
+        {
+          "label": "E-commerce store",
+          "value": "an online store where a 404 usually means a product was discontinued, and the page should offer the closest category rather than only the homepage"
+        }
+      ]
+    },
+    {
+      "id": "PAGES",
+      "label": "Which states",
+      "options": [
+        {
+          "label": "404 only",
+          "value": "the 404 state only, since it is the one that will actually be hit",
+          "hint": "The minimum worth shipping."
+        },
+        {
+          "label": "404 and 500",
+          "value": "404 and 500, sharing the template with different copy and different primary actions"
+        },
+        {
+          "label": "All five",
+          "value": "all five: 404, 500, maintenance, empty search results, and no permission"
+        }
+      ]
+    },
+    {
+      "id": "TONE",
+      "label": "Tone",
+      "options": [
+        {
+          "label": "Plain",
+          "value": "Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause.",
+          "hint": "The safest choice for anything used repeatedly."
+        },
+        {
+          "label": "Dry",
+          "value": "Dry: one understated clause of acknowledgement, then straight to the fix. No jokes that depend on the reader being amused."
+        },
+        {
+          "label": "Warm",
+          "value": "Warm: acknowledge the interruption in one short sentence and take responsibility where the site is at fault, then give the way forward without further comment."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Product neutral",
+          "value": "Product neutral: the same page background as the site, one bordered block, the status code in mono at 0.75rem, heading at 1.8rem, primary button matching the site's normal button style."
+        },
+        {
+          "label": "Editorial",
+          "value": "Editorial: no card at all, the status code set large at 4rem in the serif face as the only decorative element, a 58-character measure for the explanation, and a plain underlined link instead of a button."
+        },
+        {
+          "label": "Swiss",
+          "value": "Swiss: white page, twelve-column grid, the code aligned to column one in Helvetica at 5rem, a single red rule beneath it, body copy starting at column four, no button fill."
+        }
+      ]
+    },
+    {
+      "id": "ACTION",
+      "label": "Primary action",
+      "options": [
+        {
+          "label": "Go home",
+          "value": "a primary button returning to the homepage, plus a search field for the 404 state"
+        },
+        {
+          "label": "Retry",
+          "value": "a retry button that reloads in place for the 500 state, with the timestamp of the failed attempt shown beneath it"
+        },
+        {
+          "label": "Contextual",
+          "value": "an action matched to each state: home for 404, retry for 500, status page for maintenance, clear the query for empty search, request access for permission"
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation at all. If the stylesheet failed to load, an animated page is the one thing that looks broken rather than deliberate."
+        },
+        {
+          "label": "Fade only",
+          "value": "One 150ms fade on mount, disabled under reduced motion. Nothing moves after that."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "PAGES",
+      "note": "Ship 404 first, always. Maintenance is the second most valuable because it is the only state where the visitor can be told when service returns."
+    },
+    {
+      "token": "TONE",
+      "note": "Plain is underrated. On a page someone reaches while already annoyed, a joke reads as the site not taking the problem seriously — and the visitor has no way to tell whether their data was affected."
+    },
+    {
+      "token": "ACTION",
+      "note": "Contextual actions are the difference between a page that helps and a page that merely exists. A 500 that offers Go home sends the visitor away from the thing they were trying to do."
+    },
+    {
+      "token": "STYLE",
+      "note": "Keep the error page visually consistent with the site, then resist the urge to make it the most designed page on the domain. It is seen at the worst moment."
+    },
+    {
+      "token": "MOTION",
+      "note": "None. These pages must work when CSS is partially broken, which is exactly the condition that produces a 500 in the first place."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate one state and then ask for the others as copy variants of the same component. Generating five pages independently produces five different vertical positions for the heading."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add an illustration. Keep it only if it is a simple inline SVG with no external request — a 404 that depends on a CDN image is a second failure when the CDN is the thing that broke."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask explicitly for the status code and noindex meta. Generated error pages almost always ship as 200 with an indexable head, which is the defect that turns one missing page into dozens of thin ones."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Implement the states as one template with a data object per state, then wire the server responses (404, 500, 503) before touching the styling."
+    }
+  ],
+  "failures": [
+    {
+      "title": "The soft 404",
+      "body": "A missing page returning HTTP 200 with a human-readable apology is the most common error-page defect on the web. Search engines index it as real content, and a hundred stale links become a hundred thin pages competing with your real ones."
+    },
+    {
+      "title": "The five-second redirect",
+      "body": "Auto-redirecting to the homepage removes the visitor's ability to read what happened, breaks the back button, and hides the fact that a link is broken rather than fixed. Fix the link; do not paper over it."
+    },
+    {
+      "title": "The countdown that expires",
+      "body": "A maintenance page promising return in 30 minutes, still showing the same promise four hours later, teaches visitors that nothing on the site is reliable. If the estimate is unknown, say unknown."
+    },
+    {
+      "title": "Ads on an error page",
+      "body": "Advertising against a page with no content and an unresolved problem is both a policy risk and an insult. Exclude every error state from ad serving."
+    }
+  ],
+  "styles": [
+    "modern-tech",
+    "swiss-style",
+    "neo-brutalism",
+    "monochromatic"
+  ],
+  "motions": [
+    "scroll-reveal",
+    "text-mask-reveal"
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "slug": "onboarding-flow",
+  "name": "Onboarding Flow",
+  "category": "app",
+  "order": 9,
+  "updatedAt": "2026-10-27",
+  "readingTime": 8,
+  "summary": "One question per screen, validation that does not punish, and a skip that actually skips. The flow where a badly timed field costs a signup.",
+  "lede": "Onboarding is the only interface where the user has already decided to give you something and every additional field is a chance to change their mind. The design goal is not completeness, it is a first successful outcome — everything else can be collected later, when the value is already visible.",
+  "brief": [
+    "Generated onboarding flows usually look like a settings form split across screens: eight fields per step, a required company size, a phone number, and a progress bar that turns out to be decorative because validation only fires on submit.",
+    "Three rules do most of the work. Ask one thing per screen so the cognitive load stays low. Validate as the field loses focus, not when the button is pressed. And make skip real — a Skip link that advances without saving is worse than no link, because it teaches the user the interface lies."
+  ],
+  "sections": [
+    {
+      "name": "Progress indicator",
+      "why": "Named steps, not just a bar. A bar tells you how long it is; names tell you what is coming, which is what decides whether someone continues."
+    },
+    {
+      "name": "One question per step",
+      "why": "One primary input, one sentence of why it is being asked. Two fields on a screen doubles the chance of one being abandoned."
+    },
+    {
+      "name": "Inline validation",
+      "why": "Validate on blur, clear the error on input. Never validate on every keystroke, which flags a partially typed email as invalid."
+    },
+    {
+      "name": "Skip",
+      "why": "Real skip for anything not required to reach first value, and it must persist — a skipped step must not reappear on the summary screen."
+    },
+    {
+      "name": "Summary step",
+      "why": "Show what was entered, with edit links. This is where the user catches their own typo before it becomes a support ticket."
+    },
+    {
+      "name": "Success state",
+      "why": "One screen that says what now exists and what to do next, with a single primary action. Not a confetti animation and not a dashboard dump."
+    },
+    {
+      "name": "Resume",
+      "why": "If the user leaves mid-flow, the next visit returns to the same step with prior answers intact. Losing progress is the most common silent abandonment cause."
+    },
+    {
+      "name": "Empty first screen",
+      "why": "Whatever the flow creates, the first view of it must not be blank. One seeded example beats a tutorial overlay."
+    }
+  ],
+  "promptLines": [
+    "Build a {{FLOW}} onboarding flow for {{PRODUCT}}.",
+    "",
+    "AUDIENCE",
+    "Someone who signed up in the last five minutes. They have one goal: see the product do the thing they signed up for. They are willing to answer two or three questions and unwilling to answer eight.",
+    "",
+    "STRUCTURE",
+    "1. Layout: no global navigation during onboarding. A single centred column, maximum 480px, with the product wordmark small in the top left and an exit link in the top right. Nothing else competes with the step.",
+    "2. Progress: {{PROGRESS}} Step names are visible, the current step is marked, completed steps are links back, future steps are not clickable.",
+    "3. Steps: {{STEPS}} One primary input per step. A single sentence explains why it is being asked, phrased as a benefit rather than a policy.",
+    "4. Validation: {{VALIDATION}} On blur, show a specific message under the field (that address is missing an @ sign), not a generic one. Clear the message as soon as the user edits. Never disable the primary button to signal invalid input — let the click explain.",
+    "5. Skip: for every step that is not required to reach first value, a text link beside the primary button. Skipping must advance and must not silently save a default.",
+    "6. Summary: before the final action, show every answer in a definition list with Edit links. One confirm button, labelled with what it does (Create workspace), not Next.",
+    "7. Success: a dedicated screen stating what now exists, one primary action to start, and one secondary link to a sample so the first view is never empty.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
+    "COPY RULES",
+    "- Button labels are verbs that name the outcome: Continue, Create workspace, Invite team. Never Submit.",
+    "- Ask for the minimum. Every optional field is a step that can be skipped, and defaults are visible rather than hidden.",
+    "- No marketing copy inside the flow. No upsells before the first success.",
+    "- Error messages name the fix, not the rule: Add a company domain, not Invalid input.",
+    "",
+    "CONSTRAINTS",
+    "- Keyboard: Enter advances, Escape exits with a confirmation, focus moves to the first field on every step.",
+    "- The primary button is at least 48px tall and sits in the same position on every step.",
+    "- Mobile: the primary action remains visible with the keyboard open at 390x844.",
+    "- State persists to local storage after each step, so a refresh resumes rather than restarts.",
+    "- No step may require a field that the product does not use within the first session.",
+    "",
+    "OUTPUT",
+    "A working flow with real validation and real state, not five screens of static markup."
+  ],
+  "controls": [
+    {
+      "id": "PRODUCT",
+      "label": "What the product is",
+      "options": [
+        {
+          "label": "Team workspace tool",
+          "value": "a team workspace tool, where the first value is seeing a project with the team already in it"
+        },
+        {
+          "label": "Developer API",
+          "value": "a developer API, where the first value is a successful request returning real data"
+        },
+        {
+          "label": "Creator tool",
+          "value": "a creator tool, where the first value is publishing something that looks finished"
+        }
+      ]
+    },
+    {
+      "id": "FLOW",
+      "label": "Flow length",
+      "options": [
+        {
+          "label": "Three steps",
+          "value": "a three-step flow: account, workspace, invite",
+          "hint": "The shortest flow that still produces a usable account."
+        },
+        {
+          "label": "Five steps",
+          "value": "a five-step flow: account, profile, workspace, preferences, invite",
+          "hint": "Only if each step genuinely changes the first session."
+        },
+        {
+          "label": "Single screen",
+          "value": "a single-screen flow with three fields and one button, no stepping at all",
+          "hint": "Best conversion, worst data. Everything else must be collected later."
+        }
+      ]
+    },
+    {
+      "id": "PROGRESS",
+      "label": "Progress display",
+      "options": [
+        {
+          "label": "Named steps",
+          "value": "a row of named steps (Account, Workspace, Team) with the current one marked by weight and a filled dot, completed steps clickable, future steps not"
+        },
+        {
+          "label": "Bar with count",
+          "value": "a thin progress bar with the text Step 2 of 3 above it, and no step names"
+        },
+        {
+          "label": "None",
+          "value": "no progress indicator at all for a single-screen flow"
+        }
+      ]
+    },
+    {
+      "id": "STEPS",
+      "label": "What each step asks",
+      "options": [
+        {
+          "label": "Minimum viable",
+          "value": "Email and password, then workspace name with a live URL preview, then optional teammate invites with a skip link. Three fields total, two of them skippable.",
+          "hint": "Ask only what the first session needs."
+        },
+        {
+          "label": "With personalisation",
+          "value": "Email, then name and role, then workspace name, then a use-case choice of three options rendered as large radio cards, then invites. The use-case step changes which sample is seeded.",
+          "hint": "Adds meaningfully different first sessions."
+        },
+        {
+          "label": "Team-first",
+          "value": "Email, then company domain with automatic teammate discovery, then role, then invites pre-populated from the domain. Domain verification explains why it is worth doing, and is skippable."
+        }
+      ]
+    },
+    {
+      "id": "VALIDATION",
+      "label": "Validation timing",
+      "options": [
+        {
+          "label": "On blur",
+          "value": "Validate on blur, clear on input, and never block the primary button. The click surfaces the first invalid field and moves focus to it."
+        },
+        {
+          "label": "Live, after first blur",
+          "value": "Validate on blur for the first pass, then live on every keystroke once a field has been marked invalid, so the error clears the instant it is fixed."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Product neutral",
+          "value": "Product neutral: white card on a very light grey page, 1px borders, 10px radii, one accent on the primary button only, 16px inputs at 44px height, labels above fields and always visible."
+        },
+        {
+          "label": "Warm minimal",
+          "value": "Warm minimal: cream background, no card — the fields sit directly on the page, 1px bottom borders only, one serif heading per step, accent used on the button and the progress dot."
+        },
+        {
+          "label": "Dark product",
+          "value": "Dark product: #101318 page, #171b22 inputs with 1px borders at 12 percent white, one bright accent for the primary action, focus ring at 2px offset so it is visible against the dark surface."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "Step transition only",
+          "value": "A single 180ms horizontal slide between steps, direction matching forward or back, disabled entirely under prefers-reduced-motion. Nothing else animates."
+        },
+        {
+          "label": "None",
+          "value": "No transitions. The next step appears immediately, which is faster to use and easier to test."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "FLOW",
+      "note": "Every added step is a measurable drop in completion. If a step does not change what the user sees in their first session, it belongs in settings, not in onboarding."
+    },
+    {
+      "token": "PROGRESS",
+      "note": "Named steps convert better than bars because they let the user decide whether to continue. A bar with no names tells them the effort but not the destination."
+    },
+    {
+      "token": "STEPS",
+      "note": "The use-case step is worth its cost only if it changes the seeded content. A personalisation question that changes nothing is pure friction, and users notice."
+    },
+    {
+      "token": "VALIDATION",
+      "note": "Never validate on keystroke from the first character: a half-typed email is invalid by definition and the interface shouts at someone who is still working."
+    },
+    {
+      "token": "STYLE",
+      "note": "Swap the block whole. A dark input on a light page or vice versa reads as a broken form rather than a design choice."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate one step, then ask for the flow shell around it. Building five screens at once produces five different button positions, which is the most common fix-up in onboarding work."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a password strength meter and a terms checkbox. Keep the terms checkbox only if it is legally required in your jurisdiction; the strength meter is usually noise that stops people mid-field."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for state to persist per step before styling. Retro-fitting persistence produces flows that restart whenever a component remounts."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Define the step list as an array of objects with a validate function each, then render generically. Five bespoke screens drift apart within a week."
+    }
+  ],
+  "failures": [
+    {
+      "title": "Eight fields on the first screen",
+      "body": "A signup form that asks for company size before the product has shown anything is asking the user to invest before receiving. Every field on the first screen should be one the product cannot function without."
+    },
+    {
+      "title": "A progress bar that is decorative",
+      "body": "If the bar does not reflect real step completion, users learn to distrust every other indicator on the page. It is a small lie with a long half-life."
+    },
+    {
+      "title": "Skip that saves nothing",
+      "body": "A Skip link that advances without recording the decision means the summary screen shows blank fields the user thought they had skipped. Either save the skip explicitly or remove the link."
+    },
+    {
+      "title": "The disabled button",
+      "body": "Greying out Continue until the form is valid gives no reason and no feedback. Leave the button enabled and let the click say what is missing — that is the only moment the user is guaranteed to be paying attention."
+    }
+  ],
+  "styles": [
+    "modern-tech",
+    "dark-mode",
+    "claymorphism",
+    "swiss-style"
+  ],
+  "motions": [
+    "card-spotlight",
+    "scroll-reveal"
+  ]
+}

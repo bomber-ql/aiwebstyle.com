@@ -59,6 +59,9 @@
     "STYLE",
     "{{STYLE}}",
     "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
     "COPY RULES",
     "- The date must appear in the first 25 words of the page and again in the register block.",
     "- Never write the schedule as prose. Times only in a table or a list with a time column.",
@@ -255,6 +258,14 @@
       "body": "A visitor convinced at the hero has to scroll the entire page to act. Three placements — hero, after the schedule, footer — cost nothing and catch three different moments of decision."
     }
   ],
-  "styles": ["art-deco", "neo-brutalism", "swiss-style", "retro-y2k"],
-  "motions": ["text-mask-reveal", "aurora-background"]
+  "styles": [
+    "art-deco",
+    "neo-brutalism",
+    "swiss-style",
+    "retro-y2k"
+  ],
+  "motions": [
+    "text-mask-reveal",
+    "aurora-background"
+  ]
 }

@@ -1,0 +1,259 @@
+{
+  "slug": "careers-page",
+  "name": "Careers Page",
+  "category": "marketing",
+  "order": 10,
+  "updatedAt": "2026-10-27",
+  "readingTime": 7,
+  "summary": "A role list with salary ranges, a hiring process with a timeline, and one honest paragraph about what the job is actually like. The paragraph is the part that filters.",
+  "lede": "A careers page has two audiences and one of them is much larger. Most visitors are not applying; they are checking whether the company is serious. That check happens in about twenty seconds, and it is decided by whether the page states real numbers — salary, process length, and what the work involves on a bad day.",
+  "brief": [
+    "Generated careers pages are all mission statements and stock photography. They describe a culture nobody can verify and omit the three things candidates actually search for: what the role pays, how long the process takes, and whether remote means remote.",
+    "The structural fix is to invert the order. Roles first, with salary ranges and a location policy, then the process with a timeline, then culture. A candidate who cannot find a number assumes the number is bad, and the strongest ones leave before reading the culture section at all."
+  ],
+  "sections": [
+    {
+      "name": "Roles first",
+      "why": "The list is the reason people came. Putting it above the mission statement respects that, and it is the only section that changes weekly."
+    },
+    {
+      "name": "Salary range per role",
+      "why": "A range with currency, basis (annual), and whether it is location-adjusted. Without it, strong candidates self-select out rather than ask."
+    },
+    {
+      "name": "Location policy",
+      "why": "One of three states, stated plainly: fully remote with a timezone overlap requirement, hybrid with a named number of days, or on-site with an address."
+    },
+    {
+      "name": "Hiring process",
+      "why": "The number of stages, what each one involves, who the candidate talks to, and the total elapsed time. This is the second most searched piece of information."
+    },
+    {
+      "name": "What the work is like",
+      "why": "One honest paragraph including the hard part. Naming the difficulty is the single strongest credibility signal a careers page can carry."
+    },
+    {
+      "name": "Benefits",
+      "why": "Concrete and checkable: holiday days, notice period, equipment budget, learning budget. Vague perks read as filler."
+    },
+    {
+      "name": "How to apply",
+      "why": "One route, no account creation. State what to send and what not to bother with — a portfolio, not a cover letter, is a real filter."
+    }
+  ],
+  "promptLines": [
+    "Build a careers page for {{COMPANY}}.",
+    "",
+    "AUDIENCE",
+    "Two readers. The first is a strong candidate who will scan for salary, location and process length in that order and leave within twenty seconds if any of them is missing. The second is a customer or partner checking whether the company is real.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. One-line statement of what the company does and how many people work there. No mission statement above the roles.",
+    "2. Open roles: {{ROLES}} Each row carries title, team, location policy, contract type, and a salary range with currency. Sorted by team, not by posting date.",
+    "3. Location policy, stated once in full: {{LOCATION}} If remote, name the required timezone overlap in hours.",
+    "4. Hiring process: {{PROCESS}} Each stage names what happens, who the candidate meets, and how long it takes. Total elapsed time from application to decision stated explicitly.",
+    "5. What the work is like: one paragraph of four to six sentences. It must include the difficulty — the part of the job people underestimate — and one thing the team is currently bad at.",
+    "6. Benefits: a definition list of six to eight items, each with a number where a number exists. Holiday days, notice period, equipment budget, learning budget, pension contribution, parental leave.",
+    "7. How to apply: one route, no account required. State exactly what to send and what is not read.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
+    "COPY RULES",
+    "- No phrases from the banned list: rockstar, ninja, family, fast-paced environment, work hard play hard, wear many hats, self-starter.",
+    "- Salary ranges are mandatory. If a range cannot be published, say why in one sentence rather than omitting it.",
+    "- Never write competitive salary.",
+    "- Every benefit has a number or a named policy, not an adjective.",
+    "- Do not use stock photography of people at laptops. A photograph of the actual team, or no photograph.",
+    "",
+    "CONSTRAINTS",
+    "- The first role must be visible without scrolling at 1440x900.",
+    "- Salary text is real text, never an image, and includes the currency code.",
+    "- Role rows collapse to a stacked card at 640px with the salary still visible.",
+    "- Application link opens in the same tab and does not require signup.",
+    "- No auto-playing video, no carousel of employee quotes.",
+    "",
+    "OUTPUT",
+    "One page. Self-contained. Roles rendered from a small data array so the list can be updated without touching markup."
+  ],
+  "controls": [
+    {
+      "id": "COMPANY",
+      "label": "Company type",
+      "options": [
+        {
+          "label": "Seed-stage startup",
+          "value": "an early-stage company of 14 people, where roles are broad and the honest difficulty is that priorities change monthly",
+          "hint": "Specificity and honesty matter more than benefits here."
+        },
+        {
+          "label": "Established product company",
+          "value": "a product company of 180 people, where roles are narrow and well-defined and the honest difficulty is coordination cost"
+        },
+        {
+          "label": "Agency or studio",
+          "value": "a studio of 30 people working on client projects, where the honest difficulty is context switching and uneven project quality"
+        }
+      ]
+    },
+    {
+      "id": "ROLES",
+      "label": "Role list layout",
+      "options": [
+        {
+          "label": "Table rows",
+          "value": "Render roles as rows in a table-like list: title and team on the left, location in the middle, salary right-aligned in mono. One row per role, no cards, no expand.",
+          "hint": "Fastest to scan and easiest to keep current."
+        },
+        {
+          "label": "Grouped cards",
+          "value": "Group roles by team with a small heading per group, each role as a compact card carrying title, location and salary on one line and a one-sentence description beneath."
+        },
+        {
+          "label": "Table with detail",
+          "value": "A table where each row expands in place to reveal a three-sentence description and the first interview stage, without navigating away."
+        }
+      ]
+    },
+    {
+      "id": "LOCATION",
+      "label": "Location policy",
+      "options": [
+        {
+          "label": "Remote with overlap",
+          "value": "fully remote, with a requirement of four hours overlap with 09:00 to 17:00 CET. Contracts are local-entity or contractor depending on the country, and the page says which.",
+          "hint": "State the overlap in hours, not as flexible."
+        },
+        {
+          "label": "Hybrid",
+          "value": "hybrid, with two days per week in the office at a named address, and the specific days left to each team rather than fixed company-wide."
+        },
+        {
+          "label": "On-site",
+          "value": "on-site five days a week at a named address, with relocation support described in one sentence including the amount and the repayment terms."
+        }
+      ]
+    },
+    {
+      "id": "PROCESS",
+      "label": "Hiring process",
+      "options": [
+        {
+          "label": "Four stages",
+          "value": "four stages: a 30-minute intro call, a 60-minute craft interview, a paid half-day exercise, and a 45-minute team conversation. Total elapsed time: two to three weeks. The exercise is paid at a stated day rate."
+        },
+        {
+          "label": "Three stages",
+          "value": "three stages: a 30-minute call, a 90-minute working session with two people from the team, and a final conversation with the founder. Total elapsed time: ten working days."
+        },
+        {
+          "label": "No exercise",
+          "value": "three conversations and a reference check, with no take-home exercise. The page states why: the team believes exercises disadvantage candidates with caring responsibilities."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Editorial",
+          "value": "Editorial: serif headings, one narrow reading column for prose, roles as full-width rows separated by hairlines, salary in tabular figures, no cards and no shadows."
+        },
+        {
+          "label": "Product neutral",
+          "value": "Product neutral: white page, 1px borders, 10px radii on role cards, one accent for the apply link, section labels at 0.72rem uppercase, generous 5rem section spacing."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px black borders, 6px hard offset shadows, one saturated accent on the apply buttons, role rows that shift 3px on hover."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation. This page is scanned for facts, and movement works against scanning."
+        },
+        {
+          "label": "Rows only",
+          "value": "Role rows fade up 12px once as they enter the viewport, staggered by 40ms, disabled under reduced motion."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "ROLES",
+      "note": "A table is better than cards whenever there are more than four roles, because comparison is the task. Cards win when each role needs a sentence to be understood."
+    },
+    {
+      "token": "LOCATION",
+      "note": "Remote is a policy, not a perk. Naming the overlap hours is what separates a real remote policy from a line that will be contradicted in the first interview."
+    },
+    {
+      "token": "PROCESS",
+      "note": "Publishing the stage count and elapsed time reduces drop-off between application and first call more than any culture copy. Paid exercises cost money and are the strongest signal of respect a small company can send."
+    },
+    {
+      "token": "STYLE",
+      "note": "Editorial suits companies whose credibility comes from writing; brutalist suits design-led studios. Neither rescues a page with no salary ranges."
+    },
+    {
+      "token": "MOTION",
+      "note": "None is correct here. Candidates usually open this page on a phone between other things, and motion delays the only information they came for."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the role row first with a real salary in it, then the page around it. Without a number in the first generation, the model will design a layout that has nowhere natural to put one."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add an employee testimonial carousel and a photo grid. Remove both unless the photos are of the actual team; generic stock imagery actively reduces trust on this page."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for roles to render from a data array. Careers pages change more often than any other marketing page, and hand-editing rows is where stale listings come from."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Put the honesty paragraph in its own file and iterate on it separately. It is the highest-value copy on the page and it benefits from being rewritten more than the layout does."
+    }
+  ],
+  "failures": [
+    {
+      "title": "No salary range",
+      "body": "The strongest candidates filter themselves out rather than ask, and the ones who remain are disproportionately those willing to accept anything. The range is the cheapest quality filter on the page."
+    },
+    {
+      "title": "Mission before roles",
+      "body": "A full-screen statement about changing the world pushes the only section with facts below the fold. Candidates who came from a job board close the tab rather than scroll."
+    },
+    {
+      "title": "Process with no timeline",
+      "body": "Four stages, no dates, no indication of whether it takes a week or two months. People with offers in hand need that number to decide whether to start the process at all."
+    },
+    {
+      "title": "Culture copy that describes no difficulty",
+      "body": "Every careers page says the team is collaborative and moves fast. Naming one thing the team is currently bad at is the only sentence a reader will believe, and the only one that filters for the right person."
+    }
+  ],
+  "styles": [
+    "editorial",
+    "modern-tech",
+    "neo-brutalism",
+    "swiss-style"
+  ],
+  "motions": [
+    "scroll-reveal",
+    "text-mask-reveal"
+  ]
+}

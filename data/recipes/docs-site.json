@@ -1,0 +1,246 @@
+{
+  "slug": "docs-site",
+  "name": "Documentation Site",
+  "category": "content",
+  "order": 8,
+  "updatedAt": "2026-10-27",
+  "readingTime": 9,
+  "summary": "Three columns, one of which does not scroll. Grouped navigation, a code block that never widens the page, and the answer in the first two sentences.",
+  "lede": "Documentation is the only kind of site where the reader arrives with a specific question and leaves the moment they have the answer. That changes the design: navigation has to be persistent, the answer has to be early, and nothing may move under the pointer while someone is copying a command.",
+  "brief": [
+    "Generated documentation sites usually copy the visual language of a blog — a wide content column, a hero, cards — and skip the two things that make docs work: a navigation tree that stays put, and a content column narrow enough to read code against prose.",
+    "There is also a specific technical failure worth designing against. A code block with a long line will stretch its container, and because the container is a grid cell, the whole page widens and the layout breaks horizontally. The prompt below fixes the column widths explicitly, so long lines scroll inside the block instead of pushing the page."
+  ],
+  "sections": [
+    {
+      "name": "Top bar",
+      "why": "Product name, version selector, search, and one link back to the marketing site. The version selector belongs here because it changes every other page's content."
+    },
+    {
+      "name": "Left navigation",
+      "why": "Grouped, collapsible, and sticky. Current page marked by weight and a left bar, not just colour. This is the page's map and it must never scroll away."
+    },
+    {
+      "name": "Content column",
+      "why": "One h1 per page, answer in the first two sentences, then detail. Reading measure around 72 characters with code blocks allowed slightly wider."
+    },
+    {
+      "name": "On this page",
+      "why": "A right-hand table of contents generated from h2 and h3. It is how a returning reader jumps straight to the parameter they forgot."
+    },
+    {
+      "name": "Code blocks",
+      "why": "Horizontal scroll inside the block, never page-level overflow. Copy button, language label, and no line numbers on short snippets."
+    },
+    {
+      "name": "Callouts",
+      "why": "Two kinds only: a note and a warning. Three or more visual weights and every callout stops being read."
+    },
+    {
+      "name": "Prev / next",
+      "why": "Sequential navigation for guides, none for reference pages. Reference is looked up, guides are read in order — they need different footers."
+    },
+    {
+      "name": "Feedback line",
+      "why": "One question at the end: was this page useful. It is the only cheap signal that a page is failing, and it costs two links."
+    }
+  ],
+  "promptLines": [
+    "Build a documentation site for {{DOC_TYPE}}.",
+    "",
+    "AUDIENCE",
+    "A developer who is mid-task, has the editor open in another window, and will read for about forty seconds before trying something. They arrive from a search result that pointed at one section, not at the page they are now on.",
+    "",
+    "STRUCTURE (exactly this layout)",
+    "1. Top bar, full width, 56px tall, sticky: product name, version selector, a search field that opens a dialog, and one link back to the main site. No marketing navigation in the docs.",
+    "2. Body: a three-column grid — 240px navigation, fluid content capped at 720px, 200px table of contents. Below 1100px the table of contents collapses into a disclosure above the h1. Below 800px the navigation becomes a slide-over triggered by a button in the top bar.",
+    "3. Left navigation: {{NAV}} Groups are collapsible, the current page is marked with font weight plus a 3px left bar, and the whole column scrolls independently of the content.",
+    "4. Content: h1, then a one-sentence statement of what the page covers, then the answer or the first working example within the first two paragraphs. Detail follows. Never open with background.",
+    "5. Code: {{CODE}} Every block has a copy button and a language label. Long lines scroll horizontally inside the block — the page itself must never scroll horizontally.",
+    "6. Callouts: exactly two styles, Note and Warning. Inline code is a tinted background with a mono face at 0.9em.",
+    "7. Footer of content: prev/next links where the page is part of a sequence, plus a feedback line with two links (Yes / No).",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
+    "CONTENT RULES",
+    "- Every procedure is numbered, and every step starts with a verb.",
+    "- Second person, present tense. You run, not the user should run.",
+    "- No sentence longer than 25 words in a procedure.",
+    "- Placeholders in angle brackets and uppercase: <API_KEY>, not your-api-key-here.",
+    "- Every code sample must be runnable as written, with the placeholder substituted.",
+    "- No page may end without either a next step or a related link.",
+    "",
+    "CONSTRAINTS",
+    "- Sticky columns must use position: sticky with align-self: start, or the grid stretch defeats them.",
+    "- The code block container needs min-width: 0 on the grid child, otherwise long lines widen the page.",
+    "- Body text at least 15px, code at least 13.5px with 1.6 line height.",
+    "- Heading anchors on every h2 and h3, visible on hover, focusable by keyboard.",
+    "- Search must be reachable with a keyboard shortcut shown in the field.",
+    "- Print stylesheet: hide navigation, expand code, keep URLs visible.",
+    "",
+    "OUTPUT",
+    "One documentation page plus the layout shell. Self-contained, no build step."
+  ],
+  "controls": [
+    {
+      "id": "DOC_TYPE",
+      "label": "Documentation type",
+      "options": [
+        {
+          "label": "API reference",
+          "value": "an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone.",
+          "hint": "Parameter tables and copyable examples are the entire page."
+        },
+        {
+          "label": "Product guides",
+          "value": "task-based product guides. Pages are organised by job to be done (Connect your first source, Set up an alert), and each one ends with a next step. Sequential navigation matters."
+        },
+        {
+          "label": "SDK documentation",
+          "value": "an SDK reference organised by language. The version selector picks the language as well as the release, and every code block has tabs for the supported languages, with the selected tab remembered across pages."
+        }
+      ]
+    },
+    {
+      "id": "NAV",
+      "label": "Navigation shape",
+      "options": [
+        {
+          "label": "Grouped tree",
+          "value": "Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session.",
+          "hint": "The default for anything with more than ten pages."
+        },
+        {
+          "label": "Flat list",
+          "value": "Use a flat list of up to twelve items with no grouping, each one a single line. Works only when the whole product fits in a dozen concepts."
+        },
+        {
+          "label": "Two-level tabs",
+          "value": "Use primary tabs across the top of the content column (Guides, Reference, Changelog) with the sidebar showing only the items of the active tab."
+        }
+      ]
+    },
+    {
+      "id": "CODE",
+      "label": "Code presentation",
+      "options": [
+        {
+          "label": "Tabs per language",
+          "value": "Language tabs above each block, using button elements with aria-selected, and the chosen language persisted for the session. The first tab is the one most readers use, which is usually cURL for APIs and the primary SDK otherwise."
+        },
+        {
+          "label": "Single block",
+          "value": "A single block per example with no tabs, labelled by language in the corner. Simpler, and honest when only one language is genuinely supported."
+        },
+        {
+          "label": "Blocks plus output",
+          "value": "Two adjacent blocks per example: request and response, side by side above 900px and stacked below. The response block is collapsed by default beyond twenty lines."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Technical neutral",
+          "value": "Technical neutral: white content on a #fbfbfc canvas, 240px sidebar at #f7f8fa with a 1px right border, 1px rules under headings, one blue accent for links, mono for all identifiers, no shadows anywhere."
+        },
+        {
+          "label": "Dark console",
+          "value": "Dark console: #0d1117 page, #161b22 sidebar, 1px borders at 10 percent white, code blocks at #1c2129 with a left accent bar, one cyan accent, mono for identifiers and labels."
+        },
+        {
+          "label": "Swiss docs",
+          "value": "Swiss docs: pure white, black text, no tinted sidebar — a 1px vertical rule separates navigation from content, section labels in uppercase at 0.7rem with wide tracking, one red accent for the current page."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation. Documentation is a tool used repeatedly; any movement becomes an obstacle on the second visit."
+        },
+        {
+          "label": "Transitions only",
+          "value": "Only 120ms colour transitions on links and buttons, and a 150ms fade when the table of contents updates its active item. Nothing slides, nothing reveals on scroll."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "DOC_TYPE",
+      "note": "This changes the page template more than any other variable. An API reference page needs a parameter table and two code blocks; a task guide needs numbered steps and a next step. Do not reuse one template for both."
+    },
+    {
+      "token": "NAV",
+      "note": "Grouping is a claim about how the product is understood. Five groups of eight says the product has five conceptual areas; a flat list of twelve says it has none. Pick the one that matches your information architecture, not the one that looks tidier."
+    },
+    {
+      "token": "CODE",
+      "note": "Tabs are only honest if every language is actually supported. A tab labelled Python that shows the same cURL command is worse than no tabs."
+    },
+    {
+      "token": "STYLE",
+      "note": "Dark documentation needs correctly themed syntax highlighting; default token colours on a dark background produce unreadable strings. If you cannot theme the highlighter, use the light style."
+    },
+    {
+      "token": "MOTION",
+      "note": "None is the right default and should be stated explicitly, or a model will add scroll-triggered fades to every section and break the reading flow."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the shell first with dummy content, then a single real page. The three-column grid with two sticky columns is the hard part and it is easier to verify empty."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a hero and a card grid at the top of the content column. Remove them: a documentation page that opens with a marketing hero pushes the actual answer below the fold."
+    },
+    {
+      "name": "Bolt",
+      "note": "Specify the syntax highlighting approach (a named library or pre-highlighted HTML). Left to itself it will inline a large dependency for what is often ten code blocks."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Generate one page, then extract the shell into a layout so subsequent pages inherit it. Page-by-page generation produces five slightly different sidebars."
+    }
+  ],
+  "failures": [
+    {
+      "title": "A code block that widens the page",
+      "body": "A long line inside a grid column expands the column, and the whole page gains a horizontal scrollbar. The fix is min-width: 0 on the grid child plus overflow-x: auto on the block — without both, the layout breaks at exactly the moment someone is copying a command."
+    },
+    {
+      "title": "The sidebar scrolls away",
+      "body": "A long page with a static sidebar means the reader at paragraph forty cannot see where they are or jump elsewhere. Sticky positioning with align-self: start is the whole fix, and it is missing from most generated docs."
+    },
+    {
+      "title": "Background before the answer",
+      "body": "Pages that open with what the concept is, then why it matters, then how it works, lose the reader who arrived from a search result for one parameter. State the answer first; background goes below, for the people who want it."
+    },
+    {
+      "title": "Every callout shouting",
+      "body": "Notes, tips, warnings, cautions and dangers in five colours mean none of them registers. Two levels is the maximum a reader can calibrate."
+    }
+  ],
+  "styles": [
+    "modern-tech",
+    "swiss-style",
+    "dark-mode",
+    "sustainable-green"
+  ],
+  "motions": [
+    "scroll-reveal",
+    "sticky-scroll-story"
+  ]
+}

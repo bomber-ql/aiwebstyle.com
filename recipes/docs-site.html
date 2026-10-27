@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Site — Prompt Recipe for AI Website Builders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="recipe.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Three columns, one of which does not scroll. Grouped navigation, a code block that never widens the page, and the answer in the first two sentences. A structu">
+    <link rel="canonical" href="https://www.aiwebstyle.com/recipes/docs-site.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Documentation Site — Prompt Recipe">
+    <meta property="og:description" content="Three columns, one of which does not scroll. Grouped navigation, a code block that never widens the page, and the answer in the first two sentences. A structu">
+    <meta property="og:url" content="https://www.aiwebstyle.com/recipes/docs-site.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Documentation Site — prompt recipe","description":"Three columns, one of which does not scroll. Grouped navigation, a code block that never widens the page, and the answer in the first two sentences. A structu","inLanguage":"en","url":"https://www.aiwebstyle.com/recipes/docs-site.html","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Top bar","text":"Product name, version selector, search, and one link back to the marketing site. The version selector belongs here because it changes every other page's content."},{"@type":"HowToStep","name":"Left navigation","text":"Grouped, collapsible, and sticky. Current page marked by weight and a left bar, not just colour. This is the page's map and it must never scroll away."},{"@type":"HowToStep","name":"Content column","text":"One h1 per page, answer in the first two sentences, then detail. Reading measure around 72 characters with code blocks allowed slightly wider."},{"@type":"HowToStep","name":"On this page","text":"A right-hand table of contents generated from h2 and h3. It is how a returning reader jumps straight to the parameter they forgot."},{"@type":"HowToStep","name":"Code blocks","text":"Horizontal scroll inside the block, never page-level overflow. Copy button, language label, and no line numbers on short snippets."},{"@type":"HowToStep","name":"Callouts","text":"Two kinds only: a note and a warning. Three or more visual weights and every callout stops being read."},{"@type":"HowToStep","name":"Prev / next","text":"Sequential navigation for guides, none for reference pages. Reference is looked up, guides are read in order — they need different footers."},{"@type":"HowToStep","name":"Feedback line","text":"One question at the end: was this page useful. It is the only cheap signal that a page is failing, and it costs two links."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <p class="rc-band-title">Prompt Recipes</p>
+            <p>Whole pages, described precisely enough that the first build is the one you keep.</p>
+        </div>
+    </header>
+
+    <main class="rc-wrap">
+        <p class="rc-crumb"><a href="index.html">← All prompt recipes</a></p>
+
+        <h1 class="rc-title">Documentation Site</h1>
+        <p class="rc-lede">Documentation is the only kind of site where the reader arrives with a specific question and leaves the moment they have the answer. That changes the design: navigation has to be persistent, the answer has to be early, and nothing may move under the pointer while someone is copying a command.</p>
+
+        <div class="rc-meta">
+            <span>Content</span>
+            <span>8 sections</span>
+            <span>5 variables</span>
+            <span>9 min read</span>
+        </div>
+
+        <section class="rc-section">
+            <h2>What this page has to do</h2>
+            <p>Generated documentation sites usually copy the visual language of a blog — a wide content column, a hero, cards — and skip the two things that make docs work: a navigation tree that stays put, and a content column narrow enough to read code against prose.</p>
+            <p>There is also a specific technical failure worth designing against. A code block with a long line will stretch its container, and because the container is a grid cell, the whole page widens and the layout breaks horizontally. The prompt below fixes the column widths explicitly, so long lines scroll inside the block instead of pushing the page.</p>
+        </section>
+
+        <section class="rc-section">
+            <h2>Section order</h2>
+            <p class="rc-note">The order is the argument. Reordering these is not a layout decision, it is a change to the reasoning.</p>
+            <ol class="rc-order">
+                <li>
+                    <span class="rc-step">01</span>
+                    <div>
+                        <h3>Top bar</h3>
+                        <p>Product name, version selector, search, and one link back to the marketing site. The version selector belongs here because it changes every other page's content.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">02</span>
+                    <div>
+                        <h3>Left navigation</h3>
+                        <p>Grouped, collapsible, and sticky. Current page marked by weight and a left bar, not just colour. This is the page's map and it must never scroll away.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">03</span>
+                    <div>
+                        <h3>Content column</h3>
+                        <p>One h1 per page, answer in the first two sentences, then detail. Reading measure around 72 characters with code blocks allowed slightly wider.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">04</span>
+                    <div>
+                        <h3>On this page</h3>
+                        <p>A right-hand table of contents generated from h2 and h3. It is how a returning reader jumps straight to the parameter they forgot.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">05</span>
+                    <div>
+                        <h3>Code blocks</h3>
+                        <p>Horizontal scroll inside the block, never page-level overflow. Copy button, language label, and no line numbers on short snippets.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">06</span>
+                    <div>
+                        <h3>Callouts</h3>
+                        <p>Two kinds only: a note and a warning. Three or more visual weights and every callout stops being read.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">07</span>
+                    <div>
+                        <h3>Prev / next</h3>
+                        <p>Sequential navigation for guides, none for reference pages. Reference is looked up, guides are read in order — they need different footers.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">08</span>
+                    <div>
+                        <h3>Feedback line</h3>
+                        <p>One question at the end: was this page useful. It is the only cheap signal that a page is failing, and it costs two links.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="rc-section" id="prompt">
+            <h2>Build the prompt</h2>
+            <p class="rc-note">5 variables. Change one and the text below rewrites itself — nothing else on this page moves.</p>
+            <div class="rc-controls">
+            <div class="rc-control">
+                <label for="rc-DOC_TYPE">Documentation type</label>
+                <select id="rc-DOC_TYPE" data-rc="DOC_TYPE">
+                    <option value="an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone.">API reference</option>
+                    <option value="task-based product guides. Pages are organised by job to be done (Connect your first source, Set up an alert), and each one ends with a next step. Sequential navigation matters.">Product guides</option>
+                    <option value="an SDK reference organised by language. The version selector picks the language as well as the release, and every code block has tabs for the supported languages, with the selected tab remembered across pages.">SDK documentation</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-NAV">Navigation shape</label>
+                <select id="rc-NAV" data-rc="NAV">
+                    <option value="Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session.">Grouped tree</option>
+                    <option value="Use a flat list of up to twelve items with no grouping, each one a single line. Works only when the whole product fits in a dozen concepts.">Flat list</option>
+                    <option value="Use primary tabs across the top of the content column (Guides, Reference, Changelog) with the sidebar showing only the items of the active tab.">Two-level tabs</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-CODE">Code presentation</label>
+                <select id="rc-CODE" data-rc="CODE">
+                    <option value="Language tabs above each block, using button elements with aria-selected, and the chosen language persisted for the session. The first tab is the one most readers use, which is usually cURL for APIs and the primary SDK otherwise.">Tabs per language</option>
+                    <option value="A single block per example with no tabs, labelled by language in the corner. Simpler, and honest when only one language is genuinely supported.">Single block</option>
+                    <option value="Two adjacent blocks per example: request and response, side by side above 900px and stacked below. The response block is collapsed by default beyond twenty lines.">Blocks plus output</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-STYLE">Visual style</label>
+                <select id="rc-STYLE" data-rc="STYLE">
+                    <option value="Technical neutral: white content on a #fbfbfc canvas, 240px sidebar at #f7f8fa with a 1px right border, 1px rules under headings, one blue accent for links, mono for all identifiers, no shadows anywhere.">Technical neutral</option>
+                    <option value="Dark console: #0d1117 page, #161b22 sidebar, 1px borders at 10 percent white, code blocks at #1c2129 with a left accent bar, one cyan accent, mono for identifiers and labels.">Dark console</option>
+                    <option value="Swiss docs: pure white, black text, no tinted sidebar — a 1px vertical rule separates navigation from content, section labels in uppercase at 0.7rem with wide tracking, one red accent for the current page.">Swiss docs</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-MOTION">Motion level</label>
+                <select id="rc-MOTION" data-rc="MOTION">
+                    <option value="No animation. Documentation is a tool used repeatedly; any movement becomes an obstacle on the second visit.">None</option>
+                    <option value="Only 120ms colour transitions on links and buttons, and a 150ms fade when the table of contents updates its active item. Nothing slides, nothing reveals on scroll.">Transitions only</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="rc-prompt">
+                <div class="rc-bar">
+                    <span class="rc-bar-label">Assembled prompt</span>
+                    <span class="rc-count" id="rcCount"></span>
+                    <button class="rc-btn" id="rcReset" type="button">Reset</button>
+                    <button class="rc-btn rc-btn-primary" id="rcCopy" type="button">Copy</button>
+                </div>
+                <pre id="rcPrompt">Build a documentation site for an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone..
+
+AUDIENCE
+A developer who is mid-task, has the editor open in another window, and will read for about forty seconds before trying something. They arrive from a search result that pointed at one section, not at the page they are now on.
+
+STRUCTURE (exactly this layout)
+1. Top bar, full width, 56px tall, sticky: product name, version selector, a search field that opens a dialog, and one link back to the main site. No marketing navigation in the docs.
+2. Body: a three-column grid — 240px navigation, fluid content capped at 720px, 200px table of contents. Below 1100px the table of contents collapses into a disclosure above the h1. Below 800px the navigation becomes a slide-over triggered by a button in the top bar.
+3. Left navigation: Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session. Groups are collapsible, the current page is marked with font weight plus a 3px left bar, and the whole column scrolls independently of the content.
+4. Content: h1, then a one-sentence statement of what the page covers, then the answer or the first working example within the first two paragraphs. Detail follows. Never open with background.
+5. Code: Language tabs above each block, using button elements with aria-selected, and the chosen language persisted for the session. The first tab is the one most readers use, which is usually cURL for APIs and the primary SDK otherwise. Every block has a copy button and a language label. Long lines scroll horizontally inside the block — the page itself must never scroll horizontally.
+6. Callouts: exactly two styles, Note and Warning. Inline code is a tinted background with a mono face at 0.9em.
+7. Footer of content: prev/next links where the page is part of a sequence, plus a feedback line with two links (Yes / No).
+
+STYLE
+Technical neutral: white content on a #fbfbfc canvas, 240px sidebar at #f7f8fa with a 1px right border, 1px rules under headings, one blue accent for links, mono for all identifiers, no shadows anywhere.
+
+MOTION
+No animation. Documentation is a tool used repeatedly; any movement becomes an obstacle on the second visit.
+
+CONTENT RULES
+- Every procedure is numbered, and every step starts with a verb.
+- Second person, present tense. You run, not the user should run.
+- No sentence longer than 25 words in a procedure.
+- Placeholders in angle brackets and uppercase: &lt;API_KEY&gt;, not your-api-key-here.
+- Every code sample must be runnable as written, with the placeholder substituted.
+- No page may end without either a next step or a related link.
+
+CONSTRAINTS
+- Sticky columns must use position: sticky with align-self: start, or the grid stretch defeats them.
+- The code block container needs min-width: 0 on the grid child, otherwise long lines widen the page.
+- Body text at least 15px, code at least 13.5px with 1.6 line height.
+- Heading anchors on every h2 and h3, visible on hover, focusable by keyboard.
+- Search must be reachable with a keyboard shortcut shown in the field.
+- Print stylesheet: hide navigation, expand code, keep URLs visible.
+
+OUTPUT
+One documentation page plus the layout shell. Self-contained, no build step.</pre>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>What to change, and what to leave alone</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Variable</th><th scope="col">How to edit it</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><code>{{DOC_TYPE}}</code></th>
+                    <td>This changes the page template more than any other variable. An API reference page needs a parameter table and two code blocks; a task guide needs numbered steps and a next step. Do not reuse one template for both.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{NAV}}</code></th>
+                    <td>Grouping is a claim about how the product is understood. Five groups of eight says the product has five conceptual areas; a flat list of twelve says it has none. Pick the one that matches your information architecture, not the one that looks tidier.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{CODE}}</code></th>
+                    <td>Tabs are only honest if every language is actually supported. A tab labelled Python that shows the same cURL command is worse than no tabs.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{STYLE}}</code></th>
+                    <td>Dark documentation needs correctly themed syntax highlighting; default token colours on a dark background produce unreadable strings. If you cannot theme the highlighter, use the light style.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{MOTION}}</code></th>
+                    <td>None is the right default and should be stated explicitly, or a model will add scroll-triggered fades to every section and break the reading flow.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Feeding it to each builder</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Builder</th><th scope="col">What to do differently</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">v0</th>
+                    <td>Generate the shell first with dummy content, then a single real page. The three-column grid with two sticky columns is the hard part and it is easier to verify empty.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lovable</th>
+                    <td>It will add a hero and a card grid at the top of the content column. Remove them: a documentation page that opens with a marketing hero pushes the actual answer below the fold.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bolt</th>
+                    <td>Specify the syntax highlighting approach (a named library or pre-highlighted HTML). Left to itself it will inline a large dependency for what is often ten code blocks.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Cursor / Claude Code</th>
+                    <td>Generate one page, then extract the shell into a layout so subsequent pages inherit it. Page-by-page generation produces five slightly different sidebars.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Where it usually breaks</h2>
+            <div class="rc-failures">
+                <article class="rc-failure">
+                    <h3><span>01</span>A code block that widens the page</h3>
+                    <p>A long line inside a grid column expands the column, and the whole page gains a horizontal scrollbar. The fix is min-width: 0 on the grid child plus overflow-x: auto on the block — without both, the layout breaks at exactly the moment someone is copying a command.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>02</span>The sidebar scrolls away</h3>
+                    <p>A long page with a static sidebar means the reader at paragraph forty cannot see where they are or jump elsewhere. Sticky positioning with align-self: start is the whole fix, and it is missing from most generated docs.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>03</span>Background before the answer</h3>
+                    <p>Pages that open with what the concept is, then why it matters, then how it works, lose the reader who arrived from a search result for one parameter. State the answer first; background goes below, for the people who want it.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>04</span>Every callout shouting</h3>
+                    <p>Notes, tips, warnings, cautions and dangers in five colours mean none of them registers. Two levels is the maximum a reader can calibrate.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>Pair it with</h2>
+                <div class="rc-rel-group">
+                    <h3>Styles that carry this page</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../styles/modern-tech.html">modern tech</a><a class="rc-chip" href="../styles/swiss-style.html">swiss style</a><a class="rc-chip" href="../styles/dark-mode.html">dark mode</a><a class="rc-chip" href="../styles/sustainable-green.html">sustainable green</a></div>
+                </div>
+                <div class="rc-rel-group">
+                    <h3>Motion to pair with it</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../motions/scroll-reveal.html">scroll reveal</a><a class="rc-chip" href="../motions/sticky-scroll-story.html">sticky scroll story</a></div>
+                </div>
+        </section>
+
+        <nav class="rc-chain">
+            <a href="index.html">All recipes</a>
+            <a href="pricing-page.html">← Pricing Page</a><a href="onboarding-flow.html">Onboarding Flow →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+        </div>
+    </footer>
+
+    <script type="application/json" id="rcSource">{"lines":["Build a documentation site for {{DOC_TYPE}}.","","AUDIENCE","A developer who is mid-task, has the editor open in another window, and will read for about forty seconds before trying something. They arrive from a search result that pointed at one section, not at the page they are now on.","","STRUCTURE (exactly this layout)","1. Top bar, full width, 56px tall, sticky: product name, version selector, a search field that opens a dialog, and one link back to the main site. No marketing navigation in the docs.","2. Body: a three-column grid — 240px navigation, fluid content capped at 720px, 200px table of contents. Below 1100px the table of contents collapses into a disclosure above the h1. Below 800px the navigation becomes a slide-over triggered by a button in the top bar.","3. Left navigation: {{NAV}} Groups are collapsible, the current page is marked with font weight plus a 3px left bar, and the whole column scrolls independently of the content.","4. Content: h1, then a one-sentence statement of what the page covers, then the answer or the first working example within the first two paragraphs. Detail follows. Never open with background.","5. Code: {{CODE}} Every block has a copy button and a language label. Long lines scroll horizontally inside the block — the page itself must never scroll horizontally.","6. Callouts: exactly two styles, Note and Warning. Inline code is a tinted background with a mono face at 0.9em.","7. Footer of content: prev/next links where the page is part of a sequence, plus a feedback line with two links (Yes / No).","","STYLE","{{STYLE}}","","MOTION","{{MOTION}}","","CONTENT RULES","- Every procedure is numbered, and every step starts with a verb.","- Second person, present tense. You run, not the user should run.","- No sentence longer than 25 words in a procedure.","- Placeholders in angle brackets and uppercase: \u003cAPI_KEY>, not your-api-key-here.","- Every code sample must be runnable as written, with the placeholder substituted.","- No page may end without either a next step or a related link.","","CONSTRAINTS","- Sticky columns must use position: sticky with align-self: start, or the grid stretch defeats them.","- The code block container needs min-width: 0 on the grid child, otherwise long lines widen the page.","- Body text at least 15px, code at least 13.5px with 1.6 line height.","- Heading anchors on every h2 and h3, visible on hover, focusable by keyboard.","- Search must be reachable with a keyboard shortcut shown in the field.","- Print stylesheet: hide navigation, expand code, keep URLs visible.","","OUTPUT","One documentation page plus the layout shell. Self-contained, no build step."],"defaults":{"DOC_TYPE":"an API reference. Pages are organised by endpoint, each with method and path as the h1, a parameter table, one request example and one response example. Sequential navigation is wrong here; every page stands alone.","NAV":"Use a grouped tree of five sections maximum, each with a collapsible header and up to eight items. The group containing the current page is open; the others are closed but remember their state per session.","CODE":"Language tabs above each block, using button elements with aria-selected, and the chosen language persisted for the session. The first tab is the one most readers use, which is usually cURL for APIs and the primary SDK otherwise.","STYLE":"Technical neutral: white content on a #fbfbfc canvas, 240px sidebar at #f7f8fa with a 1px right border, 1px rules under headings, one blue accent for links, mono for all identifiers, no shadows anywhere.","MOTION":"No animation. Documentation is a tool used repeatedly; any movement becomes an obstacle on the second visit."}}</script>
+    <script src="../script.js" defer></script>
+    <script>
+(function () {
+    var src = JSON.parse(document.getElementById('rcSource').textContent);
+    var pre = document.getElementById('rcPrompt');
+    var count = document.getElementById('rcCount');
+    var selects = Array.prototype.slice.call(document.querySelectorAll('[data-rc]'));
+
+    function current() {
+        var v = {};
+        selects.forEach(function (s) { v[s.getAttribute('data-rc')] = s.value; });
+        return v;
+    }
+
+    function render(track) {
+        var v = track || src.defaults;
+        var text = src.lines.map(function (line) {
+            return line.replace(/\{\{(\w+)\}\}/g, function (m, key) {
+                return v[key] == null ? m : v[key];
+            });
+        }).join('\n');
+        pre.textContent = text;
+        count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
+    }
+
+    selects.forEach(function (s) {
+        s.addEventListener('change', function () { render(current()); });
+    });
+
+    document.getElementById('rcReset').addEventListener('click', function () {
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        render(src.defaults);
+    });
+
+    document.getElementById('rcCopy').addEventListener('click', function () {
+        var btn = this;
+        var done = function (ok) {
+            btn.textContent = ok ? 'Copied' : 'Select manually';
+            btn.classList.toggle('is-done', ok);
+            setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('is-done'); }, 1600);
+            if (!ok) {
+                var range = document.createRange();
+                range.selectNodeContents(pre);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pre.textContent).then(function () { done(true); }, function () { done(false); });
+        } else { done(false); }
+    });
+
+    render(src.defaults);
+})();
+    </script>
+</body>
+</html>

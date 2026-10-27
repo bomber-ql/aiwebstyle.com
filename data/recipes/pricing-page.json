@@ -1,0 +1,271 @@
+{
+  "slug": "pricing-page",
+  "name": "Pricing Page",
+  "category": "marketing",
+  "order": 7,
+  "updatedAt": "2026-10-27",
+  "readingTime": 8,
+  "summary": "One recommended tier, numeric limits instead of the word unlimited, and a comparison table short enough to read. Where most AI pricing pages quietly lie.",
+  "lede": "A pricing page is not a list of features. It is a decision aid, and its job is to make one option obviously correct for a specific reader. Pages that present four equal choices are not being generous, they are transferring the work of choosing back to the visitor — who usually responds by leaving.",
+  "brief": [
+    "The generated version of this page has a familiar shape: three columns of identical height, each with a checkmark list of twelve features, a middle column labelled Most popular, and four plans where the top one says Contact us with no indication of what it costs. None of it helps anyone decide.",
+    "Two rules fix most of it. First, every limit is a number, not an adjective — 10,000 events per month means something, unlimited does not. Second, the comparison table is short and grouped, because a forty-row table is a spreadsheet, not an argument. The prompt below enforces both, plus the thing pricing pages most often get wrong: what happens when you exceed a limit."
+  ],
+  "sections": [
+    {
+      "name": "Title and billing toggle",
+      "why": "One sentence naming who the page is for, then monthly/annual. The toggle sits above the tiers so the price a visitor remembers is the one for their billing choice."
+    },
+    {
+      "name": "Three tiers",
+      "why": "One tier is marked recommended and carries a one-line reason. Equal-weight columns make the reader do comparison work the page should have done."
+    },
+    {
+      "name": "What every plan includes",
+      "why": "The shared floor stated once, above or below the tiers. Repeating it three times triples the reading load and hides the differences."
+    },
+    {
+      "name": "Limits, numerically",
+      "why": "Seats, projects, events, retention, API calls — as numbers with units. Unlimited is a promise the infrastructure will eventually break."
+    },
+    {
+      "name": "Comparison table",
+      "why": "Six to ten rows grouped in three sections, differences only. If a row is identical across all tiers it belongs in the shared floor, not the table."
+    },
+    {
+      "name": "Overage behaviour",
+      "why": "What happens at the limit: throttle, bill, or block. This single line prevents most support tickets and most refund requests."
+    },
+    {
+      "name": "FAQ",
+      "why": "Five questions: changing plans, refunds, tax and invoicing, overage, and what enterprise adds. These are the five emails sales would otherwise answer."
+    },
+    {
+      "name": "Final CTA",
+      "why": "One action, matching the recommended tier. Two competing CTAs at the bottom re-open a decision the page just closed."
+    }
+  ],
+  "promptLines": [
+    "Build a pricing page for a {{PRODUCT}} whose model is {{MODEL}}.",
+    "",
+    "AUDIENCE",
+    "Someone who has already decided the product might fit and is now choosing a plan. They are comparing against one competitor and they will leave if the page requires arithmetic.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. Header: a page title of six words or fewer, one sentence naming who each plan is for, and a {{TOGGLE}}",
+    "2. Tiers: {{TIERS}} Exactly one is marked Recommended, with a one-line reason (for example: most teams of 10 to 30 people land here).",
+    "3. Shared floor: one short block listing what every plan includes, stated once.",
+    "4. Limits: a compact table of numeric limits per plan — seats, projects, monthly events, data retention in days, API rate limit. Every number carries a unit.",
+    "5. Comparison table: {{COMPARE}} Six to ten rows maximum, grouped under three headings, listing differences only. Identical rows belong in the shared floor.",
+    "6. Overage behaviour: one sentence per plan stating what happens when a limit is reached — throttle, metered billing, or block until upgrade. Name the price per unit if metered.",
+    "7. FAQ: exactly five questions — switching plans mid-cycle, refund policy, tax and invoicing, what happens at a limit, and what the top tier adds beyond the listed features.",
+    "8. Final CTA: one button, matching the recommended tier, plus a plain-text line for sales contact.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- Never write unlimited. Every limit is a number with a unit.",
+    "- No price without a currency symbol and a tax basis (per month, excluding VAT, billed annually).",
+    "- State the annual discount as an absolute number and a percentage, not as save big.",
+    "- Do not describe a plan by its features; describe who it is for, then list the features.",
+    "- No asterisked conditions below the fold. If a limit has a condition, it goes beside the limit.",
+    "- No dark patterns: no pre-ticked add-ons, no fake countdowns, no hidden annual commitment.",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
+    "CONSTRAINTS",
+    "- Tier cards must be equal height at every viewport, with the CTA aligned on one baseline.",
+    "- On mobile the recommended tier appears first, followed by the other tiers in price order.",
+    "- The table must be readable at 390px wide — collapse to per-plan blocks rather than horizontal scroll.",
+    "- Every price element marked up as text, never baked into an image.",
+    "",
+    "OUTPUT",
+    "One page. Self-contained. A single stylesheet."
+  ],
+  "controls": [
+    {
+      "id": "PRODUCT",
+      "label": "What is being sold",
+      "options": [
+        {
+          "label": "B2B SaaS",
+          "value": "a B2B SaaS product bought by a team, where the buyer is a manager and the users are their staff"
+        },
+        {
+          "label": "Developer tool",
+          "value": "a developer tool bought bottom-up, where an individual signs up first and the company pays later"
+        },
+        {
+          "label": "Marketplace",
+          "value": "a two-sided marketplace where the paying side is sellers and the free side is buyers"
+        }
+      ]
+    },
+    {
+      "id": "MODEL",
+      "label": "Pricing model",
+      "options": [
+        {
+          "label": "Per seat",
+          "value": "per seat, with volume breaks at 10, 25 and 50 seats. Seat changes are prorated to the day.",
+          "hint": "Simplest to explain and to forecast."
+        },
+        {
+          "label": "Usage-based",
+          "value": "usage-based on events, with three worked examples of what a month costs at 10k, 100k and 1M events. Include the per-unit rate above the included allowance.",
+          "hint": "Honest, but needs the worked examples or nobody can budget."
+        },
+        {
+          "label": "Flat + add-ons",
+          "value": "a flat platform fee per tier plus named add-ons priced individually, with the add-on prices visible on this page rather than behind a sales call."
+        }
+      ]
+    },
+    {
+      "id": "TIERS",
+      "label": "Tier shape",
+      "options": [
+        {
+          "label": "Three tiers",
+          "value": "three tiers (Free, Team, Business) with the middle one recommended. Free is genuinely useful, not a trial — state its limits plainly."
+        },
+        {
+          "label": "Two plus enterprise",
+          "value": "two self-serve tiers plus one Enterprise column that lists what it adds (SSO, audit log, SLA, invoicing) and gives a starting price rather than hiding it entirely."
+        },
+        {
+          "label": "Four tiers",
+          "value": "four tiers with a free entry point, but only one recommended; the fourth must be clearly for a different buyer, not a bigger version of the third."
+        }
+      ]
+    },
+    {
+      "id": "TOGGLE",
+      "label": "Billing toggle",
+      "options": [
+        {
+          "label": "Monthly / annual",
+          "value": "a monthly and annual toggle where annual shows the effective monthly price plus the total charged per year and the exact saving."
+        },
+        {
+          "label": "No toggle",
+          "value": "no toggle at all: annual only, stated plainly, because the product is sold to finance departments and monthly billing creates work for everyone."
+        }
+      ]
+    },
+    {
+      "id": "COMPARE",
+      "label": "Comparison layout",
+      "options": [
+        {
+          "label": "Grouped table",
+          "value": "a grouped comparison table with three sections (Limits, Collaboration, Security), six to ten rows total, and a checkmark, dash or number in each cell — never a vague word.",
+          "hint": "Best when the differences are genuinely tabular."
+        },
+        {
+          "label": "Card lists only",
+          "value": "no comparison table. Each tier card carries its five most important differences as a list, and a short paragraph beneath the cards explains what does not change between plans.",
+          "hint": "Better on mobile and for products with few differences."
+        },
+        {
+          "label": "Table plus cards",
+          "value": "cards for the decision, then a table for the detail, placed below the FAQ where only a careful reader will reach it."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Product neutral",
+          "value": "Product neutral: white cards on a very light grey canvas, 1px borders, one accent used only on the recommended tier's border and button, prices at 2.4rem with the currency symbol at 60 percent size."
+        },
+        {
+          "label": "Editorial",
+          "value": "Editorial: no cards at all — tiers separated by vertical rules, serif prices at 2.6rem, small caps labels, one accent line above the recommended column."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px black borders, 6px hard shadows, one saturated fill on the recommended tier, prices in a heavy grotesque, buttons that translate 3px on press."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation. A pricing page is read, compared and screenshotted; movement only gets in the way of that."
+        },
+        {
+          "label": "Toggle only",
+          "value": "The only transition is a 150ms crossfade when the billing toggle changes the numbers. Nothing enters, nothing lifts on hover."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "MODEL",
+      "note": "This decides what the limits table contains. Switching from seats to usage without rewriting the table produces a page that lists seat counts for a product billed per event."
+    },
+    {
+      "token": "TIERS",
+      "note": "Three is the default because it allows a recommended middle. Four only works when the fourth serves a different buyer, otherwise it becomes the plan nobody picks and the page reads as greedy."
+    },
+    {
+      "token": "TOGGLE",
+      "note": "If annual is the only option, say so once, plainly, and show the yearly total. A hidden annual commitment discovered at checkout is the most reliable way to earn a chargeback."
+    },
+    {
+      "token": "COMPARE",
+      "note": "A table with more than ten rows stops being read and starts being scrolled. If you need forty rows, the page needs fewer plans, not a longer table."
+    },
+    {
+      "token": "STYLE",
+      "note": "Swap the block whole. Editorial styling with product-neutral prices produces serif prices inside shadowed cards, which reads as two pages stitched together."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate one tier card first and check it at 390px before asking for three. Equal-height columns with aligned CTAs are much easier to fix in isolation than across a full grid."
+    },
+    {
+      "name": "Lovable",
+      "note": "It tends to invent a fourth Enterprise plan with no price. If you keep it, the starting price must be real; a column that says Contact us next to three real prices reads as a hidden cost."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for the toggle as a real state change with both prices in the markup, not a CSS-only swap. Otherwise the annual price is invisible to search engines and to anyone with JavaScript off."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Put the plans in a JSON file and render from it. Pricing changes more often than any other page, and editing markup under pressure is how a stale price survives a launch."
+    }
+  ],
+  "failures": [
+    {
+      "title": "Three identical columns",
+      "body": "Equal height, equal weight, equal feature count. The reader is asked to find the differences themselves, and most respond by leaving to compare somewhere that already did it. One recommended tier is the entire job of this page."
+    },
+    {
+      "title": "The word unlimited",
+      "body": "Unlimited storage, unlimited seats, unlimited API calls. It is either false or it is an invitation to abuse, and sophisticated buyers read it as a sign the limits are undocumented rather than absent."
+    },
+    {
+      "title": "No overage policy",
+      "body": "A visitor calculating whether they will exceed 10,000 events does not know whether the next 5,000 cost money, get throttled, or break the integration. That uncertainty is the most common reason a trial never converts."
+    },
+    {
+      "title": "Enterprise with no number",
+      "body": "If the top tier has no price at all, the visitor assumes it is out of reach and self-disqualifies — often wrongly. A starting price, even a range, keeps the option alive."
+    }
+  ],
+  "styles": ["modern-tech", "swiss-style", "neo-brutalism", "editorial"],
+  "motions": ["scroll-reveal", "card-spotlight"]
+}

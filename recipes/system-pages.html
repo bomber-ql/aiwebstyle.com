@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error and Empty States — Prompt Recipe for AI Website Builders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="recipe.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Five screens nobody designs: 404, 500, maintenance, empty search, no permission. One template, one plain sentence, one way forward — and the correct status co">
+    <link rel="canonical" href="https://www.aiwebstyle.com/recipes/system-pages.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Error and Empty States — Prompt Recipe">
+    <meta property="og:description" content="Five screens nobody designs: 404, 500, maintenance, empty search, no permission. One template, one plain sentence, one way forward — and the correct status co">
+    <meta property="og:url" content="https://www.aiwebstyle.com/recipes/system-pages.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Error and Empty States — prompt recipe","description":"Five screens nobody designs: 404, 500, maintenance, empty search, no permission. One template, one plain sentence, one way forward — and the correct status co","inLanguage":"en","url":"https://www.aiwebstyle.com/recipes/system-pages.html","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"One template, five states","text":"Same layout, same type scale, different sentence and action. Five bespoke designs drift apart and cost five times as much to maintain."},{"@type":"HowToStep","name":"The plain sentence","text":"What happened, in words a non-technical visitor understands. The status code is a small label, not the headline."},{"@type":"HowToStep","name":"One primary action","text":"Go home, retry, search, or request access. Exactly one, matched to the state. Two actions means the page has not decided what the visitor should do."},{"@type":"HowToStep","name":"Real destinations","text":"Three to five links that actually exist. A 404 that links to a section you removed is a second failure in the same visit."},{"@type":"HowToStep","name":"Correct status code","text":"404 returns 404, 500 returns 500, maintenance returns 503 with Retry-After. Serving 200 turns an error into an indexable empty page."},{"@type":"HowToStep","name":"Empty search specifics","text":"Repeat the query, show zero results explicitly, and offer two adjacent suggestions. Silently showing an empty list is the most confusing state of the five."},{"@type":"HowToStep","name":"What not to do","text":"No auto-redirect after five seconds, no countdown that expires into another countdown, no advertising on an error page."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <p class="rc-band-title">Prompt Recipes</p>
+            <p>Whole pages, described precisely enough that the first build is the one you keep.</p>
+        </div>
+    </header>
+
+    <main class="rc-wrap">
+        <p class="rc-crumb"><a href="index.html">← All prompt recipes</a></p>
+
+        <h1 class="rc-title">Error and Empty States</h1>
+        <p class="rc-lede">These pages are the only ones a visitor sees when something has already gone wrong. They are also the pages most often shipped as an afterthought, which is why so many sites answer a broken link with a cheerful illustration and no information.</p>
+
+        <div class="rc-meta">
+            <span>Product UI</span>
+            <span>7 sections</span>
+            <span>6 variables</span>
+            <span>7 min read</span>
+        </div>
+
+        <section class="rc-section">
+            <h2>What this page has to do</h2>
+            <p>The technical failure matters as much as the visual one. An error page that returns HTTP 200 is a soft 404, and search engines will index it — a site with thirty soft 404s looks like thirty thin pages. A maintenance page with a countdown that expires but never opens is worse than no page at all.</p>
+            <p>The design rule is the same across all five states: one sentence saying what happened in plain language, one primary action, and a short list of real destinations. No mascot carrying the explanation, and no apology standing in for information.</p>
+        </section>
+
+        <section class="rc-section">
+            <h2>Section order</h2>
+            <p class="rc-note">The order is the argument. Reordering these is not a layout decision, it is a change to the reasoning.</p>
+            <ol class="rc-order">
+                <li>
+                    <span class="rc-step">01</span>
+                    <div>
+                        <h3>One template, five states</h3>
+                        <p>Same layout, same type scale, different sentence and action. Five bespoke designs drift apart and cost five times as much to maintain.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">02</span>
+                    <div>
+                        <h3>The plain sentence</h3>
+                        <p>What happened, in words a non-technical visitor understands. The status code is a small label, not the headline.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">03</span>
+                    <div>
+                        <h3>One primary action</h3>
+                        <p>Go home, retry, search, or request access. Exactly one, matched to the state. Two actions means the page has not decided what the visitor should do.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">04</span>
+                    <div>
+                        <h3>Real destinations</h3>
+                        <p>Three to five links that actually exist. A 404 that links to a section you removed is a second failure in the same visit.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">05</span>
+                    <div>
+                        <h3>Correct status code</h3>
+                        <p>404 returns 404, 500 returns 500, maintenance returns 503 with Retry-After. Serving 200 turns an error into an indexable empty page.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">06</span>
+                    <div>
+                        <h3>Empty search specifics</h3>
+                        <p>Repeat the query, show zero results explicitly, and offer two adjacent suggestions. Silently showing an empty list is the most confusing state of the five.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">07</span>
+                    <div>
+                        <h3>What not to do</h3>
+                        <p>No auto-redirect after five seconds, no countdown that expires into another countdown, no advertising on an error page.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="rc-section" id="prompt">
+            <h2>Build the prompt</h2>
+            <p class="rc-note">6 variables. Change one and the text below rewrites itself — nothing else on this page moves.</p>
+            <div class="rc-controls">
+            <div class="rc-control">
+                <label for="rc-SITE">Site type</label>
+                <select id="rc-SITE" data-rc="SITE">
+                    <option value="a reference gallery of documented styles and prompts, where a 404 is most often a stale bookmark from an older URL structure">Reference gallery</option>
+                    <option value="a SaaS application where the five states include permission errors and empty query results inside the product, not just missing pages">SaaS application</option>
+                    <option value="an online store where a 404 usually means a product was discontinued, and the page should offer the closest category rather than only the homepage">E-commerce store</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-PAGES">Which states</label>
+                <select id="rc-PAGES" data-rc="PAGES">
+                    <option value="the 404 state only, since it is the one that will actually be hit">404 only</option>
+                    <option value="404 and 500, sharing the template with different copy and different primary actions">404 and 500</option>
+                    <option value="all five: 404, 500, maintenance, empty search results, and no permission">All five</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-TONE">Tone</label>
+                <select id="rc-TONE" data-rc="TONE">
+                    <option value="Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause.">Plain</option>
+                    <option value="Dry: one understated clause of acknowledgement, then straight to the fix. No jokes that depend on the reader being amused.">Dry</option>
+                    <option value="Warm: acknowledge the interruption in one short sentence and take responsibility where the site is at fault, then give the way forward without further comment.">Warm</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-STYLE">Visual style</label>
+                <select id="rc-STYLE" data-rc="STYLE">
+                    <option value="Product neutral: the same page background as the site, one bordered block, the status code in mono at 0.75rem, heading at 1.8rem, primary button matching the site's normal button style.">Product neutral</option>
+                    <option value="Editorial: no card at all, the status code set large at 4rem in the serif face as the only decorative element, a 58-character measure for the explanation, and a plain underlined link instead of a button.">Editorial</option>
+                    <option value="Swiss: white page, twelve-column grid, the code aligned to column one in Helvetica at 5rem, a single red rule beneath it, body copy starting at column four, no button fill.">Swiss</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-ACTION">Primary action</label>
+                <select id="rc-ACTION" data-rc="ACTION">
+                    <option value="a primary button returning to the homepage, plus a search field for the 404 state">Go home</option>
+                    <option value="a retry button that reloads in place for the 500 state, with the timestamp of the failed attempt shown beneath it">Retry</option>
+                    <option value="an action matched to each state: home for 404, retry for 500, status page for maintenance, clear the query for empty search, request access for permission">Contextual</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-MOTION">Motion level</label>
+                <select id="rc-MOTION" data-rc="MOTION">
+                    <option value="No animation at all. If the stylesheet failed to load, an animated page is the one thing that looks broken rather than deliberate.">None</option>
+                    <option value="One 150ms fade on mount, disabled under reduced motion. Nothing moves after that.">Fade only</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="rc-prompt">
+                <div class="rc-bar">
+                    <span class="rc-bar-label">Assembled prompt</span>
+                    <span class="rc-count" id="rcCount"></span>
+                    <button class="rc-btn" id="rcReset" type="button">Reset</button>
+                    <button class="rc-btn rc-btn-primary" id="rcCopy" type="button">Copy</button>
+                </div>
+                <pre id="rcPrompt">Build the system pages for a reference gallery of documented styles and prompts, where a 404 is most often a stale bookmark from an older URL structure: the 404 state only, since it is the one that will actually be hit
+
+AUDIENCE
+A visitor who has just hit a dead end — a stale link, a server fault, a search with no results, or a page they are not allowed to see. They are mildly frustrated and will give the page about five seconds to offer a way forward.
+
+STRUCTURE (one shared template, repeated per state)
+1. Layout: a centred single column, maximum 640px, vertically positioned at roughly 35 percent of the viewport rather than dead centre. No site navigation is required, but the wordmark sits top left as a link home.
+2. Status line: the code or state as a small label above the heading — 404, 500, Maintenance, No results, No access. Monospace, 0.75rem, muted.
+3. Heading: one sentence in plain language stating what happened. Sentence case, no exclamation mark, no pun.
+4. Body: one or two sentences explaining the likely cause and what the visitor can do. If the visitor can fix it, say how.
+5. Primary action: a primary button returning to the homepage, plus a search field for the 404 state
+6. Destinations: three to five text links, each a page that exists today. For empty search, show the query and two adjacent suggestions instead.
+7. Footer line: the site name and a contact address. No social links, no newsletter.
+
+STYLE
+Product neutral: the same page background as the site, one bordered block, the status code in mono at 0.75rem, heading at 1.8rem, primary button matching the site's normal button style.
+
+MOTION
+No animation at all. If the stylesheet failed to load, an animated page is the one thing that looks broken rather than deliberate.
+
+COPY RULES
+- Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause.
+- Never write oops, whoops, uh oh, or looks like you are lost.
+- Never blame the visitor. A mistyped URL is the most common cause and the page still does not say you typed it wrong.
+- Name the cause when it is known: the page moved, the server failed, the link is out of date.
+- Keep the whole page under 80 words excluding navigation.
+
+CONSTRAINTS
+- 404 must be served with HTTP status 404; 500 with 500; maintenance with 503 plus a Retry-After header.
+- Error pages carry noindex and are excluded from the sitemap.
+- No advertising on any error page.
+- No automatic redirect. If a redirect is appropriate, use a 301 at the server level instead of a page.
+- Links inside error pages are root-absolute, because an error page renders at any URL depth.
+- The page must render correctly with no stylesheet, since a broken build is one of the cases it exists for.
+
+OUTPUT
+Five states sharing one template and one stylesheet. Static where possible.</pre>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>What to change, and what to leave alone</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Variable</th><th scope="col">How to edit it</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><code>{{PAGES}}</code></th>
+                    <td>Ship 404 first, always. Maintenance is the second most valuable because it is the only state where the visitor can be told when service returns.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{TONE}}</code></th>
+                    <td>Plain is underrated. On a page someone reaches while already annoyed, a joke reads as the site not taking the problem seriously — and the visitor has no way to tell whether their data was affected.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{ACTION}}</code></th>
+                    <td>Contextual actions are the difference between a page that helps and a page that merely exists. A 500 that offers Go home sends the visitor away from the thing they were trying to do.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{STYLE}}</code></th>
+                    <td>Keep the error page visually consistent with the site, then resist the urge to make it the most designed page on the domain. It is seen at the worst moment.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{MOTION}}</code></th>
+                    <td>None. These pages must work when CSS is partially broken, which is exactly the condition that produces a 500 in the first place.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Feeding it to each builder</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Builder</th><th scope="col">What to do differently</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">v0</th>
+                    <td>Generate one state and then ask for the others as copy variants of the same component. Generating five pages independently produces five different vertical positions for the heading.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lovable</th>
+                    <td>It will add an illustration. Keep it only if it is a simple inline SVG with no external request — a 404 that depends on a CDN image is a second failure when the CDN is the thing that broke.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bolt</th>
+                    <td>Ask explicitly for the status code and noindex meta. Generated error pages almost always ship as 200 with an indexable head, which is the defect that turns one missing page into dozens of thin ones.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Cursor / Claude Code</th>
+                    <td>Implement the states as one template with a data object per state, then wire the server responses (404, 500, 503) before touching the styling.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Where it usually breaks</h2>
+            <div class="rc-failures">
+                <article class="rc-failure">
+                    <h3><span>01</span>The soft 404</h3>
+                    <p>A missing page returning HTTP 200 with a human-readable apology is the most common error-page defect on the web. Search engines index it as real content, and a hundred stale links become a hundred thin pages competing with your real ones.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>02</span>The five-second redirect</h3>
+                    <p>Auto-redirecting to the homepage removes the visitor's ability to read what happened, breaks the back button, and hides the fact that a link is broken rather than fixed. Fix the link; do not paper over it.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>03</span>The countdown that expires</h3>
+                    <p>A maintenance page promising return in 30 minutes, still showing the same promise four hours later, teaches visitors that nothing on the site is reliable. If the estimate is unknown, say unknown.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>04</span>Ads on an error page</h3>
+                    <p>Advertising against a page with no content and an unresolved problem is both a policy risk and an insult. Exclude every error state from ad serving.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>Pair it with</h2>
+                <div class="rc-rel-group">
+                    <h3>Styles that carry this page</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../styles/modern-tech.html">modern tech</a><a class="rc-chip" href="../styles/swiss-style.html">swiss style</a><a class="rc-chip" href="../styles/neo-brutalism.html">neo brutalism</a><a class="rc-chip" href="../styles/monochromatic.html">monochromatic</a></div>
+                </div>
+                <div class="rc-rel-group">
+                    <h3>Motion to pair with it</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../motions/scroll-reveal.html">scroll reveal</a><a class="rc-chip" href="../motions/text-mask-reveal.html">text mask reveal</a></div>
+                </div>
+        </section>
+
+        <nav class="rc-chain">
+            <a href="index.html">All recipes</a>
+            <a href="contact-page.html">← Contact Page</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+        </div>
+    </footer>
+
+    <script type="application/json" id="rcSource">{"lines":["Build the system pages for {{SITE}}: {{PAGES}}","","AUDIENCE","A visitor who has just hit a dead end — a stale link, a server fault, a search with no results, or a page they are not allowed to see. They are mildly frustrated and will give the page about five seconds to offer a way forward.","","STRUCTURE (one shared template, repeated per state)","1. Layout: a centred single column, maximum 640px, vertically positioned at roughly 35 percent of the viewport rather than dead centre. No site navigation is required, but the wordmark sits top left as a link home.","2. Status line: the code or state as a small label above the heading — 404, 500, Maintenance, No results, No access. Monospace, 0.75rem, muted.","3. Heading: one sentence in plain language stating what happened. Sentence case, no exclamation mark, no pun.","4. Body: one or two sentences explaining the likely cause and what the visitor can do. If the visitor can fix it, say how.","5. Primary action: {{ACTION}}","6. Destinations: three to five text links, each a page that exists today. For empty search, show the query and two adjacent suggestions instead.","7. Footer line: the site name and a contact address. No social links, no newsletter.","","STYLE","{{STYLE}}","","MOTION","{{MOTION}}","","COPY RULES","- {{TONE}}","- Never write oops, whoops, uh oh, or looks like you are lost.","- Never blame the visitor. A mistyped URL is the most common cause and the page still does not say you typed it wrong.","- Name the cause when it is known: the page moved, the server failed, the link is out of date.","- Keep the whole page under 80 words excluding navigation.","","CONSTRAINTS","- 404 must be served with HTTP status 404; 500 with 500; maintenance with 503 plus a Retry-After header.","- Error pages carry noindex and are excluded from the sitemap.","- No advertising on any error page.","- No automatic redirect. If a redirect is appropriate, use a 301 at the server level instead of a page.","- Links inside error pages are root-absolute, because an error page renders at any URL depth.","- The page must render correctly with no stylesheet, since a broken build is one of the cases it exists for.","","OUTPUT","Five states sharing one template and one stylesheet. Static where possible."],"defaults":{"SITE":"a reference gallery of documented styles and prompts, where a 404 is most often a stale bookmark from an older URL structure","PAGES":"the 404 state only, since it is the one that will actually be hit","TONE":"Plain and direct: state what happened, state what to do, stop. No personality, no apology beyond one clause.","STYLE":"Product neutral: the same page background as the site, one bordered block, the status code in mono at 0.75rem, heading at 1.8rem, primary button matching the site's normal button style.","ACTION":"a primary button returning to the homepage, plus a search field for the 404 state","MOTION":"No animation at all. If the stylesheet failed to load, an animated page is the one thing that looks broken rather than deliberate."}}</script>
+    <script src="../script.js" defer></script>
+    <script>
+(function () {
+    var src = JSON.parse(document.getElementById('rcSource').textContent);
+    var pre = document.getElementById('rcPrompt');
+    var count = document.getElementById('rcCount');
+    var selects = Array.prototype.slice.call(document.querySelectorAll('[data-rc]'));
+
+    function current() {
+        var v = {};
+        selects.forEach(function (s) { v[s.getAttribute('data-rc')] = s.value; });
+        return v;
+    }
+
+    function render(track) {
+        var v = track || src.defaults;
+        var text = src.lines.map(function (line) {
+            return line.replace(/\{\{(\w+)\}\}/g, function (m, key) {
+                return v[key] == null ? m : v[key];
+            });
+        }).join('\n');
+        pre.textContent = text;
+        count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
+    }
+
+    selects.forEach(function (s) {
+        s.addEventListener('change', function () { render(current()); });
+    });
+
+    document.getElementById('rcReset').addEventListener('click', function () {
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        render(src.defaults);
+    });
+
+    document.getElementById('rcCopy').addEventListener('click', function () {
+        var btn = this;
+        var done = function (ok) {
+            btn.textContent = ok ? 'Copied' : 'Select manually';
+            btn.classList.toggle('is-done', ok);
+            setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('is-done'); }, 1600);
+            if (!ok) {
+                var range = document.createRange();
+                range.selectNodeContents(pre);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pre.textContent).then(function () { done(true); }, function () { done(false); });
+        } else { done(false); }
+    });
+
+    render(src.defaults);
+})();
+    </script>
+</body>
+</html>

@@ -64,6 +64,9 @@
     "STYLE",
     "{{STYLE}}",
     "",
+    "MOTION",
+    "{{MOTION}}",
+    "",
     "COPY RULES",
     "- No clickbait headlines, no questions as headlines, no numbers in a title unless the piece actually contains that many items.",
     "- Every index entry needs a summary that states the argument, not the topic. A piece about caching says what it concludes about caching.",
@@ -241,6 +244,14 @@
       "body": "A code block, a wide table or a full-bleed image will widen the page and destroy the reading measure unless each has an explicit width rule. These four rules belong in the prompt, not in a later bug report."
     }
   ],
-  "styles": ["editorial", "swiss-style", "natural-organic", "monochromatic"],
-  "motions": ["scroll-reveal", "text-mask-reveal"]
+  "styles": [
+    "editorial",
+    "swiss-style",
+    "natural-organic",
+    "monochromatic"
+  ],
+  "motions": [
+    "scroll-reveal",
+    "text-mask-reveal"
+  ]
 }
