@@ -129,7 +129,8 @@
 }
 
 @media (max-width: 620px) {
-    #pv-about { padding: 2.4rem 0 2.8rem; }
+    /* extra bottom room so the fixed "back to style page" chip never covers the last line */
+    #pv-about { padding: 2.4rem 0 4.4rem; }
     #pv-about h2 { font-size: 1.18rem; }
     #pv-about p { font-size: .92rem; }
 }

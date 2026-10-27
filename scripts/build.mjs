@@ -460,6 +460,8 @@ const allHtml = [
         .filter((f) => f.endsWith('.html'))
         .map((f) => `recipes/${f}`)
     : []),
+  // 只把「预览总览页」纳入站点体系；previews/*.html 是独立 demo，不加导航
+  ...(exists('previews/index.html') ? ['previews/index.html'] : []),
   ...['about.html', 'privacy.html', 'terms.html', 'contact.html'].filter(exists),
 ];
 
@@ -591,7 +593,7 @@ if (exists('previews/index.html')) {
       desc: d,
       canonical: `${SITE}/previews/index.html`,
       jsonLd: {
-        title: 'All Style Previews — one page, 22 styles',
+        title: `All Style Previews — one page, ${previews.length} styles`,
         data: {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',

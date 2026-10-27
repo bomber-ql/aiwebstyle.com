@@ -213,62 +213,60 @@ for (const p of previews) {
 
 console.log(`✓ 生成预览页：${n} 个（共 ${previews.length} 条登记）`);
 
-function indexPage(list) {
-    const cards = list
-        .map(
-            (p, i) => `            <a class="pv-card" href="${p.styleId}.html">
+function indexCard(p, i) {
+    return `            <a class="pv-card" href="${p.styleId}.html">
                 <span class="pv-idx">${String(i + 1).padStart(2, '0')}</span>
                 <h3>${p.name}</h3>
                 <p>${p.blurb}</p>
                 <span class="pv-go">Open preview →</span>
-            </a>`
-        )
-        .join('\n');
+            </a>`;
+}
 
+function indexPage(list) {
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Style Previews — 22 design styles rendered on the same page</title>
+    <title>All Style Previews — ${list.length} design styles on one identical page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #f6f7fa; color: #161b22; line-height: 1.6; }
-        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
-        header { padding: 3.5rem 0 1rem; }
-        h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.035em; margin: 0 0 .8rem; font-weight: 600; }
-        .lede { color: #56616f; max-width: 62ch; margin: 0 0 1.6rem; }
-        .note { font-size: .84rem; color: #7b8794; border-left: 3px solid #d7dde6; padding-left: 1rem; max-width: 62ch; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; padding: 2rem 0 4rem; }
-        .pv-card { display: block; background: #fff; border: 1px solid #e2e7ee; border-radius: 12px; padding: 1.2rem 1.25rem; text-decoration: none; color: inherit; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
-        .pv-card:hover { border-color: #a9b8ca; box-shadow: 0 12px 28px -18px rgba(22, 34, 52, .55); transform: translateY(-2px); }
-        .pv-idx { font-family: ui-monospace, monospace; font-size: .7rem; color: #a3aebb; }
-        .pv-card h3 { font-size: 1.02rem; margin: .45rem 0 .4rem; font-weight: 600; letter-spacing: -.01em; }
-        .pv-card p { font-size: .85rem; color: #5d6875; margin: 0 0 .9rem; }
-        .pv-go { font-size: .78rem; font-weight: 600; color: #1f5fbf; }
-        footer { border-top: 1px solid #e2e7ee; padding: 1.6rem 0 2.6rem; font-size: .78rem; color: #8b96a3; }
-        .back-chip { position: fixed; left: 1rem; bottom: 1rem; font-size: .74rem; padding: .5rem .85rem; background: #161b22; color: #fff; text-decoration: none; border-radius: 6px; opacity: .7; }
-        .back-chip:hover { opacity: 1; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- build:seo --><!-- /build:seo -->
 </head>
 <body>
-    <a class="back-chip" href="../index.html">← Style gallery</a>
-    <header class="wrap">
-        <h1>${list.length} styles, one identical page</h1>
-        <p class="lede">Every preview below uses the same markup — the same headline, the same three services, the same footer. Only the stylesheet changes. That is the point: a style is a set of decisions about type, spacing, colour and depth, not a different website.</p>
-        <p class="note">Open two in separate tabs and compare the same sentence. The content never moves; the voice changes completely.</p>
-    </header>
-    <main class="wrap">
-        <div class="grid">
-${cards}
+    <header>
+        <div class="container">
+            <h1>All Style Previews</h1>
+            <p>${list.length} styles, one identical page — only the stylesheet changes.</p>
         </div>
+    </header>
+
+    <main class="pv-wrap">
+        <h2 class="pv-h2">Same markup, ${list.length} stylesheets</h2>
+        <p class="pv-lede">Every preview below uses the same DOM: the same headline, the same three services, the same quote, the same footer. Nothing is duplicated per style except the CSS file. That is the argument this section is making — a style is a set of decisions about type, spacing, colour and depth, not a different website.</p>
+        <p class="pv-note">Open two previews in separate tabs and compare the same sentence. The words never move; the voice changes completely.</p>
+
+        <div class="pv-grid">
+${list.map(indexCard).join('\n')}
+        </div>
+
+        <section class="pv-outro">
+            <h2>Why the content never changes</h2>
+            <p>Most style galleries show a mood board, a colour palette, or a screenshot of someone else's site. None of those answer the question a builder actually has: what does this style look like when it has to hold a headline, a paragraph, three columns and a call to action all at once?</p>
+            <p>Holding the content constant removes the variable. When two previews differ, the difference is entirely attributable to the stylesheet — not to different copy lengths, different image choices, or a different amount of whitespace baked into the mockup.</p>
+            <p>Each demo also carries a short technical note underneath: what the style is actually doing in CSS, three details worth noticing, and the situation where it stops working. The full breakdown, the prompt that generates it, and a downloadable stylesheet live on the matching style page.</p>
+        </section>
     </main>
+
     <footer>
-        <div class="wrap">AI Website Style Gallery — demo content is a fictional studio</div>
+        <div class="container">
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content is a fictional studio.</p>
+        </div>
     </footer>
+    <script src="../script.js" defer></script>
 </body>
 </html>
 `;
