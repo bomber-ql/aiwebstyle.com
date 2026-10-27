@@ -1,0 +1,8 @@
+/* Styles for Editorial Card */
+.card[data-style-id="editorial"] { background-color: #fbfaf7; border: none; border-top: 2px solid #14130f; border-radius: 0; box-shadow: none; }
+.card[data-style-id="editorial"] h3 { font-family: var(--font-serif); color: #14130f; font-weight: 700; }
+.card[data-style-id="editorial"] .prompt-text { background-color: #f2efe8; color: #3a3833; border-radius: 0; font-family: var(--font-lato); }
+.card[data-style-id="editorial"] .btn { border-radius: 0; }
+.card[data-style-id="editorial"] .btn:not(.btn-secondary) { background-color: #14130f; color: #fbfaf7 !important; }
+.card[data-style-id="editorial"] .btn-secondary { background-color: transparent; color: #8a2f1d !important; border: 1px solid #ded9cf; }
+.card[data-style-id="editorial"]:hover { border-top-color: #8a2f1d; }

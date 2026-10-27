@@ -1,0 +1,194 @@
+[
+  {
+    "id": "bento-grid",
+    "name": "Bento Grid",
+    "tagline": "Modular tiles that carry a lot of information without looking crowded",
+    "summary": "Asymmetric tiles on a shared grid — many features, one calm surface.",
+    "longDescription": [
+      "Bento Grid borrows its name from the Japanese lunchbox: compartments of different sizes packed into one rectangle with no wasted space. Applied to interfaces, it gives a page a single continuous surface divided into tiles of unequal weight, so a product can show six or eight capabilities at once without a wall of identical cards.",
+      "The discipline is in the grid, not the decoration. Every tile snaps to the same track, gaps stay constant, and each tile holds exactly one idea with one visual anchor. When a tile needs more space it spans two columns or two rows — it never shrinks its content or breaks the rhythm."
+    ],
+    "features": [
+      { "title": "Shared track, unequal spans", "detail": "One 12-column grid; tiles occupy 3, 4, 6 or 8 columns. The gaps never change, so the eye reads a single system." },
+      { "title": "One idea per tile", "detail": "A number, a chart, a logo or a short line. Two competing focal points inside one tile is what makes bento layouts feel noisy." },
+      { "title": "Constant gap", "detail": "Usually 12–20px everywhere. Varying the gap breaks the lunchbox metaphor instantly." },
+      { "title": "Quiet surfaces", "detail": "Light background, one border, generous internal padding. The complexity comes from the arrangement, not from gradients." },
+      { "title": "Two-row hero tile", "detail": "The largest tile is the entry point. Everything else is support, which is why the hierarchy reads in under a second." }
+    ],
+    "prompt": "Design a Bento Grid section for a product page.\n\nGrid:\n- A single 12-column grid with a constant gap of 16px. Tiles span 3, 4, 6 or 8 columns and may span two rows.\n- Exactly one tile is visually dominant: a two-column-wide or two-row-tall hero tile that carries the main claim.\n\nTiles:\n- Each tile contains one idea, one short label and one visual anchor — a number, a small chart, an icon or a logo row. Never two competing focal points.\n- Internal padding 24px minimum. Content aligned to a consistent corner within each tile.\n\nStyling:\n- Background: one very light surface. Border: 1px, low contrast. Radius: 14-18px, identical on every tile.\n- No gradients, no drop shadows beyond a 1px border. The grid provides the structure; decoration dilutes it.\n\nConstraints:\n- Keep the gap identical everywhere, including between rows.\n- On viewports under 768px, collapse to a single column and preserve tile order — do not reshuffle by size.\n- Tiles must remain readable at 320px width; do not hide content behind hover on touch devices.",
+    "tokens": ["grid: 12 columns", "gap: 16px", "radius: 16px", "border: 1px low contrast", "surface: near-white", "one dominant tile"],
+    "themeCss": "body.theme-bento-grid {\n    --page-bg: #f7f7f5;\n    --page-bg-gradient: none;\n    --text-color: #31353d;\n    --heading-color: #14171c;\n    --link-color: #2f6feb;\n    --border-color: #e3e4e1;\n    --card-bg: #ffffff;\n    --card-shadow: none;\n    --card-hover-shadow: 0 6px 18px -12px rgba(20, 23, 28, .4);\n    --header-bg: #14171c;\n    --header-text-color: #f7f7f5;\n    --prompt-bg: #f1f2ef;\n    --prompt-text-color: #3c414a;\n    --button-bg: #14171c;\n    --button-text-color: #ffffff;\n    --button-hover-bg: #31353d;\n    --card-border-radius: 16px;\n    --base-font: var(--font-inter);\n    --heading-font: var(--font-inter);\n}",
+    "cssNote": "The core variables for the Bento Grid theme. Tiles inherit --card-bg and --card-border-radius, so changing the radius in one place restyles every tile at once.",
+    "whenToUse": [
+      "A feature section that needs to show six or more capabilities without becoming a card wall.",
+      "Product dashboards or app marketing pages where the screenshot is the second focal point.",
+      "Any page where the reader scans rather than reads — the grid gives them places to land."
+    ],
+    "whenNot": [
+      "When all items carry equal weight. Bento is a hierarchy tool; a uniform grid of equal tiles is just a grid.",
+      "On long-form editorial pages — the tile rhythm fights paragraph flow.",
+      "If you cannot design the dominant tile well. An empty hero tile is the most visible failure in this layout."
+    ],
+    "cardCss": "/* Styles for Bento Grid Card */\n.card[data-style-id=\"bento-grid\"] { background-color: #ffffff; border: 1px solid #e3e4e1; border-radius: 16px; box-shadow: none; }\n.card[data-style-id=\"bento-grid\"] h3 { color: #14171c; letter-spacing: -0.02em; }\n.card[data-style-id=\"bento-grid\"] .prompt-text { background-color: #f1f2ef; color: #3c414a; border-radius: 10px; }\n.card[data-style-id=\"bento-grid\"] .btn { border-radius: 10px; }\n.card[data-style-id=\"bento-grid\"] .btn:not(.btn-secondary) { background-color: #14171c; color: #ffffff !important; }\n.card[data-style-id=\"bento-grid\"] .btn-secondary { background-color: #f1f2ef; color: #14171c !important; }\n.card[data-style-id=\"bento-grid\"]:hover { border-color: #c9cbc6; }"
+  },
+  {
+    "id": "liquid-glass",
+    "name": "Liquid Glass",
+    "tagline": "Refractive translucent layers that bend the content behind them",
+    "summary": "Edge-lit glass with refraction — depth without drop shadows.",
+    "longDescription": [
+      "Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the surface refracts slightly, and layers appear to float at genuinely different depths rather than sitting on one plane.",
+      "The visual work is done by three things working together — a blurred backdrop, a specular top edge, and a subtle inner highlight that reads as thickness. Remove any one and it collapses back into a flat translucent rectangle."
+    ],
+    "features": [
+      { "title": "Backdrop blur plus saturation", "detail": "The panel filters what is behind it; increasing saturation slightly stops the colour from going muddy under blur." },
+      { "title": "Specular rim", "detail": "A 1px light border that is brighter at the top than the bottom, imitating light catching a bevel." },
+      { "title": "Inner thickness", "detail": "A faint inset highlight along the top edge sells the illusion that the surface has depth." },
+      { "title": "Layered depth", "detail": "Two or three planes at distinct elevations, not one panel over a flat background." },
+      { "title": "Generous radius", "detail": "20–28px. Sharp corners read as plastic, and the material metaphor breaks." }
+    ],
+    "prompt": "Design a Liquid Glass interface layer.\n\nMaterial:\n- Panels use backdrop-filter: blur(24px) saturate(160%) over a saturated, slightly out-of-focus background.\n- Border: 1px solid rgba(255,255,255,0.35) at the top fading to rgba(255,255,255,0.08) at the bottom — the rim must be brighter where light would hit it.\n- Add a second inset highlight: box-shadow inset 0 1px 0 rgba(255,255,255,0.55), to give the surface apparent thickness.\n- Radius 24px, consistent on every panel.\n\nDepth:\n- Two distinct elevations maximum. The primary panel sits closer; a secondary control strip sits behind it with 40% less blur.\n- Do not use drop shadows for depth. Elevation is communicated by blur strength and rim brightness, not by a dark halo.\n\nConstraints:\n- Text on glass must hold 4.5:1 contrast against the brightest region the background can reach — test with the background at maximum saturation.\n- Provide a solid fallback background behind the panel for browsers without backdrop-filter.\n- Never stack more than two glass layers; a third turns the interface into frosted soup.\n- Respect prefers-reduced-transparency where available and fall back to an opaque surface.",
+    "tokens": ["blur: 24px", "saturate: 160%", "radius: 24px", "rim: 1px top-lit", "inset highlight: 1px", "max 2 layers"],
+    "themeCss": "body.theme-liquid-glass {\n    --page-bg: #0b1020;\n    --page-bg-gradient: radial-gradient(circle at 25% 10%, #2b3fa0, transparent 55%), radial-gradient(circle at 80% 80%, #7a2f9e, transparent 55%);\n    --text-color: #e8eefc;\n    --heading-color: #ffffff;\n    --link-color: #9fc2ff;\n    --border-color: rgba(255, 255, 255, .28);\n    --card-bg: rgba(255, 255, 255, .10);\n    --card-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);\n    --card-hover-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 10px 30px -18px rgba(0, 0, 0, .8);\n    --header-bg: rgba(11, 16, 32, .55);\n    --header-text-color: #ffffff;\n    --prompt-bg: rgba(255, 255, 255, .12);\n    --prompt-text-color: #dbe6ff;\n    --button-bg: rgba(255, 255, 255, .92);\n    --button-text-color: #0b1020;\n    --button-hover-bg: #ffffff;\n    --card-border-radius: 24px;\n    --base-font: var(--font-inter);\n    --heading-font: var(--font-inter);\n}",
+    "cssNote": "Liquid Glass theme variables. The inset highlight lives in --card-shadow so every panel inherits the top-edge light without repeating the declaration.",
+    "whenToUse": [
+      "Media-rich hero sections where a photograph or video sits behind the interface.",
+      "Overlay surfaces — command palettes, floating toolbars, media controls — where context must stay visible.",
+      "Product showcases for spatial or AR-adjacent software."
+    ],
+    "whenNot": [
+      "Long text pages. Blur behind paragraphs constrains reading speed and hurts contrast.",
+      "Low-end mobile devices: stacked backdrop-filter layers are one of the most expensive effects in CSS.",
+      "Any surface where the user must read dense data — a table on glass is unreadable by design."
+    ],
+    "cardCss": "/* Styles for Liquid Glass Card */\n.card[data-style-id=\"liquid-glass\"] { background-color: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .30); border-radius: 24px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); }\n.card[data-style-id=\"liquid-glass\"] h3 { color: #ffffff; }\n.card[data-style-id=\"liquid-glass\"] .prompt-text { background-color: rgba(255, 255, 255, .12); color: #dbe6ff; border-radius: 12px; }\n.card[data-style-id=\"liquid-glass\"] .btn { border-radius: 999px; }\n.card[data-style-id=\"liquid-glass\"] .btn:not(.btn-secondary) { background-color: rgba(255, 255, 255, .92); color: #0b1020 !important; }\n.card[data-style-id=\"liquid-glass\"] .btn-secondary { background-color: rgba(255, 255, 255, .14); color: #e8eefc !important; }\n.card[data-style-id=\"liquid-glass\"]:hover { background-color: rgba(255, 255, 255, .15); }"
+  },
+  {
+    "id": "editorial",
+    "name": "Editorial / Magazine",
+    "tagline": "Serif headlines, multi-column rhythm, and the confidence of print",
+    "summary": "Print hierarchy on screen — serif display type, measured columns, real whitespace.",
+    "longDescription": [
+      "Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to standfirst to body. It reads as credible because the hierarchy is borrowed from publications that have refined it for a century.",
+      "The screen-specific problem is width. Print measures around 60–70 characters per line; a browser will happily give you 140. Fixing that single constraint — a max-width on the body column — does more for the style than any typeface choice."
+    ],
+    "features": [
+      { "title": "A real type ladder", "detail": "Kicker, headline, standfirst, body, caption. Five distinct roles, each with its own size, weight and colour." },
+      { "title": "Measured line length", "detail": "62–68 characters for body copy. Anything wider and the eye loses the return sweep." },
+      { "title": "Serif display, sans body", "detail": "The classic pairing. Serif for voice, sans for extended reading — or serif throughout if the face is well hinted." },
+      { "title": "Asymmetric columns", "detail": "A wide body column beside a narrow note column, not a symmetrical 50/50 split." },
+      { "title": "Rules instead of boxes", "detail": "Hairline rules and whitespace separate content. Cards and shadows are what magazines do not use." }
+    ],
+    "prompt": "Design an editorial page layout.\n\nTypography:\n- Display face: a serif with a strong contrast axis, used for the headline only. Body: a neutral sans or a text serif at 17-19px with line-height 1.6.\n- Build a five-step ladder: kicker (11-12px, letter-spaced uppercase), headline (clamp 2.4rem to 4rem, tight leading), standfirst (1.15rem, lighter colour), body, caption (0.8rem, muted).\n\nMeasure:\n- Body column max-width 62ch. This is the single most important constraint — do not let text run wider.\n- Use a two-column asymmetric grid for sections: 8 columns of copy, 4 of notes.\n\nStyling:\n- No cards, no shadows, no rounded corners. Separate blocks with 1px hairlines and whitespace.\n- One accent colour used sparingly — a rule, a kicker, a link underline.\n\nConstraints:\n- Do not justify text; ragged-right is correct for the screen.\n- Keep paragraph spacing at 1em and drop any indent — indents plus spacing reads as a mistake.\n- Headline leading must be below 1.1; anything looser loses the print feel.",
+    "tokens": ["measure: 62ch", "ladder: 5 steps", "display: serif", "rules: 1px hairline", "no cards", "accent: 1 colour"],
+    "themeCss": "body.theme-editorial {\n    --page-bg: #fbfaf7;\n    --page-bg-gradient: none;\n    --text-color: #2b2a27;\n    --heading-color: #14130f;\n    --link-color: #8a2f1d;\n    --border-color: #ded9cf;\n    --card-bg: transparent;\n    --card-shadow: none;\n    --card-hover-shadow: none;\n    --header-bg: #fbfaf7;\n    --header-text-color: #14130f;\n    --prompt-bg: #f2efe8;\n    --prompt-text-color: #3a3833;\n    --button-bg: #14130f;\n    --button-text-color: #fbfaf7;\n    --button-hover-bg: #8a2f1d;\n    --card-border-radius: 0;\n    --base-font: var(--font-lato);\n    --heading-font: var(--font-serif);\n}",
+    "cssNote": "Editorial theme variables. Note --card-bg is transparent and --card-border-radius is 0 — the style is defined by what it refuses to draw.",
+    "whenToUse": [
+      "Long-form articles, essays, documentation with a voice, or a company blog that wants authority.",
+      "Product launches that lean on narrative rather than feature grids.",
+      "Any page where reading is the primary action."
+    ],
+    "whenNot": [
+      "Dense application UI. A serif ladder in a dashboard slows scanning.",
+      "Pages where users compare items — editorial layout has no table grammar.",
+      "If you cannot source a good display serif. A weak serif is worse than a neutral sans."
+    ],
+    "cardCss": "/* Styles for Editorial Card */\n.card[data-style-id=\"editorial\"] { background-color: #fbfaf7; border: none; border-top: 2px solid #14130f; border-radius: 0; box-shadow: none; }\n.card[data-style-id=\"editorial\"] h3 { font-family: var(--font-serif); color: #14130f; font-weight: 700; }\n.card[data-style-id=\"editorial\"] .prompt-text { background-color: #f2efe8; color: #3a3833; border-radius: 0; font-family: var(--font-lato); }\n.card[data-style-id=\"editorial\"] .btn { border-radius: 0; }\n.card[data-style-id=\"editorial\"] .btn:not(.btn-secondary) { background-color: #14130f; color: #fbfaf7 !important; }\n.card[data-style-id=\"editorial\"] .btn-secondary { background-color: transparent; color: #8a2f1d !important; border: 1px solid #ded9cf; }\n.card[data-style-id=\"editorial\"]:hover { border-top-color: #8a2f1d; }"
+  },
+  {
+    "id": "neo-brutalism",
+    "name": "Neo-Brutalism",
+    "tagline": "Hard borders and candy colours — brutalist bones, playful skin",
+    "summary": "Thick black edges, offset shadows and saturated pastel fills.",
+    "longDescription": [
+      "Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The result is loud but friendly, which is why it colonised startup landing pages while the original brutalism stayed in art schools.",
+      "The rule that makes or breaks it: every shadow is a hard offset with zero blur, and every border is identical in weight. Soften either one and the whole thing reads as a sloppy card grid instead of a deliberate style."
+    ],
+    "features": [
+      { "title": "Uniform heavy border", "detail": "2–3px solid black on every element that has an edge. Mixed border weights destroy the effect immediately." },
+      { "title": "Hard offset shadow", "detail": "6–8px on both axes, zero blur, zero spread, always the same direction and colour." },
+      { "title": "Saturated pastel fills", "detail": "Lilac, mint, butter, coral. Fully saturated but light in value, so black text stays readable." },
+      { "title": "Press interaction", "detail": "On hover the element translates by the shadow offset while the shadow shrinks — it looks physically pushed down." },
+      { "title": "No gradients, no blur", "detail": "Any softness contradicts the premise. Flat colour only." }
+    ],
+    "prompt": "Design a neo-brutalist interface.\n\nEdges:\n- Every card, button and input uses a 3px solid #000 border. The same weight everywhere, no exceptions.\n- Border radius 0. Nothing rounded.\n\nShadow:\n- Cards and buttons use box-shadow: 8px 8px 0 #000 — hard offset, no blur, no spread.\n- On hover, translate the element by (4px, 4px) and reduce the shadow to 4px 4px 0 #000 so it appears pressed into the page. Use a 0.1s linear transition, not an ease.\n\nColour:\n- Background white. One saturated pastel per block (#c9b8ff lilac, #a8f0c6 mint, #ffe08a butter, #ffb3a7 coral).\n- All text black. Accent colour only as a fill, never as text on a dark surface.\n\nType:\n- A heavy grotesque for headings, uppercase, tight tracking. Body in the same family at regular weight.\n\nConstraints:\n- No gradients, no blur, no opacity tricks. Flat fills only.\n- Keep the shadow direction identical across the whole page — one light source, or it looks like a mistake.",
+    "tokens": ["border: 3px solid #000", "radius: 0", "shadow: 8px 8px 0", "press: translate 4px", "fills: 4 pastels", "text: black only"],
+    "themeCss": "body.theme-neo-brutalism {\n    --page-bg: #fdfdf7;\n    --page-bg-gradient: none;\n    --text-color: #111111;\n    --heading-color: #000000;\n    --link-color: #4b2fd6;\n    --border-color: #000000;\n    --card-bg: #ffffff;\n    --card-shadow: 8px 8px 0 #000000;\n    --card-hover-shadow: 4px 4px 0 #000000;\n    --header-bg: #c9b8ff;\n    --header-text-color: #000000;\n    --prompt-bg: #ffe08a;\n    --prompt-text-color: #000000;\n    --button-bg: #000000;\n    --button-text-color: #ffffff;\n    --button-hover-bg: #4b2fd6;\n    --card-border-radius: 0;\n    --base-font: var(--font-inter);\n    --heading-font: var(--font-montserrat);\n}",
+    "cssNote": "Neo-brutalist theme. --card-border-radius is 0 and the shadow is a hard offset — those two variables do most of the style work across the whole site.",
+    "whenToUse": [
+      "Consumer products and indie tools that want to feel human and a bit cheeky.",
+      "Launch pages where the page itself is part of the marketing.",
+      "Portfolios and event sites where standing out matters more than looking restrained."
+    ],
+    "whenNot": [
+      "Fintech, health or anything where trust is the primary currency — hard edges read as shouting.",
+      "Dense data UI. The borders consume space that tables need.",
+      "Long reading sessions; the high contrast and flat fills fatigue the eye quickly."
+    ],
+    "cardCss": "/* Styles for Neo-Brutalism Card */\n.card[data-style-id=\"neo-brutalism\"] { background-color: #ffffff; border: 3px solid #000000; border-radius: 0; box-shadow: 8px 8px 0 #000000; }\n.card[data-style-id=\"neo-brutalism\"] h3 { font-family: var(--font-montserrat); color: #000000; text-transform: uppercase; letter-spacing: -0.01em; }\n.card[data-style-id=\"neo-brutalism\"] .prompt-text { background-color: #ffe08a; color: #000000; border-radius: 0; }\n.card[data-style-id=\"neo-brutalism\"] .btn { border: 3px solid #000000; border-radius: 0; font-weight: 700; }\n.card[data-style-id=\"neo-brutalism\"] .btn:not(.btn-secondary) { background-color: #c9b8ff; color: #000000 !important; }\n.card[data-style-id=\"neo-brutalism\"] .btn-secondary { background-color: #ffffff; color: #000000 !important; }\n.card[data-style-id=\"neo-brutalism\"]:hover { transform: translate(4px, 4px); box-shadow: 4px 4px 0 #000000; }"
+  },
+  {
+    "id": "neo-swiss",
+    "name": "Neo-Swiss",
+    "tagline": "The grid is still the argument, now with variable type",
+    "summary": "Strict modular grid, variable weight, one red accent.",
+    "longDescription": [
+      "Neo-Swiss keeps the International Typographic Style's core beliefs — grid as structure, sans-serif as neutral voice, one accent doing all emphasis — and updates the execution with variable fonts and screen-native spacing. Where the original relied on a single cut of Helvetica, this version moves weight continuously to create hierarchy without changing size.",
+      "The discipline is unchanged: a hard baseline grid, left-aligned ragged-right text, and an accent colour used perhaps twice per screen. The generosity of whitespace is not decoration; it is what makes the grid legible."
+    ],
+    "features": [
+      { "title": "Visible modular grid", "detail": "Twelve columns with a fixed gutter, and elements that snap to it. Misalignment is visible instantly in this style, which is the point." },
+      { "title": "Weight as hierarchy", "detail": "A variable font shifted between 300 and 800 creates contrast without a second family or a size jump." },
+      { "title": "One accent", "detail": "A single red used for one rule, one label, one link. When everything can be emphasised, nothing is." },
+      { "title": "Asymmetry by design", "detail": "Headline in columns 1–9, standfirst in 7–12. The overlap is deliberate, not an accident." },
+      { "title": "Type-set numerals", "detail": "Tabular figures for anything in a column, so numbers align without manual kerning." }
+    ],
+    "prompt": "Design a neo-Swiss layout.\n\nGrid:\n- A 12-column grid with a 24px gutter and a consistent outer margin.\n- Place headline across columns 1-9, standfirst across 7-12, body copy across 1-6. The deliberate overlap creates the asymmetry.\n\nTypography:\n- One variable sans throughout. Use font-variation-settings or variable weights from 300 to 800 to build hierarchy — avoid adding a second typeface.\n- Headline: weight 700-800, letter-spacing -0.045em, leading below 1.0. Body: weight 400, 16-17px, leading 1.55.\n\nColour:\n- White background, near-black text, one accent red used at most twice per screen for a rule or a label.\n- Do not tint surfaces. If you need separation, use a 1px rule or whitespace.\n\nConstraints:\n- Left-align everything with ragged right. Never centre and never justify.\n- Small caps labels at 11-12px with 0.16em tracking for section markers.\n- Keep a strict vertical rhythm: all block spacing a multiple of 8px.",
+    "tokens": ["grid: 12 col / 24px", "type: 1 variable sans", "weights: 300–800", "accent: 1 red", "align: ragged right", "rhythm: 8px"],
+    "themeCss": "body.theme-neo-swiss {\n    --page-bg: #ffffff;\n    --page-bg-gradient: none;\n    --text-color: #1a1a1a;\n    --heading-color: #000000;\n    --link-color: #e2001a;\n    --border-color: #d6d6d6;\n    --card-bg: #ffffff;\n    --card-shadow: none;\n    --card-hover-shadow: none;\n    --header-bg: #ffffff;\n    --header-text-color: #000000;\n    --prompt-bg: #f4f4f4;\n    --prompt-text-color: #1a1a1a;\n    --button-bg: #000000;\n    --button-text-color: #ffffff;\n    --button-hover-bg: #e2001a;\n    --card-border-radius: 0;\n    --base-font: var(--font-helvetica);\n    --heading-font: var(--font-helvetica);\n}",
+    "cssNote": "Neo-Swiss theme variables. Everything is black, white or one red; --card-shadow is none because separation comes from rules and whitespace.",
+    "whenToUse": [
+      "Design studios, architecture practices and any brand that sells precision.",
+      "Data-dense pages where hierarchy must be unambiguous.",
+      "Documentation and reference material — the grid scales to dozens of entries."
+    ],
+    "whenNot": [
+      "Playful consumer products where warmth is part of the value.",
+      "Pages with photography as the lead — the grid fights full-bleed imagery.",
+      "If you cannot hold the alignment. Sloppy Swiss is worse than no Swiss."
+    ],
+    "cardCss": "/* Styles for Neo-Swiss Card */\n.card[data-style-id=\"neo-swiss\"] { background-color: #ffffff; border: none; border-top: 2px solid #000000; border-radius: 0; box-shadow: none; }\n.card[data-style-id=\"neo-swiss\"] h3 { font-family: var(--font-helvetica); color: #000000; letter-spacing: -0.03em; }\n.card[data-style-id=\"neo-swiss\"] .prompt-text { background-color: #f4f4f4; color: #1a1a1a; border-radius: 0; }\n.card[data-style-id=\"neo-swiss\"] .btn { border-radius: 0; }\n.card[data-style-id=\"neo-swiss\"] .btn:not(.btn-secondary) { background-color: #000000; color: #ffffff !important; }\n.card[data-style-id=\"neo-swiss\"] .btn-secondary { background-color: transparent; color: #000000 !important; border: 1px solid #000000; }\n.card[data-style-id=\"neo-swiss\"]:hover { border-top-color: #e2001a; }"
+  },
+  {
+    "id": "acid-graphics",
+    "name": "Acid Graphics",
+    "tagline": "Oversaturated colour, broken grids and deliberate bad taste",
+    "summary": "High-saturation fills, warped type and anti-design energy.",
+    "longDescription": [
+      "Acid graphics is anti-design with a purpose: it looks wrong on purpose to signal that the product is not corporate. Neon on black, type that overlaps itself, gradients that clash, and a grid that is visibly broken rather than invisibly perfect.",
+      "It is the hardest style on this list to do well, because the difference between 'deliberately wrong' and 'actually broken' is entirely in whether the underlying structure is sound. Every chaotic placement still needs a readable path through the page."
+    ],
+    "features": [
+      { "title": "Saturated extremes", "detail": "Acid green, electric magenta and black. Mid-tones are what make a page look timid." },
+      { "title": "Warped type", "detail": "Skew, tight negative tracking, or overlapping outlines. One headine per page does this, never the body." },
+      { "title": "Broken grid", "detail": "Elements deliberately offset by 8–24px. The break must be visible as a choice, not as a missing margin." },
+      { "title": "Hard contrast only", "detail": "Neon on black or black on neon. No pastels, no gradients between similar hues." },
+      { "title": "Readable core", "detail": "One column of body text stays completely conventional — the chaos lives around it, not inside it." }
+    ],
+    "prompt": "Design an acid-graphics landing page.\n\nColour:\n- Background near-black (#0a0a0a). Two accent fills only: acid green (#c6ff00) and electric magenta (#ff2bd1). Never blend them into a gradient.\n- Text is either pure white or the accent, never a mid-grey.\n\nType:\n- One display line may be skewed (-6deg), tightly tracked (-0.06em) and set in uppercase. Everything else uses a plain grotesque at normal settings.\n- Body copy stays at 16px, weight 400, high contrast, in a single readable column of max 56ch.\n\nLayout:\n- Deliberately offset blocks: shift one column by 16px, rotate a label by -3deg. Offset by a consistent amount so it reads as a system, not as breakage.\n\nConstraints:\n- Keep one uninterrupted reading path — chaos must never cross the paragraph column.\n- No low-contrast pairs; every text colour must clear 7:1 against its background.\n- Limit to two accents. A third turns the page into noise rather than a statement.",
+    "tokens": ["bg: #0a0a0a", "accents: 2 max", "contrast: 7:1", "type: 1 warped line", "offset: 16px", "body: conventional"],
+    "themeCss": "body.theme-acid-graphics {\n    --page-bg: #0a0a0a;\n    --page-bg-gradient: none;\n    --text-color: #f2f2f2;\n    --heading-color: #c6ff00;\n    --link-color: #ff2bd1;\n    --border-color: #2a2a2a;\n    --card-bg: #131313;\n    --card-shadow: 4px 4px 0 #c6ff00;\n    --card-hover-shadow: 4px 4px 0 #ff2bd1;\n    --header-bg: #0a0a0a;\n    --header-text-color: #c6ff00;\n    --prompt-bg: #1c1c1c;\n    --prompt-text-color: #eaeaea;\n    --button-bg: #c6ff00;\n    --button-text-color: #0a0a0a;\n    --button-hover-bg: #ff2bd1;\n    --card-border-radius: 2px;\n    --base-font: var(--font-space-mono);\n    --heading-font: var(--font-inter);\n}",
+    "cssNote": "Acid Graphics theme. The two accents are separated by role: green for headings, magenta for links and hover — using both on the same element is what makes this style unreadable.",
+    "whenToUse": [
+      "Music, fashion, gaming and youth-culture products where defiance is the brand.",
+      "Event pages and drops with a short lifespan — the style ages fast by design.",
+      "Portfolios that want to be remembered rather than trusted."
+    ],
+    "whenNot": [
+      "Anything involving money, health or personal data.",
+      "Long-form content; the colour load makes extended reading painful.",
+      "Brands that already have a restrained identity — the clash reads as an error, not an attitude."
+    ],
+    "cardCss": "/* Styles for Acid Graphics Card */\n.card[data-style-id=\"acid-graphics\"] { background-color: #131313; border: 1px solid #2a2a2a; border-radius: 2px; box-shadow: 4px 4px 0 #c6ff00; }\n.card[data-style-id=\"acid-graphics\"] h3 { font-family: var(--font-inter); color: #c6ff00; text-transform: uppercase; letter-spacing: -0.04em; }\n.card[data-style-id=\"acid-graphics\"] .prompt-text { background-color: #1c1c1c; color: #eaeaea; border-radius: 0; font-family: var(--font-space-mono); }\n.card[data-style-id=\"acid-graphics\"] .btn { border-radius: 2px; font-family: var(--font-space-mono); }\n.card[data-style-id=\"acid-graphics\"] .btn:not(.btn-secondary) { background-color: #c6ff00; color: #0a0a0a !important; }\n.card[data-style-id=\"acid-graphics\"] .btn-secondary { background-color: #1c1c1c; color: #ff2bd1 !important; border: 1px solid #ff2bd1; }\n.card[data-style-id=\"acid-graphics\"]:hover { box-shadow: 4px 4px 0 #ff2bd1; }"
+  }
+]

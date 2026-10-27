@@ -1,0 +1,283 @@
+{
+  "slug": "saas-landing",
+  "name": "SaaS Landing Page",
+  "category": "marketing",
+  "order": 1,
+  "updatedAt": "2026-10-27",
+  "readingTime": 9,
+  "summary": "Ten sections, one argument. The order that survives a cold visitor, plus the six words the prompt bans because they make copy read as filler.",
+  "lede": "A landing page is not a layout with copy poured into it. It is an argument, and the order of the sections is the argument. Put pricing above proof and you ask for money before you have earned it. Put the feature grid above the problem statement and you answer a question nobody has asked yet.",
+  "brief": [
+    "Most AI-generated landing pages fail the same way. The hero describes the category instead of the outcome. The proof is a logo strip of companies the visitor has never heard of. The CTA sits below three identical cards with icons, each claiming to be powerful and intuitive.",
+    "None of that is a model failure. It is a prompt failure: the prompt asked for sections, not for a sequence where each section has a job. The template below names every section, states what it must accomplish, and caps how many items it may contain — which is what stops a model from producing nine features and four pricing tiers."
+  ],
+  "sections": [
+    {
+      "name": "Header",
+      "why": "Four links maximum. Every extra link costs attention at exactly the moment attention is scarcest."
+    },
+    {
+      "name": "Hero",
+      "why": "Outcome headline, mechanism subhead, one primary CTA. If the visitor cannot name what the product does after one line, nothing below it matters."
+    },
+    {
+      "name": "Proof strip",
+      "why": "Placed before the argument so doubt is lowered before it can form. One row, greyscale, no carousel."
+    },
+    {
+      "name": "Problem",
+      "why": "Written in the customer's language with no product nouns. The visitor has to recognise their own week before they will accept a fix for it."
+    },
+    {
+      "name": "How it works",
+      "why": "Three steps. Steps are the cheapest form of credibility, because they prove the product has a shape."
+    },
+    {
+      "name": "Feature grid",
+      "why": "Three features, each carrying a number. This is where AI pads, so this is where the cap belongs."
+    },
+    {
+      "name": "Pricing",
+      "why": "One tier marked most popular. Two tiers invite a coin flip; four invite an exit."
+    },
+    {
+      "name": "FAQ",
+      "why": "Answers the last objections, which are almost always integration fit and what happens on cancellation."
+    },
+    {
+      "name": "Final CTA",
+      "why": "A verbatim repeat of the hero CTA. A different verb at the bottom reads as a different product."
+    },
+    {
+      "name": "Footer",
+      "why": "A real contact email. This is the page a reviewer opens to decide whether a human stands behind the site."
+    }
+  ],
+  "promptLines": [
+    "Build a marketing landing page for a B2B SaaS product.",
+    "",
+    "AUDIENCE",
+    "{{AUDIENCE}}",
+    "",
+    "PRIMARY GOAL",
+    "A visitor arriving from a cold search result should be able to say what the product does, who it is for, and what happens if they click, within ten seconds — without scrolling on a 1440x900 desktop viewport.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. Header: wordmark left, four links maximum, one primary button right. No hamburger on desktop.",
+    "2. Hero: an outcome headline of seven words or fewer; a subhead of two sentences that names the mechanism; one primary CTA and one low-commitment secondary link. Below it, {{HERO_OBJECT}}.",
+    "3. Proof strip: {{PROOF}}",
+    "4. Problem: three short paragraphs describing the current workflow in the customer's words. Zero product nouns in this section.",
+    "5. How it works: exactly three steps, each one verb and one sentence.",
+    "6. Feature grid: exactly three features, each with a specific claim and a number.",
+    "7. Pricing: {{PRICING}}",
+    "8. FAQ: exactly five questions. The last one must answer how this differs from the most obvious alternative.",
+    "9. Final CTA: repeat the hero CTA verbatim, plus one line of risk reversal (no card required, cancel anytime, export everything).",
+    "10. Footer: product, resources, legal, and a real contact email.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- Never use: revolutionary, seamless, cutting-edge, empower, unlock, game-changing, next-generation, robust.",
+    "- Every feature claim needs a number, a duration, or a named integration. No claim survives without one.",
+    "- Sentence case for every heading. No title case, no all caps except the wordmark.",
+    "- Placeholder content must look like placeholder content (Acme, you@company.com, 12,480) so it can never be mistaken for final copy.",
+    "- No exclamation marks. No rhetorical questions in headings.",
+    "",
+    "MOTION",
+    "{{MOTION}}",
+    "- Animate transform and opacity only. Never animate height, top, left, width or filter.",
+    "",
+    "CONSTRAINTS",
+    "- Mobile first: the hero CTA must be fully visible at 390x844 without scrolling.",
+    "- Body text at least 4.5:1 contrast against its own background. Check the CTA label too.",
+    "- Reserve explicit width and height on every image, embed and video to prevent layout shift.",
+    "- Semantic HTML: one h1, sections as section elements with an accessible name, buttons as buttons.",
+    "- No carousels, no autoplaying video with sound, no modal before the visitor has read anything.",
+    "",
+    "OUTPUT",
+    "One self-contained page. A single stylesheet or inline style block. No framework, no build step, no JavaScript beyond what the page genuinely needs."
+  ],
+  "controls": [
+    {
+      "id": "AUDIENCE",
+      "label": "Who is this for",
+      "options": [
+        {
+          "label": "Engineering leads",
+          "value": "Engineering leads and platform teams at 50 to 500 person companies. They evaluate on documentation quality and how long the first successful API call takes."
+        },
+        {
+          "label": "Finance operations",
+          "value": "Finance and operations managers at 50 to 500 person companies. They evaluate on audit trail, approval routing and whether it fits the ERP they already run."
+        },
+        {
+          "label": "People operations",
+          "value": "People ops leads at 100 to 1000 person companies. They evaluate on onboarding time and whether payroll integrations are real or aspirational."
+        },
+        {
+          "label": "Self-serve developers",
+          "value": "Individual developers who will sign up without ever talking to sales. They evaluate on one question: can I get a real result inside the free tier tonight."
+        }
+      ]
+    },
+    {
+      "id": "HERO_OBJECT",
+      "label": "Hero visual",
+      "options": [
+        {
+          "label": "Product screenshot",
+          "value": "a single product screenshot inside a browser frame, at a slight perspective, using real interface text rather than lorem ipsum, with at least one visible number in the UI."
+        },
+        {
+          "label": "Abstract diagram",
+          "value": "a minimal diagram of three boxes and two arrows showing the before and after of the workflow, drawn at the same stroke weight as the page rules, in the accent colour only."
+        },
+        {
+          "label": "Interactive demo",
+          "value": "a small working demo card the visitor can use in one click: one input, one button, one real result. No mock data, no login."
+        }
+      ]
+    },
+    {
+      "id": "PROOF",
+      "label": "Proof type",
+      "options": [
+        {
+          "label": "Logo row",
+          "value": "six customer logos in a single greyscale row at 60 percent opacity, with the line Used by teams at above them. Static. No carousel, no autoplay."
+        },
+        {
+          "label": "Metric row",
+          "value": "three metrics with units and a measurement date, for example: 4.2 hours saved per rep per week, measured across 38 teams, Q3 2026."
+        },
+        {
+          "label": "Single quote",
+          "value": "one sentence from a named customer with their role and company, set at 1.25rem, with no photograph and no five-star graphic."
+        }
+      ]
+    },
+    {
+      "id": "PRICING",
+      "label": "Pricing shape",
+      "options": [
+        {
+          "label": "Three tiers",
+          "value": "three tiers (Free, Team, Business) with a monthly and annual toggle, a feature comparison limited to six rows, and the middle tier marked Most popular."
+        },
+        {
+          "label": "Two tiers plus sales",
+          "value": "two self-serve tiers plus a third contact-sales column that lists no price at all, with the middle tier marked Most popular."
+        },
+        {
+          "label": "Usage-based",
+          "value": "one usage-based plan with three worked examples of what a month costs at 10k, 100k and 1M events, and no tier table at all."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Editorial",
+          "value": "Editorial: serif display headlines at 3.5 to 4.5rem with tight leading; body at a 62 character measure; warm off-white background; one accent colour used only on links and the primary button; 6rem section padding; 1px hairline rules between sections instead of cards."
+        },
+        {
+          "label": "Swiss",
+          "value": "Swiss: strict twelve column grid; Helvetica or Inter; black on white; one red accent; headings aligned to column one with body copy starting at column seven; no shadows, no border radii, no cards."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px solid black borders; 8px hard offset shadows with zero blur; flat saturated fills; headings in a heavy grotesque at 800 weight; buttons that translate 4px on press while the shadow shrinks to match."
+        },
+        {
+          "label": "Dark product",
+          "value": "Dark product: near-black #0d1117 surface; one high-chroma accent; 1px borders in rgba white at 8 percent; monospace for numbers and labels; no gradients anywhere."
+        },
+        {
+          "label": "Liquid glass",
+          "value": "Liquid glass: a saturated colour field behind translucent panels; a 1px top highlight to suggest refraction; backdrop-filter blur capped at 16px; content in a 1120px column."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "One entrance",
+          "value": "Animate exactly one thing: the hero enters once on load, opacity 0 to 1 and translateY 24px to 0 over 600ms with cubic-bezier(.22,1,.36,1). Everything else is static."
+        },
+        {
+          "label": "Scroll reveal",
+          "value": "Elements fade and rise 20px as they enter the viewport, using animation-timeline: view() with animation-range: entry 10% to cover 35%, plus an IntersectionObserver fallback. Never stagger siblings by more than 80ms."
+        },
+        {
+          "label": "None",
+          "value": "No animation of any kind. No fade-ins, no parallax, no hover lift. The page must be completely readable with JavaScript disabled."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "AUDIENCE",
+      "note": "Change this and the copy has to change with it. A developer audience wants a code block in the hero; a finance audience wants an approval flow diagram. Do not keep the copy and swap the audience line."
+    },
+    {
+      "token": "PROOF",
+      "note": "If you have no logos, use the metric row. An invented logo strip is the fastest way to lose a technical visitor, and it is the detail reviewers check first."
+    },
+    {
+      "token": "PRICING",
+      "note": "Three tiers is the default because it makes one tier look chosen. If your product is genuinely single-plan, say so in the prompt and delete the tier table entirely — do not ship three tiers with two disabled."
+    },
+    {
+      "token": "STYLE",
+      "note": "Swap the whole block, never individual words inside it. Half an editorial brief produces a page that is serif in the hero and sans in the cards."
+    },
+    {
+      "token": "MOTION",
+      "note": "Choose one and hold it for the entire page. Mixed motion levels are the most common reason AI output feels assembled rather than designed."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Paste the whole prompt, then iterate one section per message (make the pricing table denser). Re-pasting the full prompt after each change resets the layout and loses earlier fixes."
+    },
+    {
+      "name": "Lovable",
+      "note": "Ask for the structure first with placeholder visuals, then request each section. It tends to add a hero image on its own — the line below it in the hero prevents that."
+    },
+    {
+      "name": "Bolt",
+      "note": "Works best if you also say the target stack (plain HTML and CSS, or React with Tailwind). Without a stack it will pick one and the page will arrive with a build step."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Drop the prompt into a fresh repository as a file named BRIEF.md, then ask for the page in one pass. Referencing the file later keeps the constraints alive across edits."
+    }
+  ],
+  "failures": [
+    {
+      "title": "The hero describes the category",
+      "body": "A modern platform for modern teams is a true sentence that says nothing. The fix is grammatical: force the headline to contain a verb and an object the visitor cares about. If the headline still works with another company's name in front of it, it is not a headline, it is a category label."
+    },
+    {
+      "title": "Four pricing tiers with no recommendation",
+      "body": "More than three options turns a decision into research. The middle tier marked Most popular is doing real work: it converts an open comparison into a default with an opt-out."
+    },
+    {
+      "title": "Feature cards that all say the same thing",
+      "body": "Fast, secure, scalable is one feature described three times. Each card needs a number, a duration or a named integration, because those are the only claims a reader can verify."
+    },
+    {
+      "title": "The CTA changes verb at the bottom",
+      "body": "Start free at the top and Book a demo at the bottom describes two products and two commitments. Repeat the hero CTA verbatim; if the bottom needs a different offer, the page has two audiences and needs two pages."
+    }
+  ],
+  "styles": ["editorial", "swiss-style", "neo-brutalism", "liquid-glass"],
+  "motions": ["scroll-reveal", "text-mask-reveal"]
+}

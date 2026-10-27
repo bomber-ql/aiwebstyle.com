@@ -1,0 +1,120 @@
+/* Liquid Glass — refraction at the edges, not just a blurred panel */
+
+body {
+    background:
+        radial-gradient(circle at 22% 8%, #2b3fa0, transparent 52%),
+        radial-gradient(circle at 82% 82%, #7a2f9e, transparent 54%),
+        #0b1020;
+    background-attachment: fixed;
+    color: #e8eefc;
+}
+
+.site-head {
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(11, 16, 32, .5);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+}
+.brand { color: #ffffff; font-weight: 600; }
+.site-head nav a { color: #b3c2e6; }
+.site-head nav a:hover { color: #ffffff; border-bottom-color: rgba(255, 255, 255, .6); }
+
+.hero { padding: 5.5rem 0 4rem; }
+.eyebrow {
+    display: inline-block;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .2);
+    padding: .35rem .9rem;
+    border-radius: 999px;
+    backdrop-filter: blur(14px);
+    color: #d8e3ff;
+    margin-bottom: 1.6rem;
+}
+.hero h1 {
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 30%, rgba(190, 210, 255, .72));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -.04em;
+}
+.lede { color: #b8c6e4; }
+
+.btn {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .92);
+    border-color: rgba(255, 255, 255, .5);
+    color: #0b1020;
+    backdrop-filter: blur(10px);
+}
+.btn:hover { background: #ffffff; color: #0b1020; }
+.btn.ghost {
+    background: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .26);
+    color: #e8eefc;
+    backdrop-filter: blur(12px);
+}
+.btn.ghost:hover { background: rgba(255, 255, 255, .18); color: #ffffff; }
+
+.services { border-top: 1px solid rgba(255, 255, 255, .12); }
+.services > .wrap { gap: 1.2rem; }
+.services article {
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 24px;
+    padding: 1.8rem 1.6rem;
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    /* the top-edge light is what makes it read as a solid material */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
+    transition: background .3s ease, transform .3s ease;
+}
+.services article:hover {
+    background: rgba(255, 255, 255, .14);
+    transform: translateY(-3px);
+}
+.services h2 { color: #ffffff; }
+.services p { color: #b8c6e4; }
+.num { color: #9fb6e8; }
+
+.quote { border-top: 1px solid rgba(255, 255, 255, .12); }
+.quote blockquote {
+    color: #ffffff;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .24);
+    border-radius: 24px;
+    padding: 2.2rem 2rem;
+    backdrop-filter: blur(22px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+    max-width: 30ch;
+}
+.quote cite { color: #a6b6d8; }
+
+.cta { border-top: 1px solid rgba(255, 255, 255, .12); }
+.cta > .wrap {
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .26);
+    border-radius: 26px;
+    padding: 2.4rem 2rem;
+    backdrop-filter: blur(24px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
+    align-items: center;
+}
+.cta h2 { color: #ffffff; }
+.cta p { color: #b8c6e4; }
+
+footer { border-top: 1px solid rgba(255, 255, 255, .12); }
+footer .wrap { color: #8c9cbe; }
+.back-chip {
+    background: rgba(255, 255, 255, .14);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    color: #ffffff;
+}
+
+/* opaque fallback where the material cannot be composited */
+@supports not (backdrop-filter: blur(1px)) {
+    .services article, .quote blockquote, .cta > .wrap {
+        background: rgba(18, 24, 44, .92);
+    }
+}

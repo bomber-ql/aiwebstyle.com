@@ -1,0 +1,257 @@
+{
+  "slug": "dashboard",
+  "name": "Analytics Dashboard",
+  "category": "app",
+  "order": 4,
+  "updatedAt": "2026-10-27",
+  "readingTime": 9,
+  "summary": "One question per screen. A KPI row, one chart, one table — plus the empty, loading and error states that generated dashboards always skip.",
+  "lede": "A dashboard is not a wall of charts. It is a screen where a specific person answers a specific question in under a minute. Every panel that does not serve that question costs attention that the answering panel needs.",
+  "brief": [
+    "Generated dashboards share a signature: seven KPI cards of equal size, four charts with no axis units, and three rows of identical fake data. The layout looks plausible in a screenshot and collapses the moment real numbers arrive, because nothing in it was designed to survive variation.",
+    "Two things fix it. First, a cap: four metrics, one primary chart, one table. Second, states — empty, loading, error, and no permission are design work, not edge cases, and they are where a demo turns into a product."
+  ],
+  "sections": [
+    {
+      "name": "App shell",
+      "why": "Sidebar with six items maximum, current item marked by a position bar rather than colour alone. Colour-only selection disappears for anyone with a colour vision deficiency."
+    },
+    {
+      "name": "Top bar",
+      "why": "Workspace, date range, one primary action. The date range belongs here rather than in each chart, because a dashboard whose panels disagree about the period is a dashboard nobody trusts."
+    },
+    {
+      "name": "KPI row",
+      "why": "Exactly four. Each carries value, unit, delta with direction and comparison period, plus a sparkline. A fifth metric halves the attention available to the other four."
+    },
+    {
+      "name": "Primary chart",
+      "why": "One question, stated in the title. Axes carry units. Three series maximum. If the title is a noun phrase like Revenue, no question has been asked."
+    },
+    {
+      "name": "Secondary breakdown",
+      "why": "A sorted bar list of the top eight, with a link to the rest. Sorting is the analysis; presentation is not."
+    },
+    {
+      "name": "Data table",
+      "why": "Sortable headers, sticky header row, numbers right-aligned in tabular figures. This is the section power users live in."
+    },
+    {
+      "name": "Detail drawer",
+      "why": "Opens from a row, shows the record and its history, closes with Escape. A full page navigation loses the table position and the reader's place."
+    },
+    {
+      "name": "States",
+      "why": "Empty with a way forward, loading as skeleton rows that match final layout, error with the failed request named, and a no-permission state. Four screens that decide whether the product feels finished."
+    }
+  ],
+  "promptLines": [
+    "Build an analytics dashboard for {{DOMAIN}}.",
+    "",
+    "AUDIENCE",
+    "An operator who opens this screen every morning to answer one question and then leaves. They are not exploring; they are checking. The layout must support a scan in under sixty seconds.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. App shell: fixed left sidebar, six navigation items maximum, current item marked with a 3px left bar plus weight change, not colour alone. Top bar with workspace switcher, a single global date range picker, and one primary action.",
+    "2. KPI row: exactly four metrics. Each shows the value with its unit, a delta with direction and the comparison period, and a sparkline with no axis. No fifth card.",
+    "3. Primary chart: one question, stated as the title (for example: Did activation improve after the March release?). One y-axis with a unit label, one x-axis with dates, up to three series in the legend. {{CHART}}",
+    "4. Secondary breakdown: a sorted horizontal bar list of the top eight segments with their share, and a link to the full list. Sorted descending by the metric that matters, never alphabetically.",
+    "5. Data table: {{TABLE}} Sortable headers, sticky header row, numbers right-aligned in tabular figures, 8 rows per page with a visible count.",
+    "6. Detail drawer: opens from a row click, shows the record fields and a small history list, closes with Escape and returns focus to the triggering row.",
+    "7. States: {{STATES}}",
+    "8. Settings row or panel: date range, timezone, and export. The export states its format and row limit before the click, not after.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "DATA RULES",
+    "- Generate 40 to 60 rows of plausible data. Include one outlier, one zero, and one segment that dropped by half.",
+    "- Dates span 90 days with weekly seasonality so the chart has a shape rather than noise.",
+    "- Numbers use thousands separators; at most one decimal unless the unit requires more.",
+    "- Colour carries meaning only: one accent for the primary series, two muted tints for secondary, grey for everything else. No decorative colour.",
+    "- Every chart needs a one-sentence text summary beneath it, so the panel is readable without seeing the graphic.",
+    "",
+    "CONSTRAINTS",
+    "- {{DENSITY}}",
+    "- The table must not overflow horizontally at 1280px width.",
+    "- Keyboard: every control reachable, visible focus ring, drawer closable with Escape, table rows activatable with Enter.",
+    "- Charts must remain legible at 320px wide with labels thinned rather than truncated.",
+    "- No chart without a unit. No percentage without its base.",
+    "",
+    "OUTPUT",
+    "One screen, self-contained, with a mock data module at the top of the script so the numbers can be swapped in one place."
+  ],
+  "controls": [
+    {
+      "id": "DOMAIN",
+      "label": "Dashboard domain",
+      "options": [
+        {
+          "label": "Product analytics",
+          "value": "product analytics. The four KPIs are weekly active users, activation rate, day-30 retention and time to first value; the primary question is whether the last release changed activation."
+        },
+        {
+          "label": "Revenue and finance",
+          "value": "revenue operations. The four KPIs are MRR, net revenue retention, gross margin and days sales outstanding; the primary question is which cohort is expanding and which is contracting."
+        },
+        {
+          "label": "Infrastructure",
+          "value": "infrastructure monitoring. The four KPIs are error rate, p95 latency, saturation and deploy frequency; the primary question is whether the last hour is worse than the same hour yesterday."
+        },
+        {
+          "label": "Support operations",
+          "value": "support operations. The four KPIs are first response time, resolution time, reopen rate and backlog age; the primary question is where the queue is accumulating this week."
+        }
+      ]
+    },
+    {
+      "id": "CHART",
+      "label": "Primary chart",
+      "options": [
+        {
+          "label": "Line with brush",
+          "value": "Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open.",
+          "hint": "The default for time series with more than 30 points."
+        },
+        {
+          "label": "Stacked bars",
+          "value": "Render the primary chart as stacked bars with at most three segments, a 2px gap between bars, and segment totals on hover only. The stack must always sum to a meaningful total.",
+          "hint": "Use when composition matters as much as volume."
+        },
+        {
+          "label": "Area with comparison",
+          "value": "Render the primary chart as an area chart of the current period with the previous period as a dashed line behind it, no fill on the comparison, and the gap described in the text summary.",
+          "hint": "Strongest for period-over-period questions."
+        }
+      ]
+    },
+    {
+      "id": "TABLE",
+      "label": "Table behaviour",
+      "options": [
+        {
+          "label": "Bulk actions",
+          "value": "Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count.",
+          "hint": "For operational tables where the dashboard is also the tool."
+        },
+        {
+          "label": "Row menu",
+          "value": "No checkboxes. A per-row overflow menu with three actions, keyboard accessible, closing on Escape or outside click.",
+          "hint": "For read-mostly tables with occasional intervention."
+        },
+        {
+          "label": "Read only",
+          "value": "No actions in the table at all. Rows open the detail drawer and nothing else. Every column is sortable and the metric column shows a delta.",
+          "hint": "For reporting screens where editing belongs elsewhere."
+        }
+      ]
+    },
+    {
+      "id": "STATES",
+      "label": "State coverage",
+      "options": [
+        {
+          "label": "All four",
+          "value": "Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link.",
+          "hint": "The version worth shipping."
+        },
+        {
+          "label": "Empty and loading",
+          "value": "Implement empty and loading states only, both matching the final layout exactly so nothing jumps when data arrives."
+        }
+      ]
+    },
+    {
+      "id": "DENSITY",
+      "label": "Density",
+      "options": [
+        {
+          "label": "Comfortable",
+          "value": "Use 44px table rows, 1rem card padding, and 16px gaps between panels. Optimised for a first-time reader rather than a daily user."
+        },
+        {
+          "label": "Compact",
+          "value": "Use 32px table rows, 0.75rem card padding, 8px gaps, and 13px body text. Optimised for someone who opens this screen every morning and already knows what everything means."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Product neutral",
+          "value": "Product neutral: white panels on a #f6f7f9 canvas, 1px borders in #e3e7ec, 8px radii, one blue accent for the primary series and interactive elements, no shadows except on the drawer."
+        },
+        {
+          "label": "Dark console",
+          "value": "Dark console: #0e1116 canvas, #151a21 panels, 1px borders at 9 percent white, one cyan accent, monospace for all numbers, no rounded corners above 4px."
+        },
+        {
+          "label": "Swiss reporting",
+          "value": "Swiss reporting: white canvas, black rules at 1px, no panels at all — sections separated by rules only, one red accent for the primary series, all labels uppercase at 0.7rem with 0.08em tracking."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "DOMAIN",
+      "note": "Change this first and change the metric names with it. A dashboard called Revenue but populated with session counts is the most obvious tell that a template was reused."
+    },
+    {
+      "token": "CHART",
+      "note": "Line with brush suits long time series; stacked bars suit composition; area with comparison suits period-over-period. Picking the wrong one is why a correct chart still answers nothing."
+    },
+    {
+      "token": "TABLE",
+      "note": "Bulk actions require a real selection model, so only choose them if the screen is genuinely operational. A read-only table with excellent sorting beats a half-wired bulk bar."
+    },
+    {
+      "token": "STATES",
+      "note": "The four-state version is what makes the screen look built rather than generated. If you only have time for two, do empty and loading — they are the ones users hit first."
+    },
+    {
+      "token": "DENSITY",
+      "note": "Comfortable for onboarding and marketing screenshots, compact for daily use. Do not mix: compact rows inside comfortable panels reads as an accident."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the shell and KPI row first, then ask for the chart, then the table. Whole-screen generations produce inconsistent panel heights that are tedious to fix afterwards."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a seventh KPI unless the cap is explicit. Also check the chart axes — it tends to omit units, which is the defect that makes a dashboard unusable rather than unattractive."
+    },
+    {
+      "name": "Bolt",
+      "note": "State the charting approach (hand-rolled SVG, or a named library) or you will get an inline dependency you cannot audit. For a demo, hand-rolled SVG is smaller and more controllable."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Ask for a mock data module first, then the components. Iterating on layout against fixed data is far faster than regenerating data with every change."
+    }
+  ],
+  "failures": [
+    {
+      "title": "Seven KPI cards of equal weight",
+      "body": "Equal size communicates equal importance, which is almost never true. Four metrics with one clearly dominant beats seven with none. The cap is the design decision."
+    },
+    {
+      "title": "Charts without units",
+      "body": "An unlabelled y-axis turns a chart into decoration. Revenue in what currency, latency in milliseconds or seconds, rate as a percentage of what base. Without units the panel cannot be read, only admired."
+    },
+    {
+      "title": "Fake data that hides layout bugs",
+      "body": "Three rows of nearly identical numbers never reveals overflow, truncation or a delta label colliding with a value. Include an outlier, a zero and a very long segment name — those are what break the layout in production."
+    },
+    {
+      "title": "No empty state",
+      "body": "A new account opens the dashboard and sees blank panels, which reads as broken rather than new. The empty state is the first screen most users ever see."
+    }
+  ],
+  "styles": ["modern-tech", "dark-mode", "swiss-style", "monochromatic"],
+  "motions": ["card-spotlight", "scroll-reveal"]
+}

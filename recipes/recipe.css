@@ -1,0 +1,449 @@
+/* recipes/recipe.css
+   Prompt 配方栏目专用样式。所有颜色走站点主题变量，换肤时整页跟随。 */
+
+/* ---------- 布局 ---------- */
+
+.rc-wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 2.2rem 1.25rem 4rem;
+}
+
+.rc-crumb {
+    font-size: .85rem;
+    margin-bottom: 1.1rem;
+}
+.rc-crumb a { color: var(--link-color); text-decoration: none; }
+.rc-crumb a:hover { text-decoration: underline; }
+
+.rc-title {
+    font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+    letter-spacing: -.025em;
+    line-height: 1.2;
+    margin-bottom: .7rem;
+    color: var(--heading-color);
+}
+
+.rc-lede {
+    font-size: 1.02rem;
+    line-height: 1.72;
+    color: var(--text-color);
+    margin-bottom: .9rem;
+    max-width: 70ch;
+}
+
+.rc-h2 {
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+    letter-spacing: -.02em;
+    margin-bottom: .6rem;
+    color: var(--heading-color);
+}
+
+.rc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .5rem;
+    margin: 1.3rem 0 .4rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .72rem;
+    color: var(--footer-text-color, #73808d);
+}
+.rc-meta span {
+    padding: .2rem .55rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--card-bg);
+    white-space: nowrap;
+}
+
+/* ---------- 小节 ---------- */
+
+.rc-section { margin-top: 2.9rem; }
+.rc-section--tight { margin-top: 2.2rem; }
+
+.rc-section > h2 {
+    font-size: 1.16rem;
+    letter-spacing: -.01em;
+    margin-bottom: .85rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--heading-color);
+}
+
+.rc-section p {
+    font-size: .95rem;
+    line-height: 1.78;
+    color: var(--text-color);
+    margin-bottom: .85rem;
+    max-width: 72ch;
+}
+
+.rc-note {
+    font-size: .88rem !important;
+    line-height: 1.68 !important;
+    color: var(--footer-text-color, #6b7785) !important;
+    border-left: 2px solid var(--border-color);
+    padding-left: .9rem;
+    margin-bottom: 1.2rem !important;
+}
+
+/* ---------- 结构顺序 ---------- */
+
+.rc-order {
+    list-style: none;
+    counter-reset: rc;
+    padding: 0;
+    margin: 0;
+}
+.rc-order li {
+    display: flex;
+    gap: 1rem;
+    padding: .85rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.rc-order li:last-child { border-bottom: 0; }
+
+.rc-step {
+    flex: 0 0 auto;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .74rem;
+    color: var(--footer-text-color, #9aa6b2);
+    padding-top: .18rem;
+    min-width: 1.6rem;
+}
+.rc-order h3 {
+    font-size: .96rem;
+    margin: 0 0 .25rem;
+    color: var(--heading-color);
+    letter-spacing: -.005em;
+}
+.rc-order p {
+    font-size: .88rem;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* ---------- 控件 ---------- */
+
+.rc-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: .9rem 1rem;
+    margin-bottom: 1.3rem;
+}
+
+.rc-control { display: flex; flex-direction: column; gap: .35rem; }
+
+.rc-control label {
+    font-size: .74rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--footer-text-color, #6b7785);
+}
+
+.rc-control select {
+    font: inherit;
+    font-size: .88rem;
+    padding: .5rem .6rem;
+    color: var(--heading-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 16px) calc(50% + 1px), calc(100% - 11px) calc(50% + 1px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2rem;
+}
+.rc-control select:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+}
+
+/* ---------- prompt 面板 ---------- */
+
+.rc-prompt {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--prompt-bg, #f8f8f8);
+    margin-bottom: .6rem;
+}
+
+.rc-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem .7rem;
+    background: #1f2937;
+    border-bottom: 1px solid #111a24;
+}
+
+.rc-bar-label {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: #8fa1b3;
+}
+
+.rc-count {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    color: #6f8092;
+    margin-right: auto;
+}
+
+.rc-btn {
+    font: inherit;
+    font-size: .74rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    letter-spacing: .03em;
+    padding: .3rem .7rem;
+    border-radius: 5px;
+    border: 1px solid #3b4a5a;
+    background: #2c3a49;
+    color: #cfdae6;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.rc-btn:hover { background: #3a4a5b; border-color: #54687c; }
+.rc-btn-primary { background: #e8eef5; border-color: #e8eef5; color: #1a2430; font-weight: 600; }
+.rc-btn-primary:hover { background: #fff; border-color: #fff; }
+.rc-btn.is-done { background: #1d6b4a; border-color: #2c8a63; color: #d8f5e7; }
+
+.rc-prompt pre {
+    margin: 0;
+    padding: 1.15rem 1.2rem 1.3rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .79rem;
+    line-height: 1.72;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--text-color);
+    max-height: 620px;
+    overflow-y: auto;
+    tab-size: 2;
+}
+
+/* ---------- 表格 ---------- */
+
+.rc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .89rem;
+    margin-top: .4rem;
+}
+.rc-table th,
+.rc-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: .7rem .8rem;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.65;
+}
+.rc-table thead th {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--footer-text-color, #6b7785);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+}
+.rc-table tbody th {
+    font-weight: 600;
+    color: var(--heading-color);
+    white-space: nowrap;
+    width: 34%;
+}
+.rc-table code {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .78rem;
+    padding: .1rem .35rem;
+    border-radius: 4px;
+    background: var(--prompt-bg, #f1f5f9);
+    color: var(--heading-color);
+}
+
+/* ---------- 失败模式 ---------- */
+
+.rc-failures {
+    display: grid;
+    gap: .8rem;
+}
+
+.rc-failure {
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--link-color);
+    border-radius: 0 8px 8px 0;
+    padding: .95rem 1.1rem;
+    background: var(--card-bg);
+}
+.rc-failure h3 {
+    font-size: .95rem;
+    margin-bottom: .4rem;
+    color: var(--heading-color);
+    display: flex;
+    gap: .6rem;
+    align-items: baseline;
+}
+.rc-failure h3 span {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    color: var(--footer-text-color, #9aa6b2);
+    font-weight: 400;
+}
+.rc-failure p {
+    margin: 0;
+    font-size: .89rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+/* ---------- 关联 ---------- */
+
+.rc-rel-group { margin-bottom: 1.3rem; }
+.rc-rel-group h3 {
+    font-size: .74rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--footer-text-color, #6b7785);
+    font-weight: 500;
+    margin-bottom: .55rem;
+}
+.rc-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.rc-chip {
+    font-size: .82rem;
+    padding: .34rem .8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--heading-color);
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: border-color .15s ease, background-color .15s ease;
+}
+.rc-chip:hover { border-color: var(--link-color); color: var(--link-color); text-decoration: none; }
+
+/* ---------- 页间链 ---------- */
+
+.rc-chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1.3rem;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: .86rem;
+}
+.rc-chain a { color: var(--link-color); text-decoration: none; }
+.rc-chain a:hover { text-decoration: underline; }
+
+/* ---------- 索引页 ---------- */
+
+.rc-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin: 1.8rem 0 1.3rem;
+}
+.rc-filter {
+    font: inherit;
+    font-size: .82rem;
+    padding: .38rem .9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.rc-filter:hover { border-color: var(--link-color); }
+.rc-filter.is-active {
+    background: var(--heading-color);
+    border-color: var(--heading-color);
+    color: var(--page-bg, #fff);
+}
+
+.rc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+}
+
+.rc-card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+    padding: 1.15rem 1.25rem 1.05rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.rc-card:hover {
+    border-color: var(--link-color);
+    box-shadow: 0 12px 26px -18px rgba(24, 42, 66, .55);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.rc-card-idx {
+    display: block;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .7rem;
+    color: var(--footer-text-color, #a3afbb);
+    margin-bottom: .4rem;
+}
+.rc-card h3 {
+    font-size: 1.04rem;
+    margin-bottom: .42rem;
+    color: var(--heading-color);
+    letter-spacing: -.01em;
+}
+.rc-card p {
+    font-size: .87rem;
+    line-height: 1.62;
+    color: var(--text-color);
+    margin: 0 0 .85rem;
+}
+.rc-card-meta {
+    display: flex;
+    gap: .9rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .69rem;
+    color: var(--footer-text-color, #8a96a2);
+    border-top: 1px solid var(--border-color);
+    padding-top: .6rem;
+}
+
+.rc-empty {
+    font-size: .9rem;
+    color: var(--footer-text-color, #8892a0);
+    padding: 1.2rem 0;
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media (max-width: 640px) {
+    .rc-wrap { padding: 1.6rem 1rem 3rem; }
+    .rc-table tbody th { width: 40%; white-space: normal; }
+    .rc-prompt pre { font-size: .74rem; padding: 1rem .9rem 1.1rem; max-height: 480px; }
+    .rc-order li { gap: .7rem; }
+    .rc-chain { flex-direction: column; gap: .5rem; }
+}
+
+/* 详情页标题栏：用 p 代替 h1，保证每页只有一个 h1（正文里的配方名） */
+.rc-band-title {
+    font-size: 1.55em;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: .3rem;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial / Magazine — Style Detail, Prompt and CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to…">
+    <link rel="canonical" href="https://www.aiwebstyle.com/styles/editorial.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Editorial / Magazine — Web Design Style, Prompt &amp; CSS">
+    <meta property="og:description" content="Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to…">
+    <meta property="og:url" content="https://www.aiwebstyle.com/styles/editorial.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Editorial / Magazine: Web Design Style, Prompt and CSS","description":"Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to…","about":{"@type":"Thing","name":"Editorial / Magazine"},"isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"}}</script>
+    <!-- /build:seo -->
+</head>
+<body class="theme-editorial">
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html" class="is-active" aria-current="page">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Editorial / Magazine</h1>
+            <p>Serif headlines, multi-column rhythm, and the confidence of print</p>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"/><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"/></svg>
+            <span>Back to Style List</span>
+        </a>
+
+                <!-- build:preview-cta -->
+        <div class="preview-cta">
+            <p>See this style applied to a real page — identical content, different stylesheet.</p>
+            <a href="../previews/editorial.html">Open live preview →</a>
+        </div>
+        <!-- /build:preview-cta -->
+
+<section class="style-detail-section style-description">
+            <h2>About This Style</h2>
+            <p>Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to standfirst to body. It reads as credible because the hierarchy is borrowed from publications that have refined it for a century.</p>
+            <p>The screen-specific problem is width. Print measures around 60–70 characters per line; a browser will happily give you 140. Fixing that single constraint — a max-width on the body column — does more for the style than any typeface choice.</p>
+
+            <div class="token-row">
+            <span class="token-chip">measure: 62ch</span>
+            <span class="token-chip">ladder: 5 steps</span>
+            <span class="token-chip">display: serif</span>
+            <span class="token-chip">rules: 1px hairline</span>
+            <span class="token-chip">no cards</span>
+            <span class="token-chip">accent: 1 colour</span>
+            </div>
+
+            <h3>Main Features:</h3>
+            <ul>
+                <li><strong>A real type ladder:</strong> Kicker, headline, standfirst, body, caption. Five distinct roles, each with its own size, weight and colour.</li>
+                <li><strong>Measured line length:</strong> 62–68 characters for body copy. Anything wider and the eye loses the return sweep.</li>
+                <li><strong>Serif display, sans body:</strong> The classic pairing. Serif for voice, sans for extended reading — or serif throughout if the face is well hinted.</li>
+                <li><strong>Asymmetric columns:</strong> A wide body column beside a narrow note column, not a symmetrical 50/50 split.</li>
+                <li><strong>Rules instead of boxes:</strong> Hairline rules and whitespace separate content. Cards and shadows are what magazines do not use.</li>
+            </ul>
+        </section>
+
+        <section class="style-detail-section style-prompt">
+            <h2>Example AI Prompt</h2>
+            <pre><code>Design an editorial page layout.
+
+Typography:
+- Display face: a serif with a strong contrast axis, used for the headline only. Body: a neutral sans or a text serif at 17-19px with line-height 1.6.
+- Build a five-step ladder: kicker (11-12px, letter-spaced uppercase), headline (clamp 2.4rem to 4rem, tight leading), standfirst (1.15rem, lighter colour), body, caption (0.8rem, muted).
+
+Measure:
+- Body column max-width 62ch. This is the single most important constraint — do not let text run wider.
+- Use a two-column asymmetric grid for sections: 8 columns of copy, 4 of notes.
+
+Styling:
+- No cards, no shadows, no rounded corners. Separate blocks with 1px hairlines and whitespace.
+- One accent colour used sparingly — a rule, a kicker, a link underline.
+
+Constraints:
+- Do not justify text; ragged-right is correct for the screen.
+- Keep paragraph spacing at 1em and drop any indent — indents plus spacing reads as a mistake.
+- Headline leading must be below 1.1; anything looser loses the print feel.</code></pre>
+        </section>
+
+        <section class="style-detail-section style-css">
+            <h2>Theme CSS Snippets</h2>
+            <p>Editorial theme variables. Note --card-bg is transparent and --card-border-radius is 0 — the style is defined by what it refuses to draw.</p>
+            <pre><code>body.theme-editorial {
+    --page-bg: #fbfaf7;
+    --page-bg-gradient: none;
+    --text-color: #2b2a27;
+    --heading-color: #14130f;
+    --link-color: #8a2f1d;
+    --border-color: #ded9cf;
+    --card-bg: transparent;
+    --card-shadow: none;
+    --card-hover-shadow: none;
+    --header-bg: #fbfaf7;
+    --header-text-color: #14130f;
+    --prompt-bg: #f2efe8;
+    --prompt-text-color: #3a3833;
+    --button-bg: #14130f;
+    --button-text-color: #fbfaf7;
+    --button-hover-bg: #8a2f1d;
+    --card-border-radius: 0;
+    --base-font: var(--font-lato);
+    --heading-font: var(--font-serif);
+}</code></pre>
+        </section>
+
+        <section class="style-detail-section style-fit">
+            <h2>Where it fits</h2>
+            <div class="fit-grid">
+                <div>
+                    <h3>Use it when</h3>
+                    <ul>
+                <li>Long-form articles, essays, documentation with a voice, or a company blog that wants authority.</li>
+                <li>Product launches that lean on narrative rather than feature grids.</li>
+                <li>Any page where reading is the primary action.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Avoid it when</h3>
+                    <ul>
+                <li>Dense application UI. A serif ladder in a dashboard slows scanning.</li>
+                <li>Pages where users compare items — editorial layout has no table grammar.</li>
+                <li>If you cannot source a good display serif. A weak serif is worse than a neutral sans.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="style-detail-section style-download">
+            <h2>Resource Download</h2>
+            <p>A working single-page demo in this style — the HTML and one self-contained stylesheet, no build step.</p>
+            <a href="../zips/editorial.zip" class="btn btn-download" download>Download editorial.zip</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="current-year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>

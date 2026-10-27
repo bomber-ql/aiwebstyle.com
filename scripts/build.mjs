@@ -17,6 +17,8 @@ const exists = (p) => fs.existsSync(path.join(ROOT, p));
 
 /* ---------- 1. 载入数据 ---------- */
 
+const site = JSON.parse(read('data/site.json'));
+
 const styles = JSON.parse(read('data/styles.json'));
 
 // 只收录「已发布 + 页面已存在」的动效，避免索引页出现死链。
@@ -28,6 +30,16 @@ const motions = JSON.parse(read('data/motions.json'))
 
 const previews = JSON.parse(read('data/previews.json'))
   .filter((p) => exists(`previews/${p.styleId}.html`));
+
+// 配方：data/recipes/*.json，一个文件一条，页面存在才收录
+const recipeList = fs.existsSync(path.join(ROOT, 'data', 'recipes'))
+  ? fs
+      .readdirSync(path.join(ROOT, 'data', 'recipes'))
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => JSON.parse(read(`data/recipes/${f}`)))
+      .filter((r) => r.status !== 'draft' && exists(`recipes/${r.slug}.html`))
+      .sort((a, b) => a.order - b.order)
+  : [];
 
 const motionsPlanned = JSON.parse(read('data/motions.json'))
   .filter((m) => m.status === 'published' && !exists(`motions/${m.slug}.html`))
@@ -165,6 +177,46 @@ function injectSeo(rel, block) {
   return true;
 }
 
+/* ---------- 3.5 AdSense 代码统一注入 ----------
+   历史状态：只有 index 与 22 个旧详情页有广告代码，其余 52 个页面没有。
+   广告代码是 AdSense 验证站点归属的依据，必须全站一致。
+   预览页与 404 不挂广告：前者是要展示"设计本身"的 demo，后者是错误页。 */
+
+function adsenseExcluded(rel) {
+  if ((site.adsExcludedFiles || []).includes(rel)) return true;
+  return (site.adsExcludedDirs || []).some((d) => rel.startsWith(d + '/'));
+}
+
+function injectAdsense(rel) {
+  let html = read(rel);
+
+  // 清掉历史遗留的、无标记的旧代码（含多行属性写法），统一由构建注入
+  const legacy = /[ \t]*<script[^>]*src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"]*"[\s\S]*?<\/script>\n?/g;
+  const marked = /[ \t]*<!-- build:adsense -->[\s\S]*?<!-- \/build:adsense -->\n?/g;
+  const cleaned = html.replace(legacy, '').replace(marked, '');
+
+  if (adsenseExcluded(rel) || !site.adsenseClient) {
+    if (cleaned !== html) write(rel, cleaned);
+    return cleaned !== html;
+  }
+
+  const block = `    <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsenseClient}"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->`;
+
+  let next;
+  if (cleaned.includes('<!-- build:seo -->')) {
+    next = cleaned.replace('<!-- build:seo -->', `${block}\n    <!-- build:seo -->`);
+  } else {
+    next = cleaned.replace('</head>', `${block}\n</head>`);
+  }
+
+  if (next === html) return false;
+  write(rel, next);
+  return true;
+}
+
 /* ---------- 4. Footer 导航（解决内链孤岛 + AdSense 必备页面入口） ---------- */
 
 function injectFooterNav(rel) {
@@ -174,9 +226,11 @@ function injectFooterNav(rel) {
   const navInner = `<p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
                 <a href="${up}index.html">Gallery</a>
+                <a href="${up}previews/index.html">Previews</a>
                 <a href="${up}motions/index.html">Motions</a>
+                <a href="${up}recipes/index.html">Prompt Recipes</a>
                 <a href="${up}about.html">About</a>
-                <a href="${up}about.html#contact">Contact</a>
+                <a href="${up}contact.html">Contact</a>
                 <a href="${up}privacy.html">Privacy Policy</a>
                 <a href="${up}terms.html">Terms</a>
                 <!-- /build:footer-nav -->
@@ -206,9 +260,13 @@ function injectNav(rel) {
   const up = depth ? '../' : '';
   const section = rel.startsWith('motions/')
     ? 'motions'
+    : rel.startsWith('recipes/')
+    ? 'recipes'
+    : rel.startsWith('previews/')
+    ? 'previews'
     : rel.startsWith('styles/')
     ? 'styles'
-    : ['about.html', 'privacy.html', 'terms.html'].includes(rel)
+    : ['about.html', 'privacy.html', 'terms.html', 'contact.html'].includes(rel)
     ? 'about'
     : 'home';
 
@@ -219,7 +277,9 @@ function injectNav(rel) {
             <a class="nav-brand" href="${up}index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
                 <a href="${up}index.html"${act(section === 'home' || section === 'styles')}>Styles</a>
+                <a href="${up}previews/index.html"${act(section === 'previews')}>Previews</a>
                 <a href="${up}motions/index.html"${act(section === 'motions')}>Motions</a>
+                <a href="${up}recipes/index.html"${act(section === 'recipes')}>Prompts</a>
                 <a href="${up}about.html"${act(section === 'about')}>About</a>
             </div>
         </div>
@@ -282,6 +342,13 @@ function buildSitemap() {
       priority: '0.7',
       freq: 'monthly',
     })),
+    { loc: `${SITE}/recipes/index.html`, priority: '0.9', freq: 'monthly' },
+    ...recipeList.map((r) => ({
+      loc: `${SITE}/recipes/${r.slug}.html`,
+      priority: '0.8',
+      freq: 'monthly',
+    })),
+    { loc: `${SITE}/previews/index.html`, priority: '0.9', freq: 'monthly' },
     ...previews.map((p) => ({
       loc: `${SITE}/previews/${p.styleId}.html`,
       priority: '0.7',
@@ -289,6 +356,7 @@ function buildSitemap() {
     })),
     { loc: `${SITE}/about.html`, priority: '0.5', freq: 'yearly' },
     { loc: `${SITE}/privacy.html`, priority: '0.3', freq: 'yearly' },
+    { loc: `${SITE}/contact.html`, priority: '0.6', freq: 'yearly' },
     { loc: `${SITE}/terms.html`, priority: '0.3', freq: 'yearly' },
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -386,7 +454,13 @@ const allHtml = [
         .filter((f) => f.endsWith('.html'))
         .map((f) => `motions/${f}`)
     : []),
-  ...['about.html', 'privacy.html', 'terms.html'].filter(exists),
+  ...(exists('recipes')
+    ? fs
+        .readdirSync(path.join(ROOT, 'recipes'))
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => `recipes/${f}`)
+    : []),
+  ...['about.html', 'privacy.html', 'terms.html', 'contact.html'].filter(exists),
 ];
 
 /* ---------- 8. 动效页 SEO ---------- */
@@ -509,6 +583,37 @@ for (const p of previews) {
   pv++;
 }
 
+if (exists('previews/index.html')) {
+  const d = `${previews.length} design styles rendered on one identical page — same markup, different stylesheet. Compare type, spacing, colour and depth side by side.`;
+  injectSeo(
+    'previews/index.html',
+    seoBlock({
+      desc: d,
+      canonical: `${SITE}/previews/index.html`,
+      jsonLd: {
+        title: 'All Style Previews — one page, 22 styles',
+        data: {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'All Style Previews',
+          description: d,
+          url: `${SITE}/previews/index.html`,
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: previews.length,
+            itemListElement: previews.map((p, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: p.name,
+              url: `${SITE}/previews/${p.styleId}.html`,
+            })),
+          },
+        },
+      },
+    })
+  );
+}
+
 /* ---------- 9. 合规页 SEO ---------- */
 
 const legalSeo = {
@@ -526,6 +631,11 @@ const legalSeo = {
     desc: 'Terms for using AI Website Style Gallery: what you may do with the written prompts and downloadable CSS, warranty disclaimer, and third-party notices.',
     type: 'WebPage',
     title: 'Terms of Use',
+  },
+  'contact.html': {
+    desc: 'How to reach AI Website Style Gallery: corrections, style submissions, licensing and reuse, privacy requests, and what to include in a message.',
+    type: 'ContactPage',
+    title: 'Contact',
   },
 };
 
@@ -551,6 +661,22 @@ for (const [rel, meta] of Object.entries(legalSeo)) {
   );
 }
 
+/* 确保首页 head 里有每个卡片的 card-styles 链接（新风格自动补） */
+function ensureCardCssLinks() {
+  let html = read('index.html');
+  const missing = styles.filter(
+    (s) => exists(`card-styles/${s.id}-card.css`) && !html.includes(`card-styles/${s.id}-card.css`)
+  );
+  if (!missing.length) return 0;
+  const links = missing
+    .map((s) => `    <link rel="stylesheet" href="card-styles/${s.id}-card.css">`)
+    .join('\n');
+  html = html.replace(/<link rel="stylesheet" href="language-switcher\.css">|<\/head>/,
+    (m) => (/<\/head>/.test(m) ? links + '\n</head>' : m + '\n' + links));
+  write('index.html', html);
+  return missing.length;
+}
+
 /* 全英文站守卫：HTML 里出现中文就报错（防止以后误粘贴中文内容） */
 function checkEnglishOnly(pages) {
   const bad = [];
@@ -566,7 +692,15 @@ function checkEnglishOnly(pages) {
   return bad.length;
 }
 
-const cjkProblems = checkEnglishOnly([...allHtml, ...previews.map((p) => `previews/${p.styleId}.html`)]);
+const cardLinks = ensureCardCssLinks();
+const cjkProblems = checkEnglishOnly([...allHtml, ...previews.map((p) => `previews/${p.styleId}.html`), ...(exists('previews/index.html') ? ['previews/index.html'] : [])]);
+
+let adsN = 0;
+let adsOff = 0;
+for (const rel of allHtml) {
+  if (adsenseExcluded(rel)) { injectAdsense(rel); adsOff++; continue; }
+  if (injectAdsense(rel)) adsN++;
+}
 
 let nav = 0;
 for (const rel of allHtml) {
@@ -576,11 +710,13 @@ for (const rel of allHtml) {
 
 buildSitemap();
 
-console.log(`✓ 首页预渲染：${styles.length} 张卡片`);
+console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''}`);
 console.log(`✓ 详情页 SEO：${n} 个`);
 console.log(`✓ 动效索引：${motions.length} 张卡片 | 动效页 SEO：${mn} 个`);
 console.log(`✓ 风格预览页：${pv} 个（含详情页入口）`);
+console.log(`✓ 配方页：${recipeList.length} 个（导航 / 页脚 / sitemap 已接入）`);
 if (motionsPlanned.length) console.log(`ℹ 待补页面（已登记未建）：${motionsPlanned.join(', ')}`);
 console.log(`✓ Footer 导航：${nav} 个页面`);
+console.log(`✓ AdSense 代码：${allHtml.length - adsOff} 个内容页（预览 demo 与 404 页按设计不挂广告）`);
 console.log(`✓ 英文站守卫：${cjkProblems ? `⚠ ${cjkProblems} 个页面含中文` : '通过，无中文残留'}`);
 console.log(`✓ sitemap.xml / robots.txt 已生成`);

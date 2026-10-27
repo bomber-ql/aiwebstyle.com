@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Recipes — Structured Prompts for Building Whole Pages | AI Website Style Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="recipe.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="6 structured prompt recipes for building whole websites with AI — section order, swap-in variables, per-builder notes and the failure modes each page type hits.">
+    <link rel="canonical" href="https://www.aiwebstyle.com/recipes/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Prompt Recipes — Structured Prompts for Building Whole Pages">
+    <meta property="og:description" content="6 structured prompt recipes for building whole websites with AI — section order, swap-in variables, per-builder notes and the failure modes each page type hits.">
+    <meta property="og:url" content="https://www.aiwebstyle.com/recipes/index.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Prompt Recipes","description":"6 structured prompt recipes for building whole websites with AI — section order, swap-in variables, per-builder notes and the failure modes each page type hits.","url":"https://www.aiwebstyle.com/recipes/index.html","mainEntity":{"@type":"ItemList","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"name":"SaaS Landing Page","url":"https://www.aiwebstyle.com/recipes/saas-landing.html"},{"@type":"ListItem","position":2,"name":"Portfolio / Case Study Site","url":"https://www.aiwebstyle.com/recipes/portfolio.html"},{"@type":"ListItem","position":3,"name":"Product Detail Page","url":"https://www.aiwebstyle.com/recipes/product-page.html"},{"@type":"ListItem","position":4,"name":"Analytics Dashboard","url":"https://www.aiwebstyle.com/recipes/dashboard.html"},{"@type":"ListItem","position":5,"name":"Blog / Editorial Site","url":"https://www.aiwebstyle.com/recipes/blog.html"},{"@type":"ListItem","position":6,"name":"Launch / Event Page","url":"https://www.aiwebstyle.com/recipes/launch-page.html"}]}}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Prompt Recipes</h1>
+            <p>Whole pages, described precisely enough that the first build is the one you keep.</p>
+        </div>
+    </header>
+
+    <main class="rc-wrap">
+        <h2 class="rc-h2">A page is an argument, not a layout</h2>
+        <p class="rc-lede">A style gallery tells an AI what a page should look like. It does not tell it what the page has to accomplish, which section answers which objection, or how many items each section may contain. Those three things are what separate a page that reads as designed from one that reads as generated.</p>
+        <p class="rc-lede">Each recipe below fixes the order, exposes the few variables worth changing, and lists the specific ways that page type fails. Copy the assembled prompt, or edit the variables first and copy the version you get.</p>
+
+        <div class="rc-filters" role="group" aria-label="Filter by page type">
+            <button class="rc-filter is-active" data-filter="all" type="button">All</button>
+                <button class="rc-filter" data-filter="marketing" type="button">Marketing</button>
+                <button class="rc-filter" data-filter="commerce" type="button">Commerce</button>
+                <button class="rc-filter" data-filter="app" type="button">Product UI</button>
+                <button class="rc-filter" data-filter="content" type="button">Content</button>
+                <button class="rc-filter" data-filter="personal" type="button">Personal</button>
+        </div>
+
+        <div class="rc-grid" id="rcGrid">
+            <a class="rc-card" href="saas-landing.html" data-cat="marketing">
+                <span class="rc-card-idx">01</span>
+                <h3>SaaS Landing Page</h3>
+                <p>Ten sections, one argument. The order that survives a cold visitor, plus the six words the prompt bans because they make copy read as filler.</p>
+                <div class="rc-card-meta">
+                    <span>10 sections</span>
+                    <span>6 variables</span>
+                </div>
+            </a>
+            <a class="rc-card" href="portfolio.html" data-cat="personal">
+                <span class="rc-card-idx">02</span>
+                <h3>Portfolio / Case Study Site</h3>
+                <p>Six projects, each carrying a constraint and an outcome. The characteristic failure is a wall of thumbnails that proves nothing about how you think.</p>
+                <div class="rc-card-meta">
+                    <span>7 sections</span>
+                    <span>6 variables</span>
+                </div>
+            </a>
+            <a class="rc-card" href="product-page.html" data-cat="commerce">
+                <span class="rc-card-idx">03</span>
+                <h3>Product Detail Page</h3>
+                <p>Gallery, buy box, variant, trust. The page where a forty-pixel mistake costs a sale, and where AI reliably invents five-star reviews.</p>
+                <div class="rc-card-meta">
+                    <span>8 sections</span>
+                    <span>6 variables</span>
+                </div>
+            </a>
+            <a class="rc-card" href="dashboard.html" data-cat="app">
+                <span class="rc-card-idx">04</span>
+                <h3>Analytics Dashboard</h3>
+                <p>One question per screen. A KPI row, one chart, one table — plus the empty, loading and error states that generated dashboards always skip.</p>
+                <div class="rc-card-meta">
+                    <span>8 sections</span>
+                    <span>6 variables</span>
+                </div>
+            </a>
+            <a class="rc-card" href="blog.html" data-cat="content">
+                <span class="rc-card-idx">05</span>
+                <h3>Blog / Editorial Site</h3>
+                <p>A 62-character reading column, an index that ranks by depth rather than date alone, and an article template that survives footnotes, code and long quotes.</p>
+                <div class="rc-card-meta">
+                    <span>8 sections</span>
+                    <span>5 variables</span>
+                </div>
+            </a>
+            <a class="rc-card" href="launch-page.html" data-cat="marketing">
+                <span class="rc-card-idx">06</span>
+                <h3>Launch / Event Page</h3>
+                <p>A one-pager where four facts decide everything: what it is, when it is, where it is, and what happens when you click. Most generated versions hide all four behind a hero image.</p>
+                <div class="rc-card-meta">
+                    <span>7 sections</span>
+                    <span>6 variables</span>
+                </div>
+            </a>
+        </div>
+
+        <p class="rc-empty" id="rcEmpty" hidden>Nothing in this category yet.</p>
+
+        <section class="rc-section rc-section--tight">
+            <h2>Why a recipe and not a prompt pack</h2>
+            <p>A prompt pack gives you a hundred sentences and no way to tell which one works. A recipe gives you one page type, the reasoning behind its section order, and the variables that genuinely change the outcome. When a build goes wrong you can point at the section that failed instead of rewriting the whole prompt.</p>
+            <p>Every recipe here follows the same four-part shape: goal, structure with counts, style block, constraints. The style block is the part most prompts omit, which is why generated pages so often look like a template with a different accent colour.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+    <script>
+(function () {
+    var filters = Array.prototype.slice.call(document.querySelectorAll('.rc-filter'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.rc-card'));
+    var empty = document.getElementById('rcEmpty');
+
+    filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var f = btn.getAttribute('data-filter');
+            filters.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+            var shown = 0;
+            cards.forEach(function (c) {
+                var ok = f === 'all' || c.getAttribute('data-cat') === f;
+                c.hidden = !ok;
+                if (ok) shown++;
+            });
+            empty.hidden = shown !== 0;
+        });
+    });
+})();
+    </script>
+</body>
+</html>

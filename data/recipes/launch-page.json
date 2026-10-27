@@ -1,0 +1,260 @@
+{
+  "slug": "launch-page",
+  "name": "Launch / Event Page",
+  "category": "marketing",
+  "order": 6,
+  "updatedAt": "2026-10-27",
+  "readingTime": 7,
+  "summary": "A one-pager where four facts decide everything: what it is, when it is, where it is, and what happens when you click. Most generated versions hide all four behind a hero image.",
+  "lede": "An event page has one job and a hard deadline. The visitor either registers now or the page has failed, and there is no second visit because the event will have happened. That makes it the page type where decoration costs the most.",
+  "brief": [
+    "The standard generated launch page opens with a full-viewport gradient, a headline set in a display face, and the date in 12px grey type at the bottom of the hero. Everything the visitor needs is technically present and functionally invisible.",
+    "The rule this recipe enforces is blunt: the four facts sit in the first screen at a readable size, and the register action appears three times — in the hero, after the schedule, and in the footer. A single button at the bottom assumes a visitor who reads to the end, which is a visitor who has already decided."
+  ],
+  "sections": [
+    {
+      "name": "Hero with the four facts",
+      "why": "Name, date with timezone, city or link, and one sentence of what happens. All four above the fold at 16px or larger. An image may sit behind them only if contrast still passes."
+    },
+    {
+      "name": "What it is",
+      "why": "Three short paragraphs or three bullets: who it is for, what they will leave with, and what it is not. The third prevents the wrong registration."
+    },
+    {
+      "name": "Schedule",
+      "why": "Times in the venue's timezone with an explicit label, and a duration for every item. Prose descriptions of a schedule cannot be scanned and are the most common reason people arrive at the wrong hour."
+    },
+    {
+      "name": "Speakers or proof",
+      "why": "Three to six people with name, role and one line of why they are worth listening to. For a product launch, replace with three concrete things being shown."
+    },
+    {
+      "name": "Register",
+      "why": "The form or link, repeated. Price and capacity stated next to it, plus what happens after submitting — a calendar file, a confirmation email, or both."
+    },
+    {
+      "name": "FAQ",
+      "why": "Five questions: cost, refunds, recording, accessibility, and whether it is remote. These are the five emails the organiser would otherwise answer individually."
+    },
+    {
+      "name": "Footer",
+      "why": "Organiser name, a contact address, and the code of conduct link for anything with an audience."
+    }
+  ],
+  "promptLines": [
+    "Build a single-page site for {{EVENT}}.",
+    "",
+    "AUDIENCE",
+    "Someone who saw a link in a newsletter or a message and has about fifteen seconds to decide whether this is worth an evening. They are on a phone, they do not know who is organising it, and they will not scroll to find out when it starts.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. Hero containing exactly four facts, all at 16px or larger: the name of the event; the date and start time with an explicit timezone; the city and venue, or a link if it is online; one sentence describing what happens. Below them, a primary register button and a secondary link to the schedule.",
+    "2. What it is: three short items. Who it is for, what they will leave with, and what it is not.",
+    "3. Schedule: {{SCHEDULE}} Every item carries a start time, an end time and a duration. Times labelled with the timezone once, in the section heading.",
+    "4. Speakers or proof: {{PROOF}} Three to six entries with name, role, and one sentence on why this person is worth listening to. No generic bios.",
+    "5. Register: {{REGISTRATION}} State the price, the capacity, and what happens after submitting. Repeat the register button here, not only in the hero.",
+    "6. FAQ: exactly five questions — cost and what it includes, refunds and transfers, whether it is recorded, accessibility and dietary needs, and whether there is a remote option.",
+    "7. Footer: organiser name, contact email, and a code of conduct link.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- The date must appear in the first 25 words of the page and again in the register block.",
+    "- Never write the schedule as prose. Times only in a table or a list with a time column.",
+    "- No countdown timer unless it includes the timezone and the target datetime in the markup.",
+    "- No speaker listed as TBA. If a slot is unconfirmed, omit it rather than placeholder it.",
+    "- Banned: join us for an unforgettable evening, thought leaders, industry experts, networking opportunities.",
+    "",
+    "CONSTRAINTS",
+    "- All four hero facts visible at 390x844 without scrolling, at a minimum of 16px.",
+    "- If a background image sits behind the hero, text contrast must remain at least 4.5:1 in the darkest and lightest region it covers.",
+    "- Register button at least 48px tall and reachable with a thumb.",
+    "- Times marked up with a machine-readable datetime attribute so calendar links and search results are correct.",
+    "- Page must work with images blocked; the four facts are text, never part of an image.",
+    "- No autoplaying video in the hero.",
+    "",
+    "OUTPUT",
+    "One page. No framework. The register action is a single form or a single link, used consistently in all three places."
+  ],
+  "controls": [
+    {
+      "id": "EVENT",
+      "label": "Event type",
+      "options": [
+        {
+          "label": "Conference",
+          "value": "a one-day conference. It runs 09:00 to 17:30, has two tracks, six speakers and a ticket price. The schedule is the centre of gravity and must be scannable in under thirty seconds."
+        },
+        {
+          "label": "Meetup",
+          "value": "a monthly evening meetup. It runs 18:30 to 21:00, has two talks and a social half hour, and is free with a capacity of 80. Registration exists mainly to control the door."
+        },
+        {
+          "label": "Product launch",
+          "value": "a product launch streamed live. It runs for 45 minutes, has three things being shown with timestamps, and registration is an email capture that adds the event to a calendar. There is no venue."
+        },
+        {
+          "label": "Workshop",
+          "value": "a half-day hands-on workshop. It runs 10:00 to 14:00 with a capacity of 16, has prerequisites listed explicitly, and requires attendees to bring a laptop with one specified tool installed."
+        }
+      ]
+    },
+    {
+      "id": "SCHEDULE",
+      "label": "Schedule format",
+      "options": [
+        {
+          "label": "Time table",
+          "value": "Render the schedule as a table with time on the left in monospace, item and speaker in the middle, and duration right-aligned. Include breaks and the closing time, which are the two rows people plan around.",
+          "hint": "The most scannable and the most robust on mobile if allowed to reflow."
+        },
+        {
+          "label": "Agenda cards",
+          "value": "Render the schedule as stacked cards, each with a time range as a label, a title, a speaker name and a one-line description. Cards stack naturally on mobile but make comparison harder.",
+          "hint": "Better when talk titles need describing."
+        },
+        {
+          "label": "Single track list",
+          "value": "Render the schedule as a numbered list with a fixed-width time column, no table markup, so it reflows cleanly at any width. Suitable only for a single-track event.",
+          "hint": "The safest choice for a phone-first audience."
+        }
+      ]
+    },
+    {
+      "id": "PROOF",
+      "label": "Credibility block",
+      "options": [
+        {
+          "label": "Speakers",
+          "value": "Show speakers as a list of four: name, role and company, and one sentence naming something specific they built or argued. No headshots larger than 80px, no social icons."
+        },
+        {
+          "label": "Three demos",
+          "value": "For a launch, replace speakers with three numbered items describing exactly what will be shown, each with a one-line claim and a timestamp in the stream."
+        },
+        {
+          "label": "Past editions",
+          "value": "Show three previous editions with the year, the attendance number, and one quoted line from an attendee, attributed with a role rather than a full name."
+        }
+      ]
+    },
+    {
+      "id": "REGISTRATION",
+      "label": "Registration",
+      "options": [
+        {
+          "label": "Inline form",
+          "value": "Use a two-field inline form (name, email) plus a submit button, with a visible success state that confirms the date and says a calendar file is on its way.",
+          "hint": "Fewest fields that still identify a person."
+        },
+        {
+          "label": "External link",
+          "value": "Use a single button linking to an external ticketing page, with the price and capacity stated beside it and the link opening in the same tab.",
+          "hint": "Right when payment or seat selection is handled elsewhere."
+        },
+        {
+          "label": "Email capture plus calendar",
+          "value": "Use one email field and a button labelled Save my seat, with a secondary link that adds the event to a calendar without registering. State that the recording will be sent to registrants.",
+          "hint": "Right for streamed launches with no capacity limit."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Poster",
+          "value": "Poster: one saturated background colour across the whole page, the event name set in a condensed display face at 4 to 6rem, all other text in a neutral sans, thick 4px rules between sections, no cards and no shadows."
+        },
+        {
+          "label": "Editorial",
+          "value": "Editorial: warm off-white, a serif event name, the four facts set as a definition list with small caps labels, hairline rules, and the schedule formatted like a printed programme."
+        },
+        {
+          "label": "Technical",
+          "value": "Technical: near-black background, one accent colour for times and the register button, monospace for every time and date, thin borders at 10 percent white, no imagery at all."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px black borders, hard offset shadows, one acid accent behind the register button, event name in a heavy grotesque at 800 weight, no border radii anywhere."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation. The page has a deadline and the visitor has fifteen seconds; nothing should delay the four facts."
+        },
+        {
+          "label": "Hero only",
+          "value": "One entrance on the hero facts: opacity and 16px translate over 450ms, once, on load. Nothing animates on scroll and the register button never moves."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "EVENT",
+      "note": "This changes the schedule shape, the price treatment and the FAQ answers. Swapping the label without changing the schedule produces a conference with a workshop timetable."
+    },
+    {
+      "token": "SCHEDULE",
+      "note": "Cards read better but compare worse. If the event has parallel tracks or a break people plan around, use the table; if every item needs a description, use cards."
+    },
+    {
+      "token": "PROOF",
+      "note": "For a launch, demos beat speakers. A list of advisors nobody recognises is weaker than three sentences describing what will actually appear on screen."
+    },
+    {
+      "token": "REGISTRATION",
+      "note": "Never mix two mechanisms. A form plus an external link splits the audience and makes the capacity number meaningless."
+    },
+    {
+      "token": "STYLE",
+      "note": "Poster styling needs a real display face and a colour you can hold for a whole page. Half-applied, it looks like a template with one loud section."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the hero with the four facts first and check it at 390px before anything else. Most of the value of this page is decided in that one screen."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a countdown. Keep it only if the target datetime and timezone are in the markup; a countdown that disagrees with the stated start time is worse than none."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for the schedule as semantic table markup with datetime attributes, not divs. This is the difference between a calendar link that works and one that silently contains the wrong hour."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Put the schedule in a small JSON file and render from it. Event details change constantly in the final week, and editing markup under time pressure is how the wrong time ships."
+    }
+  ],
+  "failures": [
+    {
+      "title": "The date buried in the hero",
+      "body": "A date set in small grey type under a full-bleed image is technically present and practically invisible. If a visitor has to look for when it is, they will assume it already happened."
+    },
+    {
+      "title": "A countdown with no timezone",
+      "body": "Counting down to a local time that the reader does not share sends people to the wrong hour. Either state the timezone in the label or omit the timer; there is no acceptable middle."
+    },
+    {
+      "title": "The schedule written as prose",
+      "body": "We start at ten with a keynote, then break for coffee around eleven is unparseable when someone is deciding between two events on the same day. Times belong in a column."
+    },
+    {
+      "title": "One register button at the very bottom",
+      "body": "A visitor convinced at the hero has to scroll the entire page to act. Three placements — hero, after the schedule, footer — cost nothing and catch three different moments of decision."
+    }
+  ],
+  "styles": ["art-deco", "neo-brutalism", "swiss-style", "retro-y2k"],
+  "motions": ["text-mask-reveal", "aurora-background"]
+}

@@ -1,0 +1,9 @@
+{
+  "siteName": "AI Website Style Gallery",
+  "url": "https://www.aiwebstyle.com",
+  "contactEmail": "hello@aiwebstyle.com",
+  "adsenseClient": "ca-pub-6334847497116545",
+  "adsExcludedFiles": ["404.html", "previews/index.html"],
+  "adsExcludedDirs": ["previews"],
+  "contactResponseTime": "two working days"
+}

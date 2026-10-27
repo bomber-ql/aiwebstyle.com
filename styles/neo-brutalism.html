@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo-Brutalism — Style Detail, Prompt and CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The…">
+    <link rel="canonical" href="https://www.aiwebstyle.com/styles/neo-brutalism.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Neo-Brutalism — Web Design Style, Prompt &amp; CSS">
+    <meta property="og:description" content="Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The…">
+    <meta property="og:url" content="https://www.aiwebstyle.com/styles/neo-brutalism.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Neo-Brutalism: Web Design Style, Prompt and CSS","description":"Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The…","about":{"@type":"Thing","name":"Neo-Brutalism"},"isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"}}</script>
+    <!-- /build:seo -->
+</head>
+<body class="theme-neo-brutalism">
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html" class="is-active" aria-current="page">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Neo-Brutalism</h1>
+            <p>Hard borders and candy colours — brutalist bones, playful skin</p>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"/><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"/></svg>
+            <span>Back to Style List</span>
+        </a>
+
+                <!-- build:preview-cta -->
+        <div class="preview-cta">
+            <p>See this style applied to a real page — identical content, different stylesheet.</p>
+            <a href="../previews/neo-brutalism.html">Open live preview →</a>
+        </div>
+        <!-- /build:preview-cta -->
+
+<section class="style-detail-section style-description">
+            <h2>About This Style</h2>
+            <p>Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The result is loud but friendly, which is why it colonised startup landing pages while the original brutalism stayed in art schools.</p>
+            <p>The rule that makes or breaks it: every shadow is a hard offset with zero blur, and every border is identical in weight. Soften either one and the whole thing reads as a sloppy card grid instead of a deliberate style.</p>
+
+            <div class="token-row">
+            <span class="token-chip">border: 3px solid #000</span>
+            <span class="token-chip">radius: 0</span>
+            <span class="token-chip">shadow: 8px 8px 0</span>
+            <span class="token-chip">press: translate 4px</span>
+            <span class="token-chip">fills: 4 pastels</span>
+            <span class="token-chip">text: black only</span>
+            </div>
+
+            <h3>Main Features:</h3>
+            <ul>
+                <li><strong>Uniform heavy border:</strong> 2–3px solid black on every element that has an edge. Mixed border weights destroy the effect immediately.</li>
+                <li><strong>Hard offset shadow:</strong> 6–8px on both axes, zero blur, zero spread, always the same direction and colour.</li>
+                <li><strong>Saturated pastel fills:</strong> Lilac, mint, butter, coral. Fully saturated but light in value, so black text stays readable.</li>
+                <li><strong>Press interaction:</strong> On hover the element translates by the shadow offset while the shadow shrinks — it looks physically pushed down.</li>
+                <li><strong>No gradients, no blur:</strong> Any softness contradicts the premise. Flat colour only.</li>
+            </ul>
+        </section>
+
+        <section class="style-detail-section style-prompt">
+            <h2>Example AI Prompt</h2>
+            <pre><code>Design a neo-brutalist interface.
+
+Edges:
+- Every card, button and input uses a 3px solid #000 border. The same weight everywhere, no exceptions.
+- Border radius 0. Nothing rounded.
+
+Shadow:
+- Cards and buttons use box-shadow: 8px 8px 0 #000 — hard offset, no blur, no spread.
+- On hover, translate the element by (4px, 4px) and reduce the shadow to 4px 4px 0 #000 so it appears pressed into the page. Use a 0.1s linear transition, not an ease.
+
+Colour:
+- Background white. One saturated pastel per block (#c9b8ff lilac, #a8f0c6 mint, #ffe08a butter, #ffb3a7 coral).
+- All text black. Accent colour only as a fill, never as text on a dark surface.
+
+Type:
+- A heavy grotesque for headings, uppercase, tight tracking. Body in the same family at regular weight.
+
+Constraints:
+- No gradients, no blur, no opacity tricks. Flat fills only.
+- Keep the shadow direction identical across the whole page — one light source, or it looks like a mistake.</code></pre>
+        </section>
+
+        <section class="style-detail-section style-css">
+            <h2>Theme CSS Snippets</h2>
+            <p>Neo-brutalist theme. --card-border-radius is 0 and the shadow is a hard offset — those two variables do most of the style work across the whole site.</p>
+            <pre><code>body.theme-neo-brutalism {
+    --page-bg: #fdfdf7;
+    --page-bg-gradient: none;
+    --text-color: #111111;
+    --heading-color: #000000;
+    --link-color: #4b2fd6;
+    --border-color: #000000;
+    --card-bg: #ffffff;
+    --card-shadow: 8px 8px 0 #000000;
+    --card-hover-shadow: 4px 4px 0 #000000;
+    --header-bg: #c9b8ff;
+    --header-text-color: #000000;
+    --prompt-bg: #ffe08a;
+    --prompt-text-color: #000000;
+    --button-bg: #000000;
+    --button-text-color: #ffffff;
+    --button-hover-bg: #4b2fd6;
+    --card-border-radius: 0;
+    --base-font: var(--font-inter);
+    --heading-font: var(--font-montserrat);
+}</code></pre>
+        </section>
+
+        <section class="style-detail-section style-fit">
+            <h2>Where it fits</h2>
+            <div class="fit-grid">
+                <div>
+                    <h3>Use it when</h3>
+                    <ul>
+                <li>Consumer products and indie tools that want to feel human and a bit cheeky.</li>
+                <li>Launch pages where the page itself is part of the marketing.</li>
+                <li>Portfolios and event sites where standing out matters more than looking restrained.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Avoid it when</h3>
+                    <ul>
+                <li>Fintech, health or anything where trust is the primary currency — hard edges read as shouting.</li>
+                <li>Dense data UI. The borders consume space that tables need.</li>
+                <li>Long reading sessions; the high contrast and flat fills fatigue the eye quickly.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="style-detail-section style-download">
+            <h2>Resource Download</h2>
+            <p>A working single-page demo in this style — the HTML and one self-contained stylesheet, no build step.</p>
+            <a href="../zips/neo-brutalism.zip" class="btn btn-download" download>Download neo-brutalism.zip</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="current-year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>

@@ -1,17 +1,394 @@
 [
   {
-    "styleId": "glassmorphism",
-    "name": "Glassmorphism",
-    "blurb": "Frosted translucent panels over a saturated colour field, with hairline light borders and a soft top-edge highlight."
+    "styleId": "skeuomorphism",
+    "name": "Skeuomorphism",
+    "blurb": "Leather and paper surfaces, stitched borders and beveled buttons that look physically pressable.",
+    "standalone": false,
+    "analysis": "The leather is a stack of repeating linear gradients at slightly different angles, which produces a grain without an image. Stitching is a dashed border inset a few pixels from the edge. Buttons carry three shadows at once: an inset top highlight, an inset bottom shadow, and a small drop shadow — that combination is what makes them look pressable rather than merely raised.",
+    "notice": [
+      "Paper grain is repeating gradients, not a texture file",
+      "Stitching is a dashed border inset from the edge",
+      "Buttons use inset highlight, inset shadow and a drop shadow together"
+    ],
+    "breaks": "It dates instantly and it is expensive to maintain: every new component needs its own set of three shadows or the illusion breaks.",
+    "tech": "gradient grain · dashed stitching · triple shadow"
+  },
+  {
+    "styleId": "swiss-style",
+    "name": "Swiss Style / International Typographic Style",
+    "blurb": "Strict twelve-column grid, Helvetica, asymmetric whitespace and a single red accent.",
+    "standalone": true,
+    "analysis": "The grid is doing the work, not the typeface. Headlines occupy columns one to nine and the lead paragraph starts at column seven, so the two blocks overlap for three columns. That deliberate asymmetry is what makes a twelve-column grid visible; a symmetrical layout would look the same at eight columns. Red appears twice on the page and nowhere else, which is the entire colour system.",
+    "notice": [
+      "The headline and the lead overlap between columns seven and nine",
+      "Red is used twice on the whole page",
+      "Sections are separated by 2px rules, not cards"
+    ],
+    "breaks": "Drop below about 900px and the twelve columns collapse, taking the asymmetry with them unless the layout is rethought rather than stacked.",
+    "tech": "12-column grid · asymmetric overlap · one accent"
+  },
+  {
+    "styleId": "grunge",
+    "name": "Grunge Style",
+    "blurb": "Off-register display type, distressed panels and muted rust on ash grey.",
+    "standalone": false,
+    "analysis": "The misprint effect is a hard text-shadow offset by one or two pixels in a contrasting colour, which imitates a second ink pass that did not register. Panels get their wear from layered gradients with irregular stops rather than from a texture image. The palette is restricted to ash grey, bone and one rust tone, because grunge fails the moment it becomes colourful.",
+    "notice": [
+      "Type carries a hard offset shadow like a bad second ink pass",
+      "Wear comes from irregular gradient stops, not images",
+      "One rust accent against ash and bone"
+    ],
+    "breaks": "Legibility degrades quickly: the offset shadow that looks great on a headline turns small text into a smear.",
+    "tech": "offset text shadow · irregular stops · rust accent"
+  },
+  {
+    "styleId": "modern-tech",
+    "name": "Modern Tech Style",
+    "blurb": "Clean cards on a faint grid, one restrained blue accent, numbers set in mono.",
+    "standalone": false,
+    "analysis": "The restraint is measurable: one accent, one shadow value, one radius, and a background grid at 24px that is barely visible until you look for it. Numbers are set in a monospace face so digits align across rows, which is the detail that makes a product page feel engineered. The accent never fills a large area — it marks links, active states and one number per card.",
+    "notice": [
+      "Numbers are monospaced so columns align",
+      "The background grid is faint enough to read as texture",
+      "Only one accent colour, and never as a large fill"
+    ],
+    "breaks": "Without real numbers or data the style looks empty; it relies on specific content to justify its precision.",
+    "tech": "24px background grid · mono numerals · one accent"
   },
   {
     "styleId": "brutalism",
     "name": "Brutalism",
-    "blurb": "Raw type, hard 3px rules and offset block shadows, one acid accent, nothing rounded and nothing softened."
+    "blurb": "Raw type, hard 3px rules, offset block shadows and one acid yellow accent.",
+    "standalone": true,
+    "analysis": "Brutalism here is a set of refusals: no border radius, no gradient, no soft shadow, one typeface. Depth comes from a solid offset shadow with zero blur, which reads as a printed block rather than a floating card. Hovering a button translates it into the shadow instead of changing colour, so the feedback is spatial rather than chromatic. The accent is a single flat acid yellow used on exactly one panel.",
+    "notice": [
+      "The shadow has no blur at all — it is a solid offset block",
+      "Buttons move on press instead of changing colour",
+      "Arial is left unsmoothed on purpose, so edges look slightly rough"
+    ],
+    "breaks": "Long-form text suffers badly: the hard edges and tight leading that feel decisive in a hero become tiring over four paragraphs.",
+    "tech": "solid offset shadow · 3px rules · no border radius"
   },
   {
-    "styleId": "swiss-style",
-    "name": "Swiss Style",
-    "blurb": "Strict twelve-column grid, Helvetica, asymmetric whitespace and a single red accent doing all the emphasis."
+    "styleId": "retro-90s",
+    "name": "Retro - 90s Web",
+    "blurb": "Times New Roman, navy and yellow, beveled table borders and underlined links everywhere.",
+    "standalone": false,
+    "analysis": "The authenticity comes from HTML-era defaults rather than from a filter: Times New Roman, navy background, yellow text, and beveled borders built from four different border colours on one element. Links are underlined and blue-violet, because that was the only affordance the browser gave you. Centred everything is not a stylistic choice here, it is a reconstruction of what the platform did by default.",
+    "notice": [
+      "Bevels are four border colours on a single element",
+      "Links keep the browser-default underline and visited colour",
+      "Nearly every block is centre-aligned"
+    ],
+    "breaks": "Readability is genuinely poor: yellow on navy at this size passes contrast but the serif at 15px on a modern high-DPI screen looks broken.",
+    "tech": "four-colour bevels · default serif · centred blocks"
+  },
+  {
+    "styleId": "retro-y2k",
+    "name": "Retro - Y2K Aesthetic",
+    "blurb": "Chrome gradients, gloss highlights and iridescent blobs with a millennial sans.",
+    "standalone": false,
+    "analysis": "The millennial look is built from three tricks: a chrome gradient that runs light-dark-light to imitate metal, a gloss highlight placed at the vertical midpoint of a shape, and iridescent blobs made from soft radial gradients. Type is a wide geometric sans with tight tracking. None of it is skeuomorphic in the leather sense — it imitates software interfaces and consumer electronics, not physical objects.",
+    "notice": [
+      "Chrome text is a gradient clipped to the glyphs",
+      "The gloss is a white-to-transparent band at the midpoint",
+      "Blobs are soft radial gradients, not images"
+    ],
+    "breaks": "Gradients on text destroy contrast unpredictably, so any label that needs to be read at a glance should stay a flat colour.",
+    "tech": "chrome gradient · gloss band · soft blobs"
+  },
+  {
+    "styleId": "retro-pixel",
+    "name": "Retro - Pixel Art",
+    "blurb": "Bitmap type on a four-pixel grid, hard edges, one neon green.",
+    "standalone": false,
+    "analysis": "Pixel type only survives at two conditions: a size that lands on the font's pixel grid, and line height near double. At 0.46rem with 2.4 line height the glyphs stay legible; drop the line height and the bitmap rows collide into noise. Borders and spacing are multiples of four so the whole page sits on the same grid as the typeface, which is what makes it read as a system rather than a font choice.",
+    "notice": [
+      "Line height is close to double — the only setting that keeps bitmap type readable",
+      "Every border and gap is a multiple of four pixels",
+      "One neon green on near-black, no gradients"
+    ],
+    "breaks": "It cannot carry long text. Beyond a short paragraph the fixed pixel grid makes the eye work far too hard, so it belongs on headings and labels only.",
+    "tech": "bitmap type · 4px grid · doubled line height"
+  },
+  {
+    "styleId": "illustration",
+    "name": "Illustration Focused",
+    "blurb": "Hand-drawn edges, irregular radii and a warm palette that reads as drawn rather than designed.",
+    "standalone": false,
+    "analysis": "The hand-drawn feel comes from four small decisions rather than from illustration assets: radii that differ per corner, borders that are slightly thicker on one side, a very shallow rotation on blocks, and dividers drawn as short strokes instead of full-width rules. The palette is warm and limited to three tones, which keeps the page from looking like a children's book.",
+    "notice": [
+      "Each corner has a different radius, so nothing is machine-round",
+      "Blocks sit at a fraction of a degree of rotation",
+      "Dividers are short strokes, not full rules"
+    ],
+    "breaks": "At scale the irregularity becomes noise: ten cards with ten different radii stop reading as hand-drawn and start reading as inconsistent.",
+    "tech": "per-corner radii · shallow rotation · stroke dividers"
+  },
+  {
+    "styleId": "3d-interactive",
+    "name": "3D Elements / Interactive",
+    "blurb": "Perspective, extruded type and cards that tilt toward the pointer.",
+    "standalone": false,
+    "analysis": "The extruded headline is five stacked text-shadows offset by one pixel each, which is cheaper and sharper than a real 3D transform. Cards tilt using rotateX and rotateY on hover, with perspective set on the parent so the vanishing point is shared. Only hover moves — touch devices and reduced-motion users get the flat state, which is the part most implementations forget.",
+    "notice": [
+      "Depth on the headline is stacked text-shadows, not a transform",
+      "Perspective lives on the parent, so all cards share one vanishing point",
+      "Tilt is hover-only and disabled under reduced motion"
+    ],
+    "breaks": "Continuous pointer tracking on many cards will drop frames on integrated graphics; the effect needs to be limited to the card under the cursor.",
+    "tech": "stacked text shadows · hover tilt · shared perspective"
+  },
+  {
+    "styleId": "dark-mode",
+    "name": "Dark Mode",
+    "blurb": "Deep charcoal surfaces, one vibrant accent, contrast held well above the minimum.",
+    "standalone": false,
+    "analysis": "A dark theme is a contrast problem before it is a colour choice. Surfaces step from #0e1116 to #171c23 rather than jumping to grey, borders sit at roughly 8 percent white so they read as edges without becoming lines, and the accent is reserved for interactive elements only. Nothing is pure black and no text is pure white, because both extremes produce halation on OLED screens at night.",
+    "notice": [
+      "Borders are white at 8 percent, visible but never a drawn line",
+      "The accent appears only on things you can click",
+      "Surfaces step up in value instead of using shadows"
+    ],
+    "breaks": "Once an image with a white background appears, the illusion collapses — dark themes need dark or transparent assets, not a CSS filter.",
+    "tech": "value-stepped surfaces · 8% borders · one accent"
+  },
+  {
+    "styleId": "bold-typography",
+    "name": "Bold Typography",
+    "blurb": "Type as the entire system: oversized capitals, no colour, no decoration.",
+    "standalone": false,
+    "analysis": "There is no colour, no decoration, and no imagery: hierarchy is carried entirely by size, weight and space. The display sizes jump in large steps rather than scaling smoothly, because a linear scale reads as timid. Line height is tight enough that paragraphs become blocks of texture, which is the point — at this scale the words function as shapes first and sentences second.",
+    "notice": [
+      "Only three sizes exist, and the gaps between them are large",
+      "Weights contrast hard: 800 against 400, nothing in between",
+      "Space, not rules, separates the sections"
+    ],
+    "breaks": "It only works with real copy. Placeholder text at 5rem exposes every awkward line break, and the layout has nothing else to hide behind.",
+    "tech": "three sizes only · 800 vs 400 · no colour"
+  },
+  {
+    "styleId": "glassmorphism",
+    "name": "Glassmorphism",
+    "blurb": "Frosted translucent panels over a saturated colour field with hairline light borders.",
+    "standalone": true,
+    "analysis": "The whole effect rests on one CSS property: backdrop-filter, which blurs whatever sits behind the panel rather than the panel itself. That is why the colour field is drawn as two fixed radial gradients in the body background — the panels have something worth blurring. The hairline border is a 1px rgba white at around 20 percent, and the top edge carries an extra highlight, which is what separates glass from frosted plastic.",
+    "notice": [
+      "The panels blur the colour field behind them, not the page content",
+      "A 1px light border plus a top highlight fakes the edge refraction",
+      "Small text sits on the darkest part of the field for contrast"
+    ],
+    "breaks": "Against a busy photograph the blur stops helping and body text drops below readable contrast within one scroll.",
+    "tech": "backdrop blur · 1px light border · gradient field"
+  },
+  {
+    "styleId": "aurora-ui",
+    "name": "Aurora UI",
+    "blurb": "Slow drifting colour fields behind thin glass, built without a blur filter.",
+    "standalone": false,
+    "analysis": "The usual implementation animates filter: blur on three huge elements, which forces the browser to re-blur them every frame. This version skips the filter entirely: each field is a radial gradient that already fades to transparent by 70 percent of its radius, so it is soft before it moves. Animation is transform only, at different durations per field, so they never sync into a pulse.",
+    "notice": [
+      "No blur filter anywhere — the softness is baked into the gradient",
+      "Each field runs at a different duration so they drift apart",
+      "Text sits on a scrim, never directly on the colour"
+    ],
+    "breaks": "On low-end phones three large composited layers still cost battery; the effect needs a pause control and a reduced-motion path to be responsible.",
+    "tech": "pre-softened gradients · desynced transforms · scrim"
+  },
+  {
+    "styleId": "natural-organic",
+    "name": "Natural / Organic Style",
+    "blurb": "Warm paper, moss and clay, soft radii and serif headings.",
+    "standalone": false,
+    "analysis": "Warm paper instead of white, a serif for headings against a sans for body, and a palette of moss, clay and ink that never exceeds four colours. Radii are deliberately uneven — each corner gets a slightly different value — so blocks read as cut paper rather than as components. Rules are thin and warm rather than grey, which keeps the page from looking like a document.",
+    "notice": [
+      "Corner radii differ per corner, which reads as hand-cut",
+      "Serif headings, sans body, no third family",
+      "Four colours total, all desaturated"
+    ],
+    "breaks": "The warmth fights with data: charts and status colours look wrong against paper tones, so it suits editorial pages better than dashboards.",
+    "tech": "uneven radii · serif and sans pairing · warm paper"
+  },
+  {
+    "styleId": "monochromatic",
+    "name": "Monochromatic Design",
+    "blurb": "One hue, with every value derived from it — nothing outside the ramp.",
+    "standalone": false,
+    "analysis": "Every value on the page derives from one blue. The ramp runs from a near-white tint to a near-black shade, and hierarchy is expressed by how far up or down that ramp an element sits, not by adding a second colour. The accent is simply the darkest step, which is why the buttons look related to the headings instead of pasted on. This is the cheapest way to make an untrained palette look deliberate.",
+    "notice": [
+      "All greys are the same hue, only the lightness changes",
+      "Buttons use the darkest step of the same ramp",
+      "Hierarchy comes from value, not from size alone"
+    ],
+    "breaks": "Status colours have nowhere to live. Success, warning and error all become the same blue, which is unacceptable the moment the page needs a form.",
+    "tech": "single-hue ramp · hierarchy by value"
+  },
+  {
+    "styleId": "maximalism",
+    "name": "Maximalism / Collage",
+    "blurb": "Overlapping rotated layers, mixed type and four competing colours.",
+    "standalone": false,
+    "analysis": "Maximalism is not randomness. Each card here is rotated by a fixed, small amount that differs per card, the background is a repeating diagonal stripe, and the type mixes a display serif with a mono label. The composition only holds because the rotations are small and consistent and the palette is limited to four colours — remove either constraint and it reads as a broken layout instead of a busy one.",
+    "notice": [
+      "Rotations are fixed per card, not random",
+      "The diagonal stripes come from a repeating gradient",
+      "Only four colours, despite the density"
+    ],
+    "breaks": "Scannability drops to almost nothing. Fine for a poster or a landing hero, unusable for anything a person has to operate.",
+    "tech": "fixed rotations · repeating stripes · four colours"
+  },
+  {
+    "styleId": "claymorphism",
+    "name": "Claymorphism",
+    "blurb": "Moulded pastel surfaces with double-sided light and no hard edges.",
+    "standalone": false,
+    "analysis": "Clay is neomorphism with the contrast put back: bigger radii, a coloured surface instead of a grey one, and a light source that comes from above rather than from a corner. The inner top highlight plus a soft outer shadow reads as moulded rather than embossed. Saturation stays below full — a clay surface that reaches pure pastel looks like plastic, and the effect depends on looking slightly matte.",
+    "notice": [
+      "An inner top highlight sits above a soft outer shadow",
+      "Radii are large enough to read as moulded, not rounded",
+      "Colours stay muted; nothing reaches full saturation"
+    ],
+    "breaks": "In dense interfaces the softness removes every edge cue, so rows and dividers disappear and scanning a table becomes guesswork.",
+    "tech": "inner top highlight · large radii · muted fill"
+  },
+  {
+    "styleId": "abstract-geometric",
+    "name": "Abstract / Geometric Shapes",
+    "blurb": "Circles and squares as composition, pastel fills, one bold grotesque.",
+    "standalone": false,
+    "analysis": "The composition is the layout: a large circle and a square establish the page's weight before any text is read, and the type is positioned against them rather than centred in the viewport. Fills are pastel at low opacity so overlaps create a third colour without a third value being declared. One heavy grotesque anchors the whole thing, because geometric shapes plus a light typeface reads as an empty template.",
+    "notice": [
+      "Shapes set the composition before the type does",
+      "Overlapping translucent fills create new colours by blending",
+      "One heavy grotesque against large soft shapes"
+    ],
+    "breaks": "The shapes occupy real space, so on a narrow screen they either crowd the text or get pushed off-canvas entirely.",
+    "tech": "shapes as layout · translucent overlaps"
+  },
+  {
+    "styleId": "sustainable-green",
+    "name": "Sustainable / Green Design",
+    "blurb": "System fonts, no shadows, hairline rules and a single green accent.",
+    "standalone": false,
+    "analysis": "This page is defined by what it removes: no shadows, no webfonts, no decorative graphics, and no card containers. Sections are separated by a 2px green rule on the left of each service, and the space between blocks does the work that borders normally do. It is also the fastest page in the gallery, because there is nothing to download beyond one CSS file.",
+    "notice": [
+      "Zero box-shadows on the entire page",
+      "A 2px green rule replaces the service cards",
+      "System fonts only — no webfont request"
+    ],
+    "breaks": "Hierarchy is fragile: with no containers and no shadows, a page that adds one more section level collapses into an undifferentiated list.",
+    "tech": "no shadows · rule-based dividers · system fonts"
+  },
+  {
+    "styleId": "art-deco",
+    "name": "Art Deco Style",
+    "blurb": "Black and gold, geometric frames within frames, wide capital letter-spacing.",
+    "standalone": false,
+    "analysis": "Deco is symmetry plus line work. The sunburst behind the headline is two crossed repeating gradients rather than an image, and every frame is a frame within a frame: an outer gold hairline, a 6px gap, then a second line at lower opacity. Letter spacing is applied to capitals only, because tracking lowercase serif text at this width makes it unreadable.",
+    "notice": [
+      "The sunburst is two crossed gradients, not a graphic",
+      "Frames are doubled with a fixed inset between the lines",
+      "Wide tracking is applied to capitals only"
+    ],
+    "breaks": "It is a poster language. Applied to a form or a table, the ornament competes with the information and the page becomes tiring within one screen.",
+    "tech": "crossed gradients · doubled frames · tracked capitals"
+  },
+  {
+    "styleId": "neomorphism",
+    "name": "Neomorphism",
+    "blurb": "Same material as the background, shaped only by light and shadow.",
+    "standalone": false,
+    "analysis": "Elements are the same colour as the background and are shaped only by two shadows: a light one from the top left, a dark one from the bottom right. Reversing that pair, or using inset, presses an element into the surface. The craft is in the shadow values being derived from the background hue rather than being pure white and pure grey, which is what stops the effect looking like a 2010s button.",
+    "notice": [
+      "Light and dark shadows are paired and always opposed",
+      "Pressed elements reverse the pair or use inset",
+      "The surface and the elements share one colour"
+    ],
+    "breaks": "Contrast is the known cost: labels on a pressed surface routinely fall under 3:1, which fails accessibility and looks washed out on cheap screens.",
+    "tech": "paired light/dark shadows · inset states"
+  },
+  {
+    "styleId": "bento-grid",
+    "name": "Bento Grid",
+    "blurb": "Asymmetric tiles on a shared grid — many features, one calm surface.",
+    "standalone": false,
+    "analysis": "A bento layout is a grid with two tile sizes and one rule: the gap never changes. Here the hero tile spans two columns and two rows, secondary tiles span two columns, and everything else is a single cell. Because the gap is constant at 16px, the tiles read as one object rather than a set of cards, which is the difference between a bento and a masonry gallery.",
+    "notice": [
+      "One gap value, 16px, everywhere",
+      "The hero tile is exactly 2x2, not 2.3 by 1.7",
+      "All tiles share one radius and one border colour"
+    ],
+    "breaks": "It needs content of genuinely different weights. Equal-value content in a bento grid produces awkward holes that no amount of CSS fixes.",
+    "tech": "2x2 hero tile · constant 16px gap"
+  },
+  {
+    "styleId": "liquid-glass",
+    "name": "Liquid Glass",
+    "blurb": "Edge-lit glass with refraction — depth without drop shadows.",
+    "standalone": false,
+    "analysis": "The difference from glassmorphism is the edge. A 1px border made from a gradient — bright at the top, dark at the bottom — imitates the way a thick glass edge bends light, and an inset white shadow at the top adds the illusion of thickness. Blur is capped around 16px; beyond that the panel stops looking like glass and starts looking like fog.",
+    "notice": [
+      "The border is a gradient, brighter at the top than the bottom",
+      "An inset top highlight creates the sense of thickness",
+      "Blur is capped — more blur reads as fog, not glass"
+    ],
+    "breaks": "Gradient borders need a solid backdrop to sit on; over a photograph they vanish and the panel loses its edge entirely.",
+    "tech": "gradient border · inset highlight · capped blur"
+  },
+  {
+    "styleId": "editorial",
+    "name": "Editorial / Magazine",
+    "blurb": "Print hierarchy on screen — serif display type, measured columns, real whitespace.",
+    "standalone": false,
+    "analysis": "The single most important number on this page is the measure: the body column is constrained to roughly 62 characters. Everything else — the serif display face, the deck under the headline, the hairline rules instead of cards — supports that. Browsers default to about 140 characters at this width, which is precisely twice what a reader can track without losing the line.",
+    "notice": [
+      "Body copy is capped near 62 characters, not the browser default",
+      "A deck sits between the headline and the body",
+      "Sections are divided by rules, not by cards"
+    ],
+    "breaks": "Wide content breaks it: a table or a code block that ignores the measure will widen the column and undo the whole page.",
+    "tech": "62-character measure · deck · hairline rules"
+  },
+  {
+    "styleId": "neo-brutalism",
+    "name": "Neo-Brutalism",
+    "blurb": "Thick black edges, offset shadows and saturated pastel fills.",
+    "standalone": false,
+    "analysis": "Neo-brutalism keeps the hard 3px border but adds two things brutalism refuses: rounded corners of about 10px and candy-bright fills. The shadow stays at zero blur, offset 8px, so the depth is still printed rather than floating. The tell is the hover state, which translates the element 4px toward the shadow while shrinking the shadow to match — a physical press, not a colour change.",
+    "notice": [
+      "Shadow is 8px with zero blur, in solid black",
+      "Corners are rounded, which is what separates it from brutalism",
+      "Hover moves the block and shrinks the shadow by the same amount"
+    ],
+    "breaks": "The saturated fills and black outlines raise contrast everywhere at once, so a dense interface becomes a wall of competing boxes.",
+    "tech": "3px border · 8px hard shadow · candy fills"
+  },
+  {
+    "styleId": "neo-swiss",
+    "name": "Neo-Swiss",
+    "blurb": "Strict modular grid, variable weight, one red accent.",
+    "standalone": false,
+    "analysis": "This takes the twelve-column grid and pushes the overlap further than the original Swiss style would allow: the headline spans one to nine, the lead starts at column seven, and the two are allowed to sit at different baselines. Red appears exactly twice. There are no shadows and no radii anywhere, so every edge is a decision about alignment rather than depth.",
+    "notice": [
+      "Headline and lead overlap across three columns on purpose",
+      "No shadows and no border radius on the whole page",
+      "Red appears exactly twice"
+    ],
+    "breaks": "The overlap has to be re-authored per breakpoint; letting it collapse to a stack removes the only idea the layout has.",
+    "tech": "column overlap · no radius · red twice"
+  },
+  {
+    "styleId": "acid-graphics",
+    "name": "Acid Graphics",
+    "blurb": "High-saturation fills, warped type and anti-design energy.",
+    "standalone": false,
+    "analysis": "Acid graphics is the one style here that is allowed to be ugly. The headline is skewed about five degrees, cards are offset by a fixed 6px rather than a random amount, and the palette is lime, magenta and black with nothing in between. The offset has to be systematic: once it becomes random, the page stops reading as a style and starts reading as a rendering bug.",
+    "notice": [
+      "The headline is skewed by a fixed angle, not a random one",
+      "Card offsets are identical everywhere, 6px",
+      "Three colours only: lime, magenta, black"
+    ],
+    "breaks": "It is hostile to reading by design; using it for anything longer than a promotional block will lose most of the audience in the first paragraph.",
+    "tech": "fixed skew · 6px offsets · three colours"
   }
 ]

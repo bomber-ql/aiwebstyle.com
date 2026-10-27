@@ -10,8 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Press+Start+2P&family=Roboto+Mono&family=Roboto:wght@400;500;700&family=Space+Mono&family=Special+Elite&family=Times+New+Roman&display=swap" rel="stylesheet">
     <!-- Link to main CSS file -->
     <link rel="stylesheet" href="../style.css">
+        <!-- build:adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
      crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
     <!-- build:seo -->
     <meta name="description" content="Note: The key to Claymorphism is the clever use of inner and outer shadows and very rounded corners. Adjusting the color, blur, and offset of the shadows…">
     <link rel="canonical" href="https://www.aiwebstyle.com/styles/claymorphism.html">
@@ -24,7 +26,7 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claymorphism: Web Design Style, Prompt and CSS","description":"Note: The key to Claymorphism is the clever use of inner and outer shadows and very rounded corners. Adjusting the color, blur, and offset of the shadows…","about":{"@type":"Thing","name":"Claymorphism"},"isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"}}</script>
     <!-- /build:seo -->
 </head>
-<!-- 关键：应用 Claymorphism 主题类 -->
+
 <body class="theme-claymorphism">
     <!-- build:nav -->
     <nav class="site-nav" aria-label="Primary">
@@ -32,7 +34,9 @@
             <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">
                 <a href="../index.html" class="is-active" aria-current="page">Styles</a>
+                <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
                 <a href="../about.html">About</a>
             </div>
         </div>
@@ -54,7 +58,14 @@
         </a>
 
         <!-- Description Section -->
-        <section class="style-detail-section style-description">
+        <!-- build:preview-cta -->
+        <div class="preview-cta">
+            <p>See this style applied to a real page — identical content, different stylesheet.</p>
+            <a href="../previews/claymorphism.html">Open live preview →</a>
+        </div>
+        <!-- /build:preview-cta -->
+
+<section class="style-detail-section style-description">
             <h2>About This Style</h2>
             <p>Claymorphism, or clay style, is an interface design style that pursues a <strong>soft, friendly, and slightly 3D feel</strong>. It simulates the texture of clay or play-dough, using rounded shapes and inner/outer shadows to create a light, cute three-dimensional effect, distinct from the harder feel of Neumorphism.</p>
             <p>This style usually gives an approachable, playful, or modern cartoonish feeling, suitable for applications and websites that need to create a relaxed and fun atmosphere.</p>
@@ -110,7 +121,6 @@ body.theme-claymorphism {
     /* Stronger outset shadow for hover states */
     --clay-shadow-outset-hover: 5px 5px 10px var(--clay-shadow-color-dark), 
                                 -5px -5px 10px var(--clay-shadow-color-light);
-
 
     /* Apply Claymorphism variables to theme properties */
     --page-bg: var(--clay-bg);
@@ -206,9 +216,11 @@ body.theme-claymorphism .style-detail-section pre {
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
                 <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
                 <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
                 <a href="../about.html">About</a>
-                <a href="../about.html#contact">Contact</a>
+                <a href="../contact.html">Contact</a>
                 <a href="../privacy.html">Privacy Policy</a>
                 <a href="../terms.html">Terms</a>
                 <!-- /build:footer-nav -->

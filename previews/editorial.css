@@ -1,0 +1,147 @@
+/* Editorial / Magazine — serif ladder, measured measure, hairline rules */
+
+body {
+    background: #fbfaf7;
+    color: #2b2a27;
+    font-family: 'Lato', 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.65;
+}
+
+.site-head {
+    border-bottom: 1px solid #ded9cf;
+    background: #fbfaf7;
+}
+.site-head .wrap { min-height: 68px; }
+.brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #14130f;
+}
+.site-head nav a {
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #6d675c;
+}
+.site-head nav a:hover { color: #8a2f1d; border-bottom-color: #8a2f1d; }
+
+.hero {
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid #ded9cf;
+}
+.eyebrow {
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #8a2f1d;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+}
+.hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    max-width: 17ch;
+    margin-bottom: 1.5rem;
+    color: #14130f;
+}
+.lede {
+    font-size: 1.16rem;
+    line-height: 1.62;
+    color: #55504a;
+    max-width: 46ch;
+    /* the standfirst sits beside the headline, not under it */
+    border-left: 2px solid #8a2f1d;
+    padding-left: 1.2rem;
+}
+
+.btn {
+    border-radius: 0;
+    background: #14130f;
+    border-color: #14130f;
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.btn:hover { background: #8a2f1d; border-color: #8a2f1d; }
+.btn.ghost { background: transparent; color: #14130f; border-color: #ded9cf; }
+.btn.ghost:hover { background: #f2efe8; border-color: #14130f; }
+
+.services { border-bottom: 1px solid #ded9cf; padding: 3.2rem 0; }
+.services > .wrap { gap: 2.4rem; }
+.services article {
+    border-top: 1px solid #ded9cf;
+    padding-top: 1.1rem;
+}
+.services h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: .6rem;
+    color: #14130f;
+}
+.services p { color: #55504a; font-size: .93rem; max-width: 32ch; }
+.num {
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #9a9285;
+    margin-bottom: 1.4rem;
+}
+
+.quote { border-bottom: 1px solid #ded9cf; padding: 4rem 0; }
+.quote blockquote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+    line-height: 1.4;
+    color: #14130f;
+    max-width: 30ch;
+}
+.quote blockquote::before {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: #8a2f1d;
+    margin-bottom: 1.6rem;
+}
+.quote cite {
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #7a7367;
+    font-style: normal;
+}
+
+.cta { padding: 3.2rem 0 4rem; }
+.cta > .wrap {
+    border-top: 2px solid #14130f;
+    padding-top: 1.6rem;
+    align-items: flex-end;
+}
+.cta h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+    color: #14130f;
+}
+.cta p { color: #55504a; }
+
+footer { border-top: 1px solid #ded9cf; }
+footer .wrap {
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #8b8478;
+}
+.back-chip { background: #14130f; border-radius: 0; letter-spacing: .08em; text-transform: uppercase; }
+
+@media (max-width: 760px) {
+    .lede { border-left: 0; padding-left: 0; border-top: 2px solid #8a2f1d; padding-top: 1rem; }
+    .services > .wrap { gap: 1.8rem; }
+}

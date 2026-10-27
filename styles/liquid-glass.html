@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass — Style Detail, Prompt and CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the…">
+    <link rel="canonical" href="https://www.aiwebstyle.com/styles/liquid-glass.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Liquid Glass — Web Design Style, Prompt &amp; CSS">
+    <meta property="og:description" content="Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the…">
+    <meta property="og:url" content="https://www.aiwebstyle.com/styles/liquid-glass.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Liquid Glass: Web Design Style, Prompt and CSS","description":"Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the…","about":{"@type":"Thing","name":"Liquid Glass"},"isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"}}</script>
+    <!-- /build:seo -->
+</head>
+<body class="theme-liquid-glass">
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html" class="is-active" aria-current="page">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Liquid Glass</h1>
+            <p>Refractive translucent layers that bend the content behind them</p>
+        </div>
+    </header>
+
+    <main class="container style-detail-container">
+
+        <a href="../index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.06 1.06L4.81 8l2.97 2.97a.75.75 0 0 1 0 1.06Z"/><path d="M13.25 8A.75.75 0 0 1 12.5 8.75H4.5a.75.75 0 0 1 0-1.5h8a.75.75 0 0 1 .75.75Z"/></svg>
+            <span>Back to Style List</span>
+        </a>
+
+                <!-- build:preview-cta -->
+        <div class="preview-cta">
+            <p>See this style applied to a real page — identical content, different stylesheet.</p>
+            <a href="../previews/liquid-glass.html">Open live preview →</a>
+        </div>
+        <!-- /build:preview-cta -->
+
+<section class="style-detail-section style-description">
+            <h2>About This Style</h2>
+            <p>Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the surface refracts slightly, and layers appear to float at genuinely different depths rather than sitting on one plane.</p>
+            <p>The visual work is done by three things working together — a blurred backdrop, a specular top edge, and a subtle inner highlight that reads as thickness. Remove any one and it collapses back into a flat translucent rectangle.</p>
+
+            <div class="token-row">
+            <span class="token-chip">blur: 24px</span>
+            <span class="token-chip">saturate: 160%</span>
+            <span class="token-chip">radius: 24px</span>
+            <span class="token-chip">rim: 1px top-lit</span>
+            <span class="token-chip">inset highlight: 1px</span>
+            <span class="token-chip">max 2 layers</span>
+            </div>
+
+            <h3>Main Features:</h3>
+            <ul>
+                <li><strong>Backdrop blur plus saturation:</strong> The panel filters what is behind it; increasing saturation slightly stops the colour from going muddy under blur.</li>
+                <li><strong>Specular rim:</strong> A 1px light border that is brighter at the top than the bottom, imitating light catching a bevel.</li>
+                <li><strong>Inner thickness:</strong> A faint inset highlight along the top edge sells the illusion that the surface has depth.</li>
+                <li><strong>Layered depth:</strong> Two or three planes at distinct elevations, not one panel over a flat background.</li>
+                <li><strong>Generous radius:</strong> 20–28px. Sharp corners read as plastic, and the material metaphor breaks.</li>
+            </ul>
+        </section>
+
+        <section class="style-detail-section style-prompt">
+            <h2>Example AI Prompt</h2>
+            <pre><code>Design a Liquid Glass interface layer.
+
+Material:
+- Panels use backdrop-filter: blur(24px) saturate(160%) over a saturated, slightly out-of-focus background.
+- Border: 1px solid rgba(255,255,255,0.35) at the top fading to rgba(255,255,255,0.08) at the bottom — the rim must be brighter where light would hit it.
+- Add a second inset highlight: box-shadow inset 0 1px 0 rgba(255,255,255,0.55), to give the surface apparent thickness.
+- Radius 24px, consistent on every panel.
+
+Depth:
+- Two distinct elevations maximum. The primary panel sits closer; a secondary control strip sits behind it with 40% less blur.
+- Do not use drop shadows for depth. Elevation is communicated by blur strength and rim brightness, not by a dark halo.
+
+Constraints:
+- Text on glass must hold 4.5:1 contrast against the brightest region the background can reach — test with the background at maximum saturation.
+- Provide a solid fallback background behind the panel for browsers without backdrop-filter.
+- Never stack more than two glass layers; a third turns the interface into frosted soup.
+- Respect prefers-reduced-transparency where available and fall back to an opaque surface.</code></pre>
+        </section>
+
+        <section class="style-detail-section style-css">
+            <h2>Theme CSS Snippets</h2>
+            <p>Liquid Glass theme variables. The inset highlight lives in --card-shadow so every panel inherits the top-edge light without repeating the declaration.</p>
+            <pre><code>body.theme-liquid-glass {
+    --page-bg: #0b1020;
+    --page-bg-gradient: radial-gradient(circle at 25% 10%, #2b3fa0, transparent 55%), radial-gradient(circle at 80% 80%, #7a2f9e, transparent 55%);
+    --text-color: #e8eefc;
+    --heading-color: #ffffff;
+    --link-color: #9fc2ff;
+    --border-color: rgba(255, 255, 255, .28);
+    --card-bg: rgba(255, 255, 255, .10);
+    --card-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
+    --card-hover-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 10px 30px -18px rgba(0, 0, 0, .8);
+    --header-bg: rgba(11, 16, 32, .55);
+    --header-text-color: #ffffff;
+    --prompt-bg: rgba(255, 255, 255, .12);
+    --prompt-text-color: #dbe6ff;
+    --button-bg: rgba(255, 255, 255, .92);
+    --button-text-color: #0b1020;
+    --button-hover-bg: #ffffff;
+    --card-border-radius: 24px;
+    --base-font: var(--font-inter);
+    --heading-font: var(--font-inter);
+}</code></pre>
+        </section>
+
+        <section class="style-detail-section style-fit">
+            <h2>Where it fits</h2>
+            <div class="fit-grid">
+                <div>
+                    <h3>Use it when</h3>
+                    <ul>
+                <li>Media-rich hero sections where a photograph or video sits behind the interface.</li>
+                <li>Overlay surfaces — command palettes, floating toolbars, media controls — where context must stay visible.</li>
+                <li>Product showcases for spatial or AR-adjacent software.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Avoid it when</h3>
+                    <ul>
+                <li>Long text pages. Blur behind paragraphs constrains reading speed and hurts contrast.</li>
+                <li>Low-end mobile devices: stacked backdrop-filter layers are one of the most expensive effects in CSS.</li>
+                <li>Any surface where the user must read dense data — a table on glass is unreadable by design.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="style-detail-section style-download">
+            <h2>Resource Download</h2>
+            <p>A working single-page demo in this style — the HTML and one self-contained stylesheet, no build step.</p>
+            <a href="../zips/liquid-glass.zip" class="btn btn-download" download>Download liquid-glass.zip</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="current-year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>

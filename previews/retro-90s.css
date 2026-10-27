@@ -1,0 +1,123 @@
+/* Retro 90s Web — Times, clashing colours, beveled borders, centre everything */
+
+body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    background: #000080;
+    color: #ffff66;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.site-head {
+    border-bottom: 3px double #ffff66;
+    background: #000060;
+}
+.site-head .wrap { justify-content: center; gap: 1rem; }
+.brand {
+    color: #00ffff;
+    font-size: 1.15rem;
+    font-style: italic;
+    text-decoration: underline;
+}
+.site-head nav { margin-left: 0; gap: 1.2rem; }
+.site-head nav a {
+    color: #ffff66;
+    text-decoration: underline;
+    border-bottom: none;
+    font-size: .95rem;
+}
+.site-head nav a:hover { color: #ff66ff; background: #0000a0; }
+
+.hero { padding: 3rem 0 2.5rem; }
+.eyebrow {
+    color: #00ffff;
+    letter-spacing: .04em;
+    text-transform: none;
+    font-size: .95rem;
+    margin-bottom: 1rem;
+}
+.hero h1 {
+    color: #ffffff;
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-decoration: underline;
+    text-decoration-color: #ff66ff;
+    max-width: 24ch;
+    margin: 0 auto 1.3rem;
+}
+.lede {
+    color: #ffff66;
+    margin: 0 auto 1.8rem;
+    max-width: 58ch;
+}
+.hero-actions { justify-content: center; }
+
+.btn {
+    font-family: inherit;
+    background: #c0c0c0;
+    color: #000080;
+    border: 3px outset #ffffff;
+    border-radius: 0;
+    font-weight: bold;
+    text-decoration: none;
+    padding: .55rem 1.2rem;
+    font-size: 1rem;
+}
+.btn:hover { background: #d4d4d4; color: #000080; transform: none; border-style: inset; }
+.btn.ghost { background: #c0c0c0; color: #000080; border: 3px outset #ffffff; }
+.btn.ghost:hover { border-style: inset; background: #d4d4d4; }
+
+.services { border-top: 3px double #ffff66; }
+.services > .wrap { gap: 1.2rem; }
+.services article {
+    background: #000060;
+    border: 3px ridge #c0c0c0;
+    padding: 1.3rem 1.1rem;
+    text-align: left;
+}
+.services h2 {
+    color: #ffffff;
+    font-size: 1.15rem;
+    text-decoration: underline;
+    margin-bottom: .5rem;
+}
+.services p { color: #ffff66; font-size: .92rem; }
+.num { color: #00ffff; font-size: .8rem; margin-bottom: .6rem; }
+
+.quote { border-top: 3px double #ffff66; }
+.quote blockquote {
+    color: #00ffff;
+    font-style: italic;
+    border: 3px inset #c0c0c0;
+    background: #000060;
+    padding: 1.4rem;
+    max-width: 34ch;
+    margin: 0 auto 1rem;
+}
+.quote cite { color: #ffff66; }
+
+.cta { border-top: 3px double #ffff66; }
+.cta > .wrap {
+    flex-direction: column;
+    align-items: center;
+    border: 3px ridge #c0c0c0;
+    background: #000060;
+    padding: 1.8rem 1.2rem;
+}
+.cta h2 { color: #ffffff; text-decoration: underline; font-size: 1.5rem; }
+.cta p { color: #ffff66; margin-bottom: 1.2rem; }
+
+footer { border-top: 3px double #ffff66; background: #000060; }
+footer .wrap { justify-content: center; color: #00ffff; font-size: .82rem; }
+.back-chip {
+    background: #c0c0c0;
+    color: #000080;
+    border: 2px outset #ffffff;
+    border-radius: 0;
+    font-family: 'Times New Roman', serif;
+}
+
+@media (max-width: 760px) {
+    .services article { text-align: left; }
+}

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard — Prompt Recipe for AI Website Builders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="recipe.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="One question per screen. A KPI row, one chart, one table — plus the empty, loading and error states that generated dashboards always skip. A structured prompt">
+    <link rel="canonical" href="https://www.aiwebstyle.com/recipes/dashboard.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Analytics Dashboard — Prompt Recipe">
+    <meta property="og:description" content="One question per screen. A KPI row, one chart, one table — plus the empty, loading and error states that generated dashboards always skip. A structured prompt">
+    <meta property="og:url" content="https://www.aiwebstyle.com/recipes/dashboard.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Analytics Dashboard — prompt recipe","description":"One question per screen. A KPI row, one chart, one table — plus the empty, loading and error states that generated dashboards always skip. A structured prompt","inLanguage":"en","url":"https://www.aiwebstyle.com/recipes/dashboard.html","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"App shell","text":"Sidebar with six items maximum, current item marked by a position bar rather than colour alone. Colour-only selection disappears for anyone with a colour vision deficiency."},{"@type":"HowToStep","name":"Top bar","text":"Workspace, date range, one primary action. The date range belongs here rather than in each chart, because a dashboard whose panels disagree about the period is a dashboard nobody trusts."},{"@type":"HowToStep","name":"KPI row","text":"Exactly four. Each carries value, unit, delta with direction and comparison period, plus a sparkline. A fifth metric halves the attention available to the other four."},{"@type":"HowToStep","name":"Primary chart","text":"One question, stated in the title. Axes carry units. Three series maximum. If the title is a noun phrase like Revenue, no question has been asked."},{"@type":"HowToStep","name":"Secondary breakdown","text":"A sorted bar list of the top eight, with a link to the rest. Sorting is the analysis; presentation is not."},{"@type":"HowToStep","name":"Data table","text":"Sortable headers, sticky header row, numbers right-aligned in tabular figures. This is the section power users live in."},{"@type":"HowToStep","name":"Detail drawer","text":"Opens from a row, shows the record and its history, closes with Escape. A full page navigation loses the table position and the reader's place."},{"@type":"HowToStep","name":"States","text":"Empty with a way forward, loading as skeleton rows that match final layout, error with the failed request named, and a no-permission state. Four screens that decide whether the product feels finished."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <p class="rc-band-title">Prompt Recipes</p>
+            <p>Whole pages, described precisely enough that the first build is the one you keep.</p>
+        </div>
+    </header>
+
+    <main class="rc-wrap">
+        <p class="rc-crumb"><a href="index.html">← All prompt recipes</a></p>
+
+        <h1 class="rc-title">Analytics Dashboard</h1>
+        <p class="rc-lede">A dashboard is not a wall of charts. It is a screen where a specific person answers a specific question in under a minute. Every panel that does not serve that question costs attention that the answering panel needs.</p>
+
+        <div class="rc-meta">
+            <span>Product UI</span>
+            <span>8 sections</span>
+            <span>6 variables</span>
+            <span>9 min read</span>
+        </div>
+
+        <section class="rc-section">
+            <h2>What this page has to do</h2>
+            <p>Generated dashboards share a signature: seven KPI cards of equal size, four charts with no axis units, and three rows of identical fake data. The layout looks plausible in a screenshot and collapses the moment real numbers arrive, because nothing in it was designed to survive variation.</p>
+            <p>Two things fix it. First, a cap: four metrics, one primary chart, one table. Second, states — empty, loading, error, and no permission are design work, not edge cases, and they are where a demo turns into a product.</p>
+        </section>
+
+        <section class="rc-section">
+            <h2>Section order</h2>
+            <p class="rc-note">The order is the argument. Reordering these is not a layout decision, it is a change to the reasoning.</p>
+            <ol class="rc-order">
+                <li>
+                    <span class="rc-step">01</span>
+                    <div>
+                        <h3>App shell</h3>
+                        <p>Sidebar with six items maximum, current item marked by a position bar rather than colour alone. Colour-only selection disappears for anyone with a colour vision deficiency.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">02</span>
+                    <div>
+                        <h3>Top bar</h3>
+                        <p>Workspace, date range, one primary action. The date range belongs here rather than in each chart, because a dashboard whose panels disagree about the period is a dashboard nobody trusts.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">03</span>
+                    <div>
+                        <h3>KPI row</h3>
+                        <p>Exactly four. Each carries value, unit, delta with direction and comparison period, plus a sparkline. A fifth metric halves the attention available to the other four.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">04</span>
+                    <div>
+                        <h3>Primary chart</h3>
+                        <p>One question, stated in the title. Axes carry units. Three series maximum. If the title is a noun phrase like Revenue, no question has been asked.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">05</span>
+                    <div>
+                        <h3>Secondary breakdown</h3>
+                        <p>A sorted bar list of the top eight, with a link to the rest. Sorting is the analysis; presentation is not.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">06</span>
+                    <div>
+                        <h3>Data table</h3>
+                        <p>Sortable headers, sticky header row, numbers right-aligned in tabular figures. This is the section power users live in.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">07</span>
+                    <div>
+                        <h3>Detail drawer</h3>
+                        <p>Opens from a row, shows the record and its history, closes with Escape. A full page navigation loses the table position and the reader's place.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">08</span>
+                    <div>
+                        <h3>States</h3>
+                        <p>Empty with a way forward, loading as skeleton rows that match final layout, error with the failed request named, and a no-permission state. Four screens that decide whether the product feels finished.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="rc-section" id="prompt">
+            <h2>Build the prompt</h2>
+            <p class="rc-note">6 variables. Change one and the text below rewrites itself — nothing else on this page moves.</p>
+            <div class="rc-controls">
+            <div class="rc-control">
+                <label for="rc-DOMAIN">Dashboard domain</label>
+                <select id="rc-DOMAIN" data-rc="DOMAIN">
+                    <option value="product analytics. The four KPIs are weekly active users, activation rate, day-30 retention and time to first value; the primary question is whether the last release changed activation.">Product analytics</option>
+                    <option value="revenue operations. The four KPIs are MRR, net revenue retention, gross margin and days sales outstanding; the primary question is which cohort is expanding and which is contracting.">Revenue and finance</option>
+                    <option value="infrastructure monitoring. The four KPIs are error rate, p95 latency, saturation and deploy frequency; the primary question is whether the last hour is worse than the same hour yesterday.">Infrastructure</option>
+                    <option value="support operations. The four KPIs are first response time, resolution time, reopen rate and backlog age; the primary question is where the queue is accumulating this week.">Support operations</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-CHART">Primary chart</label>
+                <select id="rc-CHART" data-rc="CHART">
+                    <option value="Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open.">Line with brush</option>
+                    <option value="Render the primary chart as stacked bars with at most three segments, a 2px gap between bars, and segment totals on hover only. The stack must always sum to a meaningful total.">Stacked bars</option>
+                    <option value="Render the primary chart as an area chart of the current period with the previous period as a dashed line behind it, no fill on the comparison, and the gap described in the text summary.">Area with comparison</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-TABLE">Table behaviour</label>
+                <select id="rc-TABLE" data-rc="TABLE">
+                    <option value="Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count.">Bulk actions</option>
+                    <option value="No checkboxes. A per-row overflow menu with three actions, keyboard accessible, closing on Escape or outside click.">Row menu</option>
+                    <option value="No actions in the table at all. Rows open the detail drawer and nothing else. Every column is sortable and the metric column shows a delta.">Read only</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-STATES">State coverage</label>
+                <select id="rc-STATES" data-rc="STATES">
+                    <option value="Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link.">All four</option>
+                    <option value="Implement empty and loading states only, both matching the final layout exactly so nothing jumps when data arrives.">Empty and loading</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-DENSITY">Density</label>
+                <select id="rc-DENSITY" data-rc="DENSITY">
+                    <option value="Use 44px table rows, 1rem card padding, and 16px gaps between panels. Optimised for a first-time reader rather than a daily user.">Comfortable</option>
+                    <option value="Use 32px table rows, 0.75rem card padding, 8px gaps, and 13px body text. Optimised for someone who opens this screen every morning and already knows what everything means.">Compact</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-STYLE">Visual style</label>
+                <select id="rc-STYLE" data-rc="STYLE">
+                    <option value="Product neutral: white panels on a #f6f7f9 canvas, 1px borders in #e3e7ec, 8px radii, one blue accent for the primary series and interactive elements, no shadows except on the drawer.">Product neutral</option>
+                    <option value="Dark console: #0e1116 canvas, #151a21 panels, 1px borders at 9 percent white, one cyan accent, monospace for all numbers, no rounded corners above 4px.">Dark console</option>
+                    <option value="Swiss reporting: white canvas, black rules at 1px, no panels at all — sections separated by rules only, one red accent for the primary series, all labels uppercase at 0.7rem with 0.08em tracking.">Swiss reporting</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="rc-prompt">
+                <div class="rc-bar">
+                    <span class="rc-bar-label">Assembled prompt</span>
+                    <span class="rc-count" id="rcCount"></span>
+                    <button class="rc-btn" id="rcReset" type="button">Reset</button>
+                    <button class="rc-btn rc-btn-primary" id="rcCopy" type="button">Copy</button>
+                </div>
+                <pre id="rcPrompt">Build an analytics dashboard for product analytics. The four KPIs are weekly active users, activation rate, day-30 retention and time to first value; the primary question is whether the last release changed activation..
+
+AUDIENCE
+An operator who opens this screen every morning to answer one question and then leaves. They are not exploring; they are checking. The layout must support a scan in under sixty seconds.
+
+STRUCTURE (exactly this order)
+1. App shell: fixed left sidebar, six navigation items maximum, current item marked with a 3px left bar plus weight change, not colour alone. Top bar with workspace switcher, a single global date range picker, and one primary action.
+2. KPI row: exactly four metrics. Each shows the value with its unit, a delta with direction and the comparison period, and a sparkline with no axis. No fifth card.
+3. Primary chart: one question, stated as the title (for example: Did activation improve after the March release?). One y-axis with a unit label, one x-axis with dates, up to three series in the legend. Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open.
+4. Secondary breakdown: a sorted horizontal bar list of the top eight segments with their share, and a link to the full list. Sorted descending by the metric that matters, never alphabetically.
+5. Data table: Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count. Sortable headers, sticky header row, numbers right-aligned in tabular figures, 8 rows per page with a visible count.
+6. Detail drawer: opens from a row click, shows the record fields and a small history list, closes with Escape and returns focus to the triggering row.
+7. States: Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link.
+8. Settings row or panel: date range, timezone, and export. The export states its format and row limit before the click, not after.
+
+STYLE
+Product neutral: white panels on a #f6f7f9 canvas, 1px borders in #e3e7ec, 8px radii, one blue accent for the primary series and interactive elements, no shadows except on the drawer.
+
+DATA RULES
+- Generate 40 to 60 rows of plausible data. Include one outlier, one zero, and one segment that dropped by half.
+- Dates span 90 days with weekly seasonality so the chart has a shape rather than noise.
+- Numbers use thousands separators; at most one decimal unless the unit requires more.
+- Colour carries meaning only: one accent for the primary series, two muted tints for secondary, grey for everything else. No decorative colour.
+- Every chart needs a one-sentence text summary beneath it, so the panel is readable without seeing the graphic.
+
+CONSTRAINTS
+- Use 44px table rows, 1rem card padding, and 16px gaps between panels. Optimised for a first-time reader rather than a daily user.
+- The table must not overflow horizontally at 1280px width.
+- Keyboard: every control reachable, visible focus ring, drawer closable with Escape, table rows activatable with Enter.
+- Charts must remain legible at 320px wide with labels thinned rather than truncated.
+- No chart without a unit. No percentage without its base.
+
+OUTPUT
+One screen, self-contained, with a mock data module at the top of the script so the numbers can be swapped in one place.</pre>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>What to change, and what to leave alone</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Variable</th><th scope="col">How to edit it</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><code>{{DOMAIN}}</code></th>
+                    <td>Change this first and change the metric names with it. A dashboard called Revenue but populated with session counts is the most obvious tell that a template was reused.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{CHART}}</code></th>
+                    <td>Line with brush suits long time series; stacked bars suit composition; area with comparison suits period-over-period. Picking the wrong one is why a correct chart still answers nothing.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{TABLE}}</code></th>
+                    <td>Bulk actions require a real selection model, so only choose them if the screen is genuinely operational. A read-only table with excellent sorting beats a half-wired bulk bar.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{STATES}}</code></th>
+                    <td>The four-state version is what makes the screen look built rather than generated. If you only have time for two, do empty and loading — they are the ones users hit first.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{DENSITY}}</code></th>
+                    <td>Comfortable for onboarding and marketing screenshots, compact for daily use. Do not mix: compact rows inside comfortable panels reads as an accident.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Feeding it to each builder</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Builder</th><th scope="col">What to do differently</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">v0</th>
+                    <td>Generate the shell and KPI row first, then ask for the chart, then the table. Whole-screen generations produce inconsistent panel heights that are tedious to fix afterwards.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lovable</th>
+                    <td>It will add a seventh KPI unless the cap is explicit. Also check the chart axes — it tends to omit units, which is the defect that makes a dashboard unusable rather than unattractive.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bolt</th>
+                    <td>State the charting approach (hand-rolled SVG, or a named library) or you will get an inline dependency you cannot audit. For a demo, hand-rolled SVG is smaller and more controllable.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Cursor / Claude Code</th>
+                    <td>Ask for a mock data module first, then the components. Iterating on layout against fixed data is far faster than regenerating data with every change.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Where it usually breaks</h2>
+            <div class="rc-failures">
+                <article class="rc-failure">
+                    <h3><span>01</span>Seven KPI cards of equal weight</h3>
+                    <p>Equal size communicates equal importance, which is almost never true. Four metrics with one clearly dominant beats seven with none. The cap is the design decision.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>02</span>Charts without units</h3>
+                    <p>An unlabelled y-axis turns a chart into decoration. Revenue in what currency, latency in milliseconds or seconds, rate as a percentage of what base. Without units the panel cannot be read, only admired.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>03</span>Fake data that hides layout bugs</h3>
+                    <p>Three rows of nearly identical numbers never reveals overflow, truncation or a delta label colliding with a value. Include an outlier, a zero and a very long segment name — those are what break the layout in production.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>04</span>No empty state</h3>
+                    <p>A new account opens the dashboard and sees blank panels, which reads as broken rather than new. The empty state is the first screen most users ever see.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>Pair it with</h2>
+                <div class="rc-rel-group">
+                    <h3>Styles that carry this page</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../styles/modern-tech.html">modern tech</a><a class="rc-chip" href="../styles/dark-mode.html">dark mode</a><a class="rc-chip" href="../styles/swiss-style.html">swiss style</a><a class="rc-chip" href="../styles/monochromatic.html">monochromatic</a></div>
+                </div>
+                <div class="rc-rel-group">
+                    <h3>Motion to pair with it</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../motions/card-spotlight.html">card spotlight</a><a class="rc-chip" href="../motions/scroll-reveal.html">scroll reveal</a></div>
+                </div>
+        </section>
+
+        <nav class="rc-chain">
+            <a href="index.html">All recipes</a>
+            <a href="product-page.html">← Product Detail Page</a><a href="blog.html">Blog / Editorial Site →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+        </div>
+    </footer>
+
+    <script type="application/json" id="rcSource">{"lines":["Build an analytics dashboard for {{DOMAIN}}.","","AUDIENCE","An operator who opens this screen every morning to answer one question and then leaves. They are not exploring; they are checking. The layout must support a scan in under sixty seconds.","","STRUCTURE (exactly this order)","1. App shell: fixed left sidebar, six navigation items maximum, current item marked with a 3px left bar plus weight change, not colour alone. Top bar with workspace switcher, a single global date range picker, and one primary action.","2. KPI row: exactly four metrics. Each shows the value with its unit, a delta with direction and the comparison period, and a sparkline with no axis. No fifth card.","3. Primary chart: one question, stated as the title (for example: Did activation improve after the March release?). One y-axis with a unit label, one x-axis with dates, up to three series in the legend. {{CHART}}","4. Secondary breakdown: a sorted horizontal bar list of the top eight segments with their share, and a link to the full list. Sorted descending by the metric that matters, never alphabetically.","5. Data table: {{TABLE}} Sortable headers, sticky header row, numbers right-aligned in tabular figures, 8 rows per page with a visible count.","6. Detail drawer: opens from a row click, shows the record fields and a small history list, closes with Escape and returns focus to the triggering row.","7. States: {{STATES}}","8. Settings row or panel: date range, timezone, and export. The export states its format and row limit before the click, not after.","","STYLE","{{STYLE}}","","DATA RULES","- Generate 40 to 60 rows of plausible data. Include one outlier, one zero, and one segment that dropped by half.","- Dates span 90 days with weekly seasonality so the chart has a shape rather than noise.","- Numbers use thousands separators; at most one decimal unless the unit requires more.","- Colour carries meaning only: one accent for the primary series, two muted tints for secondary, grey for everything else. No decorative colour.","- Every chart needs a one-sentence text summary beneath it, so the panel is readable without seeing the graphic.","","CONSTRAINTS","- {{DENSITY}}","- The table must not overflow horizontally at 1280px width.","- Keyboard: every control reachable, visible focus ring, drawer closable with Escape, table rows activatable with Enter.","- Charts must remain legible at 320px wide with labels thinned rather than truncated.","- No chart without a unit. No percentage without its base.","","OUTPUT","One screen, self-contained, with a mock data module at the top of the script so the numbers can be swapped in one place."],"defaults":{"DOMAIN":"product analytics. The four KPIs are weekly active users, activation rate, day-30 retention and time to first value; the primary question is whether the last release changed activation.","CHART":"Render the primary chart as a line chart with a range brush beneath it. Dragging the brush updates the KPI row, and the brush keeps its selection while the page is open.","TABLE":"Include row checkboxes, a bulk action bar that appears only when rows are selected, and a count of what is selected. Destructive bulk actions require a confirmation naming the row count.","STATES":"Implement all four states. Empty: one sentence explaining what will appear here and a link to the action that creates the first record. Loading: skeleton rows matching the final layout, no spinner. Error: the failed request named, a retry button, and the timestamp of the attempt. No permission: what the role is missing and who to ask, without a support link.","DENSITY":"Use 44px table rows, 1rem card padding, and 16px gaps between panels. Optimised for a first-time reader rather than a daily user.","STYLE":"Product neutral: white panels on a #f6f7f9 canvas, 1px borders in #e3e7ec, 8px radii, one blue accent for the primary series and interactive elements, no shadows except on the drawer."}}</script>
+    <script src="../script.js" defer></script>
+    <script>
+(function () {
+    var src = JSON.parse(document.getElementById('rcSource').textContent);
+    var pre = document.getElementById('rcPrompt');
+    var count = document.getElementById('rcCount');
+    var selects = Array.prototype.slice.call(document.querySelectorAll('[data-rc]'));
+
+    function current() {
+        var v = {};
+        selects.forEach(function (s) { v[s.getAttribute('data-rc')] = s.value; });
+        return v;
+    }
+
+    function render(track) {
+        var v = track || src.defaults;
+        var text = src.lines.map(function (line) {
+            return line.replace(/\{\{(\w+)\}\}/g, function (m, key) {
+                return v[key] == null ? m : v[key];
+            });
+        }).join('\n');
+        pre.textContent = text;
+        count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
+    }
+
+    selects.forEach(function (s) {
+        s.addEventListener('change', function () { render(current()); });
+    });
+
+    document.getElementById('rcReset').addEventListener('click', function () {
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        render(src.defaults);
+    });
+
+    document.getElementById('rcCopy').addEventListener('click', function () {
+        var btn = this;
+        var done = function (ok) {
+            btn.textContent = ok ? 'Copied' : 'Select manually';
+            btn.classList.toggle('is-done', ok);
+            setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('is-done'); }, 1600);
+            if (!ok) {
+                var range = document.createRange();
+                range.selectNodeContents(pre);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pre.textContent).then(function () { done(true); }, function () { done(false); });
+        } else { done(false); }
+    });
+
+    render(src.defaults);
+})();
+    </script>
+</body>
+</html>

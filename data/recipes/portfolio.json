@@ -1,0 +1,262 @@
+{
+  "slug": "portfolio",
+  "name": "Portfolio / Case Study Site",
+  "category": "personal",
+  "order": 2,
+  "updatedAt": "2026-10-27",
+  "readingTime": 8,
+  "summary": "Six projects, each carrying a constraint and an outcome. The characteristic failure is a wall of thumbnails that proves nothing about how you think.",
+  "lede": "A portfolio is not an archive. It is an argument that you have solved a problem like the reader's before. That argument needs three things per project: what made it hard, what you decided, and what changed. Thumbnails supply none of them.",
+  "brief": [
+    "The default AI portfolio is a grid of twelve equal cards with no hierarchy, a paragraph beginning with a phrase about being passionate, and a contact form. It looks tidy and says nothing, because every project is presented at the same weight and none of them contains a decision.",
+    "The recipe below inverts the ratio: fewer projects, more per project. It also forces a constraint into every project line, because a constraint is the only thing that makes an outcome believable — anyone can claim a redesign increased engagement."
+  ],
+  "sections": [
+    {
+      "name": "Masthead",
+      "why": "Name, one line of positioning, availability status. A portrait larger than about 120px pushes the work below the fold on a laptop."
+    },
+    {
+      "name": "Selected work",
+      "why": "Three to six entries, each as a row rather than a card. A row can carry context and outcome; a card can only carry a picture."
+    },
+    {
+      "name": "One case study in full",
+      "why": "The first entry links to depth. One deep case study outperforms six shallow ones because it shows how you think when the problem resists."
+    },
+    {
+      "name": "Approach",
+      "why": "Three principles, each with evidence. This replaces the process diagram, which is the same five circles on every portfolio ever built."
+    },
+    {
+      "name": "About",
+      "why": "120 words, first person, no adjectives about yourself. The work supplies the adjectives."
+    },
+    {
+      "name": "Contact",
+      "why": "A plain email address plus timezone and reply time. A form adds friction at the exact moment intent is highest."
+    },
+    {
+      "name": "Footer",
+      "why": "Name, year, one link. A wall of social icons sends people away from the page you just spent a week building."
+    }
+  ],
+  "promptLines": [
+    "Build a personal portfolio site for a working {{ROLE}}.",
+    "",
+    "AUDIENCE",
+    "Hiring managers and potential clients who will give the page about ninety seconds. They are not reading, they are scanning for evidence that this person has shipped something comparable to their own problem.",
+    "",
+    "GOAL",
+    "Within one screen: who this is, what they do, and one piece of proof. The site should read as a body of work, not a personality.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. Masthead: name at display size; one line of positioning that names both the kind of work and the kind of client; a status line such as Available from March 2027 or Not taking new work. Portrait optional, never larger than 120px.",
+    "2. Selected work: exactly {{WORK_COUNT}} entries. {{LAYOUT}} Each entry must contain a project name, one sentence of context, one line of outcome, and the constraint that made it hard.",
+    "3. Case study, linked from the first entry: the problem in three sentences; two approaches that were rejected and why; what shipped; what changed, expressed as a number.",
+    "4. Approach: exactly three principles. Each is a claim of one sentence plus one sentence of evidence from a real project. No process diagram, no tool logos.",
+    "5. About: 120 words maximum, first person, no adjectives about yourself. One photograph is acceptable.",
+    "6. Contact: {{CONTACT}} plus your timezone and typical reply time.",
+    "7. Footer: name, year, and one link to an RSS feed or email. No social icon wall.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- Banned words: passionate, creative, detail-oriented, storyteller, ninja, rockstar, unique perspective, loves challenges, pixel-perfect.",
+    "- Every project line needs a constraint (budget, deadline, legacy system, one week, no photography) and an outcome.",
+    "- No lorem ipsum. Use plausible project names and numbers that sound measured rather than impressive.",
+    "- Write in sentence case. No exclamation marks.",
+    "",
+    "CONSTRAINTS",
+    "- The first project must be visible at 1440x900 without scrolling, or within one short scroll at 390x844.",
+    "- Images at 16:10 or 4:3 with explicit width and height, and alt text naming the project, not the file.",
+    "- Case study reading column between 64 and 72 characters.",
+    "- One h1 per page: the name on the index, the project title on a case study.",
+    "- Total JavaScript under 10KB. No animation library, no scroll hijacking.",
+    "",
+    "OUTPUT",
+    "Two page types sharing one stylesheet: the index and one case study."
+  ],
+  "controls": [
+    {
+      "id": "ROLE",
+      "label": "Discipline",
+      "options": [
+        {
+          "label": "Product designer",
+          "value": "product designer. Positioning should name the kind of product and the stage of company: interfaces for early-stage B2B tools, or design systems for teams past their first hundred screens."
+        },
+        {
+          "label": "Front-end engineer",
+          "value": "front-end engineer. Positioning should name the hard part of the craft: performance budgets, design systems that hold up across teams, or interfaces that work without JavaScript."
+        },
+        {
+          "label": "Brand and identity",
+          "value": "brand and identity designer. Positioning should name the sector and the deliverable: identity systems for companies renaming after a funding round."
+        },
+        {
+          "label": "Writer and editor",
+          "value": "writer and editor. Positioning should name the format and the audience: long-form reporting for technical audiences, or product copy for developer tools."
+        }
+      ]
+    },
+    {
+      "id": "WORK_COUNT",
+      "label": "How many projects",
+      "options": [
+        {
+          "label": "Three",
+          "value": "three"
+        },
+        {
+          "label": "Four",
+          "value": "four"
+        },
+        {
+          "label": "Six",
+          "value": "six"
+        }
+      ]
+    },
+    {
+      "id": "LAYOUT",
+      "label": "Work layout",
+      "options": [
+        {
+          "label": "Rows with thumbnail",
+          "value": "Lay each entry out as a horizontal row: name and outcome on the left at two thirds width, a 160px thumbnail on the right. Single column regardless of viewport.",
+          "hint": "Best when the projects are visually weak but the thinking is strong."
+        },
+        {
+          "label": "Index list, images on hover",
+          "value": "Lay each entry out as an index row with no image: project name at 1.4rem, context and outcome in a second column, year right-aligned in mono. Show one image on hover, anchored to the pointer, hidden on touch devices.",
+          "hint": "Reads as confident. Requires at least one strong image."
+        },
+        {
+          "label": "Three large covers",
+          "value": "Lay each entry out as a large cover: full-bleed image at 3:2 with the project name and one outcome line beneath it. Three entries only; this layout does not scale past four.",
+          "hint": "For work where the visual result is the argument."
+        }
+      ]
+    },
+    {
+      "id": "CONTACT",
+      "label": "Contact method",
+      "options": [
+        {
+          "label": "Plain email",
+          "value": "your email address set as a mailto link in body text, not a button, with the timezone and a reply time beside it"
+        },
+        {
+          "label": "Email plus calendar",
+          "value": "your email address plus a single scheduling link to a 20-minute call, described as a call rather than a discovery session"
+        },
+        {
+          "label": "Short form",
+          "value": "a three-field form (name, email, what you are working on) with a visible success state and a fallback email address for anyone who would rather not use it"
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Editorial",
+          "value": "Editorial: serif display type for the name and project titles, sans for everything else; warm off-white background; a single narrow reading column; hairline rules between entries; no cards, no shadows."
+        },
+        {
+          "label": "Swiss",
+          "value": "Swiss: twelve column grid, Helvetica or Inter, black on white, one red accent used only for the current selection, headings flush left, generous top margin, zero border radii."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px black borders, 6px hard offset shadows, one saturated accent, headings in a heavy grotesque, hover states that shift the whole block by 3px."
+        },
+        {
+          "label": "Monochrome",
+          "value": "Monochrome: one hue, all values derived from it, no accent colour at all, hierarchy carried entirely by size and weight, images desaturated by default and restored on hover."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "One entrance",
+          "value": "Animate once on load: the masthead fades up 16px over 500ms. Project rows do not animate at all."
+        },
+        {
+          "label": "Scroll reveal",
+          "value": "Each project row fades and rises 20px as it enters the viewport, using animation-timeline: view() with animation-range: entry 10% to cover 30%, plus an IntersectionObserver fallback. Stagger no more than 60ms."
+        },
+        {
+          "label": "None",
+          "value": "No animation. The page must be fully readable with JavaScript disabled, since the audience often opens links in a locked-down browser."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "ROLE",
+      "note": "This changes the positioning line and the acceptable evidence. An engineer is judged on the artefact; a writer is judged on the sentence. Do not keep the copy and swap the discipline."
+    },
+    {
+      "token": "WORK_COUNT",
+      "note": "Three is stronger than six if the three are deep. The number appears inside the prompt so the model cannot add a seventh entry to fill space."
+    },
+    {
+      "token": "LAYOUT",
+      "note": "Choose by the strength of your images, not by taste. Index rows with hover images fail badly on the phone where most links are opened."
+    },
+    {
+      "token": "CONTACT",
+      "note": "A form is fine if you genuinely cannot publish an address, but then the fallback email is not optional — some readers will not use a form on principle."
+    },
+    {
+      "token": "STYLE",
+      "note": "Swap the whole block. A monochrome brief applied to half a page produces grey headings with a blue button, which reads as broken rather than restrained."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Ask for the index first, then the case study page as a second generation that reuses the same classes. Ask for both in one message and it will merge them into a single layout."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a portrait and a contact form unprompted. The explicit status line and the 120px portrait cap are what keep the masthead from becoming a hero."
+    },
+    {
+      "name": "Bolt",
+      "note": "State the page count (two pages, shared stylesheet) or you will get a single scrolling page where the case study is a subsection — which defeats the point."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Create BRIEF.md with this prompt plus a PROJECTS.md listing the real entries, then ask for the index. Supplying real content beats any amount of style instruction."
+    }
+  ],
+  "failures": [
+    {
+      "title": "A grid of equal cards",
+      "body": "Twelve projects at identical size tell the reader that you cannot rank your own work. If everything is equally important, nothing is. Pick one, make it the deepest, and let it lead."
+    },
+    {
+      "title": "Outcomes without constraints",
+      "body": "Increased conversion by 34 percent is a sentence any reader discounts instantly. Increased conversion by 34 percent in six weeks, without a design system, on a checkout that could not be A/B tested is a sentence they believe."
+    },
+    {
+      "title": "The about section selling personality",
+      "body": "Three paragraphs about curiosity and craft describe every candidate. Two sentences about what you are hired to do, with one example, do more work than any amount of self-description."
+    },
+    {
+      "title": "Contact buried under a footer",
+      "body": "The reader who is convinced will look for a way to reach you immediately. If that takes a scroll and a form, a fraction of them will close the tab instead."
+    }
+  ],
+  "styles": ["editorial", "swiss-style", "monochromatic", "neo-brutalism"],
+  "motions": ["scroll-reveal", "text-mask-reveal"]
+}

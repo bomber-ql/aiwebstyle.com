@@ -1,0 +1,8 @@
+/* Styles for Neo-Brutalism Card */
+.card[data-style-id="neo-brutalism"] { background-color: #ffffff; border: 3px solid #000000; border-radius: 0; box-shadow: 8px 8px 0 #000000; }
+.card[data-style-id="neo-brutalism"] h3 { font-family: var(--font-montserrat); color: #000000; text-transform: uppercase; letter-spacing: -0.01em; }
+.card[data-style-id="neo-brutalism"] .prompt-text { background-color: #ffe08a; color: #000000; border-radius: 0; }
+.card[data-style-id="neo-brutalism"] .btn { border: 3px solid #000000; border-radius: 0; font-weight: 700; }
+.card[data-style-id="neo-brutalism"] .btn:not(.btn-secondary) { background-color: #c9b8ff; color: #000000 !important; }
+.card[data-style-id="neo-brutalism"] .btn-secondary { background-color: #ffffff; color: #000000 !important; }
+.card[data-style-id="neo-brutalism"]:hover { transform: translate(4px, 4px); box-shadow: 4px 4px 0 #000000; }

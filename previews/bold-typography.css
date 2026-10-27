@@ -1,0 +1,133 @@
+/* Bold Typography — type is the entire visual system; no colour, no decoration */
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #0a0a0a;
+    line-height: 1.1;
+}
+
+.site-head { border-bottom: 2px solid #0a0a0a; }
+.site-head nav a {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    border-bottom: none;
+}
+.site-head nav a:hover { color: #0a0a0a; text-decoration: underline; text-underline-offset: 4px; }
+.brand {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+}
+
+.hero { padding: 4rem 0 2rem; }
+.eyebrow {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    margin-bottom: 2rem;
+}
+.hero h1 {
+    font-size: clamp(3rem, 10.5vw, 7.2rem);
+    line-height: .86;
+    letter-spacing: -.055em;
+    font-weight: 800;
+    text-transform: uppercase;
+    max-width: 12ch;
+    margin-bottom: 2rem;
+}
+.lede {
+    font-size: 1.04rem;
+    line-height: 1.55;
+    color: #2c2c2c;
+    max-width: 40ch;
+    border-left: 4px solid #0a0a0a;
+    padding-left: 1rem;
+    letter-spacing: 0;
+}
+
+.btn {
+    border-radius: 0;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: .76rem;
+    padding: 1rem 1.9rem;
+    background: #0a0a0a;
+    border-color: #0a0a0a;
+}
+.btn:hover { background: #ffffff; color: #0a0a0a; transform: none; }
+.btn.ghost { background: transparent; color: #0a0a0a; border-color: #0a0a0a; }
+.btn.ghost:hover { background: #0a0a0a; color: #ffffff; }
+
+.services { border-top: 2px solid #0a0a0a; margin-top: 3rem; }
+.services > .wrap { gap: 0; }
+.services article {
+    border-right: 1px solid #d4d4d4;
+    padding: 2rem 1.6rem 2rem 0;
+}
+.services article:last-child { border-right: 0; padding-right: 0; }
+.services h2 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    text-transform: uppercase;
+    line-height: .95;
+    margin-bottom: 3rem;
+}
+.services p { font-size: .88rem; line-height: 1.6; color: #3a3a3a; max-width: 26ch; letter-spacing: 0; }
+.num {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: #0a0a0a;
+    margin-bottom: .8rem;
+}
+
+.quote { border-top: 2px solid #0a0a0a; padding: 4rem 0; }
+.quote blockquote {
+    font-size: clamp(1.8rem, 4.6vw, 3.2rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+    font-weight: 800;
+    text-transform: uppercase;
+    max-width: 18ch;
+}
+.quote cite {
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+}
+
+.cta { border-top: 4px solid #0a0a0a; padding: 3rem 0 4rem; }
+.cta h2 {
+    font-size: clamp(2rem, 5.4vw, 3.6rem);
+    line-height: .92;
+    letter-spacing: -.05em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.cta p { letter-spacing: 0; }
+
+footer { border-top: 2px solid #0a0a0a; }
+footer .wrap {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+}
+.back-chip { border-radius: 0; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+
+@media (max-width: 760px) {
+    .services article { border-right: 0; border-bottom: 1px solid #d4d4d4; padding: 1.6rem 0; }
+    .services article:last-child { border-bottom: 0; }
+    .services h2 { margin-bottom: 1.2rem; }
+}

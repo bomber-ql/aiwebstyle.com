@@ -1,0 +1,144 @@
+/* Illustration Focused — drawn edges, warm palette, one hand-made irregularity per element */
+
+body {
+    background: #fffaf2;
+    color: #3b3229;
+    font-family: 'Nunito', 'Trebuchet MS', system-ui, sans-serif;
+    line-height: 1.7;
+}
+
+.site-head {
+    border-bottom: 2px dashed #e6d5bd;
+    background: #fffaf2;
+}
+.brand {
+    font-weight: 800;
+    color: #b4552d;
+    font-size: 1.04rem;
+    transform: rotate(-1deg);
+    display: inline-block;
+}
+.site-head nav a {
+    color: #6d6154;
+    border-bottom: 2px solid transparent;
+    font-weight: 700;
+    font-size: .84rem;
+}
+.site-head nav a:hover { color: #b4552d; border-bottom-color: #f0c9a8; }
+
+.hero { padding: 4.6rem 0 3.6rem; }
+.eyebrow {
+    display: inline-block;
+    color: #2f6b52;
+    background: #d9f0e2;
+    border: 2px solid #a9d8bf;
+    padding: .28rem .85rem;
+    border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+    font-weight: 800;
+    font-size: .74rem;
+    letter-spacing: .04em;
+    margin-bottom: 1.5rem;
+}
+.hero h1 {
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    color: #2f2416;
+    max-width: 17ch;
+}
+/* hand-drawn underline */
+.hero h1 em {
+    font-style: normal;
+    position: relative;
+}
+.lede {
+    color: #5f5346;
+    max-width: 50ch;
+    background: #ffffff;
+    border: 2px solid #f0dcc0;
+    border-radius: 240px 20px 220px 18px / 18px 200px 20px 230px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    border-radius: 120px 18px 110px 16px / 16px 110px 18px 120px;
+    background: #f6a24a;
+    border: 2px solid #2f2416;
+    color: #2f2416;
+    font-weight: 800;
+    box-shadow: 3px 3px 0 #2f2416;
+}
+.btn:hover { background: #ffb968; color: #2f2416; transform: translate(1px, 1px); box-shadow: 2px 2px 0 #2f2416; }
+.btn.ghost {
+    background: #ffffff;
+    border: 2px solid #2f2416;
+    color: #2f2416;
+    border-radius: 18px 120px 16px 110px / 110px 16px 120px 18px;
+}
+.btn.ghost:hover { background: #fdf1e3; }
+
+.services { border-top: 2px dashed #e6d5bd; }
+.services > .wrap { gap: 1.3rem; }
+.services article {
+    background: #ffffff;
+    border: 2px solid #2f2416;
+    padding: 1.7rem 1.5rem;
+    box-shadow: 4px 4px 0 rgba(47, 36, 22, .14);
+}
+.services article:nth-child(1) { border-radius: 26px 8px 24px 10px; }
+.services article:nth-child(2) { border-radius: 8px 26px 10px 24px; background: #fdf3e5; }
+.services article:nth-child(3) { border-radius: 22px 12px 26px 8px; }
+.services h2 { color: #2f2416; font-weight: 800; font-size: 1.14rem; margin-bottom: .5rem; }
+.services p { color: #5f5346; font-size: .9rem; }
+.num {
+    display: inline-block;
+    background: #d9f0e2;
+    border: 2px solid #a9d8bf;
+    border-radius: 50%;
+    width: 1.9rem;
+    height: 1.9rem;
+    line-height: 1.6rem;
+    text-align: center;
+    font-weight: 800;
+    font-size: .74rem;
+    color: #2f6b52;
+    margin-bottom: 1rem;
+}
+
+.quote { border-top: 2px dashed #e6d5bd; }
+.quote blockquote {
+    font-weight: 700;
+    color: #2f2416;
+    font-size: clamp(1.25rem, 2.8vw, 1.7rem);
+    line-height: 1.45;
+    max-width: 30ch;
+    background: #fff2d9;
+    border: 2px solid #2f2416;
+    border-radius: 200px 20px 180px 18px / 18px 180px 20px 200px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 4px 4px 0 rgba(47, 36, 22, .14);
+}
+.quote cite { color: #6d6154; font-weight: 700; }
+
+.cta { border-top: 2px dashed #e6d5bd; }
+.cta > .wrap {
+    background: #d9f0e2;
+    border: 2px solid #2f2416;
+    border-radius: 20px 160px 22px 140px / 140px 22px 160px 20px;
+    padding: 2.2rem 2rem;
+    align-items: center;
+}
+.cta h2 { color: #234c3a; font-weight: 800; }
+.cta p { color: #3d5c4c; }
+
+footer { border-top: 2px dashed #e6d5bd; }
+footer .wrap { color: #857868; }
+.back-chip {
+    background: #f6a24a;
+    color: #2f2416;
+    border: 2px solid #2f2416;
+    border-radius: 120px 18px 110px 16px / 16px 110px 18px 120px;
+    font-weight: 800;
+    opacity: 1;
+}

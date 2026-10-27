@@ -1,0 +1,137 @@
+/* Retro Y2K — chrome gradients, gloss, iridescent accents, tight sans */
+
+body {
+    --chrome-1: #e9edf5;
+    --chrome-2: #b8c2d6;
+    --ink: #1a1c2e;
+    --pink: #ff5fa2;
+    --cyan: #59e1ff;
+    --lilac: #b7a6ff;
+
+    background:
+        radial-gradient(circle at 12% 8%, rgba(183, 166, 255, .55), transparent 42%),
+        radial-gradient(circle at 88% 4%, rgba(89, 225, 255, .5), transparent 46%),
+        linear-gradient(180deg, #f4f6fb 0%, #dfe6f2 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+.site-head {
+    border-bottom: 1px solid rgba(255, 255, 255, .8);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .8), rgba(233, 237, 245, .55));
+    backdrop-filter: blur(10px);
+}
+.brand {
+    font-weight: 700;
+    letter-spacing: .02em;
+    background: linear-gradient(180deg, #2c2f45, #8e97ad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.site-head nav a { color: #4a5168; border-bottom: none; }
+.site-head nav a:hover { color: var(--pink); }
+
+.hero { padding: 5rem 0 4rem; }
+.eyebrow {
+    color: #6d6187;
+    letter-spacing: .16em;
+    font-weight: 600;
+}
+.hero h1 {
+    font-size: clamp(2.3rem, 6vw, 4rem);
+    line-height: 1;
+    letter-spacing: -.03em;
+    font-weight: 700;
+    background: linear-gradient(180deg, #2b2e45 0%, #7d86a0 55%, #c9d2e6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    max-width: 17ch;
+}
+.lede { color: #4a5168; }
+
+.btn {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .9);
+    background: linear-gradient(180deg, #ffffff 0%, #cfd8ea 48%, #a9b6d0 52%, #e6ebf5 100%);
+    color: #23263a;
+    box-shadow: 0 6px 16px -6px rgba(40, 50, 90, .55), inset 0 1px 0 #ffffff;
+    font-weight: 700;
+}
+.btn:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #dbeacc 48%, #ffb3d3 52%, #ffe2ef 100%);
+    color: #23263a;
+    transform: translateY(-2px);
+}
+.btn.ghost {
+    background: rgba(255, 255, 255, .5);
+    border-color: rgba(255, 255, 255, .9);
+    color: #3a3f57;
+}
+.btn.ghost:hover { background: rgba(255, 255, 255, .85); }
+
+.services { border-top: 1px solid rgba(255, 255, 255, .9); }
+.services > .wrap { gap: 1.3rem; }
+.services article {
+    background: rgba(255, 255, 255, .72);
+    border: 1px solid #ffffff;
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    box-shadow: 0 14px 30px -18px rgba(50, 60, 110, .7), inset 0 1px 0 #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+.services article::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 46%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+.services h2 { color: #23263a; position: relative; }
+.services p { color: #4a5168; position: relative; }
+.num {
+    display: inline-block;
+    color: #7d6f9e;
+    background: rgba(183, 166, 255, .28);
+    border-radius: 999px;
+    padding: .15rem .55rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.quote { border-top: 1px solid rgba(255, 255, 255, .9); }
+.quote blockquote {
+    color: #23263a;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .45));
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    padding: 2rem 1.8rem;
+    box-shadow: 0 18px 40px -24px rgba(50, 60, 110, .8);
+    max-width: 30ch;
+}
+.quote cite { color: #6d6187; font-weight: 600; }
+
+.cta { border-top: 1px solid rgba(255, 255, 255, .9); }
+.cta > .wrap {
+    background: linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .5));
+    border: 1px solid #ffffff;
+    border-radius: 22px;
+    padding: 2.4rem 2rem;
+    box-shadow: 0 20px 44px -26px rgba(50, 60, 110, .8);
+}
+.cta h2 { color: #23263a; }
+
+footer { border-top: 1px solid rgba(255, 255, 255, .9); }
+footer .wrap { color: #6d6187; }
+.back-chip {
+    background: linear-gradient(180deg, #ffffff, #cfd8ea);
+    color: #23263a;
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px -4px rgba(40, 50, 90, .5);
+}

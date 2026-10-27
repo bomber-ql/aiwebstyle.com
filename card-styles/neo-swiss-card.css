@@ -1,0 +1,8 @@
+/* Styles for Neo-Swiss Card */
+.card[data-style-id="neo-swiss"] { background-color: #ffffff; border: none; border-top: 2px solid #000000; border-radius: 0; box-shadow: none; }
+.card[data-style-id="neo-swiss"] h3 { font-family: var(--font-helvetica); color: #000000; letter-spacing: -0.03em; }
+.card[data-style-id="neo-swiss"] .prompt-text { background-color: #f4f4f4; color: #1a1a1a; border-radius: 0; }
+.card[data-style-id="neo-swiss"] .btn { border-radius: 0; }
+.card[data-style-id="neo-swiss"] .btn:not(.btn-secondary) { background-color: #000000; color: #ffffff !important; }
+.card[data-style-id="neo-swiss"] .btn-secondary { background-color: transparent; color: #000000 !important; border: 1px solid #000000; }
+.card[data-style-id="neo-swiss"]:hover { border-top-color: #e2001a; }

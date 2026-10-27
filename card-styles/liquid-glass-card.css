@@ -1,0 +1,8 @@
+/* Styles for Liquid Glass Card */
+.card[data-style-id="liquid-glass"] { background-color: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .30); border-radius: 24px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); }
+.card[data-style-id="liquid-glass"] h3 { color: #ffffff; }
+.card[data-style-id="liquid-glass"] .prompt-text { background-color: rgba(255, 255, 255, .12); color: #dbe6ff; border-radius: 12px; }
+.card[data-style-id="liquid-glass"] .btn { border-radius: 999px; }
+.card[data-style-id="liquid-glass"] .btn:not(.btn-secondary) { background-color: rgba(255, 255, 255, .92); color: #0b1020 !important; }
+.card[data-style-id="liquid-glass"] .btn-secondary { background-color: rgba(255, 255, 255, .14); color: #e8eefc !important; }
+.card[data-style-id="liquid-glass"]:hover { background-color: rgba(255, 255, 255, .15); }

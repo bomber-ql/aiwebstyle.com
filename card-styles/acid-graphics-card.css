@@ -1,0 +1,8 @@
+/* Styles for Acid Graphics Card */
+.card[data-style-id="acid-graphics"] { background-color: #131313; border: 1px solid #2a2a2a; border-radius: 2px; box-shadow: 4px 4px 0 #c6ff00; }
+.card[data-style-id="acid-graphics"] h3 { font-family: var(--font-inter); color: #c6ff00; text-transform: uppercase; letter-spacing: -0.04em; }
+.card[data-style-id="acid-graphics"] .prompt-text { background-color: #1c1c1c; color: #eaeaea; border-radius: 0; font-family: var(--font-space-mono); }
+.card[data-style-id="acid-graphics"] .btn { border-radius: 2px; font-family: var(--font-space-mono); }
+.card[data-style-id="acid-graphics"] .btn:not(.btn-secondary) { background-color: #c6ff00; color: #0a0a0a !important; }
+.card[data-style-id="acid-graphics"] .btn-secondary { background-color: #1c1c1c; color: #ff2bd1 !important; border: 1px solid #ff2bd1; }
+.card[data-style-id="acid-graphics"]:hover { box-shadow: 4px 4px 0 #ff2bd1; }

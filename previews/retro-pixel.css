@@ -1,0 +1,141 @@
+/* Retro Pixel — bitmap type, no anti-aliasing, hard 4px grid */
+
+body {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    background: #0b0b12;
+    color: #9be89b;
+    line-height: 2;
+    font-size: 12px;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+}
+
+.site-head {
+    border-bottom: 4px solid #39ff14;
+    background: #101020;
+}
+.site-head .wrap { min-height: 72px; gap: .8rem; }
+.brand {
+    font-size: .68rem;
+    color: #39ff14;
+    letter-spacing: 0;
+    line-height: 1.6;
+}
+.site-head nav { gap: .6rem; }
+.site-head nav a {
+    font-size: .55rem;
+    color: #9be89b;
+    border: 2px solid #2a4a2a;
+    padding: .5rem .6rem;
+    line-height: 1.4;
+    display: inline-block;
+}
+.site-head nav a:hover { color: #0b0b12; background: #39ff14; border-color: #39ff14; }
+
+.hero { padding: 4.5rem 0 3.5rem; }
+.eyebrow {
+    font-size: .5rem;
+    color: #ffcc00;
+    letter-spacing: .1em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+.hero h1 {
+    font-size: clamp(1rem, 3.4vw, 1.9rem);
+    line-height: 1.65;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #ffffff;
+    max-width: 22ch;
+    margin-bottom: 2rem;
+}
+.lede {
+    font-size: .55rem;
+    line-height: 2.4;
+    color: #9be89b;
+    max-width: 62ch;
+    margin-bottom: 2.4rem;
+}
+
+.btn {
+    font-family: inherit;
+    font-size: .55rem;
+    padding: .9rem 1.2rem;
+    border-radius: 0;
+    background: #39ff14;
+    color: #0b0b12;
+    border: 3px solid #39ff14;
+    box-shadow: 4px 4px 0 #1a5c1a;
+    line-height: 1.4;
+}
+.btn:hover { background: #7dff5c; transform: translate(2px, 2px); box-shadow: 2px 2px 0 #1a5c1a; }
+.btn.ghost { background: transparent; color: #39ff14; border-color: #39ff14; }
+.btn.ghost:hover { background: #123312; color: #7dff5c; }
+
+.services { border-top: 4px solid #2a4a2a; }
+.services > .wrap { gap: 1.2rem; }
+.services article {
+    background: #101020;
+    border: 3px solid #2a4a2a;
+    padding: 1.4rem 1.2rem;
+    box-shadow: 4px 4px 0 #000000;
+}
+.services article:hover { border-color: #39ff14; }
+.services h2 {
+    font-size: .72rem;
+    font-weight: 400;
+    color: #ffcc00;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+.services p { font-size: .5rem; line-height: 2.4; color: #9be89b; }
+.num {
+    font-size: .5rem;
+    color: #39ff14;
+    margin-bottom: .8rem;
+    letter-spacing: .1em;
+}
+
+.quote { border-top: 4px solid #2a4a2a; }
+.quote blockquote {
+    font-size: .62rem;
+    line-height: 2.6;
+    color: #ffffff;
+    max-width: 34ch;
+    border-left: 6px solid #39ff14;
+    padding-left: 1.2rem;
+    font-weight: 400;
+}
+.quote cite { font-size: .48rem; color: #ffcc00; line-height: 2; }
+
+.cta { border-top: 4px solid #2a4a2a; }
+.cta > .wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    border: 3px solid #39ff14;
+    padding: 1.8rem 1.4rem;
+    background: #123312;
+}
+.cta h2 { font-size: .9rem; line-height: 1.8; color: #ffffff; font-weight: 400; }
+.cta p { font-size: .5rem; line-height: 2.4; color: #9be89b; margin-bottom: 1.4rem; }
+
+footer { border-top: 4px solid #2a4a2a; }
+footer .wrap {
+    font-size: .46rem;
+    line-height: 2.2;
+    color: #5f8f5f;
+}
+.back-chip {
+    font-family: inherit;
+    font-size: .46rem;
+    border-radius: 0;
+    background: #101020;
+    color: #39ff14;
+    border: 2px solid #39ff14;
+    line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+    body { font-size: 10px; }
+    .services h2 { font-size: .62rem; }
+}

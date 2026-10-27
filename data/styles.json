@@ -394,5 +394,95 @@
     },
     "summaryLong": "A style that uses soft paired shadows — one light, one dark — to make elements appear extruded from or pressed into the background, producing a soft, moulded-plastic feel.",
     "summaryKey": "neomorphism_description"
+  },
+  {
+    "id": "bento-grid",
+    "slug": "bento-grid",
+    "name": {
+      "en": "Bento Grid"
+    },
+    "description": {
+      "en": "Asymmetric tiles on a shared grid — many features, one calm surface."
+    },
+    "prompt": {
+      "en": "Design a Bento Grid section for a product page."
+    },
+    "summaryLong": "Bento Grid borrows its name from the Japanese lunchbox: compartments of different sizes packed into one rectangle with no wasted space. Applied to interfaces, it gives a page a single continuous surface divided into tiles of unequal weight, so a product can show six or eight capabilities at once without a wall of identical cards. The discipline is in the grid, not the decoration. Every tile snaps to the same track, gaps stay constant, and each tile holds exactly one idea with one visual anchor. When a tile needs more space it spans two columns or two rows — it never shrinks its content or breaks the rhythm.",
+    "isNew": true
+  },
+  {
+    "id": "liquid-glass",
+    "slug": "liquid-glass",
+    "name": {
+      "en": "Liquid Glass"
+    },
+    "description": {
+      "en": "Edge-lit glass with refraction — depth without drop shadows."
+    },
+    "prompt": {
+      "en": "Design a Liquid Glass interface layer."
+    },
+    "summaryLong": "Liquid Glass is the successor to glassmorphism. Where glassmorphism only blurred what sat behind a panel, this style bends it: edges catch a bright rim, the surface refracts slightly, and layers appear to float at genuinely different depths rather than sitting on one plane. The visual work is done by three things working together — a blurred backdrop, a specular top edge, and a subtle inner highlight that reads as thickness. Remove any one and it collapses back into a flat translucent rectangle.",
+    "isNew": true
+  },
+  {
+    "id": "editorial",
+    "slug": "editorial",
+    "name": {
+      "en": "Editorial / Magazine"
+    },
+    "description": {
+      "en": "Print hierarchy on screen — serif display type, measured columns, real whitespace."
+    },
+    "prompt": {
+      "en": "Design an editorial page layout."
+    },
+    "summaryLong": "Editorial layout is print typography translated without apology: a serif display face, a measured column, a clear ladder from kicker to headline to standfirst to body. It reads as credible because the hierarchy is borrowed from publications that have refined it for a century. The screen-specific problem is width. Print measures around 60–70 characters per line; a browser will happily give you 140. Fixing that single constraint — a max-width on the body column — does more for the style than any typeface choice.",
+    "isNew": true
+  },
+  {
+    "id": "neo-brutalism",
+    "slug": "neo-brutalism",
+    "name": {
+      "en": "Neo-Brutalism"
+    },
+    "description": {
+      "en": "Thick black edges, offset shadows and saturated pastel fills."
+    },
+    "prompt": {
+      "en": "Design a neo-brutalist interface."
+    },
+    "summaryLong": "Neo-brutalism keeps the load-bearing parts of brutalism — heavy outlines, flat fills, hard offset shadows — and swaps the concrete grey for candy. The result is loud but friendly, which is why it colonised startup landing pages while the original brutalism stayed in art schools. The rule that makes or breaks it: every shadow is a hard offset with zero blur, and every border is identical in weight. Soften either one and the whole thing reads as a sloppy card grid instead of a deliberate style.",
+    "isNew": true
+  },
+  {
+    "id": "neo-swiss",
+    "slug": "neo-swiss",
+    "name": {
+      "en": "Neo-Swiss"
+    },
+    "description": {
+      "en": "Strict modular grid, variable weight, one red accent."
+    },
+    "prompt": {
+      "en": "Design a neo-Swiss layout."
+    },
+    "summaryLong": "Neo-Swiss keeps the International Typographic Style's core beliefs — grid as structure, sans-serif as neutral voice, one accent doing all emphasis — and updates the execution with variable fonts and screen-native spacing. Where the original relied on a single cut of Helvetica, this version moves weight continuously to create hierarchy without changing size. The discipline is unchanged: a hard baseline grid, left-aligned ragged-right text, and an accent colour used perhaps twice per screen. The generosity of whitespace is not decoration; it is what makes the grid legible.",
+    "isNew": true
+  },
+  {
+    "id": "acid-graphics",
+    "slug": "acid-graphics",
+    "name": {
+      "en": "Acid Graphics"
+    },
+    "description": {
+      "en": "High-saturation fills, warped type and anti-design energy."
+    },
+    "prompt": {
+      "en": "Design an acid-graphics landing page."
+    },
+    "summaryLong": "Acid graphics is anti-design with a purpose: it looks wrong on purpose to signal that the product is not corporate. Neon on black, type that overlaps itself, gradients that clash, and a grid that is visibly broken rather than invisibly perfect. It is the hardest style on this list to do well, because the difference between 'deliberately wrong' and 'actually broken' is entirely in whether the underlying structure is sound. Every chaotic placement still needs a readable path through the page.",
+    "isNew": true
   }
 ]

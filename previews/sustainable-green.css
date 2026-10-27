@@ -1,0 +1,108 @@
+/* Sustainable / Green Design — system fonts, no shadows, no decoration, fast by default */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #1b1f1c;
+    line-height: 1.65;
+    font-size: 16px;
+}
+
+.site-head {
+    border-bottom: 1px solid #dfe3e0;
+    background: #ffffff;
+}
+.brand {
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: #14301f;
+}
+.brand::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    margin-right: .45rem;
+    border-radius: 50%;
+    background: #1f7a4d;
+    vertical-align: 1px;
+}
+.site-head nav a { color: #4a554d; }
+.site-head nav a:hover { color: #14301f; border-bottom-color: #1f7a4d; }
+
+.hero { padding: 4.5rem 0 3.5rem; }
+.eyebrow {
+    color: #1f7a4d;
+    font-weight: 600;
+    letter-spacing: .1em;
+    font-size: .74rem;
+}
+.hero h1 {
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.08;
+    color: #0f2417;
+    max-width: 17ch;
+}
+.lede { color: #4a554d; max-width: 56ch; }
+
+/* buttons keep a visible border rather than a fill — less ink, same affordance */
+.btn {
+    border-radius: 4px;
+    background: #1f7a4d;
+    border-color: #1f7a4d;
+    color: #ffffff;
+    font-weight: 600;
+}
+.btn:hover { background: #186640; border-color: #186640; transform: none; }
+.btn.ghost { background: #ffffff; color: #14301f; border-color: #bcc7c0; }
+.btn.ghost:hover { background: #f4f7f5; border-color: #1f7a4d; }
+
+.services { border-top: 1px solid #dfe3e0; }
+.services > .wrap { gap: 0; }
+.services article {
+    border-left: 2px solid #1f7a4d;
+    padding: .2rem 0 .2rem 1.2rem;
+    margin-right: 1.4rem;
+}
+.services article:last-child { margin-right: 0; }
+.services h2 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin-bottom: .5rem;
+}
+.services p { color: #4a554d; font-size: .92rem; }
+.num { color: #1f7a4d; font-weight: 600; margin-bottom: .9rem; }
+
+.quote { border-top: 1px solid #dfe3e0; }
+.quote blockquote {
+    font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+    line-height: 1.45;
+    font-weight: 400;
+    color: #14301f;
+    max-width: 34ch;
+}
+.quote cite { color: #5c675f; }
+
+.cta { border-top: 1px solid #dfe3e0; }
+.cta > .wrap { align-items: center; }
+.cta h2 { font-weight: 700; letter-spacing: -.02em; color: #0f2417; }
+.cta p { color: #4a554d; }
+
+footer { border-top: 1px solid #dfe3e0; }
+footer .wrap { color: #6b766e; font-size: .76rem; }
+.back-chip { background: #1f7a4d; border-radius: 4px; }
+
+/* the only flourish: a thin measure line under the headline */
+.hero h1::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin-top: 1.4rem;
+    background: #1f7a4d;
+}
+
+@media (max-width: 760px) {
+    .services article { border-left: 2px solid #1f7a4d; margin-right: 0; margin-bottom: 1.6rem; }
+}

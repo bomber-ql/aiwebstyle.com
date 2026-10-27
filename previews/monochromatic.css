@@ -1,0 +1,64 @@
+/* Monochromatic — one hue, every value derived from it */
+
+body {
+    --base: #0d6efd;
+    --t0: #f5f9ff;
+    --t1: #e3eefd;
+    --t2: #b9d5fb;
+    --t3: #7fb3f8;
+    --t4: #3d8bf4;
+    --t6: #0a56c8;
+    --t8: #073a8a;
+    --t9: #04214f;
+
+    background: var(--t0);
+    color: var(--t9);
+}
+
+.site-head {
+    border-bottom: 1px solid var(--t2);
+    background: var(--t0);
+}
+.site-head nav a { color: var(--t6); }
+.site-head nav a:hover { color: var(--t9); border-bottom-color: var(--t4); }
+.brand { color: var(--t8); letter-spacing: .01em; }
+
+.hero { padding: 5rem 0 3.6rem; }
+.eyebrow { color: var(--t6); letter-spacing: .18em; }
+.hero h1 { color: var(--t9); }
+.lede { color: var(--t8); }
+
+.btn { background: var(--t9); border-color: var(--t9); color: var(--t0); border-radius: 4px; }
+.btn:hover { background: var(--t6); border-color: var(--t6); }
+.btn.ghost { background: transparent; color: var(--t8); border-color: var(--t3); }
+.btn.ghost:hover { background: var(--t2); color: var(--t9); }
+
+.services { border-top: 1px solid var(--t2); }
+.services article {
+    background: #ffffff;
+    border: 1px solid var(--t2);
+    border-top: 3px solid var(--t4);
+    border-radius: 2px;
+    padding: 1.6rem 1.4rem;
+}
+.services h2 { color: var(--t9); }
+.services p { color: var(--t8); }
+.num { color: var(--t4); font-weight: 600; }
+
+.quote { border-top: 1px solid var(--t2); background: var(--t1); }
+.quote blockquote { color: var(--t9); }
+.quote cite { color: var(--t6); }
+
+.cta { border-top: 1px solid var(--t2); background: var(--t9); }
+.cta > .wrap { align-items: center; }
+.cta h2 { color: var(--t0); }
+.cta p { color: var(--t2); }
+.cta .btn { background: var(--t0); color: var(--t9); border-color: var(--t0); }
+.cta .btn:hover { background: var(--t2); border-color: var(--t2); }
+
+footer { border-top: 1px solid var(--t2); background: var(--t0); }
+footer .wrap { color: var(--t6); }
+.back-chip { background: var(--t8); border-radius: 4px; }
+
+/* pull the quote and cta to full bleed by cancelling the base borders */
+.quote, .cta { padding: 3.6rem 0; }

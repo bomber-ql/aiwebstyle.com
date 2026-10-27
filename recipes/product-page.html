@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail Page — Prompt Recipe for AI Website Builders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="recipe.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Gallery, buy box, variant, trust. The page where a forty-pixel mistake costs a sale, and where AI reliably invents five-star reviews. A structured prompt with">
+    <link rel="canonical" href="https://www.aiwebstyle.com/recipes/product-page.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Product Detail Page — Prompt Recipe">
+    <meta property="og:description" content="Gallery, buy box, variant, trust. The page where a forty-pixel mistake costs a sale, and where AI reliably invents five-star reviews. A structured prompt with">
+    <meta property="og:url" content="https://www.aiwebstyle.com/recipes/product-page.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Product Detail Page — prompt recipe","description":"Gallery, buy box, variant, trust. The page where a forty-pixel mistake costs a sale, and where AI reliably invents five-star reviews. A structured prompt with","inLanguage":"en","url":"https://www.aiwebstyle.com/recipes/product-page.html","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Breadcrumb","text":"Three levels maximum, current page not a link. It tells the shopper where they are without costing a row of vertical space."},{"@type":"HowToStep","name":"Gallery","text":"Four images minimum, including one in use and one that shows scale. Never auto-advance — a carousel that moves while someone is reading is a carousel they will misread."},{"@type":"HowToStep","name":"Buy box","text":"Name, price with tax basis, variant, quantity, add to cart, delivery date. All of it above the fold on a phone; this is the whole page in one column."},{"@type":"HowToStep","name":"Trust strip","text":"Four items maximum. Shipping cost, return window, warranty, payment methods — each answerable in one sentence, all of them things the shopper would otherwise email about."},{"@type":"HowToStep","name":"Description","text":"Three paragraphs: what it is, what it is made of, what it is not for. The last one prevents the return."},{"@type":"HowToStep","name":"Specification table","text":"Six to ten rows with units in the header. This is the section that gets copied into a purchasing spreadsheet."},{"@type":"HowToStep","name":"Reviews","text":"Summary with a real count, then three reviews with dates. Show the three-star review first; a page of unanimous praise reads as manufactured."},{"@type":"HowToStep","name":"Cross-sell","text":"Three related items with visible prices. Anything that requires a click to learn the price will not be clicked."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html" class="is-active" aria-current="page">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <p class="rc-band-title">Prompt Recipes</p>
+            <p>Whole pages, described precisely enough that the first build is the one you keep.</p>
+        </div>
+    </header>
+
+    <main class="rc-wrap">
+        <p class="rc-crumb"><a href="index.html">← All prompt recipes</a></p>
+
+        <h1 class="rc-title">Product Detail Page</h1>
+        <p class="rc-lede">A product page answers one question: is this the right thing, and what happens if it is not. Everything else is decoration. The buy box carries the first half, the trust strip carries the second, and the description exists to absorb the doubts those two could not.</p>
+
+        <div class="rc-meta">
+            <span>Commerce</span>
+            <span>8 sections</span>
+            <span>6 variables</span>
+            <span>8 min read</span>
+        </div>
+
+        <section class="rc-section">
+            <h2>What this page has to do</h2>
+            <p>Commerce pages fail on mobile first. The add-to-cart button lands below a full-height image gallery, the variant selector changes the price but not the photograph, and the delivery estimate says 3 to 5 business days without ever naming a date.</p>
+            <p>There is a second failure that matters more for a real store: invented social proof. A model asked for reviews will produce a 4.8 average from 2,341 reviews, which is both false and obvious. The prompt below requires an honest placeholder instead, and separates the parts of the page a developer must wire up from the parts that are static.</p>
+        </section>
+
+        <section class="rc-section">
+            <h2>Section order</h2>
+            <p class="rc-note">The order is the argument. Reordering these is not a layout decision, it is a change to the reasoning.</p>
+            <ol class="rc-order">
+                <li>
+                    <span class="rc-step">01</span>
+                    <div>
+                        <h3>Breadcrumb</h3>
+                        <p>Three levels maximum, current page not a link. It tells the shopper where they are without costing a row of vertical space.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">02</span>
+                    <div>
+                        <h3>Gallery</h3>
+                        <p>Four images minimum, including one in use and one that shows scale. Never auto-advance — a carousel that moves while someone is reading is a carousel they will misread.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">03</span>
+                    <div>
+                        <h3>Buy box</h3>
+                        <p>Name, price with tax basis, variant, quantity, add to cart, delivery date. All of it above the fold on a phone; this is the whole page in one column.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">04</span>
+                    <div>
+                        <h3>Trust strip</h3>
+                        <p>Four items maximum. Shipping cost, return window, warranty, payment methods — each answerable in one sentence, all of them things the shopper would otherwise email about.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">05</span>
+                    <div>
+                        <h3>Description</h3>
+                        <p>Three paragraphs: what it is, what it is made of, what it is not for. The last one prevents the return.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">06</span>
+                    <div>
+                        <h3>Specification table</h3>
+                        <p>Six to ten rows with units in the header. This is the section that gets copied into a purchasing spreadsheet.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">07</span>
+                    <div>
+                        <h3>Reviews</h3>
+                        <p>Summary with a real count, then three reviews with dates. Show the three-star review first; a page of unanimous praise reads as manufactured.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rc-step">08</span>
+                    <div>
+                        <h3>Cross-sell</h3>
+                        <p>Three related items with visible prices. Anything that requires a click to learn the price will not be clicked.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="rc-section" id="prompt">
+            <h2>Build the prompt</h2>
+            <p class="rc-note">6 variables. Change one and the text below rewrites itself — nothing else on this page moves.</p>
+            <div class="rc-controls">
+            <div class="rc-control">
+                <label for="rc-CATEGORY">Product category</label>
+                <select id="rc-CATEGORY" data-rc="CATEGORY">
+                    <option value="apparel. The variant control is size and colour, the size guide is a link inside the buy box, the return window is 30 days and the model must show a garment on a body and flat.">Apparel</option>
+                    <option value="consumer electronics. The variant control is capacity or colour, the specification table carries the weight of the argument, and the trust strip must state warranty length and repair route.">Electronics</option>
+                    <option value="specialty food. The description carries provenance and ingredients, the trust strip states shelf life and shipping temperature, and the gallery shows packaging and the product out of it.">Food and drink</option>
+                    <option value="homeware. Scale is the main doubt, so the gallery needs one shot beside a familiar object and the specification table must include dimensions and weight.">Homeware</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-GALLERY">Gallery behaviour</label>
+                <select id="rc-GALLERY" data-rc="GALLERY">
+                    <option value="Show the gallery as a sticky left column of stacked images; the buy box scrolls independently on the right. On mobile, collapse to a horizontal swipe strip with visible dots and no autoplay.">Sticky column</option>
+                    <option value="Show the gallery as a single swipeable frame with dots below it, first image eager-loaded and the rest lazy. Add previous and next buttons for desktop. No autoplay under any circumstance.">Swipe carousel</option>
+                    <option value="Show the gallery as a two by two grid of four images with no carousel at all. Every image is visible at once, which removes the discovery problem entirely.">Four-up grid</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-VARIANTS">Variant control</label>
+                <select id="rc-VARIANTS" data-rc="VARIANTS">
+                    <option value="size as five rectangular buttons with the sold-out one struck through, colour as circular swatches with a text label that updates; both selection states visible without hover.">Size and colour</option>
+                    <option value="one selector for the only meaningful choice, rendered as a native select so it works with keyboards and screen readers without custom code.">Single option</option>
+                    <option value="no variant control at all, because there is one SKU; replace the space with a delivery estimate and a stock status line.">No variants</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-TRUST">Trust strip</label>
+                <select id="rc-TRUST" data-rc="TRUST">
+                    <option value="Four items: free shipping over a stated threshold with a delivery date range; 30-day returns with who pays postage; two-year warranty; accepted payment methods as text, not logos.">Logistics first</option>
+                    <option value="Four items: the rating summary moved up into the buy box, then a returns promise, a warranty line, and a support response time in hours.">Reviews first</option>
+                    <option value="Four items: where it is made, the material specification, the repair or replacement policy, and the shipping origin with a realistic transit time.">Craft first</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-STYLE">Visual style</label>
+                <select id="rc-STYLE" data-rc="STYLE">
+                    <option value="Clean commerce: white surface, one neutral grey scale, a single accent reserved for price and the add-to-cart button, 1px hairlines instead of cards, generous 1.25rem line height, product photography with no decorative frame.">Clean commerce</option>
+                    <option value="Editorial retail: serif product name at 2.25rem, sans for everything else, warm paper background, wide margins, specification table set like a magazine data page, no badges or stickers on the imagery.">Editorial retail</option>
+                    <option value="Neo-brutalist: 3px black borders on the buy box and gallery, 6px hard offset shadows, one saturated accent for price, headings in a heavy grotesque, buttons that translate 3px on press.">Neo-brutalist</option>
+                    <option value="Dark premium: near-black background at #101214, product photography on matching dark plates, thin white rules at 12 percent opacity, price in large light-weight type, no gradients or gloss.">Dark premium</option>
+                </select>
+            </div>
+            <div class="rc-control">
+                <label for="rc-MOTION">Motion level</label>
+                <select id="rc-MOTION" data-rc="MOTION">
+                    <option value="No animation beyond the native feel of a button press. Commerce pages lose money to motion that delays the buy box.">None</option>
+                    <option value="Only micro-interactions: 120ms background transitions on buttons and swatches, and a 200ms fade when the gallery image swaps. Nothing enters, nothing scrolls, nothing parallaxes.">Micro only</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="rc-prompt">
+                <div class="rc-bar">
+                    <span class="rc-bar-label">Assembled prompt</span>
+                    <span class="rc-count" id="rcCount"></span>
+                    <button class="rc-btn" id="rcReset" type="button">Reset</button>
+                    <button class="rc-btn rc-btn-primary" id="rcCopy" type="button">Copy</button>
+                </div>
+                <pre id="rcPrompt">Build a product detail page for one physical product in the apparel. The variant control is size and colour, the size guide is a link inside the buy box, the return window is 30 days and the model must show a garment on a body and flat. category.
+
+AUDIENCE
+A shopper who arrived from a search for this exact product and is choosing between it and one alternative. They are on a phone, on mobile data, and they will leave if the price or the add-to-cart button is not visible early.
+
+STRUCTURE (exactly this order)
+1. Breadcrumb: three levels maximum. The current page is text, not a link.
+2. Gallery: Show the gallery as a sticky left column of stacked images; the buy box scrolls independently on the right. On mobile, collapse to a horizontal swipe strip with visible dots and no autoplay. At least four images: one in use, one showing scale against a familiar object, one detail, one packaging. Never auto-advance.
+3. Buy box, beside the gallery on desktop and directly beneath it on mobile: product name as h1; price with currency symbol and a tax note; size as five rectangular buttons with the sold-out one struck through, colour as circular swatches with a text label that updates; both selection states visible without hover. quantity stepper; add to cart as the only filled button on the page; delivery estimate as a date range, not a number of days.
+4. Trust strip: Four items: free shipping over a stated threshold with a delivery date range; 30-day returns with who pays postage; two-year warranty; accepted payment methods as text, not logos. Four items maximum, one sentence each.
+5. Description: three paragraphs. What it is, what it is made of, what it is not for.
+6. Specification table: 6 to 10 rows, units in the column header, no marketing language.
+7. Reviews: a rating summary with a real count, then three reviews with dates and a verified badge. Include one review below four stars.
+8. Cross-sell: three related products using the same card shape, with prices visible and no hover-only information.
+
+STYLE
+Clean commerce: white surface, one neutral grey scale, a single accent reserved for price and the add-to-cart button, 1px hairlines instead of cards, generous 1.25rem line height, product photography with no decorative frame.
+
+COPY RULES
+- Price always carries a currency symbol and states whether tax is included.
+- Every measurement carries a unit. No size called large without a number beside it.
+- Banned: premium quality, must-have, game-changer, elevate, curated for you, crafted with care.
+- Shipping cost, delivery window and the return period must all be answerable from this page without opening another.
+- Reviews must be labelled as placeholder content, with the comment Review data to be supplied by the store. Do not invent an average rating or a review count.
+
+CONSTRAINTS
+- Add to cart fully visible at 390x844 without scrolling.
+- Changing a variant must update price and image together, never one alone.
+- All tap targets at least 44x44 CSS pixels, including the quantity stepper.
+- Every image needs width and height attributes so nothing shifts while loading.
+- No countdown timers, no stock counters, no exit-intent modal, no chat bubble over the buy box.
+
+OUTPUT
+One page plus an inert cart drawer in the markup. Static where possible; mark the four places that need real store data with a comment.</pre>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>What to change, and what to leave alone</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Variable</th><th scope="col">How to edit it</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><code>{{CATEGORY}}</code></th>
+                    <td>This rewrites what the page has to prove. Apparel proves fit, electronics proves specification, food proves provenance. Keeping the copy and swapping the category produces a page that answers the wrong doubt.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{GALLERY}}</code></th>
+                    <td>Sticky columns work when the buy box is tall. Four-up grids work when the product is visually distinctive. Carousels are the fallback, not the default.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{VARIANTS}}</code></th>
+                    <td>If you have variants, the price must be per variant, not starting at. Starting-at pricing on a product page is the single most common cause of cart abandonment.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{TRUST}}</code></th>
+                    <td>Only claim what you can honour. A 30-day return window you do not offer will generate chargebacks that cost more than the sale.</td>
+                </tr>
+                <tr>
+                    <th scope="row"><code>{{STYLE}}</code></th>
+                    <td>Photography decides this more than taste does. Dark styling on white-background product shots looks like a rendering error, not a premium choice.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Feeding it to each builder</h2>
+            <table class="rc-table">
+                <thead>
+                    <tr><th scope="col">Builder</th><th scope="col">What to do differently</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">v0</th>
+                    <td>Generate the buy box alone first. It is the only section with real logic, and generating it inside the full page makes iteration slow because every change re-renders the gallery.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lovable</th>
+                    <td>It will invent reviews and a review count unless the placeholder rule is present. Check the rating summary before you publish; that is the line most likely to be quietly fabricated.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bolt</th>
+                    <td>Ask for static HTML and CSS with one small script for variant state. A framework build here adds a dependency for what is fundamentally a form.</td>
+                </tr>
+                <tr>
+                    <th scope="row">Cursor / Claude Code</th>
+                    <td>Point it at your product data file first and tell it to read prices and variants from there. Hard-coded prices in markup are the defect that survives longest.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="rc-section">
+            <h2>Where it usually breaks</h2>
+            <div class="rc-failures">
+                <article class="rc-failure">
+                    <h3><span>01</span>The buy box below the gallery on mobile</h3>
+                    <p>A full-height image followed by a full-height gallery pushes the price and the button past the first screen. On a phone the buy box comes first and the gallery second, or half the visitors never learn the price.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>02</span>Variant changes that only update the price</h3>
+                    <p>Selecting a different colour and seeing the same photograph is a trust failure, not a polish issue. The shopper concludes the images are stock and the variants may not exist.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>03</span>Delivery described in days</h3>
+                    <p>Three to five business days requires the shopper to do calendar arithmetic, and they will do it pessimistically. A date range does the work for them and converts better at identical cost.</p>
+                </article>
+                <article class="rc-failure">
+                    <h3><span>04</span>Invented reviews</h3>
+                    <p>A 4.8 average from 2,341 reviews on a page that launched last week is both false and detectable. It is also the fastest route to a marketplace suspension if this is a real store.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="rc-section">
+            <h2>Pair it with</h2>
+                <div class="rc-rel-group">
+                    <h3>Styles that carry this page</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../styles/claymorphism.html">claymorphism</a><a class="rc-chip" href="../styles/editorial.html">editorial</a><a class="rc-chip" href="../styles/dark-mode.html">dark mode</a><a class="rc-chip" href="../styles/neo-brutalism.html">neo brutalism</a></div>
+                </div>
+                <div class="rc-rel-group">
+                    <h3>Motion to pair with it</h3>
+                    <div class="rc-chips"><a class="rc-chip" href="../motions/card-spotlight.html">card spotlight</a><a class="rc-chip" href="../motions/scroll-reveal.html">scroll reveal</a></div>
+                </div>
+        </section>
+
+        <nav class="rc-chain">
+            <a href="index.html">All recipes</a>
+            <a href="portfolio.html">← Portfolio / Case Study Site</a><a href="dashboard.html">Analytics Dashboard →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+        </div>
+    </footer>
+
+    <script type="application/json" id="rcSource">{"lines":["Build a product detail page for one physical product in the {{CATEGORY}} category.","","AUDIENCE","A shopper who arrived from a search for this exact product and is choosing between it and one alternative. They are on a phone, on mobile data, and they will leave if the price or the add-to-cart button is not visible early.","","STRUCTURE (exactly this order)","1. Breadcrumb: three levels maximum. The current page is text, not a link.","2. Gallery: {{GALLERY}} At least four images: one in use, one showing scale against a familiar object, one detail, one packaging. Never auto-advance.","3. Buy box, beside the gallery on desktop and directly beneath it on mobile: product name as h1; price with currency symbol and a tax note; {{VARIANTS}} quantity stepper; add to cart as the only filled button on the page; delivery estimate as a date range, not a number of days.","4. Trust strip: {{TRUST}} Four items maximum, one sentence each.","5. Description: three paragraphs. What it is, what it is made of, what it is not for.","6. Specification table: 6 to 10 rows, units in the column header, no marketing language.","7. Reviews: a rating summary with a real count, then three reviews with dates and a verified badge. Include one review below four stars.","8. Cross-sell: three related products using the same card shape, with prices visible and no hover-only information.","","STYLE","{{STYLE}}","","COPY RULES","- Price always carries a currency symbol and states whether tax is included.","- Every measurement carries a unit. No size called large without a number beside it.","- Banned: premium quality, must-have, game-changer, elevate, curated for you, crafted with care.","- Shipping cost, delivery window and the return period must all be answerable from this page without opening another.","- Reviews must be labelled as placeholder content, with the comment Review data to be supplied by the store. Do not invent an average rating or a review count.","","CONSTRAINTS","- Add to cart fully visible at 390x844 without scrolling.","- Changing a variant must update price and image together, never one alone.","- All tap targets at least 44x44 CSS pixels, including the quantity stepper.","- Every image needs width and height attributes so nothing shifts while loading.","- No countdown timers, no stock counters, no exit-intent modal, no chat bubble over the buy box.","","OUTPUT","One page plus an inert cart drawer in the markup. Static where possible; mark the four places that need real store data with a comment."],"defaults":{"CATEGORY":"apparel. The variant control is size and colour, the size guide is a link inside the buy box, the return window is 30 days and the model must show a garment on a body and flat.","GALLERY":"Show the gallery as a sticky left column of stacked images; the buy box scrolls independently on the right. On mobile, collapse to a horizontal swipe strip with visible dots and no autoplay.","VARIANTS":"size as five rectangular buttons with the sold-out one struck through, colour as circular swatches with a text label that updates; both selection states visible without hover.","TRUST":"Four items: free shipping over a stated threshold with a delivery date range; 30-day returns with who pays postage; two-year warranty; accepted payment methods as text, not logos.","STYLE":"Clean commerce: white surface, one neutral grey scale, a single accent reserved for price and the add-to-cart button, 1px hairlines instead of cards, generous 1.25rem line height, product photography with no decorative frame.","MOTION":"No animation beyond the native feel of a button press. Commerce pages lose money to motion that delays the buy box."}}</script>
+    <script src="../script.js" defer></script>
+    <script>
+(function () {
+    var src = JSON.parse(document.getElementById('rcSource').textContent);
+    var pre = document.getElementById('rcPrompt');
+    var count = document.getElementById('rcCount');
+    var selects = Array.prototype.slice.call(document.querySelectorAll('[data-rc]'));
+
+    function current() {
+        var v = {};
+        selects.forEach(function (s) { v[s.getAttribute('data-rc')] = s.value; });
+        return v;
+    }
+
+    function render(track) {
+        var v = track || src.defaults;
+        var text = src.lines.map(function (line) {
+            return line.replace(/\{\{(\w+)\}\}/g, function (m, key) {
+                return v[key] == null ? m : v[key];
+            });
+        }).join('\n');
+        pre.textContent = text;
+        count.textContent = text.split(/\s+/).filter(Boolean).length + ' words';
+    }
+
+    selects.forEach(function (s) {
+        s.addEventListener('change', function () { render(current()); });
+    });
+
+    document.getElementById('rcReset').addEventListener('click', function () {
+        selects.forEach(function (s) { s.value = src.defaults[s.getAttribute('data-rc')]; });
+        render(src.defaults);
+    });
+
+    document.getElementById('rcCopy').addEventListener('click', function () {
+        var btn = this;
+        var done = function (ok) {
+            btn.textContent = ok ? 'Copied' : 'Select manually';
+            btn.classList.toggle('is-done', ok);
+            setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('is-done'); }, 1600);
+            if (!ok) {
+                var range = document.createRange();
+                range.selectNodeContents(pre);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pre.textContent).then(function () { done(true); }, function () { done(false); });
+        } else { done(false); }
+    });
+
+    render(src.defaults);
+})();
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* Grunge — distressed surfaces, off-register type, muted rust on ash */
+
+body {
+    background:
+        radial-gradient(circle at 78% 12%, rgba(120, 60, 40, .18), transparent 46%),
+        radial-gradient(circle at 12% 78%, rgba(60, 70, 60, .2), transparent 52%),
+        #1a1917;
+    color: #cfc9bd;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.7;
+}
+
+.site-head {
+    border-bottom: 3px solid #3a3733;
+    background: #141312;
+}
+.brand {
+    font-size: 1.05rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #d8d2c6;
+    text-shadow: 2px 0 0 rgba(150, 60, 40, .55), -1px 0 0 rgba(70, 90, 80, .45);
+}
+.site-head nav { gap: .2rem; }
+.site-head nav a {
+    color: #9c958a;
+    border-bottom: none;
+    padding: .4rem .8rem;
+    font-size: .82rem;
+    letter-spacing: .06em;
+}
+.site-head nav a:hover { color: #e6e0d3; background: #2a2724; }
+
+.hero { padding: 4.5rem 0 3.5rem; }
+.eyebrow {
+    color: #b06a4e;
+    letter-spacing: .22em;
+    font-size: .72rem;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+}
+.hero h1 {
+    color: #e8e2d5;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    text-shadow: 3px 2px 0 rgba(120, 50, 35, .5), -2px -1px 0 rgba(60, 80, 70, .35);
+    max-width: 17ch;
+}
+.lede {
+    color: #a8a196;
+    border-left: 4px solid #6b3f30;
+    padding-left: 1rem;
+    max-width: 48ch;
+}
+
+.btn {
+    border-radius: 0;
+    background: #2c2926;
+    border: 2px solid #4a443e;
+    color: #ddd6c8;
+    font-family: inherit;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    transform: rotate(-.6deg);
+}
+.btn:hover { background: #3a3531; border-color: #8a5a44; color: #f0e9db; transform: rotate(-.6deg); }
+.btn.ghost { background: transparent; border-color: #4a443e; color: #b6afa3; transform: rotate(.5deg); }
+.btn.ghost:hover { background: #26221f; border-color: #6b7f70; }
+
+.services { border-top: 3px solid #3a3733; }
+.services > .wrap { gap: 1.1rem; }
+.services article {
+    background:
+        repeating-linear-gradient(115deg, rgba(255, 255, 255, .012) 0 3px, transparent 3px 7px),
+        #232120;
+    border: 2px solid #3a3531;
+    padding: 1.6rem 1.4rem;
+    transform: rotate(-.35deg);
+}
+.services article:nth-child(2) { transform: rotate(.4deg); border-color: #4a3a30; }
+.services article:nth-child(3) { transform: rotate(-.15deg); border-color: #33403a; }
+.services h2 {
+    color: #ddd6c8;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 1.12rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+}
+.services p { color: #9c958a; font-size: .88rem; }
+.num { color: #b06a4e; letter-spacing: .2em; margin-bottom: .9rem; }
+
+.quote { border-top: 3px solid #3a3733; }
+.quote blockquote {
+    color: #ddd6c8;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    max-width: 30ch;
+    border-left: 5px solid #6b3f30;
+    padding-left: 1.2rem;
+}
+.quote cite { color: #8a8478; letter-spacing: .14em; text-transform: uppercase; font-size: .74rem; }
+
+.cta { border-top: 3px solid #3a3733; }
+.cta > .wrap { align-items: center; }
+.cta h2 {
+    color: #e8e2d5;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    text-shadow: 2px 1px 0 rgba(120, 50, 35, .5);
+}
+.cta p { color: #9c958a; }
+
+footer { border-top: 3px solid #3a3733; background: #141312; }
+footer .wrap { color: #6f6960; letter-spacing: .1em; text-transform: uppercase; font-size: .7rem; }
+.back-chip {
+    background: #2c2926;
+    border: 2px solid #4a443e;
+    border-radius: 0;
+    color: #cfc9bd;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    opacity: 1;
+}
+
+@media (max-width: 760px) {
+    .services article { transform: none !important; }
+}

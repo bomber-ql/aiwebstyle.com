@@ -1,0 +1,83 @@
+/* Bento Grid — asymmetric tiles on one constant-gap grid */
+
+body {
+    --surface: #f7f7f5;
+    --tile: #ffffff;
+    --line: #e3e4e1;
+    --ink: #14171c;
+    --muted: #5c636e;
+    background: var(--surface);
+    color: #31353d;
+}
+
+.site-head { border-bottom: 1px solid var(--line); }
+.brand { color: var(--ink); }
+.site-head nav a { color: var(--muted); }
+.site-head nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.hero { padding: 4.5rem 0 3rem; }
+.eyebrow { color: #7a828e; }
+.hero h1 { color: var(--ink); letter-spacing: -.04em; }
+.lede { color: var(--muted); }
+
+.btn { border-radius: 10px; background: var(--ink); border-color: var(--ink); }
+.btn:hover { background: #31353d; border-color: #31353d; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: #d6d8d4; }
+.btn.ghost:hover { background: #ffffff; border-color: var(--ink); }
+
+/* the bento: one dominant tile, two supporting */
+.services { border-top: 1px solid var(--line); padding: 3rem 0 3.5rem; }
+.services > .wrap {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+.services article {
+    background: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.7rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 150px;
+}
+.services article:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 316px;
+    background: #eef1ea;
+    justify-content: space-between;
+}
+.services article:nth-child(2) { grid-column: span 2; }
+.services article:nth-child(3) { grid-column: span 2; }
+.services h2 { color: var(--ink); letter-spacing: -.02em; }
+.services article:nth-child(1) h2 { font-size: 1.7rem; }
+.services p { color: var(--muted); max-width: 34ch; }
+.num { color: #9aa1ab; }
+
+.quote { border-top: 1px solid var(--line); }
+.quote blockquote { color: var(--ink); }
+.quote cite { color: var(--muted); }
+
+.cta { border-top: 1px solid var(--line); }
+.cta > .wrap {
+    background: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 2.4rem 2rem;
+    align-items: center;
+}
+.cta h2 { color: var(--ink); }
+.cta p { color: var(--muted); }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { color: #8b939e; }
+.back-chip { background: var(--ink); border-radius: 10px; }
+
+@media (max-width: 820px) {
+    .services > .wrap { grid-template-columns: 1fr; }
+    .services article:nth-child(1),
+    .services article:nth-child(2),
+    .services article:nth-child(3) { grid-column: span 1; grid-row: auto; min-height: 0; }
+    .services article:nth-child(1) { min-height: 0; }
+}

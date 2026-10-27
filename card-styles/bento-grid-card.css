@@ -1,0 +1,8 @@
+/* Styles for Bento Grid Card */
+.card[data-style-id="bento-grid"] { background-color: #ffffff; border: 1px solid #e3e4e1; border-radius: 16px; box-shadow: none; }
+.card[data-style-id="bento-grid"] h3 { color: #14171c; letter-spacing: -0.02em; }
+.card[data-style-id="bento-grid"] .prompt-text { background-color: #f1f2ef; color: #3c414a; border-radius: 10px; }
+.card[data-style-id="bento-grid"] .btn { border-radius: 10px; }
+.card[data-style-id="bento-grid"] .btn:not(.btn-secondary) { background-color: #14171c; color: #ffffff !important; }
+.card[data-style-id="bento-grid"] .btn-secondary { background-color: #f1f2ef; color: #14171c !important; }
+.card[data-style-id="bento-grid"]:hover { border-color: #c9cbc6; }

@@ -1,0 +1,122 @@
+/* Aurora UI — slow drifting colour fields behind everything, thin glass at the edges */
+
+body {
+    background: #0a0d18;
+    color: #eaf0ff;
+    font-family: 'Inter', system-ui, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* three desynchronised fields, no blur filter — cost stays on the compositor */
+body::before,
+body::after,
+.hero::before {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+}
+body::before {
+    width: 62vw; height: 62vw;
+    top: -24vw; left: -16vw;
+    background: radial-gradient(circle, rgba(88, 112, 255, .55), transparent 66%);
+    animation: aur-1 17s ease-in-out infinite alternate;
+}
+body::after {
+    width: 54vw; height: 54vw;
+    bottom: -22vw; right: -12vw;
+    background: radial-gradient(circle, rgba(40, 205, 178, .45), transparent 66%);
+    animation: aur-2 21s ease-in-out infinite alternate;
+}
+.hero::before {
+    width: 46vw; height: 46vw;
+    top: 4vw; right: 6vw;
+    background: radial-gradient(circle, rgba(198, 96, 214, .4), transparent 64%);
+    animation: aur-3 25s ease-in-out infinite alternate;
+}
+@keyframes aur-1 { to { transform: translate(50px, 40px) scale(1.1); } }
+@keyframes aur-2 { to { transform: translate(-40px, -50px) scale(1.08); } }
+@keyframes aur-3 { to { transform: translate(-30px, 45px) scale(.94); } }
+
+.site-head,
+main,
+footer { position: relative; z-index: 1; }
+
+.site-head {
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(10, 13, 24, .45);
+    backdrop-filter: blur(14px);
+}
+.brand { color: #ffffff; }
+.site-head nav a { color: #a9b6d4; }
+.site-head nav a:hover { color: #ffffff; border-bottom-color: rgba(255, 255, 255, .5); }
+
+.hero { padding: 5.5rem 0 4rem; }
+.eyebrow {
+    display: inline-block;
+    color: #c8d4f5;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(10px);
+    padding: .35rem .9rem;
+    border-radius: 999px;
+    margin-bottom: 1.6rem;
+}
+.hero h1 {
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 35%, rgba(200, 214, 255, .7));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.lede { color: #b3c0dc; }
+
+.btn {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .94);
+    border-color: transparent;
+    color: #0a0d18;
+}
+.btn:hover { background: #ffffff; color: #0a0d18; }
+.btn.ghost {
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .22);
+    color: #eaf0ff;
+    backdrop-filter: blur(10px);
+}
+.btn.ghost:hover { background: rgba(255, 255, 255, .16); color: #ffffff; }
+
+.services { border-top: 1px solid rgba(255, 255, 255, .1); }
+.services > .wrap { gap: 1.2rem; }
+.services article {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 16px;
+    padding: 1.7rem 1.5rem;
+    backdrop-filter: blur(16px);
+}
+.services h2 { color: #ffffff; }
+.services p { color: #aab7d4; }
+.num { color: #8fa4d8; }
+
+.quote { border-top: 1px solid rgba(255, 255, 255, .1); }
+.quote blockquote { color: #ffffff; }
+.quote cite { color: #94a3c4; }
+
+.cta { border-top: 1px solid rgba(255, 255, 255, .1); }
+.cta h2 { color: #ffffff; }
+.cta p { color: #aab7d4; }
+
+footer { border-top: 1px solid rgba(255, 255, 255, .1); }
+footer .wrap { color: #7f8dad; }
+.back-chip { background: rgba(255, 255, 255, .12); backdrop-filter: blur(10px); border-radius: 999px; }
+
+@media (prefers-reduced-motion: reduce) {
+    body::before, body::after, .hero::before { animation: none !important; }
+}
+@media (max-width: 760px) {
+    body::before, body::after { width: 90vw; height: 90vw; }
+}

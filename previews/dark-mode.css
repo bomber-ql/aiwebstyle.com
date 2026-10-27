@@ -1,0 +1,55 @@
+/* Dark Mode — deep charcoal surface, one vibrant accent, contrast held above 7:1 */
+
+body {
+    background: #0e1116;
+    color: #e6ebf1;
+}
+.site-head { border-bottom-color: #1e242d; background: rgba(14, 17, 22, .9); }
+.site-head nav a { color: #93a1b1; }
+.site-head nav a:hover { color: #e6ebf1; }
+.brand { color: #e6ebf1; }
+
+.eyebrow { color: #4d5bff; letter-spacing: .16em; }
+.hero h1 { color: #ffffff; font-weight: 600; }
+.lede { color: #a3b0c0; }
+
+.btn { background: #4d5bff; border-color: #4d5bff; color: #ffffff; }
+.btn:hover { background: #6b77ff; }
+.btn.ghost { background: transparent; color: #d6dee8; border-color: #2a333f; }
+.btn.ghost:hover { background: #171c24; }
+
+.services { border-top-color: #1e242d; }
+.services article {
+    background: #141922;
+    border: 1px solid #232b36;
+    border-radius: 12px;
+    padding: 1.6rem 1.5rem;
+    transition: border-color .25s ease, transform .25s ease;
+}
+.services article:hover { border-color: #3a4553; transform: translateY(-3px); }
+.services h2 { color: #ffffff; }
+.services p { color: #9dabbb; }
+.num { color: #4d5bff; }
+
+.quote { border-top-color: #1e242d; }
+.quote blockquote { color: #e6ebf1; }
+.quote blockquote::before {
+    content: '';
+    display: block;
+    width: 32px; height: 2px;
+    background: #4d5bff;
+    margin-bottom: 1.4rem;
+}
+.quote cite { color: #7d8b9c; }
+
+.cta { border-top-color: #1e242d; }
+.cta h2 { color: #ffffff; }
+.cta p { color: #9dabbb; }
+
+footer { border-top-color: #1e242d; }
+footer .wrap { color: #6f7d8d; }
+.back-chip { background: #1d232c; color: #cdd7e2; }
+
+@media (max-width: 760px) {
+    .services article { padding: 1.3rem 1.2rem; }
+}

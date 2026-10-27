@@ -1,0 +1,258 @@
+{
+  "slug": "product-page",
+  "name": "Product Detail Page",
+  "category": "commerce",
+  "order": 3,
+  "updatedAt": "2026-10-27",
+  "readingTime": 8,
+  "summary": "Gallery, buy box, variant, trust. The page where a forty-pixel mistake costs a sale, and where AI reliably invents five-star reviews.",
+  "lede": "A product page answers one question: is this the right thing, and what happens if it is not. Everything else is decoration. The buy box carries the first half, the trust strip carries the second, and the description exists to absorb the doubts those two could not.",
+  "brief": [
+    "Commerce pages fail on mobile first. The add-to-cart button lands below a full-height image gallery, the variant selector changes the price but not the photograph, and the delivery estimate says 3 to 5 business days without ever naming a date.",
+    "There is a second failure that matters more for a real store: invented social proof. A model asked for reviews will produce a 4.8 average from 2,341 reviews, which is both false and obvious. The prompt below requires an honest placeholder instead, and separates the parts of the page a developer must wire up from the parts that are static."
+  ],
+  "sections": [
+    {
+      "name": "Breadcrumb",
+      "why": "Three levels maximum, current page not a link. It tells the shopper where they are without costing a row of vertical space."
+    },
+    {
+      "name": "Gallery",
+      "why": "Four images minimum, including one in use and one that shows scale. Never auto-advance — a carousel that moves while someone is reading is a carousel they will misread."
+    },
+    {
+      "name": "Buy box",
+      "why": "Name, price with tax basis, variant, quantity, add to cart, delivery date. All of it above the fold on a phone; this is the whole page in one column."
+    },
+    {
+      "name": "Trust strip",
+      "why": "Four items maximum. Shipping cost, return window, warranty, payment methods — each answerable in one sentence, all of them things the shopper would otherwise email about."
+    },
+    {
+      "name": "Description",
+      "why": "Three paragraphs: what it is, what it is made of, what it is not for. The last one prevents the return."
+    },
+    {
+      "name": "Specification table",
+      "why": "Six to ten rows with units in the header. This is the section that gets copied into a purchasing spreadsheet."
+    },
+    {
+      "name": "Reviews",
+      "why": "Summary with a real count, then three reviews with dates. Show the three-star review first; a page of unanimous praise reads as manufactured."
+    },
+    {
+      "name": "Cross-sell",
+      "why": "Three related items with visible prices. Anything that requires a click to learn the price will not be clicked."
+    }
+  ],
+  "promptLines": [
+    "Build a product detail page for one physical product in the {{CATEGORY}} category.",
+    "",
+    "AUDIENCE",
+    "A shopper who arrived from a search for this exact product and is choosing between it and one alternative. They are on a phone, on mobile data, and they will leave if the price or the add-to-cart button is not visible early.",
+    "",
+    "STRUCTURE (exactly this order)",
+    "1. Breadcrumb: three levels maximum. The current page is text, not a link.",
+    "2. Gallery: {{GALLERY}} At least four images: one in use, one showing scale against a familiar object, one detail, one packaging. Never auto-advance.",
+    "3. Buy box, beside the gallery on desktop and directly beneath it on mobile: product name as h1; price with currency symbol and a tax note; {{VARIANTS}} quantity stepper; add to cart as the only filled button on the page; delivery estimate as a date range, not a number of days.",
+    "4. Trust strip: {{TRUST}} Four items maximum, one sentence each.",
+    "5. Description: three paragraphs. What it is, what it is made of, what it is not for.",
+    "6. Specification table: 6 to 10 rows, units in the column header, no marketing language.",
+    "7. Reviews: a rating summary with a real count, then three reviews with dates and a verified badge. Include one review below four stars.",
+    "8. Cross-sell: three related products using the same card shape, with prices visible and no hover-only information.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- Price always carries a currency symbol and states whether tax is included.",
+    "- Every measurement carries a unit. No size called large without a number beside it.",
+    "- Banned: premium quality, must-have, game-changer, elevate, curated for you, crafted with care.",
+    "- Shipping cost, delivery window and the return period must all be answerable from this page without opening another.",
+    "- Reviews must be labelled as placeholder content, with the comment Review data to be supplied by the store. Do not invent an average rating or a review count.",
+    "",
+    "CONSTRAINTS",
+    "- Add to cart fully visible at 390x844 without scrolling.",
+    "- Changing a variant must update price and image together, never one alone.",
+    "- All tap targets at least 44x44 CSS pixels, including the quantity stepper.",
+    "- Every image needs width and height attributes so nothing shifts while loading.",
+    "- No countdown timers, no stock counters, no exit-intent modal, no chat bubble over the buy box.",
+    "",
+    "OUTPUT",
+    "One page plus an inert cart drawer in the markup. Static where possible; mark the four places that need real store data with a comment."
+  ],
+  "controls": [
+    {
+      "id": "CATEGORY",
+      "label": "Product category",
+      "options": [
+        {
+          "label": "Apparel",
+          "value": "apparel. The variant control is size and colour, the size guide is a link inside the buy box, the return window is 30 days and the model must show a garment on a body and flat."
+        },
+        {
+          "label": "Electronics",
+          "value": "consumer electronics. The variant control is capacity or colour, the specification table carries the weight of the argument, and the trust strip must state warranty length and repair route."
+        },
+        {
+          "label": "Food and drink",
+          "value": "specialty food. The description carries provenance and ingredients, the trust strip states shelf life and shipping temperature, and the gallery shows packaging and the product out of it."
+        },
+        {
+          "label": "Homeware",
+          "value": "homeware. Scale is the main doubt, so the gallery needs one shot beside a familiar object and the specification table must include dimensions and weight."
+        }
+      ]
+    },
+    {
+      "id": "GALLERY",
+      "label": "Gallery behaviour",
+      "options": [
+        {
+          "label": "Sticky column",
+          "value": "Show the gallery as a sticky left column of stacked images; the buy box scrolls independently on the right. On mobile, collapse to a horizontal swipe strip with visible dots and no autoplay."
+        },
+        {
+          "label": "Swipe carousel",
+          "value": "Show the gallery as a single swipeable frame with dots below it, first image eager-loaded and the rest lazy. Add previous and next buttons for desktop. No autoplay under any circumstance."
+        },
+        {
+          "label": "Four-up grid",
+          "value": "Show the gallery as a two by two grid of four images with no carousel at all. Every image is visible at once, which removes the discovery problem entirely."
+        }
+      ]
+    },
+    {
+      "id": "VARIANTS",
+      "label": "Variant control",
+      "options": [
+        {
+          "label": "Size and colour",
+          "value": "size as five rectangular buttons with the sold-out one struck through, colour as circular swatches with a text label that updates; both selection states visible without hover."
+        },
+        {
+          "label": "Single option",
+          "value": "one selector for the only meaningful choice, rendered as a native select so it works with keyboards and screen readers without custom code."
+        },
+        {
+          "label": "No variants",
+          "value": "no variant control at all, because there is one SKU; replace the space with a delivery estimate and a stock status line."
+        }
+      ]
+    },
+    {
+      "id": "TRUST",
+      "label": "Trust strip",
+      "options": [
+        {
+          "label": "Logistics first",
+          "value": "Four items: free shipping over a stated threshold with a delivery date range; 30-day returns with who pays postage; two-year warranty; accepted payment methods as text, not logos."
+        },
+        {
+          "label": "Reviews first",
+          "value": "Four items: the rating summary moved up into the buy box, then a returns promise, a warranty line, and a support response time in hours."
+        },
+        {
+          "label": "Craft first",
+          "value": "Four items: where it is made, the material specification, the repair or replacement policy, and the shipping origin with a realistic transit time."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Clean commerce",
+          "value": "Clean commerce: white surface, one neutral grey scale, a single accent reserved for price and the add-to-cart button, 1px hairlines instead of cards, generous 1.25rem line height, product photography with no decorative frame."
+        },
+        {
+          "label": "Editorial retail",
+          "value": "Editorial retail: serif product name at 2.25rem, sans for everything else, warm paper background, wide margins, specification table set like a magazine data page, no badges or stickers on the imagery."
+        },
+        {
+          "label": "Neo-brutalist",
+          "value": "Neo-brutalist: 3px black borders on the buy box and gallery, 6px hard offset shadows, one saturated accent for price, headings in a heavy grotesque, buttons that translate 3px on press."
+        },
+        {
+          "label": "Dark premium",
+          "value": "Dark premium: near-black background at #101214, product photography on matching dark plates, thin white rules at 12 percent opacity, price in large light-weight type, no gradients or gloss."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation beyond the native feel of a button press. Commerce pages lose money to motion that delays the buy box."
+        },
+        {
+          "label": "Micro only",
+          "value": "Only micro-interactions: 120ms background transitions on buttons and swatches, and a 200ms fade when the gallery image swaps. Nothing enters, nothing scrolls, nothing parallaxes."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "CATEGORY",
+      "note": "This rewrites what the page has to prove. Apparel proves fit, electronics proves specification, food proves provenance. Keeping the copy and swapping the category produces a page that answers the wrong doubt."
+    },
+    {
+      "token": "GALLERY",
+      "note": "Sticky columns work when the buy box is tall. Four-up grids work when the product is visually distinctive. Carousels are the fallback, not the default."
+    },
+    {
+      "token": "VARIANTS",
+      "note": "If you have variants, the price must be per variant, not starting at. Starting-at pricing on a product page is the single most common cause of cart abandonment."
+    },
+    {
+      "token": "TRUST",
+      "note": "Only claim what you can honour. A 30-day return window you do not offer will generate chargebacks that cost more than the sale."
+    },
+    {
+      "token": "STYLE",
+      "note": "Photography decides this more than taste does. Dark styling on white-background product shots looks like a rendering error, not a premium choice."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the buy box alone first. It is the only section with real logic, and generating it inside the full page makes iteration slow because every change re-renders the gallery."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will invent reviews and a review count unless the placeholder rule is present. Check the rating summary before you publish; that is the line most likely to be quietly fabricated."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for static HTML and CSS with one small script for variant state. A framework build here adds a dependency for what is fundamentally a form."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Point it at your product data file first and tell it to read prices and variants from there. Hard-coded prices in markup are the defect that survives longest."
+    }
+  ],
+  "failures": [
+    {
+      "title": "The buy box below the gallery on mobile",
+      "body": "A full-height image followed by a full-height gallery pushes the price and the button past the first screen. On a phone the buy box comes first and the gallery second, or half the visitors never learn the price."
+    },
+    {
+      "title": "Variant changes that only update the price",
+      "body": "Selecting a different colour and seeing the same photograph is a trust failure, not a polish issue. The shopper concludes the images are stock and the variants may not exist."
+    },
+    {
+      "title": "Delivery described in days",
+      "body": "Three to five business days requires the shopper to do calendar arithmetic, and they will do it pessimistically. A date range does the work for them and converts better at identical cost."
+    },
+    {
+      "title": "Invented reviews",
+      "body": "A 4.8 average from 2,341 reviews on a page that launched last week is both false and detectable. It is also the fastest route to a marketplace suspension if this is a real store."
+    }
+  ],
+  "styles": ["claymorphism", "editorial", "dark-mode", "neo-brutalism"],
+  "motions": ["card-spotlight", "scroll-reveal"]
+}

@@ -1,0 +1,246 @@
+{
+  "slug": "blog",
+  "name": "Blog / Editorial Site",
+  "category": "content",
+  "order": 5,
+  "updatedAt": "2026-10-27",
+  "readingTime": 8,
+  "summary": "A 62-character reading column, an index that ranks by depth rather than date alone, and an article template that survives footnotes, code and long quotes.",
+  "lede": "Most AI-generated blogs are a list of cards with a stock photograph each, and an article page whose text runs the full width of a laptop screen. The list is fine and the article is unreadable. Line length is the whole game.",
+  "brief": [
+    "Two numbers decide whether an editorial site works. The first is line length: between 60 and 72 characters. Browser defaults produce 120 to 140 on a desktop, and at that width the eye loses its place on the return sweep. The second is the ratio of index to article: the index exists to send someone into a piece, so every card needs a reason to be clicked other than a picture.",
+    "There is also a structural problem specific to AI output. Asked for a blog, a model produces an index and omits the article template entirely, or produces an article template with no support for code blocks, footnotes, pull quotes or captions — the four things that immediately break a reading column when they arrive."
+  ],
+  "sections": [
+    {
+      "name": "Masthead",
+      "why": "Publication name, one line of what it covers and for whom, and a subscribe field. Three elements, no hero image."
+    },
+    {
+      "name": "Featured",
+      "why": "One piece, chosen for depth rather than recency. A blog that leads with its newest post has no editorial judgement; a blog that leads with its best does."
+    },
+    {
+      "name": "Index",
+      "why": "Date, title, one-line summary, reading time. Newest first, with the occasional older piece pinned when it is more useful than what is on top."
+    },
+    {
+      "name": "Article template",
+      "why": "A fixed reading column at 66 to 70 characters, with the title allowed to break out slightly wider. This is where the site is actually read."
+    },
+    {
+      "name": "Rich content rules",
+      "why": "Code blocks, footnotes, pull quotes, captions and tables all need a defined width and behaviour, or they break the column the moment an author uses one."
+    },
+    {
+      "name": "Author block",
+      "why": "One sentence and a link, placed after the piece rather than before it. Readers decide whether to trust the writing from the writing."
+    },
+    {
+      "name": "Related",
+      "why": "Three pieces, chosen by topic overlap rather than by tag equality. Tag-based related lists are usually empty or wrong."
+    },
+    {
+      "name": "Archive and feed",
+      "why": "A plain chronological archive and a real RSS link. Both are how a body of work becomes findable after the first month."
+    }
+  ],
+  "promptLines": [
+    "Build an editorial site for {{PUBLICATION}}.",
+    "",
+    "AUDIENCE",
+    "Readers who arrive from a search result or a shared link, read one piece, and decide from that piece whether to subscribe. They are not browsing a brand; they are testing whether the writing is worth their time.",
+    "",
+    "STRUCTURE",
+    "1. Masthead: publication name at 2rem, one line naming the subject and the reader, a subscribe input with a working success state. No hero image, no carousel.",
+    "2. Featured piece: exactly one, chosen for depth. Title, deck of two sentences, author, date, reading time, and a 16:9 image only if a real one exists.",
+    "3. Index: {{LIST}} Each entry shows date, title, a one-sentence summary, and reading time. Newest first, with an optional pinned entry marked as such.",
+    "4. Article template: {{READING}} Title may extend to 1.15 times the column width; body stays inside it. Every paragraph 2 to 4 sentences.",
+    "5. Rich content rules: code blocks scroll horizontally and never widen the column; footnotes appear as numbered superscripts linking to a list at the end; pull quotes indent 1.5rem and use the display face at 1.35rem; captions sit at 0.8rem in muted text directly under the figure; tables scroll horizontally on narrow viewports.",
+    "6. Author block: one sentence in first person and one link, placed after the final paragraph.",
+    "7. Related: exactly three pieces chosen by topic overlap, each with its reading time.",
+    "8. Archive and feed: a chronological archive page linked from the footer, plus a visible RSS link.",
+    "",
+    "STYLE",
+    "{{STYLE}}",
+    "",
+    "COPY RULES",
+    "- No clickbait headlines, no questions as headlines, no numbers in a title unless the piece actually contains that many items.",
+    "- Every index entry needs a summary that states the argument, not the topic. A piece about caching says what it concludes about caching.",
+    "- Dates always shown as a full date, not as 3 days ago.",
+    "- Reading time computed at 220 words per minute, rounded up.",
+    "- No author bio longer than two sentences. No social sharing bar above the article.",
+    "",
+    "CONSTRAINTS",
+    "- Body line length between 60 and 72 characters at every viewport above 900px.",
+    "- Font size 18 to 20px for body text, line height 1.6 to 1.7.",
+    "- Heading hierarchy: one h1 per page, h2 for sections, h3 for subsections. Never skip a level.",
+    "- No layout shift from images: width and height on every figure.",
+    "- The article must be readable with JavaScript disabled, including footnotes.",
+    "",
+    "OUTPUT",
+    "Three page types sharing one stylesheet: index, article, archive."
+  ],
+  "controls": [
+    {
+      "id": "PUBLICATION",
+      "label": "Publication type",
+      "options": [
+        {
+          "label": "Essays",
+          "value": "a publication of long-form essays. Pieces run 2,000 to 4,000 words, publish twice a month, and are argued rather than reported. The index should feel sparse and deliberate."
+        },
+        {
+          "label": "Engineering notes",
+          "value": "an engineering notebook. Pieces are short, dated, and often revised; each carries a status line (draft, stable, superseded) and the date of the last revision. Readers arrive from search and need the answer in the first paragraph."
+        },
+        {
+          "label": "Reporting",
+          "value": "a reporting outlet. Pieces carry a dateline, named sources, and corrections when amended. The index must show the section and the byline."
+        },
+        {
+          "label": "Product changelog",
+          "value": "a product changelog written as editorial. Each entry covers one change, states what it replaces, and links to the documentation. Reverse chronological, no featured piece."
+        }
+      ]
+    },
+    {
+      "id": "LIST",
+      "label": "Index layout",
+      "options": [
+        {
+          "label": "Text rows",
+          "value": "Render the index as text rows: date in a 90px left column, then title at 1.25rem with the summary beneath, reading time right-aligned in mono. No images at all.",
+          "hint": "The most readable option and the hardest to make look empty."
+        },
+        {
+          "label": "Cards with images",
+          "value": "Render the index as cards: 16:9 image, title, summary, and a meta line with date and reading time. Two columns above 900px, one below.",
+          "hint": "Only worth it if you have real images for every piece."
+        },
+        {
+          "label": "Magazine grid",
+          "value": "Render the index as a magazine grid: the newest piece spans two columns with a larger title, the next four sit in a two by two grid, and everything older becomes a plain text list beneath.",
+          "hint": "Good for a publication with uneven piece lengths."
+        }
+      ]
+    },
+    {
+      "id": "READING",
+      "label": "Reading typography",
+      "options": [
+        {
+          "label": "Serif body",
+          "value": "Set body copy in a serif at 19px with 1.68 line height and a 68 character measure; headings in a sans at 600 weight. Serif at this size reads faster for long pieces.",
+          "hint": "Best for essays over 1,500 words."
+        },
+        {
+          "label": "Sans body",
+          "value": "Set body copy in a sans at 18px with 1.65 line height and a 66 character measure; headings in the same family at 700 weight, differentiated by size only.",
+          "hint": "Best for technical writing with code."
+        },
+        {
+          "label": "Mixed",
+          "value": "Set body copy in a sans at 18px, but pull quotes and the deck in a serif italic at 1.3 times the body size. Use serif only where the reader is meant to slow down.",
+          "hint": "Best for reporting with strong quotes."
+        }
+      ]
+    },
+    {
+      "id": "STYLE",
+      "label": "Visual style",
+      "options": [
+        {
+          "label": "Editorial",
+          "value": "Editorial: warm paper background at #fbf9f5, near-black text, one thin rule under the masthead, no cards, no shadows, dates in small caps with 0.06em tracking."
+        },
+        {
+          "label": "Swiss",
+          "value": "Swiss: white background, black Helvetica, a strict grid, one red accent for links only, section labels in uppercase at 0.7rem, generous 5rem vertical rhythm."
+        },
+        {
+          "label": "Technical",
+          "value": "Technical: white background, one grotesque family, monospace for dates and metadata, 1px rules in #e6e9ee, links underlined rather than coloured, no decorative elements at all."
+        },
+        {
+          "label": "Literary",
+          "value": "Literary: cream background at #f7f4ee, serif throughout, drop cap on the first paragraph of each article, wide margins at 12 percent of viewport, and no accent colour besides the link underline."
+        }
+      ]
+    },
+    {
+      "id": "MOTION",
+      "label": "Motion level",
+      "options": [
+        {
+          "label": "None",
+          "value": "No animation anywhere. Editorial sites date fastest when they move, and the reader came for the text."
+        },
+        {
+          "label": "One entrance",
+          "value": "Only the article title fades up 12px over 400ms on load. Nothing else moves, including on scroll."
+        }
+      ]
+    }
+  ],
+  "change": [
+    {
+      "token": "PUBLICATION",
+      "note": "This changes the index density and the metadata, not just the copy. An engineering notebook needs revision dates and status; a reporting outlet needs datelines and sections. Keeping the same template for both is why the result feels generic."
+    },
+    {
+      "token": "LIST",
+      "note": "Text rows are the honest choice when you have three posts. Cards with images need images for every entry — one card without a picture breaks the grid visibly."
+    },
+    {
+      "token": "READING",
+      "note": "Choose by length, not by taste. Serif at 19px rewards a 3,000-word essay and punishes a 300-word changelog entry, where sans at 18px reads faster."
+    },
+    {
+      "token": "STYLE",
+      "note": "Swap the block whole. A literary brief applied to half the page produces a drop cap on the index and sans headings in the article."
+    },
+    {
+      "token": "MOTION",
+      "note": "None is a defensible choice, not a lazy one. Say so explicitly, or a model will add scroll reveals to every paragraph."
+    }
+  ],
+  "builders": [
+    {
+      "name": "v0",
+      "note": "Generate the article page first. It is the page that gets read, and every index decision should follow from it. Index-first generation produces beautiful lists over unreadable articles."
+    },
+    {
+      "name": "Lovable",
+      "note": "It will add a reading progress bar. Decide deliberately: a progress bar is useful on a 4,000-word essay and noise on a 400-word note."
+    },
+    {
+      "name": "Bolt",
+      "note": "Ask for the three page types in one project so the stylesheet is shared. Separate generations drift, and the archive ends up with a different column width than the article."
+    },
+    {
+      "name": "Cursor / Claude Code",
+      "note": "Write one real article as a fixture first, including a code block, a footnote and a quote, then ask for the template. Designing against real content prevents the four breakages listed above."
+    }
+  ],
+  "failures": [
+    {
+      "title": "A 140-character line",
+      "body": "The single most common defect, and the one that matters most. A full-width paragraph on a 1440px screen is roughly 140 characters, which is twice the comfortable maximum. The fix is one property: max-width around 68ch on the body column."
+    },
+    {
+      "title": "No dates",
+      "body": "Readers use dates to judge relevance, and search engines use them for freshness. A blog without visible dates reads as abandoned, even when it published this morning."
+    },
+    {
+      "title": "Tag soup",
+      "body": "Twenty tags with two posts each is a navigation system that helps nobody. Either keep five categories and no tags, or use tags that each cover at least six pieces."
+    },
+    {
+      "title": "Rich content that breaks the column",
+      "body": "A code block, a wide table or a full-bleed image will widen the page and destroy the reading measure unless each has an explicit width rule. These four rules belong in the prompt, not in a later bug report."
+    }
+  ],
+  "styles": ["editorial", "swiss-style", "natural-organic", "monochromatic"],
+  "motions": ["scroll-reveal", "text-mask-reveal"]
+}
