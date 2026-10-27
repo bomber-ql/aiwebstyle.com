@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About This Site — AI Website Style Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal { max-width: 760px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        .legal h2 { font-size: 1.35rem; margin: 2.2rem 0 .7rem; padding-bottom: .4rem; border-bottom: 1px solid var(--border-color); }
+        .legal h2:first-of-type { margin-top: 0; }
+        .legal h3 { font-size: 1.05rem; margin: 1.4rem 0 .4rem; }
+        .legal p, .legal li { font-size: .95rem; line-height: 1.75; margin-bottom: .85rem; }
+        .legal ul, .legal ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+        .legal li { margin-bottom: .45rem; }
+        .legal .meta { font-size: .85rem; color: #6c757d; margin-bottom: 2rem; }
+        .legal .lang-divider { margin: 3rem 0 2rem; border: 0; border-top: 2px dashed var(--border-color); }
+        .legal .contact-box { background: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .legal code { background: #f4f4f4; padding: .1rem .35rem; border-radius: 3px; font-size: .88em; }
+    </style>
+    <!-- build:seo -->
+    <meta name="description" content="What AI Website Style Gallery is, how design styles are selected and documented, our editorial standards, and how to reach us.">
+    <link rel="canonical" href="https://www.aiwebstyle.com/about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="About This Site — AI Website Style Gallery">
+    <meta property="og:description" content="What AI Website Style Gallery is, how design styles are selected and documented, our editorial standards, and how to reach us.">
+    <meta property="og:url" content="https://www.aiwebstyle.com/about.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About This Site","description":"What AI Website Style Gallery is, how design styles are selected and documented, our editorial standards, and how to reach us.","url":"https://www.aiwebstyle.com/about.html","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"}}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>About AI Website Style Gallery</h1>
+            <p>A reference library of web design styles, written prompts, and downloadable CSS.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="legal">
+            <p class="meta">Last updated: 27 October 2026</p>
+
+            <h2>What this site is</h2>
+            <p>AI Website Style Gallery is a reference library for people who build websites with AI tools. It documents visual design styles in enough detail that you can reproduce them deliberately rather than by guessing at adjectives.</p>
+            <p>Each entry follows the same structure: what the style looks like, where it came from, which CSS properties actually carry the effect, the design tokens involved, the failure cases that break first when an AI generates it, and a written prompt you can paste into a builder. Where a style is fully implemented here, a standalone stylesheet is offered for download.</p>
+
+            <h2>Why it exists</h2>
+            <p>Ask an AI tool for "a modern website" and you get the same result every time: Inter, a soft purple gradient, and 16px rounded cards. That sameness is not a limitation of the model. It is what happens when a prompt names a mood instead of naming constraints.</p>
+            <p>The gap this site fills is specificity. A useful prompt states the visual tradition, the typographic system, the layout rhythm, the interaction behaviour, and the things to avoid. That is a different kind of writing from a one-line inspiration tweet, and it is what each style page here provides.</p>
+
+            <h2>How the content is produced</h2>
+            <p>Styles are selected by tracking what is actually shipping: design award shortlists, front-end technique write-ups, component libraries, and the recurring questions in design communities. A style is only added once it can be described concretely enough to be reproduced — if we cannot specify the tokens, it does not get a page.</p>
+            <p>Every page is written and edited by hand. Where a page was drafted with language-model assistance, it is reviewed, corrected, and verified against a working implementation before publication. Prompts are tested against real builders; if a prompt reliably produces a broken layout, it is rewritten rather than shipped.</p>
+
+            <h2>Who it is for</h2>
+            <ul>
+                <li>Developers using AI builders (v0, Lovable, Bolt, Claude) who want output that does not look templated.</li>
+                <li>Designers who need a shared vocabulary for a visual direction before briefing.</li>
+                <li>Founders building a first landing page without a design team.</li>
+                <li>Anyone learning CSS who wants to see how a named style maps to actual properties.</li>
+            </ul>
+
+            <h2>Editorial standards</h2>
+            <ul>
+                <li><strong>No copied source material.</strong> Style analysis is written from observation and from the CSS itself. Reference links point outward to the original work rather than reproducing it.</li>
+                <li><strong>No claims without an implementation.</strong> If a page says a style needs <code>backdrop-filter</code>, there is a working example behind it.</li>
+                <li><strong>Corrections are welcome.</strong> If a description is wrong or a prompt no longer works with a current model, tell us and it gets fixed.</li>
+            </ul>
+
+            <h2 id="contact">Contact</h2>
+            <div class="contact-box">
+                <p style="margin-bottom:.4rem"><strong>Email:</strong> <a href="mailto:hello@aiwebstyle.com">hello@aiwebstyle.com</a></p>
+                <p style="margin-bottom:0">For corrections, style suggestions, broken links, or licensing questions. We aim to reply within a few business days.</p>
+            </div>
+
+            <hr class="lang-divider">
+
+            <h2 lang="zh-CN">关于本站（中文）</h2>
+            <div lang="zh-CN">
+                <p>AI Website Style Gallery 是一个面向「用 AI 建站」人群的设计风格参考库。它把每一种视觉风格拆解到可以复现的程度，而不是只给一个形容词。</p>
+                <p>每个条目包含：这种风格长什么样、来源是什么、真正决定效果的 CSS 属性、设计变量（色板/字体/圆角/间距）、AI 生成时最先崩坏的地方，以及一段可以直接粘贴使用的 prompt。页面中完整实现的风格会提供独立 CSS 下载。</p>
+                <p><strong>为什么做这个站：</strong>你让 AI「做一个现代的网站」，结果永远是同一套——Inter 字体、淡紫渐变、16px 圆角卡片。这不是模型的极限，而是 prompt 只说氛围、不说约束的必然结果。本站填的就是「具体性」这个缺口。</p>
+                <p><strong>内容怎么来的：</strong>通过跟踪真实在落地的东西来选题——设计奖项短名单、前端技法文章、组件库、设计社区的重复提问。只有当一种风格能被具体描述到可复现，才会收录。所有页面人工撰写与审核；prompt 经过真实工具验证，不可用就重写而不是照发。</p>
+                <p><strong>关于转载：</strong>本站不搬运原文与素材，风格分析基于观察和 CSS 本身，参考链接均指向原始出处。</p>
+                <div class="contact-box">
+                    <p style="margin-bottom:0"><strong>联系：</strong><a href="mailto:hello@aiwebstyle.com">hello@aiwebstyle.com</a>（纠错、风格建议、失效链接、授权问题）</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="index.html">Gallery</a>
+                <a href="about.html">About</a>
+                <a href="about.html#contact">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="current-year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

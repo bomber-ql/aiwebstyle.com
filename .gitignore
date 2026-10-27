@@ -1,1 +1,21 @@
+# macOS
 .DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 依赖与构建产物（Phase 0 重构后启用）
+node_modules/
+dist/
+.vercel/
+.env
+.env.*
+
+# 临时文件
+temp_*/
+*.log

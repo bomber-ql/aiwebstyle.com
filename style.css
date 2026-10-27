@@ -1139,3 +1139,81 @@ body.theme-art-deco .card[data-style-id="art-deco"] {
     .style-detail-section h2 { font-size: 1.2em; }
     .style-detail-section pre { padding: 0.8rem; font-size: 0.85em; }
 }
+/* ===== Neomorphism Theme (added 2026-10-27: body.theme-neomorphism was missing, detail page rendered unstyled) ===== */
+
+/* Core Neomorphism Theme Variables */
+body.theme-neomorphism {
+    --neo-bg: #e0e0e0;
+    --neo-text-color: #5c5c5c;
+    --neo-shadow-light: #ffffff;
+    --neo-shadow-dark: #a3b1c6; /* Adjusted for better visibility than pure #bebebe on #e0e0e0 */
+
+    --page-bg: var(--neo-bg);
+    --text-color: var(--neo-text-color);
+    --heading-color: #484848; /* Darker for headings */
+    --link-color: #337ab7;
+    --link-hover-color: #23527c;
+    
+    --border-color: #d1d1d1;
+    
+    --card-bg: var(--neo-bg);
+    --card-shadow-extrude: 8px 8px 15px var(--neo-shadow-dark), -8px -8px 15px var(--neo-shadow-light);
+    --card-shadow-press: inset 5px 5px 10px var(--neo-shadow-dark), inset -5px -5px 10px var(--neo-shadow-light);
+    
+    --header-bg: var(--neo-bg);
+    --header-text-color: var(--neo-text-color);
+    
+    --button-bg: var(--neo-bg);
+    --button-text-color: var(--neo-text-color);
+    --button-shadow: 5px 5px 10px var(--neo-shadow-dark), -5px -5px 10px var(--neo-shadow-light);
+    --button-hover-shadow: 3px 3px 7px var(--neo-shadow-dark), -3px -3px 7px var(--neo-shadow-light);
+    --button-border: 1px solid #cacaca;
+    
+    --prompt-bg: #d1d1d1; /* Pressed look for prompt */
+    --prompt-text-color: #666;
+    --prompt-shadow: inset 3px 3px 5px var(--neo-shadow-dark), inset -3px -3px 5px var(--neo-shadow-light);
+    
+    --base-font: var(--font-pop); /* Poppins is good for soft UIs */
+    --heading-font: var(--font-pop);
+    
+    --card-border-radius: 20px;
+    --button-border-radius: 10px;
+}
+            
+
+/* ===== Footer nav (build 注入的站内链接，提升可抓取性) ===== */
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 1.25rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+}
+.footer-nav a { opacity: 0.85; }
+.footer-nav a:hover { opacity: 1; }
+
+/* ===== Homepage SEO sections (介绍与 FAQ) ===== */
+.seo-intro, .seo-faq {
+    max-width: 780px;
+    margin: 3rem auto 0;
+    text-align: left;
+}
+.seo-intro h2, .seo-faq h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.9rem;
+    color: var(--heading-color);
+}
+.seo-intro h3 { font-size: 1.05rem; margin: 1.4rem 0 0.5rem; color: var(--heading-color); }
+.seo-intro p, .seo-faq p { font-size: 0.94rem; line-height: 1.75; margin-bottom: 0.85rem; color: var(--text-color); }
+.seo-intro ol { padding-left: 1.35rem; }
+.seo-intro li, .seo-faq li { font-size: 0.94rem; line-height: 1.7; margin-bottom: 0.5rem; }
+.seo-faq details {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.7rem;
+}
+.seo-faq summary { cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--heading-color); }
+.seo-faq details[open] summary { margin-bottom: 0.55rem; }
