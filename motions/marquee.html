@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Marquee — A Ticker That Has No Seam | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="A row of tags that loops with no visible seam, by translating a duplicated track by exactly half its width. Working demo, copy-ready AI prompt and the failure">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/marquee.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Infinite Marquee — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A row of tags that loops with no visible seam, by translating a duplicated track by exactly half its width. Working demo, copy-ready AI prompt and the failure">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/marquee.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Infinite Marquee","description":"A row of tags that loops with no visible seam, by translating a duplicated track by exactly half its width.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to load using transform: translateX(-50%)."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Infinite Marquee</h1>
+            <p>A ticker that loops without a visible jump.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <p class="m-title">Infinite Marquee</p>
+        <p class="m-lede">Every moving ticker looks the same in a screenshot and most of them have a visible stutter at the loop point. The seam is not a timing problem — it is a measurement problem. Two identical copies inside one track, translated by exactly half the track width, is the only version that has no join.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: load</span>
+            <span class="m-tag">transform: translateX</span>
+            <span class="m-tag">duplicated track</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="toggle" type="button">Pause</button>
+        </div>
+        <div class="m-stage">
+            <div class="marquee" id="marquee">
+                <div class="marquee-track">
+                    <div class="marquee-group">
+                        <span class="chip">Editorial</span>
+                        <span class="chip">Brutalism</span>
+                        <span class="chip">Swiss</span>
+                        <span class="chip">Liquid Glass</span>
+                        <span class="chip">Bento Grid</span>
+                        <span class="chip">Retro Pixel</span>
+                        <span class="chip">Art Deco</span>
+                        <span class="chip">Acid Graphics</span>
+                    </div>
+                    <div class="marquee-group" aria-hidden="true">
+                        <span class="chip">Editorial</span>
+                        <span class="chip">Brutalism</span>
+                        <span class="chip">Swiss</span>
+                        <span class="chip">Liquid Glass</span>
+                        <span class="chip">Bento Grid</span>
+                        <span class="chip">Retro Pixel</span>
+                        <span class="chip">Art Deco</span>
+                        <span class="chip">Acid Graphics</span>
+                    </div>
+                </div>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Create a marquee — a horizontally scrolling row of items that loops with no visible join.
+
+Structure:
+- A viewport element with overflow: hidden.
+- Inside it, one track element containing the same set of items TWICE, as two sibling groups. The second group must be a byte-identical copy of the first and must carry aria-hidden="true".
+- The track is display: flex, width: max-content. Each group is display: flex with its own internal gap.
+- Put the gap INSIDE each group, never between the groups. A margin between groups is what creates the seam.
+
+Motion:
+- Animate the track with transform: translateX(0) to translateX(-50%), linear, infinite, 20 to 40 seconds depending on content length.
+- Because the track contains exactly two identical groups, -50% is exactly one group width. That is why the loop is seamless.
+- Animate transform only. Animating left or margin-left forces layout on every frame.
+
+Control:
+- Pause on hover and on focus-within, using animation-play-state: paused. Any auto-moving content that runs longer than five seconds needs a way to stop.
+- Under prefers-reduced-motion: reduce, remove the animation entirely and let the row scroll horizontally by hand instead of freezing it mid-word.
+
+Constraints:
+- The row must not trap focus or steal keyboard navigation; items are static text, not links, unless they are real links.
+- Content must remain readable at the loop point — no half-visible words at reduced motion.
+- Do not use this inside a form, near an input, or as the primary headline.
+
+Fallback:
+- Without JavaScript this works as-is, because the whole effect is CSS. Do not animate with requestAnimationFrame unless you need direction changes on drag.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Two copies, one track.</strong> A single copy translated by -100% leaves a gap the width of the viewport at the moment it resets. Duplicating the content and translating by -50% means the second copy has already replaced the first when the animation restarts.</li>
+                <li><strong>The gap belongs inside the group.</strong> If the gap is a margin between the two groups, the spacing at the seam is doubled and the rhythm visibly stutters once per loop. Put <code>gap</code> on each group and nothing between them.</li>
+                <li><strong><code>width: max-content</code>.</strong> Without it the flex track is constrained by its parent, the groups compress, and the -50% calculation no longer matches the content width. This single line is what makes the maths true.</li>
+                <li><strong>Pause is not optional.</strong> Content that moves for more than five seconds and cannot be stopped fails WCAG 2.2.2. <code>animation-play-state</code> on <code>:hover</code> and <code>:focus-within</code> is the cheapest compliant answer.</li>
+                <li><strong>Freeze is the wrong reduced-motion response.</strong> Stopping the animation mid-scroll can leave a word half-clipped. Under reduced motion, drop the animation and allow horizontal scrolling instead.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>transform animation</td><td>Universal. Runs on the compositor; no layout and no paint after the first frame.</td></tr>
+                    <tr><td>animation-play-state</td><td>Universal.</td></tr>
+                    <tr><td>Cost</td><td>One composited layer the width of the duplicated track. Long rows with images get expensive — keep the payload per item small.</td></tr>
+                    <tr><td>Memory</td><td>The track is twice the content width. Above roughly 4000px of traffic-strip content, consider a JS-driven approach that recycles nodes.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: the duplicate group is a real DOM cost, not a visual one. Screen readers would otherwise announce everything twice, which is why the second group carries <code>aria-hidden="true"</code>. Skipping that attribute is the most common accessibility defect in this pattern.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't put a sentence in it.</strong> Anything a visitor has to read cannot be moving at a constant speed. A ticker is for names, logos, categories and tags.</p>
+                <p><strong>Don't use it as the only place information appears.</strong> If the strip is the sole presentation of a category list, anyone who stops the animation or uses a screen reader loses half of it. Provide a static list elsewhere on the page.</p>
+                <p><strong>Don't run it in a hero next to a CTA.</strong> Two things moving at once — a marquee and a pulsing button — competes for the same attention and neither wins.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="card-spotlight.html">← Previous: Card Spotlight</a>
+            <a href="scroll-progress.html">Next: Scroll Progress →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .marquee {
+            overflow: hidden;
+            padding: .9rem 0;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 26s linear infinite;
+            will-change: transform;
+        }
+        .marquee-group {
+            display: flex;
+            gap: .55rem;
+            padding-right: .55rem;
+        }
+        .chip {
+            font-size: .82rem;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            padding: .4rem .9rem;
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 999px;
+            background: var(--card-bg, #fff);
+            color: var(--text-color, #38434f);
+            white-space: nowrap;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        .marquee.is-paused .marquee-track,
+        .marquee:hover .marquee-track,
+        .marquee:focus-within .marquee-track {
+            animation-play-state: paused;
+        }
+
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track { animation: none; }
+            .marquee { overflow-x: auto; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const marquee = document.getElementById('marquee');
+        const toggle = document.getElementById('toggle');
+        const modeEl = document.getElementById('mode');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (rm.matches) {
+            toggle.disabled = true;
+            toggle.textContent = 'Static (system)';
+            modeEl.innerHTML = 'Running: <b>static row</b> — reduce motion keeps the content, drops the loop';
+            marquee.style.overflowX = 'auto';
+        } else {
+            modeEl.innerHTML = 'Running: <b>two identical groups, translateX(-50%)</b> — hover to pause';
+        }
+
+        toggle.addEventListener('click', () => {
+            const paused = marquee.classList.toggle('is-paused');
+            toggle.textContent = paused ? 'Resume' : 'Pause';
+        });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

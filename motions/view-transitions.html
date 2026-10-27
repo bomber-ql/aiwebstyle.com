@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Transitions — Moving Between Two States | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="Two states described, frames computed by the browser — including the uniqueness rule that silently breaks it. Working demo, copy-ready AI prompt and the failu">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/view-transitions.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="View Transitions — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="Two states described, frames computed by the browser — including the uniqueness rule that silently breaks it. Working demo, copy-ready AI prompt and the failu">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/view-transitions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"View Transitions","description":"Two states described, frames computed by the browser — including the uniqueness rule that silently breaks it.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to navigation using document.startViewTransition()."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>View Transitions</h1>
+            <p>The browser animates between two states you describe.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <p class="m-title">View Transitions</p>
+        <p class="m-lede">Every other effect on this site is a property animation you build by hand. This one is different: you tell the browser what the page looks like before and after, and it works out the frames. The catch is the one line everybody forgets — <code>view-transition-name</code> must be unique in the document, so exactly one element can own a name at a time.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: navigation</span>
+            <span class="m-tag">document.startViewTransition()</span>
+            <span class="m-tag">shared element morph</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="reset" type="button">Back to grid</button>
+        </div>
+        <div class="m-stage">
+            <div class="vt-root" id="root">
+                <div class="vt-list" id="list">
+                    <button class="vt-card" type="button" data-index="0">
+                        <span class="vt-thumb vt-thumb-a" aria-hidden="true"></span>
+                        <span class="vt-name">Grid systems</span>
+                    </button>
+                    <button class="vt-card" type="button" data-index="1">
+                        <span class="vt-thumb vt-thumb-b" aria-hidden="true"></span>
+                        <span class="vt-name">Type scales</span>
+                    </button>
+                    <button class="vt-card" type="button" data-index="2">
+                        <span class="vt-thumb vt-thumb-c" aria-hidden="true"></span>
+                        <span class="vt-name">Colour ramps</span>
+                    </button>
+                </div>
+
+                <div class="vt-detail" id="detail" hidden>
+                    <div class="vt-media" id="media"></div>
+                    <h3 id="detailTitle"></h3>
+                    <p id="detailBody"></p>
+                    <button class="vt-back" id="back" type="button">← Back to grid</button>
+                </div>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Build a grid of cards that expands into a detail view, using the View Transitions API for the change.
+
+Structure:
+- The list and the detail view are two states of the same container. Only one is visible at a time.
+- The list contains a thumbnail per item; the detail view contains a larger media block.
+- The thumbnail and the media block are the shared element. Whichever is visible carries view-transition-name: hero.
+
+Behaviour:
+- On card click, set the clicked card's thumbnail to view-transition-name: hero, then call document.startViewTransition with a callback that removes the inline name and switches the container into detail mode. CSS then gives the media block the same name, so the browser captures one named element on each side and morphs between them.
+- Reversing is the mirror image: the detail media already owns the name, and the callback switches back to the grid and assigns the name to the chosen card.
+- Clear any inline view-transition-name after the transition finishes.
+
+Correctness:
+- view-transition-name must be unique in the document at every moment. Two elements sharing a name make the transition abort, and the change happens instantly with no error worth reading.
+- Set the name on exactly one element per state, never on all the cards.
+
+Fallback:
+- If document.startViewTransition does not exist, perform the same state change synchronously. The result is an instant swap, which is a completely acceptable outcome.
+
+Motion design:
+- Keep the whole transition between 220 and 320ms. Longer durations make the morph feel like the interface is thinking.
+- Customise with ::view-transition-group(hero) for the shared element and keep the default cross-fade for the rest, or disable the root cross-fade if it double-exposes the page.
+- Under prefers-reduced-motion: reduce, disable all view-transition animations.
+
+Cross-document:
+- For full page navigations between static pages, add @view-transition { navigation: auto } to both stylesheets and give matching elements the same view-transition-name. No JavaScript is involved on the new page.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Names must be unique.</strong> The API captures one snapshot per name. Two elements claiming <code>hero</code> at the same moment is invalid, and the browser drops the transition silently — the state still changes, so nothing looks broken, which is why this defect survives review.</li>
+                <li><strong>The callback is synchronous state, not animation.</strong> Everything inside the <code>startViewTransition</code> callback is a normal DOM change. The browser captures the old state before it runs and the new state after. You are not animating anything yourself.</li>
+                <li><strong>Hand the name over, don't duplicate it.</strong> The card owns <code>hero</code> before the callback; the detail media owns it after. The handover inside the callback is the entire mechanism.</li>
+                <li><strong>Cross-fade can double-expose.</strong> The default is a fade of the whole page plus the morph. On text-heavy layouts that reads as a ghost. Either shorten the root duration or set the root animation to none so only the shared element moves.</li>
+                <li><strong>It degrades to nothing.</strong> Without support the callback still runs, just without a snapshot animation. That is the right failure mode for this API and the reason it is safe to adopt early.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>Same-document API</td><td>Chrome 111+, Safari 18+, Edge 111+. Firefox 144+. Older Firefox falls back to an instant swap.</td></tr>
+                    <tr><td>Cross-document</td><td>Same browsers; requires <code>@view-transition { navigation: auto }</code> on both pages.</td></tr>
+                    <tr><td>Cost</td><td>One snapshot of the affected area per transition. Cheap for a single element; a full-page morph on a long document rasterises both versions.</td></tr>
+                    <tr><td>During the transition</td><td>The page is not interactive for the duration. Keep it under 300ms or clicks will feel dropped.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: this is the only effect here that needs a real state change to exist at all. There is nothing to demo without something to transition between, which is why the honest way to evaluate it is on a navigation or an expand, not on a static card.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't use it on every link.</strong> A 300ms transition on each navigation adds up to seconds across a session, and it delays the content the visitor asked for. Reserve it for changes of context: opening a record, moving between steps.</p>
+                <p><strong>Don't morph unrelated elements.</strong> A card becoming a full-page header looks impressive once and confusing the second time, because the visitor cannot tell what the new screen is.</p>
+                <p><strong>Don't rely on it for orientation.</strong> The transition is decoration; the destination must still be obvious from the resulting layout, including when the animation does not run at all.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="tilt-card.html">← Previous: Tilt Card</a>
+            <a href="index.html">All motions →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .vt-root {
+            position: relative;
+            min-height: 240px;
+        }
+        .vt-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .7rem;
+        }
+        .vt-card {
+            display: flex;
+            flex-direction: column;
+            gap: .55rem;
+            padding: .55rem;
+            font: inherit;
+            text-align: left;
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 10px;
+            background: var(--card-bg, #fff);
+            cursor: pointer;
+            transition: border-color .15s ease;
+        }
+        .vt-card:hover { border-color: var(--link-color, #0a66d8); }
+        .vt-card:focus-visible { outline: 2px solid var(--link-color, #0a66d8); outline-offset: 2px; }
+
+        .vt-thumb {
+            display: block;
+            height: 74px;
+            border-radius: 7px;
+        }
+        .vt-thumb-a { background: linear-gradient(135deg, #dfe9f7, #b9cdec); }
+        .vt-thumb-b { background: linear-gradient(135deg, #f7e6df, #ecc7b9); }
+        .vt-thumb-c { background: linear-gradient(135deg, #e2f2e6, #bce0c5); }
+
+        .vt-name {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--heading-color, #1d242e);
+            padding: 0 .2rem .2rem;
+        }
+
+        .vt-detail h3 {
+            font-size: 1.1rem;
+            margin: .9rem 0 .45rem;
+            color: var(--heading-color, #1d242e);
+        }
+        .vt-detail p {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: var(--text-color, #4a5563);
+            margin: 0 0 1rem;
+        }
+        .vt-media {
+            height: 150px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #dfe9f7, #b9cdec);
+        }
+        .vt-back {
+            font: inherit;
+            font-size: .82rem;
+            padding: .45rem .9rem;
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 7px;
+            background: var(--card-bg, #fff);
+            color: var(--heading-color, #1d242e);
+            cursor: pointer;
+        }
+        .vt-back:hover { border-color: var(--link-color, #0a66d8); }
+
+        /* Only the element that owns the name at capture time participates */
+        .vt-root.is-detail .vt-media { view-transition-name: hero; }
+        .vt-root.is-detail #list { display: none; }
+
+        ::view-transition-group(hero) {
+            animation-duration: 280ms;
+            animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+        }
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 180ms;
+        }
+
+        .demo-mode {
+            margin: .8rem 0 0;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-group(*),
+            ::view-transition-old(*),
+            ::view-transition-new(*) {
+                animation: none !important;
+            }
+        }
+        @media (max-width: 560px) {
+            .vt-list { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const root = document.getElementById('root');
+        const list = document.getElementById('list');
+        const detail = document.getElementById('detail');
+        const media = document.getElementById('media');
+        const titleEl = document.getElementById('detailTitle');
+        const bodyEl = document.getElementById('detailBody');
+        const modeEl = document.getElementById('mode');
+        const resetBtn = document.getElementById('reset');
+        const backBtn = document.getElementById('back');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const supportsVT = typeof document.startViewTransition === 'function';
+
+        const DATA = [
+            { title: 'Grid systems', body: 'A twelve-column grid is not a layout; it is a way of making alignment decisions once so you do not make them on every section.', cls: 'vt-thumb-a' },
+            { title: 'Type scales', body: 'Three sizes beat five. The gaps between them matter more than the sizes themselves, because a scale that climbs evenly reads as timid.', cls: 'vt-thumb-b' },
+            { title: 'Colour ramps', body: 'One hue with nine values covers almost every interface need, and it is far harder to make an incoherent palette from a ramp than from a colour wheel.', cls: 'vt-thumb-c' }
+        ];
+
+        let activeCard = null;
+
+        function setDetail(i) {
+            const d = DATA[i];
+            titleEl.textContent = d.title;
+            bodyEl.textContent = d.body;
+            media.className = 'vt-media ' + d.cls;
+            media.style.viewTransitionName = '';
+            root.classList.add('is-detail');
+            list.hidden = true;
+            detail.hidden = false;
+        }
+
+        function setList(card) {
+            root.classList.remove('is-detail');
+            list.hidden = false;
+            detail.hidden = true;
+            if (card) card.style.viewTransitionName = '';
+        }
+
+        function open(i, card) {
+            if (activeCard) activeCard.style.viewTransitionName = '';
+            activeCard = card;
+            card.style.viewTransitionName = 'hero';
+
+            if (!supportsVT || rm.matches) {
+                setDetail(i);
+                card.style.viewTransitionName = '';
+                return;
+            }
+
+            const t = document.startViewTransition(() => {
+                card.style.viewTransitionName = '';
+                setDetail(i);
+            });
+            t.finished.finally(() => { media.style.viewTransitionName = ''; });
+        }
+
+        function close() {
+            if (!activeCard) return;
+            const card = activeCard;
+
+            if (!supportsVT || rm.matches) {
+                setList(card);
+                return;
+            }
+
+            const t = document.startViewTransition(() => {
+                setList(card);
+                card.style.viewTransitionName = 'hero';
+            });
+            t.finished.finally(() => { card.style.viewTransitionName = ''; });
+        }
+
+        document.querySelectorAll('.vt-card').forEach((card) => {
+            card.addEventListener('click', () => open(Number(card.dataset.index), card));
+        });
+        backBtn.addEventListener('click', close);
+        resetBtn.addEventListener('click', () => {
+            if (root.classList.contains('is-detail')) close();
+        });
+
+        modeEl.innerHTML = supportsVT
+            ? 'Running: <b>startViewTransition + named element</b>' + (rm.matches ? ' · reduce motion disables the morph' : ' — click a card')
+            : 'Running: <b>instant swap</b> — this browser lacks the View Transitions API';
+    </script>
+</body>
+</html>

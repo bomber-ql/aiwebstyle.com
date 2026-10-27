@@ -70,5 +70,65 @@
     "order": 6,
     "status": "published",
     "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "marquee",
+    "name": "Infinite Marquee",
+    "trigger": "load",
+    "tech": "transform: translateX(-50%)",
+    "summary": "A row of tags that loops with no visible seam, by translating a duplicated track by exactly half its width.",
+    "order": 7,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "scroll-progress",
+    "name": "Scroll Progress",
+    "trigger": "scroll",
+    "tech": "animation-timeline: scroll()",
+    "summary": "A reading bar bound to scroll position in CSS — no listener, no layout read, and a scaleX instead of a width.",
+    "order": 8,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "accordion",
+    "name": "Animated Accordion",
+    "trigger": "interaction",
+    "tech": "grid-template-rows: 0fr → 1fr",
+    "summary": "A panel that opens smoothly without measuring its height, because 0fr and 1fr are interpolatable lengths.",
+    "order": 9,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "count-up",
+    "name": "Count-Up Stats",
+    "trigger": "scroll",
+    "tech": "IntersectionObserver + rAF",
+    "summary": "Numbers that count once on entry, with tabular figures so the label never jitters while the value changes.",
+    "order": 10,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "tilt-card",
+    "name": "Tilt Card",
+    "trigger": "cursor",
+    "tech": "perspective + rotate3d",
+    "summary": "A card that leans toward the pointer, capped at eight degrees and switched off on touch and for reduced motion.",
+    "order": 11,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "view-transitions",
+    "name": "View Transitions",
+    "trigger": "navigation",
+    "tech": "document.startViewTransition()",
+    "summary": "Two states described, frames computed by the browser — including the uniqueness rule that silently breaks it.",
+    "order": 12,
+    "status": "published",
+    "updatedAt": "2026-10-27"
   }
 ]

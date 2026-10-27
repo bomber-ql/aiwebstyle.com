@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilt Card — Pointer-Driven 3D Without the Jank | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="A card that leans toward the pointer, capped at eight degrees and switched off on touch and for reduced motion. Working demo, copy-ready AI prompt and the fai">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/tilt-card.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Tilt Card — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A card that leans toward the pointer, capped at eight degrees and switched off on touch and for reduced motion. Working demo, copy-ready AI prompt and the fai">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/tilt-card.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Tilt Card","description":"A card that leans toward the pointer, capped at eight degrees and switched off on touch and for reduced motion.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to cursor using perspective + rotate3d."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Tilt Card</h1>
+            <p>A card that leans toward the cursor, then settles.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <p class="m-title">Tilt Card</p>
+        <p class="m-lede">Tilt is the effect that most reliably separates a demo from something shippable. The rotation itself is two lines; the work is in the bounds, the transition timing, the glare, and knowing to switch the whole thing off on a touchscreen and for anyone who has asked for less motion.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: cursor</span>
+            <span class="m-tag">perspective + rotate3d</span>
+            <span class="m-tag">bounds-mapped, 8° max</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="replay" type="button">Reset</button>
+        </div>
+        <div class="m-stage">
+            <div class="tilt-wrap" id="wrap">
+                <article class="tilt-card" id="card">
+                    <div class="tilt-glare" id="glare"></div>
+                    <p class="tilt-eyebrow">Case study</p>
+                    <h3>Rebuilding onboarding in six weeks</h3>
+                    <p class="tilt-body">A tilt of eight degrees is enough to read as depth. Past twelve it reads as a toy, and the text starts to look like it is sliding off the card.</p>
+                    <p class="tilt-meta">Activation +34% · support tickets halved</p>
+                </article>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Create a card that tilts in three dimensions as the pointer moves across it.
+
+Structure:
+- A wrapper element with perspective: 900px. The perspective belongs on the parent, not the card; putting it on the card makes every card compute its own vanishing point.
+- The card itself is the element that rotates, and it must have transform-style: preserve-3d if any child should sit on its own plane.
+- A glare element absolutely positioned over the card, radial-gradient, mix-blend-mode: screen, pointer-events: none.
+
+Behaviour:
+- On pointermove, compute normalised coordinates: x = (clientX - rect.left) / rect.width - 0.5, giving a range of -0.5 to 0.5. Same for y.
+- Rotate by a maximum of 8 degrees: rotateY(x * 16deg) and rotateX(y * -16deg). The sign inversion is what makes the card lean toward the cursor rather than away.
+- Cache the bounding rect on pointerenter and on resize. Do not call getBoundingClientRect inside pointermove; that is the layout read that makes tilt stutter.
+- While the pointer is over the card, update the transform with no transition. On pointerleave, apply a 400ms ease-out transition back to identity, then remove the transition after it finishes so the next entry is immediate.
+- Move the glare with the same coordinates via two CSS custom properties, not by setting background-position.
+
+Constraints:
+- Only run on devices with a fine pointer: guard with matchMedia('(hover: hover) and (pointer: fine)').
+- Under prefers-reduced-motion: reduce, do not rotate at all. Keep the glare static or remove it.
+- Maximum rotation 8 to 10 degrees. Larger angles distort text and break the illusion.
+- The card must remain fully readable at maximum tilt; do not let 3D transforms push content outside the card bounds.
+
+Do not:
+- Do not animate box-shadow or filter alongside the transform; both run on the main thread and will drop frames.
+- Do not tilt every card in a grid at once. Tilt only the card under the pointer.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Perspective on the parent.</strong> <code>perspective</code> defines the distance between the viewer and the plane. On the parent, all children share one vanishing point; on each card, every card gets its own, and a grid of them looks incoherent.</li>
+                <li><strong>Eight degrees, not twenty.</strong> Depth reads convincingly up to about ten degrees. Beyond that the card stops looking like a surface under glass and starts looking like a spinning object, and the text no longer sits flat on it.</li>
+                <li><strong>Cache the rect.</strong> <code>getBoundingClientRect()</code> inside <code>pointermove</code> forces a layout read on every move event, which can fire several times per frame. Reading it once on enter and on resize removes the entire class of stutter this effect is known for.</li>
+                <li><strong>Transition out, not in.</strong> A transition on the way in adds latency between the pointer and the card, which reads as lag. Transitioning only on leave gives the settle without the delay.</li>
+                <li><strong>Guarded by pointer type.</strong> On a touchscreen there is no hover, so the card either never tilts or tilts on tap and stays stuck. <code>(hover: hover) and (pointer: fine)</code> is the correct guard.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>3D transforms</td><td>Universal, including older Safari with the <code>-webkit-</code> prefix on perspective.</td></tr>
+                    <tr><td>CSS custom properties</td><td>Universal. Updating a custom property that only a transform reads does not invalidate layout.</td></tr>
+                    <tr><td>Cost</td><td>Composited transform per move event. One card is cheap; forty cards each with their own listener is not.</td></tr>
+                    <tr><td>Blur and shadow</td><td>Both are main-thread effects. A large <code>box-shadow</code> that changes with the tilt will visibly lag behind the rotation.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: text inside a rotated element is resampled by the compositor and looks slightly softer at the extremes of the tilt. If the card contains small type, keep the maximum angle lower or accept a small loss of sharpness at the edges.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't use it on anything you have to read carefully.</strong> Text on a moving plane is measurably harder to read, and tilt is at its worst on the exact cards that carry the most copy.</p>
+                <p><strong>Don't apply it to a whole grid.</strong> If every card tilts as the pointer crosses the page, the layout looks unstable rather than responsive. One focal card, or none.</p>
+                <p><strong>Don't combine it with a hover lift and a shadow change.</strong> Three depth cues at once contradict each other, and the card looks like it is vibrating rather than responding.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="count-up.html">← Previous: Count-Up Stats</a>
+            <a href="view-transitions.html">Next: View Transitions →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .tilt-wrap {
+            perspective: 900px;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 1.2rem 0;
+        }
+        .tilt-card {
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform;
+            padding: 1.5rem 1.6rem 1.4rem;
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 14px;
+            background: var(--card-bg, #fff);
+            box-shadow: 0 18px 40px -30px rgba(20, 34, 52, .55);
+        }
+        .tilt-card.is-settling {
+            transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+        }
+        .tilt-glare {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .2s ease;
+            background: radial-gradient(
+                320px circle at var(--gx, 50%) var(--gy, 50%),
+                rgba(255, 255, 255, .55),
+                transparent 60%
+            );
+            mix-blend-mode: screen;
+        }
+        .tilt-card:hover .tilt-glare { opacity: 1; }
+
+        .tilt-eyebrow {
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .68rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--footer-text-color, #8b96a3);
+            margin: 0 0 .55rem;
+        }
+        .tilt-card h3 {
+            font-size: 1.12rem;
+            line-height: 1.35;
+            margin: 0 0 .6rem;
+            color: var(--heading-color, #1d242e);
+        }
+        .tilt-body {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: var(--text-color, #4a5563);
+            margin: 0 0 .9rem;
+        }
+        .tilt-meta {
+            font-size: .78rem;
+            color: var(--footer-text-color, #6b7785);
+            margin: 0;
+            padding-top: .7rem;
+            border-top: 1px solid var(--border-color, #e6ecf3);
+        }
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+            text-align: center;
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tilt-card { transition: none !important; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const wrap = document.getElementById('wrap');
+        const card = document.getElementById('card');
+        const modeEl = document.getElementById('mode');
+        const replay = document.getElementById('replay');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+        const MAX = 8;
+        let rect = null;
+        let raf = 0;
+        let target = { x: 0, y: 0 };
+
+        function measure() {
+            rect = card.getBoundingClientRect();
+        }
+
+        function apply() {
+            raf = 0;
+            const rx = (-target.y * MAX).toFixed(2);
+            const ry = (target.x * MAX).toFixed(2);
+            card.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+            card.style.setProperty('--gx', ((target.x + 0.5) * 100).toFixed(1) + '%');
+            card.style.setProperty('--gy', ((target.y + 0.5) * 100).toFixed(1) + '%');
+        }
+
+        function onMove(e) {
+            if (!rect) measure();
+            target.x = (e.clientX - rect.left) / rect.width - 0.5;
+            target.y = (e.clientY - rect.top) / rect.height - 0.5;
+            if (!raf) raf = requestAnimationFrame(apply);
+        }
+
+        function reset() {
+            card.classList.add('is-settling');
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            target.x = 0; target.y = 0;
+            window.setTimeout(() => card.classList.remove('is-settling'), 420);
+        }
+
+        if (rm.matches || !fine.matches) {
+            modeEl.innerHTML = rm.matches
+                ? 'Running: <b>disabled</b> — reduce motion is on'
+                : 'Running: <b>disabled</b> — no fine pointer (touch device)';
+            replay.disabled = true;
+            replay.textContent = 'Not available';
+        } else {
+            modeEl.innerHTML = 'Running: <b>8° max, rect cached</b> — move the pointer across the card';
+            card.addEventListener('pointerenter', () => { measure(); card.classList.remove('is-settling'); });
+            card.addEventListener('pointermove', onMove);
+            card.addEventListener('pointerleave', reset);
+            window.addEventListener('resize', measure, { passive: true });
+            window.addEventListener('scroll', () => { rect = null; }, { passive: true });
+            replay.addEventListener('click', reset);
+        }
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

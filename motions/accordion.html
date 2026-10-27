@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Accordion — Opening Without a Jump | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="A panel that opens smoothly without measuring its height, because 0fr and 1fr are interpolatable lengths. Working demo, copy-ready AI prompt and the failure m">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/accordion.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Animated Accordion — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A panel that opens smoothly without measuring its height, because 0fr and 1fr are interpolatable lengths. Working demo, copy-ready AI prompt and the failure m">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/accordion.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Animated Accordion","description":"A panel that opens smoothly without measuring its height, because 0fr and 1fr are interpolatable lengths.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to interaction using grid-template-rows: 0fr → 1fr."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Animated Accordion</h1>
+            <p>An expand that animates without measuring anything.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <p class="m-title">Animated Accordion</p>
+        <p class="m-lede">This is the single most common animation failure in AI-generated interfaces: a panel that opens by transitioning <code>height</code> from zero to <code>auto</code>. That transition does not run — <code>auto</code> is not an interpolatable length — so the panel either snaps open or, worse, the model measures the content in JavaScript and the layout jumps on resize. The grid technique below animates the real height without measuring anything.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: interaction</span>
+            <span class="m-tag">grid-template-rows: 0fr → 1fr</span>
+            <span class="m-tag">no JavaScript measurement</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="reset" type="button">Close all</button>
+        </div>
+        <div class="m-stage">
+            <div class="acc" id="acc">
+                <div class="acc-item is-open">
+                    <button class="acc-btn" type="button" aria-expanded="true" aria-controls="panel-1" id="btn-1">
+                        <span>Why does height: auto not animate?</span>
+                        <span class="acc-sign" aria-hidden="true"></span>
+                    </button>
+                    <div class="acc-panel" id="panel-1" role="region" aria-labelledby="btn-1">
+                        <div class="acc-inner">
+                            <p>Because <code>auto</code> is a keyword, not a length. The browser resolves it at layout time, so there is no numeric start or end value for the transition to interpolate between. Every workaround that measures <code>scrollHeight</code> in JavaScript inherits the same problem later: the measurement goes stale when the viewport changes or the content reflows.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel-2" id="btn-2">
+                        <span>So what does the grid trick actually do?</span>
+                        <span class="acc-sign" aria-hidden="true"></span>
+                    </button>
+                    <div class="acc-panel" id="panel-2" role="region" aria-labelledby="btn-2">
+                        <div class="acc-inner">
+                            <p>A grid row sized <code>0fr</code> collapses to zero; the same row sized <code>1fr</code> takes exactly the content height. Both are flexible lengths, so the browser can interpolate between them. The panel is a grid with one row, and the inner element carries <code>overflow: hidden</code> so the content is clipped while the row is short.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <button class="acc-btn" type="button" aria-expanded="false" aria-controls="panel-3" id="btn-3">
+                        <span>Does it need JavaScript at all?</span>
+                        <span class="acc-sign" aria-hidden="true"></span>
+                    </button>
+                    <div class="acc-panel" id="panel-3" role="region" aria-labelledby="btn-3">
+                        <div class="acc-inner">
+                            <p>For a visual accordion, no — <code>details</code> and <code>summary</code> give you open and closed for free, and CSS can style the marker. What they do not give you is the height transition, because the browser toggles <code>display</code> rather than a height. The version here is a button plus a panel, with one line of JavaScript toggling a class and the ARIA attribute.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Build an accordion with a height transition that animates smoothly.
+
+Markup:
+- Each item is a container holding a button and a panel.
+- The button carries aria-expanded ("true" or "false") and aria-controls pointing at the panel id. The panel has role="region" and aria-labelledby pointing at the button id.
+- The panel contains exactly one child element that holds the content. That inner element is what gets clipped.
+
+CSS:
+- The panel is display: grid with grid-template-rows: 0fr and overflow: hidden applied to the INNER child, not the panel.
+- The open state sets grid-template-rows: 1fr.
+- Transition grid-template-rows over 220 to 280ms with an ease-out curve. Add a small padding transition if the content has padding, because padding is not part of the grid track.
+- Do NOT transition height, max-height, or use scrollHeight measurements. height: auto cannot interpolate, and max-height with a guessed value either clips long content or finishes early on short content.
+- Animate the open/close icon with a transform, not by swapping text.
+
+Behaviour:
+- Clicking an open item closes it; clicking another opens that one. Decide explicitly whether the accordion is single-open or multi-open and implement only that.
+- Keyboard: Enter and Space activate the button natively; Tab moves between headers; do not add custom key handlers beyond that.
+- Under prefers-reduced-motion, remove the transition entirely so panels open instantly.
+
+Constraints:
+- Content inside a closed panel must not be reachable by Tab. Use inert or visibility on the inner element, not display: none on the panel (which would kill the transition).
+- Long content must scroll the page rather than the panel; the panel grows to its natural height when open.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong><code>0fr</code> and <code>1fr</code> are both flexible lengths.</strong> That is the entire trick. A grid row at <code>0fr</code> has zero height and a row at <code>1fr</code> resolves to the content's height, and because both are lengths the browser can interpolate between them frame by frame.</li>
+                <li><strong><code>overflow: hidden</code> goes on the inner child.</strong> Putting it on the panel instead breaks the transition in some browsers, because the row can no longer size to its content. The inner element is the clip.</li>
+                <li><strong>Padding is not inside the track.</strong> If the content has padding, the row animates but the padding appears instantly, which reads as a jump at both ends. Transition padding alongside, or move the padding to the inner element's children.</li>
+                <li><strong><code>aria-expanded</code> is the state.</strong> The class is for styling; the attribute is what assistive technology reads. Both must change in the same function, or a screen reader announces an open panel that looks closed.</li>
+                <li><strong>Closed content must be unreachable.</strong> A collapsed row is still in the accessibility tree. <code>inert</code> on the inner element keeps Tab out without killing the animation.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>grid-template-rows transition</td><td>Chrome 107+, Firefox 66+, Safari 16+. Older Safari needs a max-height fallback.</td></tr>
+                    <tr><td>Cost</td><td>Layout on every frame while animating. Acceptable for one panel at a time; do not open twelve at once.</td></tr>
+                    <tr><td>Alternative</td><td><code>interpolate-size: allow-keywords</code> makes <code>height: auto</code> animatable in Chromium 129+, but it is not in Safari or Firefox yet.</td></tr>
+                    <tr><td>Nested panels</td><td>Works, but the inner panel's 1fr resolves inside the outer one's track; test with long content before shipping.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: the animation is layout-driven, unlike the transform-based effects elsewhere in this library. That is fine for a single panel with a few hundred pixels of content, and it is the reason an accordion should never be the element you open on every scroll event.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't hide essential content behind it.</strong> Anything a visitor must read to complete a task should be visible. An accordion is for secondary detail, specifications and FAQs.</p>
+                <p><strong>Don't put more than one long panel in the same view.</strong> Opening a 2,000px panel pushes everything below it out of sight, and the visitor loses the header they just clicked.</p>
+                <p><strong>Don't use it for navigation.</strong> A menu that expands in place is not a disclosure; it needs different focus management and different semantics from a FAQ accordion.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="scroll-progress.html">← Previous: Scroll Progress</a>
+            <a href="count-up.html">Next: Count-Up Stats →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .acc {
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--card-bg, #fff);
+        }
+        .acc-item + .acc-item { border-top: 1px solid var(--border-color, #e6ecf3); }
+
+        .acc-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+            padding: 1rem 1.15rem;
+            font: inherit;
+            font-size: .95rem;
+            font-weight: 600;
+            text-align: left;
+            color: var(--heading-color, #1d242e);
+            background: none;
+            border: 0;
+            cursor: pointer;
+        }
+        .acc-btn:hover { background: var(--prompt-bg, #f7f9fc); }
+        .acc-btn:focus-visible { outline: 2px solid var(--link-color, #0a66d8); outline-offset: -2px; }
+
+        .acc-sign {
+            position: relative;
+            flex: 0 0 auto;
+            width: 12px;
+            height: 12px;
+        }
+        .acc-sign::before,
+        .acc-sign::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 2px;
+            background: currentColor;
+            transition: transform .22s ease;
+        }
+        .acc-sign::after { transform: rotate(90deg); }
+        .acc-item.is-open .acc-sign::after { transform: rotate(0deg); }
+
+        .acc-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .24s ease;
+        }
+        .acc-item.is-open .acc-panel { grid-template-rows: 1fr; }
+
+        .acc-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+        .acc-inner p {
+            margin: 0;
+            padding: 0 1.15rem 1.1rem;
+            font-size: .9rem;
+            line-height: 1.72;
+            color: var(--text-color, #4a5563);
+        }
+        .acc-inner code {
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .82em;
+            background: var(--prompt-bg, #f1f5f9);
+            padding: .08rem .3rem;
+            border-radius: 3px;
+        }
+
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .acc-panel { transition: none; }
+            .acc-sign::before, .acc-sign::after { transition: none; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const acc = document.getElementById('acc');
+        const modeEl = document.getElementById('mode');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        const items = [...acc.querySelectorAll('.acc-item')];
+
+        function setOpen(item, open) {
+            const btn = item.querySelector('.acc-btn');
+            const inner = item.querySelector('.acc-inner');
+            item.classList.toggle('is-open', open);
+            btn.setAttribute('aria-expanded', String(open));
+            if (open) { inner.removeAttribute('inert'); }
+            else { inner.setAttribute('inert', ''); }
+        }
+
+        items.forEach((item) => {
+            setOpen(item, item.classList.contains('is-open'));
+            item.querySelector('.acc-btn').addEventListener('click', () => {
+                const willOpen = !item.classList.contains('is-open');
+                items.forEach((other) => setOpen(other, other === item ? willOpen : false));
+            });
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            items.forEach((item) => setOpen(item, false));
+        });
+
+        modeEl.innerHTML = rm.matches
+            ? 'Running: <b>instant open</b> — reduce motion removes the transition'
+            : 'Running: <b>grid-template-rows 0fr → 1fr</b> — no height measurement';
+    </script>
+</body>
+</html>

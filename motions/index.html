@@ -14,15 +14,15 @@
      crossorigin="anonymous"></script>
     <!-- /build:adsense -->
     <!-- build:seo -->
-    <meta name="description" content="A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <meta name="description" content="A library of 12 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
     <link rel="canonical" href="https://www.aiwebstyle.com/motions/index.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI Website Style Gallery">
     <meta property="og:title" content="Web Motion Library — Animation Prompts with Live Demos">
-    <meta property="og:description" content="A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <meta property="og:description" content="A library of 12 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
     <meta property="og:url" content="https://www.aiwebstyle.com/motions/index.html">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Web Motion Library","description":"A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.","url":"https://www.aiwebstyle.com/motions/index.html","mainEntity":{"@type":"ItemList","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"name":"Scroll Reveal","url":"https://www.aiwebstyle.com/motions/scroll-reveal.html"},{"@type":"ListItem","position":2,"name":"Magnetic Button","url":"https://www.aiwebstyle.com/motions/magnetic-button.html"},{"@type":"ListItem","position":3,"name":"Text Mask Reveal","url":"https://www.aiwebstyle.com/motions/text-mask-reveal.html"},{"@type":"ListItem","position":4,"name":"Sticky Scroll Story","url":"https://www.aiwebstyle.com/motions/sticky-scroll-story.html"},{"@type":"ListItem","position":5,"name":"Aurora Background","url":"https://www.aiwebstyle.com/motions/aurora-background.html"},{"@type":"ListItem","position":6,"name":"Card Spotlight","url":"https://www.aiwebstyle.com/motions/card-spotlight.html"}]}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Web Motion Library","description":"A library of 12 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.","url":"https://www.aiwebstyle.com/motions/index.html","mainEntity":{"@type":"ItemList","numberOfItems":12,"itemListElement":[{"@type":"ListItem","position":1,"name":"Scroll Reveal","url":"https://www.aiwebstyle.com/motions/scroll-reveal.html"},{"@type":"ListItem","position":2,"name":"Magnetic Button","url":"https://www.aiwebstyle.com/motions/magnetic-button.html"},{"@type":"ListItem","position":3,"name":"Text Mask Reveal","url":"https://www.aiwebstyle.com/motions/text-mask-reveal.html"},{"@type":"ListItem","position":4,"name":"Sticky Scroll Story","url":"https://www.aiwebstyle.com/motions/sticky-scroll-story.html"},{"@type":"ListItem","position":5,"name":"Aurora Background","url":"https://www.aiwebstyle.com/motions/aurora-background.html"},{"@type":"ListItem","position":6,"name":"Card Spotlight","url":"https://www.aiwebstyle.com/motions/card-spotlight.html"},{"@type":"ListItem","position":7,"name":"Infinite Marquee","url":"https://www.aiwebstyle.com/motions/marquee.html"},{"@type":"ListItem","position":8,"name":"Scroll Progress","url":"https://www.aiwebstyle.com/motions/scroll-progress.html"},{"@type":"ListItem","position":9,"name":"Animated Accordion","url":"https://www.aiwebstyle.com/motions/accordion.html"},{"@type":"ListItem","position":10,"name":"Count-Up Stats","url":"https://www.aiwebstyle.com/motions/count-up.html"},{"@type":"ListItem","position":11,"name":"Tilt Card","url":"https://www.aiwebstyle.com/motions/tilt-card.html"},{"@type":"ListItem","position":12,"name":"View Transitions","url":"https://www.aiwebstyle.com/motions/view-transitions.html"}]}}</script>
     <!-- /build:seo -->
 </head>
 <body>
@@ -55,6 +55,8 @@
             <button class="mx-filter" data-filter="load" type="button">On load</button>
             <button class="mx-filter" data-filter="scroll" type="button">On scroll</button>
             <button class="mx-filter" data-filter="cursor" type="button">On cursor</button>
+            <button class="mx-filter" data-filter="interaction" type="button">On interaction</button>
+            <button class="mx-filter" data-filter="navigation" type="button">On navigate</button>
         </div>
 
         <div class="mx-grid" id="mxGrid">
@@ -111,6 +113,60 @@
                 <div class="mx-meta">
                     <span>CSS variables + radial-gradient mask</span>
                     <span class="mx-trigger">cursor</span>
+                </div>
+            </a>
+            <a class="mx-card" href="marquee.html" data-trigger="load">
+                <span class="mx-idx">07</span>
+                <h3>Infinite Marquee</h3>
+                <p>A row of tags that loops with no visible seam, by translating a duplicated track by exactly half its width.</p>
+                <div class="mx-meta">
+                    <span>transform: translateX(-50%)</span>
+                    <span class="mx-trigger">load</span>
+                </div>
+            </a>
+            <a class="mx-card" href="scroll-progress.html" data-trigger="scroll">
+                <span class="mx-idx">08</span>
+                <h3>Scroll Progress</h3>
+                <p>A reading bar bound to scroll position in CSS — no listener, no layout read, and a scaleX instead of a width.</p>
+                <div class="mx-meta">
+                    <span>animation-timeline: scroll()</span>
+                    <span class="mx-trigger">scroll</span>
+                </div>
+            </a>
+            <a class="mx-card" href="accordion.html" data-trigger="interaction">
+                <span class="mx-idx">09</span>
+                <h3>Animated Accordion</h3>
+                <p>A panel that opens smoothly without measuring its height, because 0fr and 1fr are interpolatable lengths.</p>
+                <div class="mx-meta">
+                    <span>grid-template-rows: 0fr → 1fr</span>
+                    <span class="mx-trigger">interaction</span>
+                </div>
+            </a>
+            <a class="mx-card" href="count-up.html" data-trigger="scroll">
+                <span class="mx-idx">10</span>
+                <h3>Count-Up Stats</h3>
+                <p>Numbers that count once on entry, with tabular figures so the label never jitters while the value changes.</p>
+                <div class="mx-meta">
+                    <span>IntersectionObserver + rAF</span>
+                    <span class="mx-trigger">scroll</span>
+                </div>
+            </a>
+            <a class="mx-card" href="tilt-card.html" data-trigger="cursor">
+                <span class="mx-idx">11</span>
+                <h3>Tilt Card</h3>
+                <p>A card that leans toward the pointer, capped at eight degrees and switched off on touch and for reduced motion.</p>
+                <div class="mx-meta">
+                    <span>perspective + rotate3d</span>
+                    <span class="mx-trigger">cursor</span>
+                </div>
+            </a>
+            <a class="mx-card" href="view-transitions.html" data-trigger="navigation">
+                <span class="mx-idx">12</span>
+                <h3>View Transitions</h3>
+                <p>Two states described, frames computed by the browser — including the uniqueness rule that silently breaks it.</p>
+                <div class="mx-meta">
+                    <span>document.startViewTransition()</span>
+                    <span class="mx-trigger">navigation</span>
                 </div>
             </a>
             <!-- /build:motion-cards -->

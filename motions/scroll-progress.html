@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Progress — A Bar Driven by Scroll Position | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+        <!-- build:adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6334847497116545"
+     crossorigin="anonymous"></script>
+    <!-- /build:adsense -->
+    <!-- build:seo -->
+    <meta name="description" content="A reading bar bound to scroll position in CSS — no listener, no layout read, and a scaleX instead of a width. Working demo, copy-ready AI prompt and the failu">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/scroll-progress.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Scroll Progress — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A reading bar bound to scroll position in CSS — no listener, no layout read, and a scaleX instead of a width. Working demo, copy-ready AI prompt and the failu">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/scroll-progress.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Scroll Progress","description":"A reading bar bound to scroll position in CSS — no listener, no layout read, and a scaleX instead of a width.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to scroll using animation-timeline: scroll()."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../recipes/index.html">Prompts</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Scroll Progress</h1>
+            <p>A reading bar that tracks scroll position without a listener.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <p class="m-title">Scroll Progress</p>
+        <p class="m-lede">This is the cheapest scroll-driven effect there is, and almost every implementation does it the expensive way: a scroll listener that reads <code>scrollTop</code>, writes <code>width</code>, and forces the browser to recalculate layout on every frame. The CSS version binds the same value to a transform and never touches the main thread.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: scroll</span>
+            <span class="m-tag">animation-timeline: scroll()</span>
+            <span class="m-tag">transform: scaleX</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="replay" type="button">Back to top</button>
+        </div>
+        <div class="m-stage">
+            <div class="scroller" id="scroller">
+                <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+                <article class="article">
+                    <h3>Scroll this panel</h3>
+                    <p>The bar at the top of this box is not measuring the page. It is bound to this element's own scroll container, using <code>animation-timeline: scroll(nearest block)</code>. Scroll to the bottom and it reaches exactly full width at the last pixel.</p>
+                    <h3>Why scaleX and not width</h3>
+                    <p>Animating <code>width</code> changes the geometry of the element, so the browser re-runs layout for the bar and everything that depends on it. Animating <code>transform: scaleX()</code> leaves geometry untouched and runs on the compositor.</p>
+                    <p>One consequence: a scaled border or radius distorts. A progress bar has neither, which is exactly why the substitution is safe here and unsafe on, say, a card.</p>
+                    <h3>Where the number comes from</h3>
+                    <p>The timeline maps scroll offset to progress with no rounding you have to manage. When the container has no scrollable overflow the animation sits at its start value, so a short article simply shows an empty bar rather than a full one.</p>
+                    <p>That behaviour is worth keeping. A full bar on an unscrollable page implies the reader has finished something they never started.</p>
+                    <h3>The fallback is one condition</h3>
+                    <p>Firefox has supported this since version 144; anything older needs the JavaScript path. The check is a single <code>CSS.supports</code> call, and the fallback reads scroll position inside a <code>requestAnimationFrame</code> callback rather than on the event itself.</p>
+                    <p>Reading layout inside a scroll handler is what makes the naive version stutter: the handler runs many times per frame, each read forces a style recalculation, and the writes queue up behind it.</p>
+                    <h3>End of the panel</h3>
+                    <p>The bar should now be at one hundred percent. Scroll back up and it unwinds in reverse — there is no state to reset, because the animation is a pure function of scroll offset.</p>
+                </article>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Create a scroll progress bar for a long article.
+
+Structure:
+- The bar sits inside the scroll container, as a sticky element at the top, so that its nearest scroll ancestor is the container it is measuring.
+- The bar itself is a thin element, 3 to 4px tall, with transform-origin: 0 50%.
+
+Motion:
+- Bind the animation to scroll position, not to time: animation-timeline: scroll(nearest block), with animation-name pointing at a keyframe that goes from scaleX(0) to scaleX(1).
+- Do NOT use animation-duration. With a scroll timeline the duration is ignored; the scroll range is the clock.
+- Use scaleX, never width. Width forces layout on every frame; scaleX runs on the compositor.
+- Never scale an element that has a border-radius or a border. Both distort.
+
+Fallback:
+- Detect support with CSS.supports('animation-timeline', 'scroll()').
+- If unsupported, compute scrollTop / (scrollHeight - clientHeight) inside a requestAnimationFrame callback triggered by a passive scroll listener. Never read layout directly in the scroll handler.
+- Clamp the result to 0..1 and set transform, not width.
+
+Accessibility and restraint:
+- The bar is decorative: give it aria-hidden="true" and do not announce a percentage.
+- Under prefers-reduced-motion, keep the bar but let it update without easing. Removing it entirely is also acceptable; a jumping bar is not.
+- Do not colour it as an alert. It is a position indicator, not a warning.
+
+Constraints:
+- Position it above the content with a solid background, or long text will show through it.
+- It must reach exactly 100% at the last pixel of scroll, not before, and never exceed it.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong><code>scroll(nearest block)</code> instead of <code>scroll(root)</code>.</strong> <code>root</code> measures the page. <code>nearest</code> measures the closest scrollable ancestor, which is what you want for a bar that belongs to one panel or one article in a layout with sidebars.</li>
+                <li><strong>No duration.</strong> A scroll timeline has no time component. Declaring <code>animation-duration</code> alongside it is a common copy-paste mistake that does nothing and confuses whoever reads it next.</li>
+                <li><strong><code>transform-origin: 0 50%.</code></strong> Without it the bar scales from its centre and grows in both directions, which looks like a loading shimmer rather than progress.</li>
+                <li><strong>Sticky, not fixed.</strong> <code>position: fixed</code> would pin the bar to the viewport, so in a page with a scrolling panel the bar would measure the page while appearing to belong to the panel.</li>
+                <li><strong>The fallback reads inside rAF.</strong> Scroll events fire far more often than frames. Reading <code>scrollTop</code> in the handler and writing style in the same tick is the classic layout-thrash pattern.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>animation-timeline: scroll()</td><td>Chrome 115+, Edge 115+, Safari 26+, Firefox 144+. Older Firefox and Safari need the fallback.</td></tr>
+                    <tr><td>Cost</td><td>One composited transform. No layout, no paint, no listener on the main thread.</td></tr>
+                    <tr><td>Fallback cost</td><td>One rAF callback per frame while scrolling, one layout read and one style write. Acceptable.</td></tr>
+                    <tr><td>Resize</td><td><code>scroll(nearest)</code> re-measures automatically; a JS fallback must recompute the scroll range on resize.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: on very long pages the bar becomes a decoration rather than information — nobody reads a percentage that moves by a pixel per screen. It earns its place on articles between roughly 1,500 and 8,000 words, and on multi-step forms.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't put it on a short page.</strong> If the article fits in two screens, the bar spends most of its life at 90 percent, which teaches visitors the indicator is unreliable.</p>
+                <p><strong>Don't use it as the only progress cue in a multi-step form.</strong> A form needs named steps; a slim bar tells you how far but not what is left.</p>
+                <p><strong>Don't animate its colour.</strong> A bar that shifts from green to red as you scroll reads as a warning about the content rather than a reading aid.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="marquee.html">← Previous: Infinite Marquee</a>
+            <a href="accordion.html">Next: Animated Accordion →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../previews/index.html">Previews</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../recipes/index.html">Prompt Recipes</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .scroller {
+            position: relative;
+            height: 320px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 10px;
+            background: var(--card-bg, #fff);
+            scrollbar-width: thin;
+        }
+        .bar-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            height: 4px;
+            background: var(--border-color, #e6ecf3);
+        }
+        .bar {
+            height: 100%;
+            width: 100%;
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            background: var(--link-color, #0a66d8);
+            animation: grow linear both;
+            animation-timeline: scroll(nearest block);
+        }
+        @keyframes grow {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+        .article {
+            padding: 1.3rem 1.4rem 1.6rem;
+        }
+        .article h3 {
+            font-size: 1rem;
+            margin: 1.3rem 0 .5rem;
+            color: var(--heading-color, #1d242e);
+        }
+        .article h3:first-child { margin-top: 0; }
+        .article p {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: var(--text-color, #4a5563);
+            margin: 0 0 .8rem;
+        }
+        .article code {
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .82em;
+            background: var(--prompt-bg, #f1f5f9);
+            padding: .08rem .3rem;
+            border-radius: 3px;
+        }
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono, ui-monospace, monospace);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @supports not (animation-timeline: scroll()) {
+            .bar { animation: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bar { transition: none; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const scroller = document.getElementById('scroller');
+        const bar = document.getElementById('bar');
+        const modeEl = document.getElementById('mode');
+        const replay = document.getElementById('replay');
+        const hasTimeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (hasTimeline) {
+            modeEl.innerHTML = 'Running: <b>CSS scroll timeline</b> — animation-timeline: scroll(nearest block)';
+        } else {
+            modeEl.innerHTML = 'Running: <b>requestAnimationFrame fallback</b> — this browser lacks animation-timeline';
+
+            let ticking = false;
+            const update = () => {
+                ticking = false;
+                const max = scroller.scrollHeight - scroller.clientHeight;
+                const p = max > 0 ? Math.min(1, Math.max(0, scroller.scrollTop / max)) : 0;
+                bar.style.transform = 'scaleX(' + p + ')';
+            };
+            scroller.addEventListener('scroll', () => {
+                if (!ticking) { ticking = true; requestAnimationFrame(update); }
+            }, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        }
+
+        if (rm.matches && hasTimeline) {
+            modeEl.innerHTML += ' · <b>reduce motion</b> keeps the bar but drops easing';
+        }
+
+        replay.addEventListener('click', () => {
+            scroller.scrollTo({ top: 0, behavior: rm.matches ? 'auto' : 'smooth' });
+        });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>
