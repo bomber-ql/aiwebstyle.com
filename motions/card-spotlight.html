@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Spotlight — Pointer-Tracked Highlight and Border Glow | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="A soft highlight tracks the pointer across a card surface, revealing a border glow at the same position. Working demo, copy-ready AI prompt and the failure mo">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/card-spotlight.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Card Spotlight — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A soft highlight tracks the pointer across a card surface, revealing a border glow at the same position. Working demo, copy-ready AI prompt and the failure mo">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/card-spotlight.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Card Spotlight","description":"A soft highlight tracks the pointer across a card surface, revealing a border glow at the same position.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to cursor using CSS variables + radial-gradient mask."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Card Spotlight</h1>
+            <p>A highlight that tracks the pointer across a card surface.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <h1 class="m-title">Card Spotlight</h1>
+        <p class="m-lede">Two soft lights follow the cursor: a wash on the card surface and a glow along the border. The surface one is easy. The border one is the detail that separates a polished component from a first-attempt grid — and it needs a mask, not an <code>overflow: hidden</code>.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: cursor</span>
+            <span class="m-tag">CSS custom properties</span>
+            <span class="m-tag">mask-composite</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="reset" type="button">Reset</button>
+        </div>
+        <div class="m-stage">
+            <div class="spot-grid">
+                <article class="spot-card">
+                    <span class="spot-tag">01</span>
+                    <h3>Analytics</h3>
+                    <p>Move the pointer across this card. The light follows on both the surface and the edge.</p>
+                </article>
+                <article class="spot-card">
+                    <span class="spot-tag">02</span>
+                    <h3>Automations</h3>
+                    <p>Each card keeps its own position state — nothing is shared between siblings.</p>
+                </article>
+                <article class="spot-card">
+                    <span class="spot-tag">03</span>
+                    <h3>Reporting</h3>
+                    <p>The effect costs two style writes per frame and no layout reads.</p>
+                </article>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Add a pointer-tracked spotlight to a grid of cards — a soft wash across the surface plus a glow along the border.
+
+Surface highlight:
+- On pointermove, compute the pointer position relative to the card's bounding box and write it into two CSS custom properties on that card: --mx and --my, in pixels.
+- Render the wash with a ::before pseudo-element covering the card: radial-gradient(200px circle at var(--mx) var(--my), rgba(120,160,255,.16), transparent 65%).
+- Fade it in with opacity on :hover, not by toggling display — display changes cause layout work.
+
+Border glow:
+- Use a ::after pseudo-element with inset: 0, border-radius: inherit and padding: 1px.
+- Give it the same radial gradient but brighter, then punch out the middle with a mask:
+  -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+- Do not try to do this with overflow: hidden — that clips the glow to the inside edge and it disappears.
+
+Constraints:
+- Cache the bounding rect on pointerenter; never call getBoundingClientRect() inside pointermove.
+- Write only custom properties. Never set left/top on the highlight element.
+- Skip the whole effect under @media (hover: none) so touch devices are unaffected.
+- Respect prefers-reduced-motion: keep the static hover state, remove the transition timing.
+- Keep a visible :focus-visible outline — the spotlight is decorative and must never be the only indication of focus.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Pixels, not percentages.</strong> A gradient positioned with percentages changes its centre as the card resizes and drifts oddly near the edges. Writing the pointer position in pixels against the card's own box keeps the highlight exactly under the cursor.</li>
+                <li><strong>The border glow needs a mask, not clipping.</strong> A radial gradient on <code>::after</code> fills the whole box. <code>padding: 1px</code> plus <code>mask-composite: exclude</code> keeps only that 1px ring, which is why the glow appears to travel along the edge. <code>overflow: hidden</code> would cut it off at the inner edge and hide the effect entirely.</li>
+                <li><strong>Cache the rect.</strong> <code>getBoundingClientRect()</code> forces layout. Calling it on every <code>pointermove</code> (which can fire at 120Hz+) makes the card feel heavy. Compute it once on <code>pointerenter</code>.</li>
+                <li><strong>Two style writes per frame.</strong> Setting <code>--mx</code> and <code>--my</code> on the card invalidates only paint for that card's pseudo-elements. No layout, no sibling recalculation.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>CSS custom properties</td><td>Universal.</td></tr>
+                    <tr><td>mask-composite</td><td>Chrome 120+, Safari 15.4+, Firefox 53+ via the standard property. In older Safari only the <code>-webkit-</code> form applies — ship both.</td></tr>
+                    <tr><td>Degradation</td><td>If masking is unsupported the border glow is simply absent; the surface wash still works and the card is unchanged.</td></tr>
+                </tbody>
+            </table>
+            <p>The one thing to watch is the number of cards. Twenty spotlit cards on one page means twenty pseudo-element pairs repainting as the pointer moves. That is still cheap, but on a low-end device it is the first thing to drop — in which case keep the effect on the hovered card only and remove it from the rest.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't use it to imply interactivity a card doesn't have.</strong> A light that follows the cursor reads as "this is clickable". If the card is not a link, add no cursor change and no hover lift — or better, remove the effect.</p>
+                <p><strong>Don't stack it with a tilt and a glow and a scale.</strong> Three simultaneous pointer reactions on one card is the most common way this effect goes from premium to gimmicky.</p>
+                <p><strong>Don't ship it without a keyboard story.</strong> Pointer-only feedback means keyboard users see nothing. Pair it with a clear <code>:focus-visible</code> outline of equal prominence.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="aurora-background.html">← Previous: Aurora Background</a>
+            <a href="index.html">All motions →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: .9rem;
+        }
+        .spot-card {
+            position: relative;
+            border-radius: 12px;
+            padding: 1.15rem 1.2rem;
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #e2e9f2);
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .spot-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%), rgba(120, 160, 255, .16), transparent 65%);
+            opacity: 0;
+            transition: opacity .25s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .spot-card:hover::before { opacity: 1; }
+
+        .spot-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: radial-gradient(190px circle at var(--mx, 50%) var(--my, 50%), rgba(120, 160, 255, .95), transparent 62%);
+            -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity .25s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .spot-card:hover::after { opacity: 1; }
+
+        .spot-tag {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: .7rem;
+            color: var(--footer-text-color, #9aa7b5);
+            margin-bottom: .45rem;
+            position: relative;
+            z-index: 2;
+        }
+        .spot-card h3 {
+            font-size: 1rem;
+            margin-bottom: .4rem;
+            color: var(--heading-color, #1d242e);
+            position: relative;
+            z-index: 2;
+        }
+        .spot-card p {
+            margin: 0;
+            font-size: .86rem;
+            line-height: 1.62;
+            color: var(--text-color, #4a5563);
+            position: relative;
+            z-index: 2;
+        }
+        .demo-mode {
+            margin: .8rem 0 0;
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media not all and (hover: hover) {
+            .spot-card::before, .spot-card::after { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .spot-card::before, .spot-card::after { transition: none; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const modeEl = document.getElementById('mode');
+        modeEl.innerHTML = canHover
+            ? 'Running: <b>pointer-tracked gradient</b> — rect cached on pointerenter'
+            : 'Running: <b>disabled</b> — no fine pointer detected';
+
+        document.querySelectorAll('.spot-card').forEach((card) => {
+            let rect = null;
+
+            card.addEventListener('pointerenter', () => {
+                if (canHover) rect = card.getBoundingClientRect();
+            });
+
+            card.addEventListener('pointermove', (e) => {
+                if (!canHover) return;
+                if (!rect) rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+            });
+
+            card.addEventListener('pointerleave', () => {
+                card.style.removeProperty('--mx');
+                card.style.removeProperty('--my');
+                rect = null;
+            });
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            document.querySelectorAll('.spot-card').forEach((card) => {
+                card.style.removeProperty('--mx');
+                card.style.removeProperty('--my');
+            });
+        });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

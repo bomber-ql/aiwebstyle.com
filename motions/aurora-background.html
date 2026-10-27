@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Background — Slow Drifting Colour Fields | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="Soft blurred colour fields drift behind the content, slow enough to read as atmosphere rather than motion. Working demo, copy-ready AI prompt and the failure ">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/aurora-background.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Aurora Background — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="Soft blurred colour fields drift behind the content, slow enough to read as atmosphere rather than motion. Working demo, copy-ready AI prompt and the failure ">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/aurora-background.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Aurora Background","description":"Soft blurred colour fields drift behind the content, slow enough to read as atmosphere rather than motion.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to load using CSS radial-gradient + keyframes."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->
+<header>
+        <div class="container">
+            <h1>Aurora Background</h1>
+            <p>Soft blurred colour fields drifting behind the content.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <h1 class="m-title">Aurora Background</h1>
+        <p class="m-lede">The most copied background effect of the last three years, and the one that most often ships a janky page. The usual implementation animates <code>filter: blur(80px)</code> on three huge elements — which forces the browser to re-blur them every frame. This version gets the same look with pre-softened gradients and no filter at all.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: load</span>
+            <span class="m-tag">radial-gradient</span>
+            <span class="m-tag">compositor-only transform</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="toggle" type="button">Pause</button>
+        </div>
+        <div class="m-stage">
+            <div class="aurora" id="aurora">
+                <span class="blob b1"></span>
+                <span class="blob b2"></span>
+                <span class="blob b3"></span>
+                <div class="aurora-content">
+                    <h3>Content stays readable</h3>
+                    <p>The colour moves slowly enough that you notice the atmosphere, not the animation. Text sits above it with a scrim behind.</p>
+                </div>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Create an aurora background: three soft colour fields drifting slowly behind the page content.
+
+Structure:
+- A container with overflow: hidden and a dark base colour. Inside, exactly three empty span elements used purely as colour fields, plus the real content in a sibling element above them.
+- Each field is an absolutely positioned element with a radial-gradient background that fades to fully transparent by 70% of its radius. Do NOT use filter: blur() — a large-radius blur re-rasterises every frame and will drop frames on integrated GPUs.
+- Size each field around 400-450px and position them partly outside the container so only the soft edge is visible.
+
+Motion:
+- Animate transform (translate and scale) only, 14-18s per cycle, ease-in-out, alternate, with different durations and delays so the fields never sync up.
+- Keep total movement under about 100px. Larger travel reads as a lava lamp, not atmosphere.
+- Use mix-blend-mode: screen on the fields so overlapping colours combine.
+
+Readability:
+- Put a semi-transparent scrim or a subtle vertical gradient between the fields and the text. Never rely on the aurora itself for contrast.
+- Body text must hold at least 4.5:1 contrast against the darkest region the fields can move over.
+
+Constraints:
+- Respect prefers-reduced-motion: freeze the fields at their initial transform, keep the colour, drop the animation.
+- Expose a pause control if the background sits behind content a visitor reads for more than a few seconds.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Radial gradients instead of blur.</strong> A <code>radial-gradient</code> with stops fading to <code>transparent</code> is already soft — the browser rasterises it once and then only moves a layer. <code>filter: blur(80px)</code> on a 400px element has to re-blur every frame, which is where the dropped frames come from. Same visual result, an order of magnitude cheaper.</li>
+                <li><strong>Desynchronised durations.</strong> Three fields on the same 16s loop visibly pulse together, and the pattern becomes predictable. 16s / 19s / 22s with offset delays never repeats within a session.</li>
+                <li><strong><code>mix-blend-mode: screen</code>.</strong> Screen blending makes overlapping fields add up to brighter colour rather than one covering the other — that is what produces the aurora look rather than three floating discs.</li>
+                <li><strong>Movement budget.</strong> Under ~100px of travel over 15 seconds is roughly 7px per second. Above that the eye tracks it as motion, which pulls attention off the content.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>radial-gradient</td><td>Universal.</td></tr>
+                    <tr><td>mix-blend-mode</td><td>Universal in modern browsers; costs a compositing pass but no per-frame re-blur.</td></tr>
+                    <tr><td>Cost</td><td>Three compositor layers. Transform-only animation means no layout and no paint after the first frame.</td></tr>
+                </tbody>
+            </table>
+            <p>One practical note: this demo keeps a fixed dark background on purpose. An aurora needs a controlled canvas — if you inherit whatever surface colour the page happens to use, the gradients either wash out on light themes or disappear on dark ones. Treat it as a self-contained section, not a page-wide background.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't put it behind body copy.</strong> A moving background under a paragraph measurably slows reading. Keep it behind a hero headline and a single line of supporting text.</p>
+                <p><strong>Don't use it on a site that is already visually busy.</strong> Aurora plus glass cards plus a gradient headline is three competing atmospheres; the page reads as noise.</p>
+                <p><strong>Don't add it to checkout or forms.</strong> Movement near an input field competes with the cursor and raises error rates.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="sticky-scroll-story.html">← Previous: Sticky Scroll Story</a>
+            <a href="card-spotlight.html">Next: Card Spotlight →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .aurora {
+            position: relative;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0c1220;
+            isolation: isolate;
+        }
+        .blob {
+            position: absolute;
+            width: 440px;
+            height: 440px;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            will-change: transform;
+        }
+        .b1 {
+            top: -170px;
+            left: -110px;
+            background: radial-gradient(circle, rgba(78, 104, 255, .62) 0%, rgba(78, 104, 255, 0) 68%);
+            animation: drift-a 16s ease-in-out infinite alternate;
+        }
+        .b2 {
+            bottom: -200px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(38, 200, 172, .55) 0%, rgba(38, 200, 172, 0) 68%);
+            animation: drift-b 19s ease-in-out infinite alternate;
+        }
+        .b3 {
+            top: 10%;
+            right: 18%;
+            background: radial-gradient(circle, rgba(196, 92, 210, .45) 0%, rgba(196, 92, 210, 0) 66%);
+            animation: drift-c 22s ease-in-out infinite alternate;
+        }
+        @keyframes drift-a { to { transform: translate(80px, 60px) scale(1.12); } }
+        @keyframes drift-b { to { transform: translate(-70px, -50px) scale(1.1); } }
+        @keyframes drift-c { to { transform: translate(-50px, 70px) scale(.92); } }
+
+        .aurora.is-paused .blob { animation-play-state: paused; }
+
+        .aurora-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem 1.6rem;
+            background: linear-gradient(to top, rgba(6, 10, 20, .82), rgba(6, 10, 20, .1) 70%);
+            z-index: 2;
+        }
+        .aurora-content h3 {
+            font-size: 1.15rem;
+            color: #f2f6ff;
+            margin-bottom: .4rem;
+        }
+        .aurora-content p {
+            font-size: .88rem;
+            line-height: 1.6;
+            color: #b9c6da;
+            margin: 0;
+            max-width: 46ch;
+        }
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blob { animation: none !important; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const aurora = document.getElementById('aurora');
+        const toggle = document.getElementById('toggle');
+        const modeEl = document.getElementById('mode');
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (rm.matches) {
+            aurora.classList.add('is-paused');
+            toggle.disabled = true;
+            toggle.textContent = 'Paused (system)';
+            modeEl.innerHTML = 'Running: <b>frozen</b> — system “reduce motion” keeps the colour but drops the animation';
+        } else {
+            modeEl.innerHTML = 'Running: <b>3 gradient fields, transform-only</b> — no filter blur';
+        }
+
+        toggle.addEventListener('click', () => {
+            const paused = aurora.classList.toggle('is-paused');
+            toggle.textContent = paused ? 'Resume' : 'Pause';
+        });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

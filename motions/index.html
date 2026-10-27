@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="motion.css">
     <!-- build:seo -->
-    <meta name="description" content="A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <meta name="description" content="A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
     <link rel="canonical" href="https://www.aiwebstyle.com/motions/index.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI Website Style Gallery">
     <meta property="og:title" content="Web Motion Library — Animation Prompts with Live Demos">
-    <meta property="og:description" content="A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <meta property="og:description" content="A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
     <meta property="og:url" content="https://www.aiwebstyle.com/motions/index.html">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Web Motion Library","description":"A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.","url":"https://www.aiwebstyle.com/motions/index.html","mainEntity":{"@type":"ItemList","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Scroll Reveal","url":"https://www.aiwebstyle.com/motions/scroll-reveal.html"},{"@type":"ListItem","position":2,"name":"Magnetic Button","url":"https://www.aiwebstyle.com/motions/magnetic-button.html"},{"@type":"ListItem","position":3,"name":"Text Mask Reveal","url":"https://www.aiwebstyle.com/motions/text-mask-reveal.html"}]}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Web Motion Library","description":"A library of 6 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.","url":"https://www.aiwebstyle.com/motions/index.html","mainEntity":{"@type":"ItemList","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"name":"Scroll Reveal","url":"https://www.aiwebstyle.com/motions/scroll-reveal.html"},{"@type":"ListItem","position":2,"name":"Magnetic Button","url":"https://www.aiwebstyle.com/motions/magnetic-button.html"},{"@type":"ListItem","position":3,"name":"Text Mask Reveal","url":"https://www.aiwebstyle.com/motions/text-mask-reveal.html"},{"@type":"ListItem","position":4,"name":"Sticky Scroll Story","url":"https://www.aiwebstyle.com/motions/sticky-scroll-story.html"},{"@type":"ListItem","position":5,"name":"Aurora Background","url":"https://www.aiwebstyle.com/motions/aurora-background.html"},{"@type":"ListItem","position":6,"name":"Card Spotlight","url":"https://www.aiwebstyle.com/motions/card-spotlight.html"}]}}</script>
     <!-- /build:seo -->
 </head>
 <body>
@@ -78,6 +78,33 @@
                 <div class="mx-meta">
                     <span>clip-path + transform</span>
                     <span class="mx-trigger">load</span>
+                </div>
+            </a>
+            <a class="mx-card" href="sticky-scroll-story.html" data-trigger="scroll">
+                <span class="mx-idx">04</span>
+                <h3>Sticky Scroll Story</h3>
+                <p>A panel stays pinned while the copy advances beside it — the standard structure for brand storytelling.</p>
+                <div class="mx-meta">
+                    <span>position: sticky + IntersectionObserver</span>
+                    <span class="mx-trigger">scroll</span>
+                </div>
+            </a>
+            <a class="mx-card" href="aurora-background.html" data-trigger="load">
+                <span class="mx-idx">05</span>
+                <h3>Aurora Background</h3>
+                <p>Soft blurred colour fields drift behind the content, slow enough to read as atmosphere rather than motion.</p>
+                <div class="mx-meta">
+                    <span>CSS radial-gradient + keyframes</span>
+                    <span class="mx-trigger">load</span>
+                </div>
+            </a>
+            <a class="mx-card" href="card-spotlight.html" data-trigger="cursor">
+                <span class="mx-idx">06</span>
+                <h3>Card Spotlight</h3>
+                <p>A soft highlight tracks the pointer across a card surface, revealing a border glow at the same position.</p>
+                <div class="mx-meta">
+                    <span>CSS variables + radial-gradient mask</span>
+                    <span class="mx-trigger">cursor</span>
                 </div>
             </a>
             <!-- /build:motion-cards -->

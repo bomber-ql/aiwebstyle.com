@@ -1,0 +1,17 @@
+[
+  {
+    "styleId": "glassmorphism",
+    "name": "Glassmorphism",
+    "blurb": "Frosted translucent panels over a saturated colour field, with hairline light borders and a soft top-edge highlight."
+  },
+  {
+    "styleId": "brutalism",
+    "name": "Brutalism",
+    "blurb": "Raw type, hard 3px rules and offset block shadows, one acid accent, nothing rounded and nothing softened."
+  },
+  {
+    "styleId": "swiss-style",
+    "name": "Swiss Style",
+    "blurb": "Strict twelve-column grid, Helvetica, asymmetric whitespace and a single red accent doing all the emphasis."
+  }
+]

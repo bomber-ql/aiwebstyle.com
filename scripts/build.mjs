@@ -26,6 +26,9 @@ const motions = JSON.parse(read('data/motions.json'))
   .filter((m) => exists(`motions/${m.slug}.html`))
   .sort((a, b) => a.order - b.order);
 
+const previews = JSON.parse(read('data/previews.json'))
+  .filter((p) => exists(`previews/${p.styleId}.html`));
+
 const motionsPlanned = JSON.parse(read('data/motions.json'))
   .filter((m) => m.status === 'published' && !exists(`motions/${m.slug}.html`))
   .map((m) => m.slug);
@@ -279,6 +282,11 @@ function buildSitemap() {
       priority: '0.7',
       freq: 'monthly',
     })),
+    ...previews.map((p) => ({
+      loc: `${SITE}/previews/${p.styleId}.html`,
+      priority: '0.7',
+      freq: 'monthly',
+    })),
     { loc: `${SITE}/about.html`, priority: '0.5', freq: 'yearly' },
     { loc: `${SITE}/privacy.html`, priority: '0.3', freq: 'yearly' },
     { loc: `${SITE}/terms.html`, priority: '0.3', freq: 'yearly' },
@@ -448,6 +456,59 @@ if (exists('motions/index.html')) {
   );
 }
 
+/* ---------- 8.5 风格预览页 ---------- */
+
+function injectPreviewCta(styleId, styleName) {
+  const rel = `styles/${styleId}.html`;
+  if (!exists(rel)) return false;
+  let html = read(rel);
+  const block = `        <!-- build:preview-cta -->
+        <div class="preview-cta">
+            <p>See this style applied to a real page — identical content, different stylesheet.</p>
+            <a href="../previews/${styleId}.html">Open live preview →</a>
+        </div>
+        <!-- /build:preview-cta -->
+`;
+  const RE = /[ \t]*<!-- build:preview-cta -->[\s\S]*?<!-- \/build:preview-cta -->\n?/;
+  if (RE.test(html)) {
+    html = html.replace(RE, block);
+  } else {
+    const anchor = html.indexOf('<section class="style-detail-section');
+    if (anchor === -1) return false;
+    html = html.slice(0, anchor) + block + '\n' + html.slice(anchor);
+  }
+  write(rel, html);
+  return true;
+}
+
+let pv = 0;
+for (const p of previews) {
+  const rel = `previews/${p.styleId}.html`;
+  const desc = `A complete demo landing page built in the ${p.name} style. ${p.blurb}`.slice(0, 158);
+  injectSeo(
+    rel,
+    seoBlock({
+      desc,
+      canonical: `${SITE}/${rel}`,
+      ogType: 'article',
+      jsonLd: {
+        title: `Northline Studio — a demo site in the ${p.name} style`,
+        data: {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: `${p.name} style — live preview`,
+          description: desc,
+          url: `${SITE}/${rel}`,
+          about: { '@type': 'Thing', name: p.name },
+          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+        },
+      },
+    })
+  );
+  injectPreviewCta(p.styleId, p.name);
+  pv++;
+}
+
 /* ---------- 9. 合规页 SEO ---------- */
 
 const legalSeo = {
@@ -505,7 +566,7 @@ function checkEnglishOnly(pages) {
   return bad.length;
 }
 
-const cjkProblems = checkEnglishOnly(allHtml);
+const cjkProblems = checkEnglishOnly([...allHtml, ...previews.map((p) => `previews/${p.styleId}.html`)]);
 
 let nav = 0;
 for (const rel of allHtml) {
@@ -518,6 +579,7 @@ buildSitemap();
 console.log(`✓ 首页预渲染：${styles.length} 张卡片`);
 console.log(`✓ 详情页 SEO：${n} 个`);
 console.log(`✓ 动效索引：${motions.length} 张卡片 | 动效页 SEO：${mn} 个`);
+console.log(`✓ 风格预览页：${pv} 个（含详情页入口）`);
 if (motionsPlanned.length) console.log(`ℹ 待补页面（已登记未建）：${motionsPlanned.join(', ')}`);
 console.log(`✓ Footer 导航：${nav} 个页面`);
 console.log(`✓ 英文站守卫：${cjkProblems ? `⚠ ${cjkProblems} 个页面含中文` : '通过，无中文残留'}`);

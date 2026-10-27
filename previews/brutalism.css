@@ -1,0 +1,265 @@
+/* Brutalism — preview stylesheet
+   Same markup as every preview; only this file differs. */
+
+:root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --acid: #ffe600;
+    --rule: 3px solid #000;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: auto; }
+
+body {
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.35;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+}
+
+.wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ---------- header ---------- */
+.site-head {
+    border-bottom: var(--rule);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+.site-head .wrap {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 64px;
+}
+.brand {
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: .2rem .5rem;
+    background: var(--acid);
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+}
+.site-head nav {
+    display: flex;
+    gap: 0;
+    margin-left: auto;
+}
+.site-head nav a {
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: .45rem .85rem;
+    border-left: 2px solid #000;
+}
+.site-head nav a:last-child { border-right: 2px solid #000; }
+.site-head nav a:hover { background: var(--acid); }
+
+/* ---------- hero ---------- */
+.hero {
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: var(--rule);
+}
+.eyebrow {
+    display: inline-block;
+    font-size: .74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding: .3rem .7rem;
+    border: 2px solid #000;
+    margin-bottom: 1.4rem;
+}
+.hero h1 {
+    font-size: clamp(2.6rem, 8vw, 5.4rem);
+    line-height: .92;
+    letter-spacing: -.045em;
+    font-weight: 900;
+    text-transform: uppercase;
+    max-width: 16ch;
+    margin-bottom: 1.5rem;
+}
+.hero h1::after {
+    content: '';
+    display: block;
+    width: 96px;
+    height: 12px;
+    background: var(--acid);
+    border: 2px solid #000;
+    margin-top: .7rem;
+}
+.lede {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 46ch;
+    margin-bottom: 2rem;
+    border-left: 6px solid #000;
+    padding-left: 1rem;
+}
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.btn {
+    display: inline-block;
+    padding: .85rem 1.7rem;
+    font-size: .88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--acid);
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    transition: transform .08s linear, box-shadow .08s linear;
+}
+.btn:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 #000; }
+.btn.ghost {
+    background: var(--paper);
+}
+
+/* ---------- services ---------- */
+.services { border-bottom: var(--rule); }
+.services > .wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+}
+.services article {
+    padding: 2.4rem 1.8rem 2.8rem;
+    border-right: var(--rule);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+}
+.services article:last-child { border-right: 0; }
+.services article:nth-child(2) { background: var(--acid); }
+.num {
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    border: 2px solid #000;
+    padding: .1rem .45rem;
+    align-self: flex-start;
+    margin-bottom: auto;
+}
+.services h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin: 1.6rem 0 .6rem;
+}
+.services p {
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+/* ---------- quote ---------- */
+.quote {
+    background: #000;
+    color: #fff;
+    padding: 4rem 0;
+    border-bottom: var(--rule);
+}
+.quote blockquote {
+    font-size: clamp(1.4rem, 3.6vw, 2.3rem);
+    line-height: 1.15;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -.025em;
+    max-width: 22ch;
+    margin-bottom: 1.4rem;
+}
+.quote cite {
+    font-style: normal;
+    font-size: .84rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--acid);
+}
+
+/* ---------- cta ---------- */
+.cta { padding: 4rem 0; border-bottom: var(--rule); }
+.cta > .wrap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+.cta h2 {
+    font-size: clamp(1.8rem, 4.6vw, 3rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: .95;
+    letter-spacing: -.035em;
+    margin-bottom: .7rem;
+}
+.cta p {
+    font-size: 1rem;
+    border-top: 2px solid #000;
+    padding-top: .7rem;
+    max-width: 34ch;
+}
+.cta .btn { justify-self: end; }
+
+/* ---------- footer ---------- */
+footer { padding: 1.6rem 0; }
+footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+/* ---------- back chip ---------- */
+.back-chip {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    font-size: .74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: .45rem .8rem;
+    color: #000;
+    text-decoration: none;
+    background: #fff;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    opacity: .8;
+}
+.back-chip:hover { background: var(--acid); opacity: 1; }
+
+@media (max-width: 860px) {
+    .services > .wrap { grid-template-columns: 1fr; }
+    .services article { border-right: 0; border-bottom: var(--rule); min-height: 0; }
+    .services article:last-child { border-bottom: 0; }
+    .cta > .wrap { grid-template-columns: 1fr; }
+    .cta .btn { justify-self: start; }
+    .site-head nav a { padding: .4rem .5rem; font-size: .74rem; }
+}

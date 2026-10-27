@@ -1293,3 +1293,41 @@ header p { font-size: 1em; }
     .site-nav .nav-inner { min-height: 48px; gap: .5rem; }
     header h1 { font-size: 1.5em; }
 }
+
+/* ===== 风格预览入口（build 注入到详情页） ===== */
+.preview-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.8rem;
+    padding: 0.95rem 1.15rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-border-radius, 10px);
+    background: var(--card-bg);
+}
+.preview-cta p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    max-width: 46ch;
+}
+.preview-cta a {
+    flex: 0 0 auto;
+    font-size: 0.84rem;
+    font-weight: 600;
+    padding: 0.55rem 1.05rem;
+    border-radius: 6px;
+    background: var(--button-bg);
+    color: var(--button-text-color) !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.preview-cta a:hover { background: var(--button-hover-bg); transform: translateY(-1px); }
+
+@media (max-width: 560px) {
+    .preview-cta { flex-direction: column; align-items: flex-start; }
+}
