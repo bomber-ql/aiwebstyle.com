@@ -34,7 +34,18 @@
     <!-- /build:seo -->
 </head>
 <body>
-    <header>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="index.html">Styles</a>
+                <a href="motions/index.html">Motions</a>
+                <a href="about.html" class="is-active" aria-current="page">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav --><header>
         <div class="container">
             <h1>About AI Website Style Gallery</h1>
             <p>A reference library of web design styles, written prompts, and downloadable CSS.</p>
@@ -77,20 +88,6 @@
                 <p style="margin-bottom:.4rem"><strong>Email:</strong> <a href="mailto:hello@aiwebstyle.com">hello@aiwebstyle.com</a></p>
                 <p style="margin-bottom:0">For corrections, style suggestions, broken links, or licensing questions. We aim to reply within a few business days.</p>
             </div>
-
-            <hr class="lang-divider">
-
-            <h2 lang="zh-CN">关于本站（中文）</h2>
-            <div lang="zh-CN">
-                <p>AI Website Style Gallery 是一个面向「用 AI 建站」人群的设计风格参考库。它把每一种视觉风格拆解到可以复现的程度，而不是只给一个形容词。</p>
-                <p>每个条目包含：这种风格长什么样、来源是什么、真正决定效果的 CSS 属性、设计变量（色板/字体/圆角/间距）、AI 生成时最先崩坏的地方，以及一段可以直接粘贴使用的 prompt。页面中完整实现的风格会提供独立 CSS 下载。</p>
-                <p><strong>为什么做这个站：</strong>你让 AI「做一个现代的网站」，结果永远是同一套——Inter 字体、淡紫渐变、16px 圆角卡片。这不是模型的极限，而是 prompt 只说氛围、不说约束的必然结果。本站填的就是「具体性」这个缺口。</p>
-                <p><strong>内容怎么来的：</strong>通过跟踪真实在落地的东西来选题——设计奖项短名单、前端技法文章、组件库、设计社区的重复提问。只有当一种风格能被具体描述到可复现，才会收录。所有页面人工撰写与审核；prompt 经过真实工具验证，不可用就重写而不是照发。</p>
-                <p><strong>关于转载：</strong>本站不搬运原文与素材，风格分析基于观察和 CSS 本身，参考链接均指向原始出处。</p>
-                <div class="contact-box">
-                    <p style="margin-bottom:0"><strong>联系：</strong><a href="mailto:hello@aiwebstyle.com">hello@aiwebstyle.com</a>（纠错、风格建议、失效链接、授权问题）</p>
-                </div>
-            </div>
         </article>
     </main>
 
@@ -99,6 +96,7 @@
             <p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
                 <a href="index.html">Gallery</a>
+                <a href="motions/index.html">Motions</a>
                 <a href="about.html">About</a>
                 <a href="about.html#contact">Contact</a>
                 <a href="privacy.html">Privacy Policy</a>

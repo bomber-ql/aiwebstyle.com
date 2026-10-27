@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Mask Reveal — Headline Slides Up From a Hard Edge | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="An oversized headline slides up from behind a hard edge, line by line, with a staggered delay. Working demo, copy-ready AI prompt and the failure modes to avo">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/text-mask-reveal.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Text Mask Reveal — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="An oversized headline slides up from behind a hard edge, line by line, with a staggered delay. Working demo, copy-ready AI prompt and the failure modes to avo">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/text-mask-reveal.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Text Mask Reveal","description":"An oversized headline slides up from behind a hard edge, line by line, with a staggered delay.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to load using clip-path + transform."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav --><header>
+        <div class="container">
+            <h1>Text Mask Reveal</h1>
+            <p>An oversized headline slides up from behind a hard edge, line by line.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <h1 class="m-title">Text Mask Reveal</h1>
+        <p class="m-lede">Every landing page opening wants this, and almost every AI-generated version clips the descenders off the letters. The fix is two lines of CSS that nobody writes down.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: load</span>
+            <span class="m-tag">overflow + transform</span>
+            <span class="m-tag">staggered delay</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="replay" type="button">Replay</button>
+        </div>
+        <div class="m-stage">
+            <div class="mask-demo" id="maskDemo">
+                <h2 class="mask-head">
+                    <span class="mask-line"><span style="--i:0">Typography</span></span>
+                    <span class="mask-line"><span style="--i:1">that earns</span></span>
+                    <span class="mask-line"><span style="--i:2">attention</span></span>
+                </h2>
+                <p class="mask-sub">Watch the descender on the “g” — it is not clipped.</p>
+            </div>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <p class="m-prompt-label">English</p>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Animate a large headline so each line slides up from behind a hard edge on page load.
+
+Structure:
+- Wrap every line of the headline in its own span with display: block and overflow: hidden. Put the actual text in a nested span that will be translated.
+- Give each inner span a CSS variable --i (0, 1, 2...) used as animation-delay: calc(var(--i) * 90ms).
+
+Motion:
+- Inner span starts at transform: translateY(115%) and animates to translateY(0) over 900ms with cubic-bezier(.22, 1, .36, 1).
+- Use animation-fill-mode: forwards.
+
+Critical detail — do not skip this:
+- The inner span must have padding-bottom: 0.12em and margin-bottom: -0.12em. Without it, overflow: hidden on the parent clips the descenders of g, y, p, j and the text looks broken.
+- Use translateY(115%) rather than 100% so the baseline clears the mask edge during the first frames.
+
+Constraints:
+- Only animate transform. Never animate line-height, font-size or margin.
+- Respect prefers-reduced-motion: show the headline immediately, no animation.
+- The text must remain real text in the DOM (not an image, not split into per-character spans) so it stays selectable and indexable.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>The mask is a clipping box, not a fade.</strong> <code>overflow: hidden</code> on a block-level wrapper creates a hard horizontal edge. Sliding the child up from below that edge reads as the text emerging from solid ground — far cleaner than animating opacity.</li>
+                <li><strong>The descender fix.</strong> This is the detail AI output almost always omits. <code>overflow: hidden</code> clips at the content box, so the tails of g, y, p and j get sliced. Adding <code>padding-bottom: 0.12em</code> extends the box downward and <code>margin-bottom: -0.12em</code> pulls the layout back so nothing shifts. The clipped area is now empty padding instead of letterforms.</li>
+                <li><strong>115%, not 100%.</strong> At exactly 100% the glyphs sit flush against the mask edge and you see a hairline of the top serif during the first frame. The extra 15% clears it.</li>
+                <li><strong>Stagger is what sells it.</strong> All three lines at once looks like a slide transition. 90ms apart reads as deliberate typesetting.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+                <tbody>
+                    <tr><td>Browser support</td><td>Universal. Overflow clipping and transforms have worked everywhere for a decade.</td></tr>
+                    <tr><td>Cost</td><td>Compositor-only. A handful of layers for under a second.</td></tr>
+                    <tr><td>Cumulative layout shift</td><td>None, provided the negative margin matches the padding.</td></tr>
+                </tbody>
+            </table>
+            <p>The one thing to watch is that <code>overflow: hidden</code> creates a new formatting context. If a line contains a tooltip or a dropdown that needs to escape the box, it will be clipped too. In that case animate the whole block instead of individual lines.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't apply it to body copy.</strong> This is a display-type effect. On a paragraph it makes reading feel like waiting.</p>
+                <p><strong>Don't delay the headline past ~600ms.</strong> People decide whether to stay before your animation finishes. The first line should be readable almost immediately — which is why the stagger starts at 0ms, not after a 400ms lead-in.</p>
+                <p><strong>Don't replicate it on every section.</strong> Once per page, at the top. Repeating it turns an entrance into a tic.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="magnetic-button.html">← Previous: Magnetic Button</a>
+            <a href="index.html">All motions →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .mask-demo {
+            padding: 2.4rem 1.6rem;
+            background: var(--card-bg, #fff);
+            border-radius: 10px;
+            border: 1px solid var(--border-color, #e4ebf3);
+        }
+        .mask-head {
+            font-size: clamp(2rem, 6vw, 3.4rem);
+            line-height: 1.06;
+            letter-spacing: -.03em;
+            margin: 0 0 1rem;
+            color: var(--heading-color, #10151c);
+        }
+        .mask-line {
+            display: block;
+            overflow: hidden;
+        }
+        .mask-line > span {
+            display: block;
+            transform: translateY(115%);
+            padding-bottom: 0.12em;
+            margin-bottom: -0.12em;
+        }
+        .mask-demo.is-on .mask-line > span {
+            animation: mask-up 900ms cubic-bezier(.22, 1, .36, 1) forwards;
+            animation-delay: calc(var(--i) * 90ms);
+        }
+        @keyframes mask-up {
+            to { transform: translateY(0); }
+        }
+        .mask-sub {
+            font-size: .85rem;
+            color: var(--footer-text-color, #8892a0);
+            margin: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mask-line > span { transform: none; animation: none !important; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const demo = document.getElementById('maskDemo');
+
+        function play() {
+            demo.classList.remove('is-on');
+            void demo.offsetWidth;
+            demo.classList.add('is-on');
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            demo.classList.add('is-on');
+        } else {
+            requestAnimationFrame(play);
+        }
+
+        document.getElementById('replay').addEventListener('click', play);
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -139,6 +139,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.aiwebstyle.com/motions/index.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.aiwebstyle.com/motions/scroll-reveal.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.aiwebstyle.com/motions/magnetic-button.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.aiwebstyle.com/motions/text-mask-reveal.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.aiwebstyle.com/about.html</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>yearly</changefreq>

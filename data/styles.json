@@ -13,7 +13,9 @@
     "prompt": {
       "en": "Design a skeuomorphic UI element, like a leather-bound notebook app interface. Use realistic leather texture, stitching details, drop shadows, and maybe a textured paper background. Font like Georgia or a classic serif.",
       "zh": "设计一个拟物化的用户界面元素，例如皮革封面的笔记本应用程序界面。使用逼真的皮革纹理、缝合细节、投影，以及可能的纹理纸张背景。字体可选用 Georgia 或经典的衬线字体。"
-    }
+    },
+    "summaryLong": "Skeuomorphism is an interface design method whose core lies in imitating the appearance, material, texture, and interaction methods of corresponding objects in the real world, striving to create a realistic and familiar feeling on the digital interface.",
+    "summaryKey": "skeuomorphismDesc1"
   },
   {
     "id": "swiss-style",
@@ -29,7 +31,9 @@
     "prompt": {
       "en": "Create a website layout in the Swiss Style for a design conference. Use a strict grid, Helvetica or Univers font, strong typographic hierarchy (different weights/sizes), maybe one bold accent color (like red), and black/white photography.",
       "zh": "为设计会议创建一个瑞士风格的网站布局。使用严格的网格、Helvetica 或 Univers 字体、强烈的排版层次（不同的字重/大小），可选用一种醒目的强调色（如红色），以及黑白摄影。"
-    }
+    },
+    "summaryLong": "Swiss Style, also known as International Typographic Style, is a graphic design and typographic method that emphasizes clarity, objectivity, readability, and order. It originated in Switzerland in the 1940s-50s.",
+    "summaryKey": "swissStyleDesc1"
   },
   {
     "id": "grunge",
@@ -45,7 +49,9 @@
     "prompt": {
       "en": "Design a grunge-style band website. Use distressed paper or concrete textures, ripped edges, layered elements, maybe some 'dirty' brush strokes, dark colors (browns, greys, muted reds), and a typewriter or stencil font.",
       "zh": "设计一个垃圾摇滚风格的乐队网站。使用破旧纸张或混凝土纹理、撕裂边缘、分层元素，可加入一些“肮脏”的笔触效果，采用深色调（棕色、灰色、柔和的红色），以及打字机或模板字体。"
-    }
+    },
+    "summaryLong": "Grunge design originated in the music and subculture scenes of the 90s. Its visual characteristics are often deliberately rough, messy, imperfect, and even somewhat 'dirty' or 'destructive'. It opposes clean, refined design, pursuing a raw, authentic, unembellished aesthetic.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "modern-tech",
@@ -61,7 +67,9 @@
     "prompt": {
       "en": "Design a modern tech dashboard UI for data analytics. Use a clean layout with cards, charts (bar, line), Inter or Poppins font, a cool color palette (blues, purples, greys), clear data visualization, and subtle hover effects.",
       "zh": "为数据分析设计一个现代科技风格的仪表盘用户界面。使用简洁的卡片式布局、图表（条形图、折线图）、Inter 或 Poppins 字体，采用冷色调（蓝色、紫色、灰色），清晰的数据可视化，以及细微的悬停效果。"
-    }
+    },
+    "summaryLong": "Modern Tech style is the application of modern design principles to digital products, software interfaces, and technology-related websites. It prioritizes clarity, efficiency, and user experience, often with a precise, cutting-edge feel.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "brutalism",
@@ -77,7 +85,9 @@
     "prompt": {
       "en": "Create a brutalist website for an art zine. Use default system fonts (Arial, Times), stark high-contrast colors (black/white or black/yellow), hard borders, no rounded corners, and maybe harsh block shadows.",
       "zh": "为艺术杂志创建一个粗野主义网站。使用默认系统字体（Arial, Times），鲜明的高对比度颜色（黑/白或黑/黄），硬朗的边框，无圆角，以及可能的粗犷块状阴影。"
-    }
+    },
+    "summaryLong": "Brutalism in web design originates from the architectural movement of the same name, emphasizing raw, exposed, unadorned materials and structures. It is often seen as a rebellion against current refined, sleek, user-friendly design trends.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "retro-90s",
@@ -93,7 +103,9 @@
     "prompt": {
       "en": "Generate a 90s Geocities style fan page. Use Times New Roman or Comic Sans, bright clashing colors (blue background, yellow text), animated GIFs (under construction!), maybe a visitor counter, and a table-based layout feel.",
       "zh": "生成一个 90 年代 Geocities 风格的粉丝页面。使用 Times New Roman 或 Comic Sans 字体，鲜艳且冲突的颜色（蓝色背景，黄色文本），动画 GIF（“建设中！”），可加入访客计数器，以及基于表格的布局感。"
-    }
+    },
+    "summaryLong": "The 90s web retro style is an imitation and tribute to the visual characteristics of the early internet era. Web design at that time was limited by technology (slow networks, limited HTML/CSS functionality, low-resolution screens), forming a unique aesthetic.",
+    "summaryKey": "retro90sDesc1"
   },
   {
     "id": "retro-y2k",
@@ -109,7 +121,9 @@
     "prompt": {
       "en": "Design a Y2K aesthetic fashion blog. Use glossy/metallic textures, semi-transparent elements, bubbly fonts, pastel or neon colors (like hot pink, lime green, iridescent blues), and maybe some abstract blob shapes.",
       "zh": "设计一个 Y2K 美学风格的时尚博客。使用光泽/金属纹理、半透明元素、气泡字体、柔和或霓虹色（如亮粉色、石灰绿、彩虹蓝），以及可能的抽象斑点形状。"
-    }
+    },
+    "summaryLong": "The Y2K (Year 2000) aesthetic is a look back and reproduction of popular culture, technology, and design trends from the turn of the century (around 1995-2004). In web design, it blends the optimism of the early internet, futuristic tech fantasies, and popular visual elements of the time.",
+    "summaryKey": "retroY2KDesc1"
   },
   {
     "id": "retro-pixel",
@@ -125,7 +139,9 @@
     "prompt": {
       "en": "Generate a retro pixel art website for an indie game studio. Use a pixel font (like Press Start 2P), a dark background, bright accent colors (like #00ff00), pixelated icons/logo, and sharp edges.",
       "zh": "为独立游戏工作室生成一个复古像素艺术网站。使用像素字体（如 Press Start 2P），深色背景，明亮的强调色（如 #00ff00），像素化图标/标志，以及锐利的边缘。"
-    }
+    },
+    "summaryLong": "Pixel Art style is an imitation of the visual effects of early video games, such as the 8-bit and 16-bit eras. In web design, it creates a nostalgic, fun, and unique digital feel through the use of blocky, low-resolution graphics and fonts.",
+    "summaryKey": "retroPixelDesc1"
   },
   {
     "id": "illustration",
@@ -141,7 +157,9 @@
     "prompt": {
       "en": "Design a website for a children's bookstore heavily featuring whimsical, hand-drawn illustrations. Integrate illustrations around content blocks. Use a warm, friendly color palette and a playful font.",
       "zh": "为一个儿童书店设计一个以异想天开的手绘插画为主要特色的网站。将插画融入内容区块周围。使用温暖、友好的调色板和俏皮的字体。"
-    }
+    },
+    "summaryLong": "Illustration-style web design focuses on using custom, often hand-drawn style graphic elements to convey information, create atmosphere, and enhance brand personality. It's not just about adding pictures, but integrating illustration as a core component of the design.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "3d-interactive",
@@ -157,7 +175,9 @@
     "prompt": {
       "en": "Create a website product page showcasing an interactive 3D model (e.g., using Three.js or Spline). Allow users to rotate/zoom the model. Use a clean, modern UI around the 3D view.",
       "zh": "创建一个展示交互式 3D 模型（例如使用 Three.js 或 Spline）的产品页面网站。允许用户旋转/缩放模型。在 3D 视图周围使用简洁、现代的用户界面。"
-    }
+    },
+    "summaryLong": "Note: These CSS effects are intended to significantly enhance the visual style and simulate a 3D interactive feel. True 3D rendering and complex interactions still require JavaScript and WebGL. The perceived effect may also vary depending on the browser and user settings. Overly strong effects can sometimes impact usability, so please balance accordingly.",
+    "summaryKey": "detail_css_note"
   },
   {
     "id": "dark-mode",
@@ -173,7 +193,9 @@
     "prompt": {
       "en": "Create a modern dark mode theme for a tech blog. Use a deep charcoal or navy background (#1a1f2c), light grey text (#e0e0e0), a vibrant accent color (#4d5bff) for links/buttons, and Poppins font.",
       "zh": "为科技博客创建一个现代暗黑模式主题。使用深炭色或海军蓝背景（#1a1f2c），浅灰色文本（#e0e0e0），以及用于链接/按钮的鲜艳强调色（#4d5bff），并采用 Poppins 字体。"
-    }
+    },
+    "summaryLong": "Dark Mode, also known as dark theme or night mode, is an interface color scheme that uses dark backgrounds and light foregrounds (text, icons). It contrasts with the traditional light background, dark foreground approach.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "bold-typography",
@@ -189,7 +211,9 @@
     "prompt": {
       "en": "Design a landing page using oversized, bold typography (e.g., Montserrat ExtraBold) as the main visual element. Keep the layout simple, possibly black and white, to emphasize the text.",
       "zh": "设计一个以超大、醒目的排版（例如 Montserrat ExtraBold）作为主要视觉元素的登陆页面。保持布局简洁，可能采用黑白配色，以强调文本。"
-    }
+    },
+    "summaryLong": "The bold typography style is very suitable for websites that need to quickly convey core information, showcase a sense of power and modernity, such as event promotions, portfolios, brand manifestos, news headlines, or any scenario where a strong first impression through text is desired.",
+    "summaryKey": "aboutP3"
   },
   {
     "id": "glassmorphism",
@@ -205,7 +229,9 @@
     "prompt": {
       "en": "Design a website section using glassmorphism. Use a colorful, blurred background image/gradient. Create semi-transparent white cards with backdrop-filter: blur(10px) and a subtle white border.",
       "zh": "使用玻璃拟态设计一个网站区域。使用色彩鲜艳、模糊的背景图片/渐变。创建带有 backdrop-filter: blur(10px) 和细微白色边框的半透明白色卡片。"
-    }
+    },
+    "summaryLong": "Glassmorphism is an interface design style that simulates a frosted glass effect. It creates a light, layered, and modern visual experience through background blur, translucency, subtle borders, and glossy effects.",
+    "summaryKey": "aboutP1"
   },
   {
     "id": "aurora-ui",
@@ -221,7 +247,9 @@
     "prompt": {
       "en": "Create a website header with an Aurora UI background effect. Use soft, blurred, colorful radial gradients positioned off-canvas that subtly animate or shift.",
       "zh": "创建一个带有极光 UI 背景效果的网站页眉。使用柔和、模糊、色彩斑斓的径向渐变，这些渐变位于画布之外，并能产生细微的动画或位移效果。"
-    }
+    },
+    "summaryLong": "Note: The effect of Aurora UI largely depends on the fine-tuning of blurriness, color selection, transparency, shape size, and position. Animation is optional but can add dynamism. Please note that this effect may have certain performance requirements.",
+    "summaryKey": "detail_css_note"
   },
   {
     "id": "natural-organic",
@@ -237,7 +265,9 @@
     "prompt": {
       "en": "Design a website for an organic farm using earthy tones (browns, greens, creams), perhaps a subtle paper texture background, rounded corners, and a friendly, legible font like Lato.",
       "zh": "为一个有机农场设计一个网站，使用大地色系（棕色、绿色、奶油色），或许可以加入细微的纸张纹理背景，采用圆角设计，以及友好、易读的字体，如 Lato。"
-    }
+    },
+    "summaryLong": "This style is well-suited for brands or projects related to wellness, eco-friendliness, lifestyle, handcrafted goods, or anything that wishes to convey authenticity, earthiness, and tranquility.",
+    "summaryKey": "descriptionP2"
   },
   {
     "id": "monochromatic",
@@ -253,7 +283,9 @@
     "prompt": {
       "en": "Create a monochromatic portfolio website using only shades, tints, and tones of blue (e.g., #0d6efd). Vary the lightness and saturation for contrast between text, background, and elements.",
       "zh": "创建一个单色作品集网站，仅使用蓝色（例如 #0d6efd）的各种色度、色调和色彩。通过改变亮度和饱和度来区分文本、背景和元素之间的对比。"
-    }
+    },
+    "summaryLong": "Monochromatic design is suitable for brands wishing to convey focus, stability, and a high-quality feel, such as corporate websites, portfolios, high-end product showcases, etc. It can be any color, not just black and white or gray.",
+    "summaryKey": "aboutP3"
   },
   {
     "id": "maximalism",
@@ -269,7 +301,9 @@
     "prompt": {
       "en": "Design a maximalist website for an art collective. Use overlapping elements, a mix of fonts, bold and contrasting colors, patterns, textures, and maybe a collage-like feel. Embrace visual richness.",
       "zh": "为一个艺术团体设计一个最大化主义网站。使用重叠元素、混合字体、大胆且对比鲜明的颜色、图案、纹理，或许可以营造一种拼贴感。拥抱视觉的丰富性。"
-    }
+    },
+    "summaryLong": "Note: Maximalism encourages experimentation and breaking conventions. The code here is just a starting point; feel free to mix in more patterns, fonts, and unusual layouts to enhance the effect. The key is 'more' and 'bold'.",
+    "summaryKey": "cssP2"
   },
   {
     "id": "claymorphism",
@@ -285,7 +319,9 @@
     "prompt": {
       "en": "Design UI elements (buttons, cards) using claymorphism. Use soft, rounded shapes, light background colors (like #e0e5ec), and inner/outer shadows to create a fluffy, clay-like 3D effect.",
       "zh": "使用粘土拟态设计用户界面元素（按钮、卡片）。使用柔和、圆润的形状，浅色背景（如 #e0e5ec），以及内外阴影，营造出蓬松、粘土般的 3D 效果。"
-    }
+    },
+    "summaryLong": "Note: The key to Claymorphism is the clever use of inner and outer shadows and very rounded corners. Adjusting the color, blur, and offset of the shadows can create different 'clay' textures.",
+    "summaryKey": "cssP2"
   },
   {
     "id": "abstract-geometric",
@@ -301,7 +337,9 @@
     "prompt": {
       "en": "Design a website background using abstract geometric shapes (circles, triangles, lines) in a pastel color palette. Shapes can be static or subtly animated.",
       "zh": "使用柔和色调的抽象几何形状（圆形、三角形、线条）设计一个网站背景。形状可以是静态的，也可以是带有细微动画效果的。"
-    }
+    },
+    "summaryLong": "Note: Abstract and geometric styles offer a lot of freedom. Try different shape combinations, color pairings, and layouts to create unique visual effects. The key is a sense of form and visual impact.",
+    "summaryKey": "detail_css_note"
   },
   {
     "id": "sustainable-green",
@@ -317,7 +355,9 @@
     "prompt": {
       "en": "Design a sustainable brand website focusing on low environmental impact. Use system fonts, a simple layout, optimized images (maybe duotone or grayscale), dark mode option, and clear messaging about sustainability.",
       "zh": "为一个注重低环境影响的可持续品牌设计网站。使用系统字体、简洁的布局、优化的图像（可能是双色调或灰度图像）、暗黑模式选项，以及关于可持续性的清晰信息传递。"
-    }
+    },
+    "summaryLong": "This style aims to create a calm, responsible, and environmentally friendly impression, often associated with environmental organizations, organic products, renewable energy, socially responsible enterprises, or any brand wishing to emphasize its commitment to sustainable development.",
+    "summaryKey": "sustainableGreenDesc2"
   },
   {
     "id": "art-deco",
@@ -333,7 +373,9 @@
     "prompt": {
       "en": "Design a website header or invitation card in Art Deco style. Use strong geometric patterns (chevrons, sunbursts), a black and gold color scheme, sharp lines, and a stylized sans-serif font like 'Poppins' (used geometrically) or a specific Art Deco font.",
       "zh": "设计一个装饰艺术风格的网站页眉或邀请卡。使用强烈的几何图案（V形、旭日形），黑金配色方案，锐利的线条，以及风格化的无衬线字体，如 'Poppins'（几何化使用）或特定的装饰艺术字体。"
-    }
+    },
+    "summaryLong": "Note: Art Deco style is known for its unique geometric beauty and sense of luxury. Gold, black, and symmetry are common elements. Font choice and pattern details are crucial for creating the atmosphere.",
+    "summaryKey": "detail_css_note"
   },
   {
     "id": "neomorphism",
@@ -349,6 +391,8 @@
     "prompt": {
       "en": "Design a web interface using Neomorphism. Elements should appear as if they are extruding from the background or pressed into it, using subtle inner and outer shadows. Use a monochromatic color scheme with soft, rounded shapes.",
       "zh": "使用新拟物化设计一个网页界面。元素应看起来像是从背景中挤压出来或压入背景中，使用微妙的内外阴影。采用单色配色方案和柔和的圆角形状。"
-    }
+    },
+    "summaryLong": "A style that uses soft paired shadows — one light, one dark — to make elements appear extruded from or pressed into the background, producing a soft, moulded-plastic feel.",
+    "summaryKey": "neomorphism_description"
   }
 ]

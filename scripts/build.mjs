@@ -8,7 +8,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import vm from 'node:vm';
 
 const ROOT = process.cwd();
 const SITE = 'https://www.aiwebstyle.com';
@@ -20,22 +19,23 @@ const exists = (p) => fs.existsSync(path.join(ROOT, p));
 
 const styles = JSON.parse(read('data/styles.json'));
 
-function loadGlobalJs(rel) {
-  const code = read(rel);
-  // 静音：页面级翻译文件会打印 "Global translations object not found" 等告警
-  const quiet = { log() {}, warn() {}, error() {}, info() {} };
-  const ctx = vm.createContext({ console: quiet });
-  vm.runInContext(
-    code +
-      '\n;globalThis.__out = typeof pageTranslations !== "undefined" ? pageTranslations' +
-      ' : (typeof translations !== "undefined" ? translations : null);',
-    ctx
-  );
-  return ctx.__out;
-}
+// 只收录「已发布 + 页面已存在」的动效，避免索引页出现死链。
+// 新写一个 motions/xxx.html 后重跑本脚本，卡片与 sitemap 会自动出现。
+const motions = JSON.parse(read('data/motions.json'))
+  .filter((m) => m.status === 'published')
+  .filter((m) => exists(`motions/${m.slug}.html`))
+  .sort((a, b) => a.order - b.order);
 
-const t = loadGlobalJs('translations.js');
-const L = t.en;
+const motionsPlanned = JSON.parse(read('data/motions.json'))
+  .filter((m) => m.status === 'published' && !exists(`motions/${m.slug}.html`))
+  .map((m) => m.slug);
+
+// 全英文站：界面文案直接内置，不再走词典
+const L = {
+  promptLabel: 'Example Prompt:',
+  viewDetailsButton: 'View Details',
+  applyThemeButton: 'Apply Theme',
+};
 const escapeAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const stripTags = (s) => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const clip = (s, n) => {
@@ -166,29 +166,103 @@ function injectSeo(rel, block) {
 
 function injectFooterNav(rel) {
   let html = read(rel);
-  if (html.includes('build:footer-nav')) return false;
   const depth = rel.split('/').length - 1;
   const up = depth ? '../' : '';
-  const nav = `<p class="footer-nav" data-build="footer-nav">
+  const navInner = `<p class="footer-nav" data-build="footer-nav">
                 <!-- build:footer-nav -->
                 <a href="${up}index.html">Gallery</a>
+                <a href="${up}motions/index.html">Motions</a>
                 <a href="${up}about.html">About</a>
                 <a href="${up}about.html#contact">Contact</a>
                 <a href="${up}privacy.html">Privacy Policy</a>
                 <a href="${up}terms.html">Terms</a>
                 <!-- /build:footer-nav -->
             </p>`;
+
+  // 已注入过 → 就地更新（便于以后调整导航项）
+  const NAV_RE = /<p class="footer-nav"[^>]*>[\s\S]*?<\/p>/;
+  if (NAV_RE.test(html)) {
+    const next = html.replace(NAV_RE, navInner);
+    if (next === html) return false;
+    write(rel, next);
+    return true;
+  }
+
   const footerMatch = html.match(/<footer[^>]*>[\s\S]*?<\/footer>/);
   if (!footerMatch) return false;
-  let footer = footerMatch[0];
-  if (!/<p class="footer-nav"/.test(footer)) {
-    footer = footer.replace(/(<div class="container">)/, `$1\n            ${nav}`);
-  }
+  const footer = footerMatch[0].replace(/(<div class="container">)/, `$1\n            ${navInner}`);
   write(rel, html.replace(footerMatch[0], footer));
   return true;
 }
 
-/* ---------- 5. sitemap / robots ---------- */
+/* ---------- 4.5 顶部导航（含语言按钮迁移） ---------- */
+
+function injectNav(rel) {
+  let html = read(rel);
+  const depth = rel.split('/').length - 1;
+  const up = depth ? '../' : '';
+  const section = rel.startsWith('motions/')
+    ? 'motions'
+    : rel.startsWith('styles/')
+    ? 'styles'
+    : ['about.html', 'privacy.html', 'terms.html'].includes(rel)
+    ? 'about'
+    : 'home';
+
+  const act = (cond) => (cond ? ' class="is-active" aria-current="page"' : '');
+  const nav = `    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="${up}index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="${up}index.html"${act(section === 'home' || section === 'styles')}>Styles</a>
+                <a href="${up}motions/index.html"${act(section === 'motions')}>Motions</a>
+                <a href="${up}about.html"${act(section === 'about')}>About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav -->`;
+
+  const NAV_RE = /[ \t]*<!-- build:nav -->[\s\S]*?<!-- \/build:nav -->/;
+  if (NAV_RE.test(html)) {
+    html = html.replace(NAV_RE, nav);
+  } else {
+    html = html.replace(/(<body[^>]*>)\s*\n?/, `$1\n${nav}\n`);
+  }
+  write(rel, html);
+  return true;
+}
+
+/* ---------- 6. 动效索引渲染 ---------- */
+
+function motionCard(m, i) {
+  const idx = String(i + 1).padStart(2, '0');
+  return `            <a class="mx-card" href="${m.slug}.html" data-trigger="${m.trigger}">
+                <span class="mx-idx">${idx}</span>
+                <h3>${m.name}</h3>
+                <p>${m.summary}</p>
+                <div class="mx-meta">
+                    <span>${m.tech}</span>
+                    <span class="mx-trigger">${m.trigger}</span>
+                </div>
+            </a>`;
+}
+
+function prerenderMotionsIndex() {
+  const rel = 'motions/index.html';
+  if (!exists(rel)) return 0;
+  let html = read(rel);
+  const cards = `<!-- build:motion-cards -->\n${motions.map(motionCard).join('\n')}\n            <!-- /build:motion-cards -->`;
+  if (/<!-- build:motion-cards -->[\s\S]*?<!-- \/build:motion-cards -->/.test(html)) {
+    html = html.replace(/<!-- build:motion-cards -->[\s\S]*?<!-- \/build:motion-cards -->/, cards);
+  } else {
+    html = html.replace('<!-- build:motion-cards -->', cards);
+  }
+  write(rel, html);
+  return motions.length;
+}
+
+/* ---------- 7. sitemap / robots ---------- */
 
 function buildSitemap() {
   const today = new Date().toISOString().slice(0, 10);
@@ -197,6 +271,12 @@ function buildSitemap() {
     ...styles.map((s) => ({
       loc: `${SITE}/styles/${s.id}.html`,
       priority: '0.8',
+      freq: 'monthly',
+    })),
+    { loc: `${SITE}/motions/index.html`, priority: '0.9', freq: 'weekly' },
+    ...motions.map((m) => ({
+      loc: `${SITE}/motions/${m.slug}.html`,
+      priority: '0.7',
       freq: 'monthly',
     })),
     { loc: `${SITE}/about.html`, priority: '0.5', freq: 'yearly' },
@@ -228,7 +308,8 @@ Sitemap: ${SITE}/sitemap.xml
   );
 }
 
-/* ---------- 6. 执行 ---------- */
+/* ---------- 10. 执行 ---------- */
+
 
 prerenderHome();
 
@@ -261,20 +342,8 @@ injectSeo('index.html', homeSeo);
 let n = 0;
 for (const s of styles) {
   const rel = `styles/${s.id}.html`;
-  if (!exists(rel)) {
-    console.warn('  跳过（文件不存在）:', rel);
-    continue;
-  }
-  let desc = s.description.en;
-  const ptRel = `translations_pages/${s.id}-translations.js`;
-  if (exists(ptRel)) {
-    try {
-      const pt = loadGlobalJs(ptRel);
-      if (pt?.en?.aboutP1) desc = clip(pt.en.aboutP1, 158);
-    } catch (e) {
-      /* 用兜底描述 */
-    }
-  }
+
+  let desc = clip(s.summaryLong || s.description.en, 158);
   injectSeo(
     rel,
     seoBlock({
@@ -303,10 +372,83 @@ const allHtml = [
     .readdirSync(path.join(ROOT, 'styles'))
     .filter((f) => f.endsWith('.html'))
     .map((f) => `styles/${f}`),
+  ...(exists('motions')
+    ? fs
+        .readdirSync(path.join(ROOT, 'motions'))
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => `motions/${f}`)
+    : []),
   ...['about.html', 'privacy.html', 'terms.html'].filter(exists),
 ];
 
-/* ---------- 7. 合规页 SEO ---------- */
+/* ---------- 8. 动效页 SEO ---------- */
+
+prerenderMotionsIndex();
+
+let mn = 0;
+for (const m of motions) {
+  const rel = `motions/${m.slug}.html`;
+
+  const desc = `${m.summary} Working demo, copy-ready AI prompt and the failure modes to avoid.`.slice(0, 158);
+  injectSeo(
+    rel,
+    seoBlock({
+      desc,
+      canonical: `${SITE}/${rel}`,
+      ogType: 'article',
+      jsonLd: {
+        title: `${m.name} — Motion Pattern, Prompt & Demo`,
+        data: {
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: m.name,
+          description: m.summary,
+          inLanguage: 'en',
+          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+          step: [
+            { '@type': 'HowToStep', name: 'Copy the prompt', text: 'Paste the prompt from this page into your AI website builder.' },
+            { '@type': 'HowToStep', name: 'Set the trigger', text: `Bind the effect to ${m.trigger} using ${m.tech}.` },
+            { '@type': 'HowToStep', name: 'Add the fallback', text: 'Include the reduced-motion and unsupported-browser path before shipping.' },
+          ],
+        },
+      },
+    })
+  );
+  mn++;
+}
+
+const motionsIndexDesc = `A library of ${motions.length} web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.`;
+if (exists('motions/index.html')) {
+  injectSeo(
+    'motions/index.html',
+    seoBlock({
+      desc: motionsIndexDesc,
+      canonical: `${SITE}/motions/index.html`,
+      jsonLd: {
+        title: 'Web Motion Library — Animation Prompts with Live Demos',
+        data: {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Web Motion Library',
+          description: motionsIndexDesc,
+          url: `${SITE}/motions/index.html`,
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: motions.length,
+            itemListElement: motions.map((m, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: m.name,
+              url: `${SITE}/motions/${m.slug}.html`,
+            })),
+          },
+        },
+      },
+    })
+  );
+}
+
+/* ---------- 9. 合规页 SEO ---------- */
 
 const legalSeo = {
   'about.html': {
@@ -348,12 +490,35 @@ for (const [rel, meta] of Object.entries(legalSeo)) {
   );
 }
 
+/* 全英文站守卫：HTML 里出现中文就报错（防止以后误粘贴中文内容） */
+function checkEnglishOnly(pages) {
+  const bad = [];
+  for (const rel of pages) {
+    const html = read(rel).replace(/<!--[\s\S]*?-->/g, '');
+    const hits = html.match(/[\u4e00-\u9fff]+/g);
+    if (hits) bad.push(`${rel}: ${[...new Set(hits)].slice(0, 6).join(' / ')}`);
+  }
+  if (bad.length) {
+    console.error('\n✗ 英文站守卫：检测到中文\n' + bad.map((b) => '  · ' + b).join('\n') + '\n');
+    if (!process.argv.includes('--force')) process.exit(1);
+  }
+  return bad.length;
+}
+
+const cjkProblems = checkEnglishOnly(allHtml);
+
 let nav = 0;
-for (const rel of allHtml) if (injectFooterNav(rel)) nav++;
+for (const rel of allHtml) {
+  injectNav(rel);
+  if (injectFooterNav(rel)) nav++;
+}
 
 buildSitemap();
 
 console.log(`✓ 首页预渲染：${styles.length} 张卡片`);
 console.log(`✓ 详情页 SEO：${n} 个`);
+console.log(`✓ 动效索引：${motions.length} 张卡片 | 动效页 SEO：${mn} 个`);
+if (motionsPlanned.length) console.log(`ℹ 待补页面（已登记未建）：${motionsPlanned.join(', ')}`);
 console.log(`✓ Footer 导航：${nav} 个页面`);
+console.log(`✓ 英文站守卫：${cjkProblems ? `⚠ ${cjkProblems} 个页面含中文` : '通过，无中文残留'}`);
 console.log(`✓ sitemap.xml / robots.txt 已生成`);

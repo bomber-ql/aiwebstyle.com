@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Motion Library — Copy-Ready Animation Prompts | AI Website Style Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Web Motion Library — Animation Prompts with Live Demos">
+    <meta property="og:description" content="A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/index.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Web Motion Library","description":"A library of 3 web animation patterns with live demos, copy-ready AI prompts, compatibility notes and the failure modes most AI builds hit.","url":"https://www.aiwebstyle.com/motions/index.html","mainEntity":{"@type":"ItemList","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"Scroll Reveal","url":"https://www.aiwebstyle.com/motions/scroll-reveal.html"},{"@type":"ListItem","position":2,"name":"Magnetic Button","url":"https://www.aiwebstyle.com/motions/magnetic-button.html"},{"@type":"ListItem","position":3,"name":"Text Mask Reveal","url":"https://www.aiwebstyle.com/motions/text-mask-reveal.html"}]}}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav --><header>
+        <div class="container">
+            <h1>Web Motion Library</h1>
+            <p>Animation patterns you can describe to an AI builder — with a working demo, the prompt, and the failure modes.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <h2 class="mx-h2">Animations that survive a real build</h2>
+        <p class="m-lede">Style guides tell you what a page should look like. They rarely tell you what it should <em>do</em>. Each entry below pairs a live demo with a prompt precise enough that a model produces the effect on the first attempt — including the details that get dropped, like descender clipping or how far a magnetic button is allowed to travel.</p>
+
+        <div class="mx-filters" role="group" aria-label="Filter by trigger">
+            <button class="mx-filter is-active" data-filter="all" type="button">All</button>
+            <button class="mx-filter" data-filter="load" type="button">On load</button>
+            <button class="mx-filter" data-filter="scroll" type="button">On scroll</button>
+            <button class="mx-filter" data-filter="cursor" type="button">On cursor</button>
+        </div>
+
+        <div class="mx-grid" id="mxGrid">
+            <!-- build:motion-cards -->
+            <a class="mx-card" href="scroll-reveal.html" data-trigger="scroll">
+                <span class="mx-idx">01</span>
+                <h3>Scroll Reveal</h3>
+                <p>Elements fade in and rise as they enter the viewport, driven by CSS alone — no scroll listener, no library.</p>
+                <div class="mx-meta">
+                    <span>CSS scroll-driven animations</span>
+                    <span class="mx-trigger">scroll</span>
+                </div>
+            </a>
+            <a class="mx-card" href="magnetic-button.html" data-trigger="cursor">
+                <span class="mx-idx">02</span>
+                <h3>Magnetic Button</h3>
+                <p>A button that leans toward the cursor as it approaches, then springs back when you leave. Under 20 lines of JavaScript.</p>
+                <div class="mx-meta">
+                    <span>pointer events + lerp</span>
+                    <span class="mx-trigger">cursor</span>
+                </div>
+            </a>
+            <a class="mx-card" href="text-mask-reveal.html" data-trigger="load">
+                <span class="mx-idx">03</span>
+                <h3>Text Mask Reveal</h3>
+                <p>An oversized headline slides up from behind a hard edge, line by line, with a staggered delay.</p>
+                <div class="mx-meta">
+                    <span>clip-path + transform</span>
+                    <span class="mx-trigger">load</span>
+                </div>
+            </a>
+            <!-- /build:motion-cards -->
+        </div>
+
+        <p class="mx-empty" id="mxEmpty" hidden>Nothing in this category yet.</p>
+
+        <section class="m-section" style="margin-top:3rem">
+            <h2>Why prompts, not snippets</h2>
+            <p>A copied CSS snippet solves today's problem and nothing else — it does not survive a redesign, a different framework, or a model that decides to rewrite your markup. A prompt that states the mechanism, the constraints and the failure mode transfers. That is why every entry here leads with the prompt and treats the code as evidence that it works.</p>
+            <p>The four things every prompt on this page specifies, and which most prompts leave out:</p>
+            <ul>
+                <li><strong>The trigger</strong> — load, scroll position, pointer position, or a state change. Ambiguity here is why an AI gives you a hover effect when you wanted a scroll one.</li>
+                <li><strong>The property budget</strong> — transform and opacity only. The moment a model animates <code>top</code> or <code>height</code>, the effect drops off the compositor and stutters.</li>
+                <li><strong>The fallback</strong> — what happens in a browser or a preference setting that cannot run it.</li>
+                <li><strong>The ceiling</strong> — a number. Strength, duration, displacement. Without one, models overshoot, because "noticeable" is not a measurement.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <script src="../script.js" defer></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const grid = document.getElementById('mxGrid');
+        const empty = document.getElementById('mxEmpty');
+        const buttons = [...document.querySelectorAll('.mx-filter')];
+
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+                const want = btn.dataset.filter;
+                let shown = 0;
+                [...grid.children].forEach((card) => {
+                    const match = want === 'all' || card.dataset.trigger === want;
+                    card.hidden = !match;
+                    if (match) shown++;
+                });
+                empty.hidden = shown > 0;
+            });
+        });
+    </script>
+</body>
+</html>

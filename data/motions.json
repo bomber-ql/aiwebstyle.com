@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "scroll-reveal",
+    "name": "Scroll Reveal",
+    "zh": "渐进显现",
+    "trigger": "scroll",
+    "tech": "CSS scroll-driven animations",
+    "summary": "Elements fade in and rise as they enter the viewport, driven by CSS alone — no scroll listener, no library.",
+    "summaryZh": "元素进入视口时淡入并上移，纯 CSS 驱动，不挂滚动监听。",
+    "order": 1,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "magnetic-button",
+    "name": "Magnetic Button",
+    "zh": "磁吸按钮",
+    "trigger": "cursor",
+    "tech": "pointer events + lerp",
+    "summary": "A button that leans toward the cursor as it approaches, then springs back when you leave. Under 20 lines of JavaScript.",
+    "summaryZh": "光标靠近时按钮朝光标方向偏移，离开后回弹。不到 20 行 JS。",
+    "order": 2,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "text-mask-reveal",
+    "name": "Text Mask Reveal",
+    "zh": "文字遮罩揭示",
+    "trigger": "load",
+    "tech": "clip-path + transform",
+    "summary": "An oversized headline slides up from behind a hard edge, line by line, with a staggered delay.",
+    "summaryZh": "大标题逐行从硬遮罩后方向上滑出，带错峰延迟。",
+    "order": 3,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "sticky-scroll-story",
+    "name": "Sticky Scroll Story",
+    "zh": "固定滚动叙事",
+    "trigger": "scroll",
+    "tech": "position: sticky + IntersectionObserver",
+    "summary": "A panel stays pinned while the copy advances beside it — the standard structure for brand storytelling.",
+    "summaryZh": "面板固定不动，旁边文案逐步推进——品牌叙事页的标准结构。",
+    "order": 4,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "aurora-background",
+    "name": "Aurora Background",
+    "zh": "极光渐变背景",
+    "trigger": "load",
+    "tech": "CSS radial-gradient + keyframes",
+    "summary": "Soft blurred colour fields drift behind the content, slow enough to read as atmosphere rather than motion.",
+    "summaryZh": "柔和的模糊色块在内容后方缓慢漂移，慢到只被感知为氛围而非动效。",
+    "order": 5,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  },
+  {
+    "slug": "card-spotlight",
+    "name": "Card Spotlight",
+    "zh": "卡片光斑跟随",
+    "trigger": "cursor",
+    "tech": "CSS variables + radial-gradient mask",
+    "summary": "A soft highlight tracks the pointer across a card surface, revealing a border glow at the same position.",
+    "summaryZh": "柔和高光跟随指针划过卡片表面，同位置同时点亮边框光。",
+    "order": 6,
+    "status": "published",
+    "updatedAt": "2026-10-27"
+  }
+]

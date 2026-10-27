@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetic Button — Cursor-Attracted CTA | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="A button that leans toward the cursor as it approaches, then springs back when you leave. Under 20 lines of JavaScript. Working demo, copy-ready AI prompt and">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/magnetic-button.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Magnetic Button — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="A button that leans toward the cursor as it approaches, then springs back when you leave. Under 20 lines of JavaScript. Working demo, copy-ready AI prompt and">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/magnetic-button.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Magnetic Button","description":"A button that leans toward the cursor as it approaches, then springs back when you leave. Under 20 lines of JavaScript.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to cursor using pointer events + lerp."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav --><header>
+        <div class="container">
+            <h1>Magnetic Button</h1>
+            <p>A button that leans toward the cursor as it approaches, then springs back.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <h1 class="m-title">Magnetic Button</h1>
+        <p class="m-lede">The effect is not really about the button moving. It is about the invisible hit area around it — the part that makes the cursor feel <em>pulled in</em> before it ever touches the edge. Most implementations miss this and end up with a button that only reacts once you are already on top of it.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: cursor</span>
+            <span class="m-tag">pointer events</span>
+            <span class="m-tag">CSS transition</span>
+            <span class="m-tag">18 lines of JS</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="reset" type="button">Reset</button>
+        </div>
+        <div class="m-stage">
+            <p class="demo-hint">Move your cursor slowly across the whole area, not just the button.</p>
+            <div class="magnet-zone" data-magnet-zone>
+                <a class="magnet" href="#the-prompt" data-magnet>
+                    <svg class="magnet-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Get started
+                </a>
+            </div>
+            <p class="demo-hint demo-hint--small">The dashed outline is the hit area (≈120px of padding). The button is only the visible part.</p>
+        </div>
+
+        <section class="m-section" id="the-prompt">
+            <h2>The prompt</h2>
+            <p class="m-prompt-label">English</p>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Make the primary call-to-action button magnetic.
+
+Behaviour:
+- Wrap the button in a container with about 60px of invisible padding on all sides. Attach the pointer listeners to that wrapper, not to the button, so the effect begins before the cursor reaches the button.
+- On pointermove, compute the cursor offset from the wrapper centre, multiply by 0.3, and write the result into two CSS custom properties (--mx, --my) on the button.
+- The button uses transform: translate(var(--mx), var(--my)) with a 0.35s cubic-bezier(.22,1,.36,1) transition for the return, and a 0.08s linear transition while the pointer is inside.
+- On pointerleave, reset both custom properties to 0px.
+- Only transform the button. Never animate margin, top or left.
+- Guard the whole effect with @media (hover: hover) and (pointer: fine) so touch devices get a normal button.
+- Cap the strength at 0.3 — anything above 0.4 makes the target feel unstable.
+- Keep the focus ring intact and do not move the button further than 16px, or keyboard users lose sight of the hit target.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><strong>Listen on the padded wrapper.</strong> This is the whole trick. A 60px padding ring means the pointer is already inside a listening area while still visually outside the button — that gap is what reads as magnetism. Listening on the button itself produces a much weaker effect.</li>
+                <li><strong>Write CSS variables, not inline transforms.</strong> Setting <code>--mx</code> and <code>--my</code> keeps the transform in the stylesheet, so the return animation is defined once and the JS stays stateless.</li>
+                <li><strong>Two transition speeds.</strong> Fast while the pointer is inside (tracking feels responsive), slow on exit (the spring-back reads as weight). A single speed feels either laggy or rubbery.</li>
+                <li><strong>Offset from the centre, not from the button origin.</strong> Subtracting half the width and height is what makes the button move toward the cursor rather than away.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Environment</th><th>Behaviour</th></tr></thead>
+                <tbody>
+                    <tr><td>Desktop with mouse</td><td>Full effect. Pointer events are universal, no polyfill needed.</td></tr>
+                    <tr><td>Touch devices</td><td>Effect disabled by the hover media query — a normal button remains.</td></tr>
+                    <tr><td>Keyboard</td><td>Unchanged. <code>pointerleave</code> never fires, so the button stays in place.</td></tr>
+                </tbody>
+            </table>
+            <p>The cost here is negligible: one pointer event per frame per button, a style write on a custom property, and a compositor-only transform. The thing to watch is <code>pointermove</code> frequency — it fires at the device's report rate (often 120Hz+). Because the handler does no layout reads, that is fine; if you ever need the bounding rect, cache it on <code>pointerenter</code> instead of calling <code>getBoundingClientRect()</code> inside the move handler.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't apply it to every button.</strong> One magnetic element per screen is a deliberate emphasis. Four of them and the page feels twitchy.</p>
+                <p><strong>Don't use it on the only route to conversion if you can't test it.</strong> A button that moves away from a shaky cursor can cost clicks. Cap the displacement and always keep the hit area at least as large as the original button.</p>
+                <p><strong>Don't stack it with a cursor-following custom cursor.</strong> Two things chasing the pointer at once reads as a bug, not a flourish.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="scroll-reveal.html">← Previous: Scroll Reveal</a>
+            <a href="index.html">All motions →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .demo-hint { font-size: .82rem; color: var(--footer-text-color, #8892a0); margin-bottom: 1rem; }
+        .demo-hint--small { margin: 1rem 0 0; font-size: .76rem; }
+        .magnet-zone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            border: 1px dashed var(--border-color, #c9d6e3);
+            border-radius: 12px;
+            background: var(--card-bg, #fafcff);
+            min-height: 220px;
+        }
+        .magnet {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.6rem;
+            border-radius: 999px;
+            background: var(--button-bg, #1d2734);
+            color: var(--button-text-color, #fff);
+            font-size: .95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transform: translate(var(--mx, 0px), var(--my, 0px));
+            transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease;
+            box-shadow: 0 8px 22px -10px rgba(29, 39, 52, .55);
+            will-change: transform;
+        }
+        .magnet:hover { color: #fff; text-decoration: none; box-shadow: 0 14px 30px -12px rgba(29, 39, 52, .6); }
+        .magnet.is-active { transition: transform .08s linear, box-shadow .3s ease; }
+        .magnet-arrow { flex: 0 0 auto; transition: transform .3s ease; }
+        .magnet:hover .magnet-arrow { transform: translateX(3px); }
+
+        @media not all and (hover: hover) {
+            .magnet { transform: none !important; }
+            .magnet-zone { padding: 40px 20px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .magnet { transform: none !important; transition: none !important; }
+            .magnet-arrow { transition: none; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        document.querySelectorAll('[data-magnet-zone]').forEach((zone) => {
+            const target = zone.querySelector('[data-magnet]');
+            if (!target) return;
+
+            let rect = null;
+            zone.addEventListener('pointerenter', () => { rect = zone.getBoundingClientRect(); });
+
+            zone.addEventListener('pointermove', (e) => {
+                if (!canHover || reduceMotion) return;
+                if (!rect) rect = zone.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                const cap = 16;
+                target.style.setProperty('--mx', Math.max(-cap, Math.min(cap, x)) + 'px');
+                target.style.setProperty('--my', Math.max(-cap, Math.min(cap, y)) + 'px');
+                target.classList.add('is-active');
+            });
+
+            zone.addEventListener('pointerleave', () => {
+                target.style.setProperty('--mx', '0px');
+                target.style.setProperty('--my', '0px');
+                target.classList.remove('is-active');
+                rect = null;
+            });
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            document.querySelectorAll('[data-magnet]').forEach((el) => {
+                el.style.setProperty('--mx', '0px');
+                el.style.setProperty('--my', '0px');
+                el.classList.remove('is-active');
+            });
+        });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>

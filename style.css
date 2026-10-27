@@ -1217,3 +1217,79 @@ body.theme-neomorphism {
 }
 .seo-faq summary { cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--heading-color); }
 .seo-faq details[open] summary { margin-bottom: 0.55rem; }
+
+/* ===== Site nav（build 注入的顶部固定导航） ===== */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #0f151c;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.site-nav .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: .45rem 1rem;
+    min-height: 56px;
+}
+.nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    color: #eef2f7 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: .98rem;
+    letter-spacing: -.01em;
+}
+.nav-brand-sub {
+    font-size: .64rem;
+    font-weight: 400;
+    color: #7f8fa1;
+    letter-spacing: .06em;
+    margin-top: .1rem;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: .15rem;
+    margin-left: auto;
+}
+.nav-links a {
+    display: block;
+    padding: .4rem .85rem;
+    border-radius: 8px;
+    font-size: .86rem;
+    color: #c2cedb !important;
+    text-decoration: none !important;
+    transition: background .15s ease, color .15s ease;
+}
+.nav-links a:hover { background: rgba(255, 255, 255, .08); color: #fff !important; }
+.nav-links a.is-active { background: #213040; color: #fff !important; }
+.nav-end { display: flex; align-items: center; margin-left: .4rem; }
+.site-nav .language-btn {
+    position: static;
+    top: auto;
+    right: auto;
+    padding: 6px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .07);
+    line-height: 0;
+}
+.site-nav .language-btn:hover { background: rgba(255, 255, 255, .16); }
+.site-nav .language-btn img { width: 20px; height: 20px; }
+
+/* ===== 标题区压缩：整屏 hero 收成紧凑标题条 ===== */
+header { padding: 1rem 1rem 1.1rem; margin-bottom: 1.4rem; }
+header h1 { font-size: 1.75em; margin-bottom: .35rem; }
+header p { font-size: 1em; }
+
+@media (max-width: 640px) {
+    .nav-brand-sub { display: none; }
+    .nav-links a { padding: .4rem .55rem; font-size: .8rem; }
+    .site-nav .nav-inner { min-height: 48px; gap: .5rem; }
+    header h1 { font-size: 1.5em; }
+}

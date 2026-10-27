@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Reveal — Fade and Rise Elements on Entry | AI Web Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="motion.css">
+    <!-- build:seo -->
+    <meta name="description" content="Elements fade in and rise as they enter the viewport, driven by CSS alone — no scroll listener, no library. Working demo, copy-ready AI prompt and the failure">
+    <link rel="canonical" href="https://www.aiwebstyle.com/motions/scroll-reveal.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:title" content="Scroll Reveal — Motion Pattern, Prompt &amp; Demo">
+    <meta property="og:description" content="Elements fade in and rise as they enter the viewport, driven by CSS alone — no scroll listener, no library. Working demo, copy-ready AI prompt and the failure">
+    <meta property="og:url" content="https://www.aiwebstyle.com/motions/scroll-reveal.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Scroll Reveal","description":"Elements fade in and rise as they enter the viewport, driven by CSS alone — no scroll listener, no library.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"AI Website Style Gallery","url":"https://www.aiwebstyle.com/"},"step":[{"@type":"HowToStep","name":"Copy the prompt","text":"Paste the prompt from this page into your AI website builder."},{"@type":"HowToStep","name":"Set the trigger","text":"Bind the effect to scroll using CSS scroll-driven animations."},{"@type":"HowToStep","name":"Add the fallback","text":"Include the reduced-motion and unsupported-browser path before shipping."}]}</script>
+    <!-- /build:seo -->
+</head>
+<body>
+    <!-- build:nav -->
+    <nav class="site-nav" aria-label="Primary">
+        <div class="nav-inner">
+            <a class="nav-brand" href="../index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            <div class="nav-links">
+                <a href="../index.html">Styles</a>
+                <a href="../motions/index.html" class="is-active" aria-current="page">Motions</a>
+                <a href="../about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    <!-- /build:nav --><header>
+        <div class="container">
+            <h1>Scroll Reveal</h1>
+            <p>Elements fade in and rise as they enter the viewport — driven by CSS alone.</p>
+        </div>
+    </header>
+
+    <main class="m-wrap">
+        <p class="m-crumb"><a href="index.html">← All motions</a></p>
+
+        <h1 class="m-title">Scroll Reveal</h1>
+        <p class="m-lede">The most requested effect on any landing page, and the one AI builders most often get wrong — they reach for a scroll listener when the browser can do it on the compositor thread for free.</p>
+
+        <div class="m-tags">
+            <span class="m-tag">trigger: scroll</span>
+            <span class="m-tag">CSS scroll-driven animations</span>
+            <span class="m-tag">0 lines of JS</span>
+        </div>
+
+        <div class="m-stage-label">
+            <h2>Live demo</h2>
+            <button class="m-replay" id="replay" type="button">Replay</button>
+        </div>
+        <div class="m-stage">
+            <div class="demo-scroller" id="scroller">
+                <div class="demo-lead"><span class="demo-cue">Scroll down ↓</span></div>
+                <article class="reveal demo-card"><span class="demo-num">01</span><h3>Section one</h3><p>Each block fades in and lifts as its top edge crosses into view.</p></article>
+                <article class="reveal demo-card"><span class="demo-num">02</span><h3>Section two</h3><p>The animation is bound to this panel's scrollport, not to a timer.</p></article>
+                <article class="reveal demo-card"><span class="demo-num">03</span><h3>Section three</h3><p>Scroll back up and it reverses automatically. There is no state to reset.</p></article>
+                <article class="reveal demo-card"><span class="demo-num">04</span><h3>Section four</h3><p>That reversibility is what separates scroll-driven animation from a one-shot reveal.</p></article>
+                <div class="demo-spacer">end of panel</div>
+            </div>
+            <p class="demo-mode" id="mode"></p>
+            <p class="rm-note" id="rmNote" hidden><strong>Reduced motion is on.</strong> Your system setting disables this effect by design — turn off “Reduce motion” to see the demo.</p>
+        </div>
+
+        <section class="m-section">
+            <h2>The prompt</h2>
+            <p class="m-prompt-label">English</p>
+            <div class="m-prompt">
+                <button class="m-copy" data-copy="prompt-en" type="button">Copy</button>
+                <pre id="prompt-en">Add a scroll reveal effect to the page. Each content block should start with opacity 0 and translateY(28px), and animate to opacity 1 and translateY(0) as it enters the viewport.
+
+Implementation requirements:
+- Use CSS scroll-driven animations: animation-timeline: view() with animation-range: entry 10% cover 35%. Do not use a scroll event listener.
+- Include animation-fill-mode: both so elements are visible before and after the range.
+- Add a @supports fallback for browsers without animation-timeline using IntersectionObserver, threshold 0.25.
+- Animate only opacity and transform — never top, margin or height.
+- Respect prefers-reduced-motion: when reduced motion is requested, show all content immediately with no animation.
+- Stagger consecutive blocks by 60ms using animation-delay.
+Do not apply this to content above the fold; the first screen must be readable without waiting.</pre>
+            </div>
+        </section>
+
+        <section class="m-section">
+            <h2>What actually makes it work</h2>
+            <ul>
+                <li><code>animation-timeline: view()</code> binds the animation to the element's own position relative to the scrollport. It runs off the main thread, so it keeps animating while JavaScript is busy.</li>
+                <li><code>animation-range: entry 10% cover 35%</code> is the part most AI output omits. <em>entry 10%</em> means "start when the element's leading edge has crossed 10% into the viewport"; <em>cover 35%</em> means "finish by the time it is 35% covered". Without a range the animation maps to the entire scroll journey and feels sluggish.</li>
+                <li><code>animation-fill-mode: both</code> keeps the element at the start keyframe before entry and at the end keyframe after exit — without it you get a flash of fully visible content, then a jump.</li>
+                <li>The element must be inside a scroll container. In this demo that container is the bordered panel, which is why <code>view()</code> works without the whole page scrolling.</li>
+            </ul>
+        </section>
+
+        <section class="m-section">
+            <h2>Compatibility and performance</h2>
+            <table class="m-compat">
+                <thead><tr><th>Browser</th><th>Support</th></tr></thead>
+                <tbody>
+                    <tr><td>Chrome / Edge</td><td>115+ — full support, runs on the compositor</td></tr>
+                    <tr><td>Safari</td><td>26+ — supported; earlier versions fall back</td></tr>
+                    <tr><td>Firefox</td><td>Behind a flag — the fallback path is what users get</td></tr>
+                </tbody>
+            </table>
+            <p>Because the fallback exists, this is safe to ship today. The cost of the CSS path is close to zero: no scroll listener, no layout reads, no jank when the main thread is busy. The IntersectionObserver fallback does cost a callback per threshold crossing, which is why the threshold is coarse (0.25) rather than continuous.</p>
+        </section>
+
+        <section class="m-section">
+            <h2>When not to use it</h2>
+            <div class="m-avoid">
+                <p><strong>Don't animate the first viewport.</strong> A visitor who has to wait 400ms to read your headline has already decided the page is slow. Above the fold should be static.</p>
+                <p><strong>Don't reveal everything.</strong> If every paragraph fades in, the page feels like a slideshow and the effect stops signalling anything. Reserve it for distinct sections, two to five per page.</p>
+                <p><strong>Don't hide content that carries SEO weight.</strong> Text that starts at <code>opacity: 0</code> is still in the DOM and still indexed, but a user who lands mid-page from a search result may see blank space. Anchor jumps and back-navigation should bypass the animation.</p>
+            </div>
+        </section>
+
+        <nav class="m-next">
+            <a href="index.html">← All motions</a>
+            <a href="magnetic-button.html">Next: Magnetic Button →</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-nav" data-build="footer-nav">
+                <!-- build:footer-nav -->
+                <a href="../index.html">Gallery</a>
+                <a href="../motions/index.html">Motions</a>
+                <a href="../about.html">About</a>
+                <a href="../about.html#contact">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms</a>
+                <!-- /build:footer-nav -->
+            </p>
+            <p>&copy; <span id="year"></span> AI Website Style Gallery</p>
+        </div>
+    </footer>
+
+    <style>
+        .demo-scroller {
+            height: 300px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding-right: .4rem;
+            scrollbar-width: thin;
+            background: var(--card-bg, #fff);
+            border-radius: 10px;
+        }
+        .demo-lead {
+            height: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 1.2rem;
+        }
+        .demo-cue {
+            font-family: var(--font-mono);
+            font-size: .74rem;
+            letter-spacing: .06em;
+            color: var(--footer-text-color, #8892a0);
+            animation: cue-bob 1.8s ease-in-out infinite;
+        }
+        @keyframes cue-bob {
+            0%, 100% { transform: translateY(0); opacity: .65; }
+            50%      { transform: translateY(5px); opacity: 1; }
+        }
+        .demo-card {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #dbe3ec);
+            border-radius: 10px;
+            padding: 1.15rem 1.3rem;
+            margin: 0 .2rem 1.1rem;
+        }
+        .demo-card h3 { font-size: 1rem; margin-bottom: .35rem; color: var(--heading-color, #1d242e); }
+        .demo-card p { font-size: .88rem; line-height: 1.65; color: var(--text-color, #4a5563); margin: 0; }
+        .demo-num {
+            font-family: var(--font-mono);
+            font-size: .7rem;
+            color: var(--footer-text-color, #9aa7b5);
+            display: block;
+            margin-bottom: .3rem;
+        }
+        .demo-spacer {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .74rem;
+            color: var(--footer-text-color, #a8b3bf);
+            font-family: var(--font-mono);
+        }
+        .demo-mode {
+            margin: .7rem 0 0;
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: var(--footer-text-color, #8892a0);
+        }
+        .demo-mode b { color: var(--heading-color, #33404f); font-weight: 600; }
+        .rm-note {
+            margin: .8rem 0 0;
+            padding: .7rem .9rem;
+            font-size: .84rem;
+            line-height: 1.6;
+            border-left: 3px solid #d98a2b;
+            background: #fff8ec;
+            color: #6b4a12;
+            border-radius: 0 8px 8px 0;
+        }
+
+        @keyframes reveal-rise {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @supports (animation-timeline: view()) {
+            .reveal {
+                animation: reveal-rise linear both;
+                animation-timeline: view();
+                animation-range: entry 15% cover 40%;
+            }
+        }
+        @supports not (animation-timeline: view()) {
+            .reveal { opacity: 0; transform: translateY(30px); transition: opacity .45s ease, transform .45s ease; }
+            .reveal.in { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+            .demo-cue { animation: none; }
+        }
+    </style>
+
+    <script src="../script.js" defer></script>
+    <script>
+        const scroller = document.getElementById('scroller');
+        const items = [...document.querySelectorAll('.reveal')];
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const hasTimeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
+
+        const modeEl = document.getElementById('mode');
+        if (rm.matches) {
+            document.getElementById('rmNote').hidden = false;
+            modeEl.innerHTML = 'Running: <b>disabled</b> — system “reduce motion” is on';
+        } else if (hasTimeline) {
+            modeEl.innerHTML = 'Running: <b>CSS scroll-driven animation</b> (animation-timeline: view())';
+        } else {
+            modeEl.innerHTML = 'Running: <b>IntersectionObserver fallback</b> — this browser lacks animation-timeline';
+        }
+
+        function observe() {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((en) => {
+                    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+                });
+            }, { root: scroller, threshold: 0.2 });
+            items.forEach((el) => io.observe(el));
+        }
+        if (!hasTimeline && !rm.matches) observe();
+
+        document.getElementById('replay').addEventListener('click', () => {
+            scroller.scrollTop = 0;
+            if (!hasTimeline && !rm.matches) {
+                items.forEach((el) => el.classList.remove('in'));
+                observe();
+            }
+        });
+
+        // Hide the scroll cue after the first scroll
+        scroller.addEventListener('scroll', () => {
+            const cue = document.querySelector('.demo-cue');
+            if (cue && scroller.scrollTop > 40) cue.style.visibility = 'hidden';
+        }, { passive: true });
+
+        document.querySelectorAll('.m-copy').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+                const text = document.getElementById(btn.dataset.copy).textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied';
+                    btn.classList.add('done');
+                    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+                } catch (e) { btn.textContent = 'Failed'; }
+            });
+        });
+    </script>
+</body>
+</html>
