@@ -33,7 +33,7 @@ const icons = {
   'favicon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="AI Web Style">
   <rect width="96" height="96" rx="22" fill="#000000"/>
   <rect x="14" y="14" width="46" height="46" rx="10" fill="#7c5cff"/>
-  <rect x="36" y="36" width="46" height="46" rx="10" fill="none" stroke="#f4f1ea" stroke-width="10"/>
+  <rect x="36" y="36" width="46" height="46" rx="10" fill="#f4f1ea"/>
 </svg>
 `,
 };

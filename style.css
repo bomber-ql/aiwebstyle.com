@@ -2240,7 +2240,8 @@ html.search-open, html.search-open body { overflow: hidden; }
    换成这张卡 —— 它是全站唯一在「演示」而不只是「叙述」的东西：
    左边给主张，右边给证据。 */
 .home-style-lead-long,
-.home-style-note { display: none; }
+.home-style-note,
+.home-style-mark { display: none; }
 
 @media (min-width: 1080px) {
     .home-hero-top {
@@ -2285,6 +2286,15 @@ html.search-open, html.search-open body { overflow: hidden; }
         z-index: -1;
         pointer-events: none;
     }
+    /* 单色 lockup：前块实心、后块描边，和导航里那枚是同一组形状，
+       只是换成「深底上用浅色」的版本，紫色卡面上一眼能认出来 */
+    .home-hero-top > .home-style-chip .home-style-mark {
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin-bottom: .45rem;
+    }
+    .home-hero-top > .home-style-chip .home-style-mark svg { display: block; width: 100%; height: 100%; }
     .home-hero-top > .home-style-chip .home-style-lead-short { display: none; }
     .home-hero-top > .home-style-chip .home-style-lead-long {
         display: block;

@@ -8,7 +8,7 @@
 
 export const NAV_MARK = `<svg class="nav-mark" viewBox="13 13 70 70" aria-hidden="true" focusable="false">
                     <rect x="16" y="16" width="46" height="46" rx="10" fill="#7c5cff"/>
-                    <rect x="34" y="34" width="46" height="46" rx="10" fill="none" stroke="#f4f1ea" stroke-width="9"/>
+                    <rect x="34" y="34" width="46" height="46" rx="10" fill="#f4f1ea"/>
                 </svg>`;
 
 /** 品牌链接的内部内容（标 + 文字） */
