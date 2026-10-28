@@ -113,29 +113,39 @@ for (const [id, vars] of themes) {
     const flipBg = parseColor(resolve(vars, vars['--flip-bg'] ?? vars['--heading-color'] ?? '#111')) || { r: 0, g: 0, b: 0, a: 1 };
     const flipFg = parseColor(resolve(vars, vars['--flip-fg'] ?? vars['--page-bg'] ?? '#fff')) || { r: 255, g: 255, b: 255, a: 1 };
 
+    // hero 右栏那张卡：底色 = 该主题 --card-bg 叠在页面底色上，再盖一层 9% 标题墨；
+    // 文字取 --hero-card-fg / --hero-card-name（有几套主题的 card-bg 与正文色并不是一对，
+    // 逐套在 style.css 末尾的 “Theme contrast fixes” 里覆盖）
+    const cardBg = parseColor(resolve(vars, vars['--card-bg'] ?? 'transparent')) || { r: 0, g: 0, b: 0, a: 0 };
+    const cardInk = parseColor(resolve(vars, vars['--heading-color'] ?? '#111')) || { r: 0, g: 0, b: 0, a: 1 };
+    const cardFg = parseColor(resolve(vars, vars['--hero-card-fg'] ?? vars['--text-color'] ?? '#000')) || { r: 0, g: 0, b: 0, a: 1 };
+    const cardName = parseColor(resolve(vars, vars['--hero-card-name'] ?? vars['--heading-color'] ?? '#111')) || { r: 0, g: 0, b: 0, a: 1 };
+
     const heroBg = over(headerBg, base);
     const hoverBg = over(flipBg, base);
+    const cardSurface = over({ ...cardInk, a: 0.09 }, over(cardBg, base));
     results.push({
         id,
         hero: +contrast(over(headerText, heroBg), heroBg).toFixed(2),
         body: +contrast(over(bodyText, base), base).toFixed(2),
         flip: +contrast(over(flipFg, hoverBg), hoverBg).toFixed(2),
+        card: +Math.min(contrast(cardFg, cardSurface), contrast(cardName, cardSurface)).toFixed(2),
     });
 }
 
 /* ---------- 输出 ---------- */
 
-results.sort((a, b) => Math.min(a.hero, a.body, a.flip) - Math.min(b.hero, b.body, b.flip));
+results.sort((a, b) => Math.min(a.hero, a.body, a.flip, a.card) - Math.min(b.hero, b.body, b.flip, b.card));
 
-const bad = results.filter((r) => r.hero < MIN || r.body < MIN || r.flip < MIN);
+const bad = results.filter((r) => r.hero < MIN || r.body < MIN || r.flip < MIN || r.card < MIN);
 
 for (const r of results) {
-    const worst = Math.min(r.hero, r.body, r.flip);
+    const worst = Math.min(r.hero, r.body, r.flip, r.card);
     const mark = worst < MIN ? '  ✗' : '';
     const weak = !mark && worst < MIN + 0.6 ? '  ·' : '';
     if (mark || weak) {
         console.log(
-            `  ${r.id.padEnd(20)} hero ${String(r.hero).padStart(6)}  正文 ${String(r.body).padStart(6)}  反色 ${String(r.flip).padStart(6)}${mark || weak}`
+            `  ${r.id.padEnd(20)} hero ${String(r.hero).padStart(6)}  正文 ${String(r.body).padStart(6)}  反色 ${String(r.flip).padStart(6)}  卡片 ${String(r.card).padStart(6)}${mark || weak}`
         );
     }
 }
