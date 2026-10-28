@@ -641,62 +641,6 @@ function buildPicker() {
   return Object.keys(map).length;
 }
 
-/* ---------- 5.7 首页 hero 调色板 ----------
-   1920 宽下 hero 右半屏是空的（标题和正文都有 max-width），加一块「28 套配色一览」：
-   每格 = 该主题的页面底色 + 标题色，点进去是对应的风格页。
-   两列版式只在 ≥1080px 生效，手机上不出现 —— 小屏放不下，也不该抢正文的空间。 */
-
-function themeColor(block, prop) {
-  const want = prop;
-  const vars = {};
-  for (const m of block.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;]+);/g)) vars[m[1]] = m[2].trim();
-  let v = vars[want];
-  for (let i = 0; i < 4 && v && v.startsWith('var('); i++) {
-    const name = v.match(/var\((--[a-z0-9-]+)/);
-    v = name ? vars[name[1]] : null;
-  }
-  return v && /^#[0-9a-f]{3,8}$|^rgb/i.test(v) ? v : null;
-}
-
-function buildHeroPalette() {
-  const rel = 'index.html';
-  if (!exists(rel)) return 0;
-  const css = read('style.css');
-  const swatches = [];
-  for (const s of styles) {
-    const re = new RegExp('body\\.theme-' + s.id + '\\s*\\{([^{}]*)\\}');
-    const m = css.match(re);
-    if (!m) continue;
-    const bg = themeColor(m[1], '--page-bg') || '#ffffff';
-    const fg = themeColor(m[1], '--heading-color') || '#111111';
-    const name = s.name.en || s.name;
-    swatches.push(
-      `            <a class="hero-swatch" href="styles/${s.id}.html" title="${escapeAttr(name)}" aria-label="${escapeAttr(name)}" style="--sw-bg:${bg};--sw-fg:${fg}"></a>`
-    );
-  }
-  if (!swatches.length) return 0;
-
-  const block = `        <!-- build:hero-palette -->
-        <div class="hero-palette">
-            <p class="hero-palette-cap">${styles.length} styles, by palette</p>
-            <div class="hero-palette-grid">
-${swatches.join('\n')}
-            </div>
-            <a class="hero-palette-more" href="styles/index.html">Browse all ${styles.length} →</a>
-        </div>
-        <!-- /build:hero-palette -->`;
-
-  let html = read(rel);
-  const RE = /[ \t]*<!-- build:hero-palette -->[\s\S]*?<!-- \/build:hero-palette -->\n?/;
-  if (RE.test(html)) {
-    html = html.replace(RE, block + '\n');
-  } else {
-    html = html.replace(/(<div class="home-hero-top">[\s\S]*?)(\n\s*<\/div>)/, `$1\n${block}$2`);
-  }
-  write(rel, html);
-  return swatches.length;
-}
-
 /* ---------- 6. 动效索引渲染 ---------- */
 
 function motionCard(m, i) {
@@ -1132,7 +1076,6 @@ buildHomeNames();
 buildHomeSections();
 buildHomeFeatured();
 const pickerCount = buildPicker();
-const paletteCount = buildHeroPalette();
 const related = buildRelated();
 
 const gallerySeo = seoBlock({
@@ -1489,7 +1432,7 @@ for (const rel of allHtml) {
 
 buildSitemap();
 
-console.log(`✓ 风格选择器：${pickerCount} 个风格有画像 | hero 调色板：${paletteCount} 格`);
+console.log(`✓ 风格选择器：${pickerCount} 个风格有画像`);
 console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''} | 随机风格池：${styles.length} 套 / 应用页：${themedPages} 个`);
 console.log(`✓ 相关链接：风格页 ${related.stylePages} / 对比页 ${related.comparePages} / 动效页 ${related.motionPages}`);
 console.log(`✓ 详情页 SEO：${n} 个`);
