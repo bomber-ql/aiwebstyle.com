@@ -7,6 +7,7 @@
 //   2) build-styles        新风格的详情页 / 卡片样式 / 主题块 / zip（会重写 styles/*.html）
 //   3) build               预渲染画廊、首页、SEO、导航、sitemap（必须最后，否则注入会被覆盖）
 //   4) validate-data --files  落地校验。必须在生成之后，兜住「数据加了、产物漏了」
+//   5) check-contrast      主题对比度。必须在生成之后，读的是最终 style.css
 //
 // 用法：node scripts/build-all.mjs
 
@@ -21,6 +22,7 @@ const STEPS = [
     { script: 'build-styles.mjs', label: '风格产物' },
     { script: 'build.mjs', label: '站点注入' },
     { script: 'validate-data.mjs', args: ['--files'], label: '数据校验（产物）' },
+    { script: 'check-contrast.mjs', label: '主题对比度' },
 ];
 
 const node = process.execPath;

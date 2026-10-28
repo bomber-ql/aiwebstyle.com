@@ -584,12 +584,13 @@ function buildHomeSections() {
 
   const cards = sections
     .map(
-      (x) => `                <a class="home-card" href="${x.href}">
-                    <span class="home-count">${x.count} ${x.unit}</span>
-                    <h3>${x.label}</h3>
-                    <p>${x.text}</p>
-                    <span class="home-go">Open →</span>
-                </a>`
+      (x, i) => `                <li><a class="home-row" href="${x.href}">
+                    <span class="home-row-num">${String(i + 1).padStart(2, '0')}</span>
+                    <span class="home-row-label">${x.label}</span>
+                    <span class="home-row-text">${x.text}</span>
+                    <span class="home-row-count">${x.count} ${x.unit}</span>
+                    <span class="home-row-go" aria-hidden="true">→</span>
+                </a></li>`
     )
     .join('\n');
 
@@ -609,7 +610,7 @@ function buildHomeFeatured() {
     .map(
       (s) => `                <a class="home-feature" href="styles/${s.id}.html">
                     <h3>${escapeAttr(s.name.en)}</h3>
-                    <p>${escapeAttr(clip(s.description.en, 96))}</p>
+                    <p>${escapeAttr(clip(s.description.en, 104))}</p>
                     <span class="home-go">Breakdown →</span>
                 </a>`
     )
@@ -623,12 +624,53 @@ ${cards}
   return featured.length;
 }
 
+/* 首页顶部数字条：数字全部来自数据，新增内容时自动变 */
+function buildHomeStats() {
+  const cells = [
+    ['styles/index.html', styles.length, 'styles'],
+    ['previews/index.html', previews.length, 'previews'],
+    ['compares/index.html', compareList.length, 'comparisons'],
+    ['motions/index.html', motions.length, 'motion patterns'],
+    ['recipes/index.html', recipeList.length, 'page prompts'],
+  ]
+    .map(
+      ([href, n, label]) => `                <a href="${href}"><b>${n}</b><span>${label}</span></a>`
+    )
+    .join('\n');
+
+  const block = `<!-- build:home-stats -->\n${cells}\n                <!-- /build:home-stats -->`;
+  const doc = read('index.html');
+  write(
+    'index.html',
+    doc.replace(/<!-- build:home-stats -->[\s\S]*?<!-- \/build:home-stats -->/, block)
+  );
+  return cells.split('\n').length;
+}
+
+/* 首页风格名一览：28 个名字铺一行行，顺便给出 28 条指向详情页的内链 */
+function buildHomeNames() {
+  const names = styles
+    .map((s) => `<a href="styles/${s.id}.html">${escapeAttr(s.name.en)}</a>`)
+    // 分隔符两侧必须留空格，否则 nowrap 的链接连成一条不可断行的长串，会撑出横向滚动
+    .join(' <span class="home-names-sep">·</span> ');
+
+  const block = `<!-- build:home-names -->\n            ${names}\n            <!-- /build:home-names -->`;
+  const doc = read('index.html');
+  write(
+    'index.html',
+    doc.replace(/<!-- build:home-names -->[\s\S]*?<!-- \/build:home-names -->/, block)
+  );
+  return styles.length;
+}
+
 /* ---------- 10. 执行 ---------- */
 
 
 const homeThemes = buildHomeTheme();
 
 prerenderGallery();
+buildHomeStats();
+buildHomeNames();
 buildHomeSections();
 buildHomeFeatured();
 
