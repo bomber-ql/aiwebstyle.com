@@ -2250,6 +2250,11 @@ html.search-open, html.search-open body { overflow: hidden; }
         align-items: start;
     }
     .home-hero-top > * { grid-column: 1; }
+    /* 完全照 logo 的构成来：前面一块实心紫的圆角方块（卡片本体），
+       后面一块错位的描边方块（logo 的第二块）。两者共用 22px 圆角，
+       错位的描边用 z-index:-1 压到卡片背后 —— 露出来的只有右下那条 L 形边，
+       和 logo 里「后一块被前一块挡住一部分」是同一种读法。
+       文字反白：深紫 #5b3fd6 上的奶白 #f4f1ea 约 7:1。 */
     .home-hero-top > .home-style-chip {
         grid-column: 2;
         grid-row: 1 / span 4;
@@ -2259,13 +2264,26 @@ html.search-open, html.search-open body { overflow: hidden; }
         flex-direction: column;
         align-items: flex-start;
         gap: .55rem;
-        margin: 0;
-        padding: clamp(1.15rem, 1.7vw, 1.5rem);
-        border: 1px solid currentColor;
-        border-radius: 18px;
-        background: rgba(128, 128, 128, .07);
+        margin: 0 clamp(0px, 5vw, 104px) 0 0;
+        padding: clamp(1.15rem, 1.7vw, 1.55rem);
+        border: 0;
+        border-radius: 22px;
+        background: #5b3fd6;
+        color: #f4f1ea;
         font-size: .8rem;
         opacity: 1;
+        position: relative;
+        isolation: isolate;
+    }
+    .home-hero-top > .home-style-chip::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 2px solid #7c5cff;
+        border-radius: 22px;
+        transform: translate(15px, 15px);
+        z-index: -1;
+        pointer-events: none;
     }
     .home-hero-top > .home-style-chip .home-style-lead-short { display: none; }
     .home-hero-top > .home-style-chip .home-style-lead-long {
@@ -2273,28 +2291,39 @@ html.search-open, html.search-open body { overflow: hidden; }
         font-size: .64rem;
         letter-spacing: .14em;
         text-transform: uppercase;
-        opacity: .6;
+        opacity: .82;
     }
     .home-hero-top > .home-style-chip .home-style-name {
         font-size: clamp(1.25rem, 1.8vw, 1.7rem);
         font-weight: 700;
         line-height: 1.15;
         letter-spacing: -.015em;
-        text-decoration: none;
-        border-bottom: 2px solid currentColor;
-        padding-bottom: .1rem;
+        color: #fff !important;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+        text-decoration-color: rgba(244, 241, 234, .75);
     }
     .home-hero-top > .home-style-chip .home-style-note {
         display: block;
         font-size: .78rem;
         line-height: 1.5;
-        opacity: .65;
+        opacity: .88;
     }
     .home-hero-top > .home-style-chip .home-style-another {
         margin-top: .7rem;
         padding: .42rem 1rem;
         font-size: .76rem;
         border-radius: 999px;
+        border: 1px solid rgba(244, 241, 234, .7);
+        color: #f4f1ea;
+        background: transparent;
+    }
+    .home-hero-top > .home-style-chip .home-style-another:hover {
+        background: #f4f1ea;
+        border-color: #f4f1ea;
+        color: #3b2a99;
+        opacity: 1;
     }
 }
 
