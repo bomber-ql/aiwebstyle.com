@@ -1,0 +1,90 @@
+{
+  "slug": "3d-interactive-vs-aurora-ui",
+  "a": "3d-interactive",
+  "b": "aurora-ui",
+  "title": "3D Interactive vs Aurora UI",
+  "order": 17,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are dark, both are blue, both move. The difference is whether the depth is in the objects or in the air behind them.",
+  "verdict": "3D interactive puts depth on the elements: stacked text-shadow on the headline, cards that lift 3px on hover and tilt toward the pointer. Aurora puts depth in the background: three blurred radial fields drifting on 14 to 22 second cycles behind panels that barely move.",
+  "brief": [
+    "The 3D page earns its name from two things — a headline built from a multi-line text-shadow stack that imitates extrusion, and cards at 10px radius with a 1px #7f9bff border and a 0 10px 24px -10px blue shadow. Interaction is the point: hover translates the card up 3px, and the tilt follows the pointer.",
+    "Aurora is a background technique. Three circles at 50% radius, each a radial gradient fading to transparent at 66%, animated with small translate and scale keyframes so they drift out of sync. The panels in front use backdrop-filter: blur(14px) and a 1px rgba(255,255,255,.18) border — they are glass, and they are deliberately static."
+  ],
+  "dimensions": [
+    {
+      "name": "Where depth lives",
+      "a": "On the elements — shadow stack and lift",
+      "b": "In the background — drifting colour fields",
+      "edge": "tie"
+    },
+    {
+      "name": "Motion",
+      "a": "Pointer-driven, only while hovering",
+      "b": "Ambient, runs without input",
+      "edge": "tie"
+    },
+    {
+      "name": "Card treatment",
+      "a": "1px #7f9bff border, blue drop shadow",
+      "b": "backdrop blur 14px, 1px white at 18%",
+      "edge": "tie"
+    },
+    {
+      "name": "Headline",
+      "a": "Extruded via multi-layer text-shadow",
+      "b": "Flat, sits on a scrim",
+      "edge": "a"
+    },
+    {
+      "name": "Cost",
+      "a": "Transform per card; cheap but needs throttling",
+      "b": "Three composited layers; needs a pause control",
+      "edge": "tie"
+    },
+    {
+      "name": "Touch behaviour",
+      "a": "Must be disabled — no hover on a phone",
+      "b": "Works as-is; nothing depends on a pointer",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Headline",
+      "a": "text-shadow: 1px 1px 0 #5b7cff, 2px 2px 0 #4a6bee, 3px 3px 0 #3a5add",
+      "b": "no shadow; a dark scrim behind the text"
+    },
+    {
+      "label": "Card",
+      "a": "border: 1px solid #7f9bff; box-shadow: 0 10px 24px -10px rgba(80,120,255,.8)",
+      "b": "backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.18)"
+    },
+    {
+      "label": "Hover",
+      "a": "transform: translateY(-3px) + tilt",
+      "b": "nothing"
+    },
+    {
+      "label": "Background",
+      "a": "static gradient",
+      "b": "three radial gradients on 14–22s keyframes"
+    }
+  ],
+  "whenA": [
+    "The page is a product or a demo where the interaction itself is the argument",
+    "There are few cards and the user will actually point at them",
+    "You can gate the effect behind a hover media query so phones get the flat state"
+  ],
+  "whenB": [
+    "The page is a hero or a landing section where atmosphere matters more than interaction",
+    "You want the site to feel alive with no input at all — a kiosk, a launch page, a title screen",
+    "You need the effect to work identically on touch"
+  ],
+  "promptDelta": "Split the instruction between object and air. For 3D, say the depth is a multi-layer text-shadow with 1px steps and that cards tilt on hover toward the pointer, with perspective on the parent. For aurora, say the depth is three radial gradients at 50% radius drifting on different durations behind static glass panels. A model asked for \"dark 3D glassmorphism\" will do both at once — moving fields under cards that also have drop shadows and tilt — and three depth cues will fight each other.",
+  "recipes": [
+    "launch-page",
+    "dashboard"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "slug": "bento-grid-vs-maximalism",
+  "a": "bento-grid",
+  "b": "maximalism",
+  "title": "Bento Grid vs Maximalism",
+  "order": 12,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "One arranges many things calmly. The other arranges many things loudly. Both are answers to the same problem: a page that has more than five things to say.",
+  "verdict": "Bento controls size — a 4-column grid, one 16px gap, tiles that span one or two columns. Maximalism controls none of that: cards are rotated by a fixed degree each, borders are 2px black, and the palette runs to five colours on purpose.",
+  "brief": [
+    "Bento is a discipline about proportion. The grid is repeat(4, 1fr) with a gap that never changes, and every tile is a multiple of that unit — one column, or two. Because nothing is rotated, nothing overlaps and the gap is constant, the page reads as one object rather than a set of cards.",
+    "Maximalism in this gallery is not random. Each card carries a fixed small rotation (−1.5deg on the hero label, ±1deg on the nav chips), borders are a flat 2px #16130f, and fills come from a five-colour set: butter, mint, pink, lilac, blue. The composition holds only because the rotations are small and repeatable and the palette is capped — remove either and it reads as a broken layout rather than a busy one."
+  ],
+  "dimensions": [
+    {
+      "name": "Grid",
+      "a": "4 columns, 16px gap, spans of 1 or 2",
+      "b": "No grid; blocks are rotated and stacked",
+      "edge": "a"
+    },
+    {
+      "name": "Rotation",
+      "a": "None",
+      "b": "−1.5deg to +1deg, fixed per element",
+      "edge": "b"
+    },
+    {
+      "name": "Palette",
+      "a": "White, #eef1ea, #31353d — three fills",
+      "b": "Five bright fills on #16130f ink",
+      "edge": "b"
+    },
+    {
+      "name": "Border",
+      "a": "1px low-contrast hairline",
+      "b": "2px solid #16130f",
+      "edge": "b"
+    },
+    {
+      "name": "Corner",
+      "a": "10px to 18px, identical on every tile",
+      "b": "0 everywhere",
+      "edge": "tie"
+    },
+    {
+      "name": "Headline",
+      "a": "Single tile carries the claim at 1.7rem",
+      "b": "clamp(2.4rem, 7vw, 4.6rem), max 15ch",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Layout",
+      "a": "grid-template-columns: repeat(4, 1fr); gap: 16px",
+      "b": "no grid; transform: rotate(-1.5deg) per block"
+    },
+    {
+      "label": "Fill",
+      "a": "background: #ffffff / #eef1ea / var(--ink)",
+      "b": "background: #ffd166 / #9be7c4 / #ff9fb2 / #dcc6ff"
+    },
+    {
+      "label": "Border",
+      "a": "border: 1px solid var(--line)",
+      "b": "border: 2px solid #16130f"
+    },
+    {
+      "label": "Radius",
+      "a": "border-radius: 10px to 18px",
+      "b": "border-radius: 0"
+    }
+  ],
+  "whenA": [
+    "The page must show six or more capabilities without becoming a wall of cards",
+    "There is genuinely different weight in the content — one claim, three features, one number — that spans can express",
+    "The brand is quiet and the page has to stay readable for several minutes"
+  ],
+  "whenB": [
+    "The page is a poster, a campaign or a portfolio opening, and five seconds is the whole visit",
+    "Each item is meant to feel individually placed, not part of a system",
+    "You can cap the palette and the rotations — without those two limits it collapses into noise"
+  ],
+  "promptDelta": "Ask for spans and a constant gap and you get Bento; ask for fixed rotations, 2px outlines and five named fills and you get maximalism. The failure mode is a mix: a model asked for a \"playful bento\" will rotate some tiles, which destroys the one property that makes bento legible — the constant gap between unrotated boxes. If you want playfulness with structure, rotate the label, not the tile.",
+  "recipes": [
+    "saas-landing",
+    "careers-page"
+  ]
+}

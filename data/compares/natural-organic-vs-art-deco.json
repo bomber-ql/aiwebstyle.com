@@ -1,0 +1,90 @@
+{
+  "slug": "natural-organic-vs-art-deco",
+  "a": "natural-organic",
+  "b": "art-deco",
+  "title": "Natural Organic vs Art Deco",
+  "order": 20,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are serif display with a warm accent and hairline rules. One is paper and moss; the other is lacquer and gold.",
+  "verdict": "Natural Organic is warm and loose: paper #f5f0e1, Playfair headings over Lato body, 19ch headline, 18px card radii, sections divided by 1px #e0d8c8. Art Deco is cold and exact: #0b0b0b black, gold #c9a227, caps tracked to 0.34em, headline at 0.12em with a 20ch measure.",
+  "brief": [
+    "The organic page looks drawn rather than set. Radii are generous (18px on cards, 999px on pills), rules are warm rather than grey, and the palette never exceeds four tones — paper, moss, clay, ink. Nothing is centred for the sake of symmetry; the sections simply follow each other.",
+    "Art Deco is a system of measurement. Labels sit at 0.34em tracking, the headline at 0.12em, and the gold hairlines at 45% opacity frame each block without closing it. The symmetry is strict and the palette is two values plus one metal — the opposite of the organic page in every decision except the serif."
+  ],
+  "dimensions": [
+    {
+      "name": "Ground",
+      "a": "#f5f0e1 warm paper",
+      "b": "#0b0b0b near-black",
+      "edge": "tie"
+    },
+    {
+      "name": "Accent",
+      "a": "Moss green and clay",
+      "b": "Gold #c9a227",
+      "edge": "tie"
+    },
+    {
+      "name": "Tracking",
+      "a": "0.18em on labels, −0.01em on the headline",
+      "b": "0.34em on labels, 0.12em on the headline",
+      "edge": "b"
+    },
+    {
+      "name": "Radius",
+      "a": "18px cards, 999px pills",
+      "b": "0 — square corners throughout",
+      "edge": "a"
+    },
+    {
+      "name": "Rules",
+      "a": "1px #e0d8c8 between sections",
+      "b": "1px gold at 45% opacity, doubled on frames",
+      "edge": "tie"
+    },
+    {
+      "name": "Measure",
+      "a": "19ch headline, 50ch standfirst",
+      "b": "20ch headline, 54ch body",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Page",
+      "a": "background: var(--paper) #f5f0e1",
+      "b": "background: #0b0b0b"
+    },
+    {
+      "label": "Headline",
+      "a": "'Playfair Display', letter-spacing: -.01em, max-width: 19ch",
+      "b": "'Playfair Display', letter-spacing: .12em, max-width: 20ch"
+    },
+    {
+      "label": "Label",
+      "a": "letter-spacing: .18em",
+      "b": "letter-spacing: .34em, uppercase"
+    },
+    {
+      "label": "Divider",
+      "a": "border-top: 1px solid #e0d8c8",
+      "b": "border-top: 1px solid rgba(201,162,39,.45)"
+    }
+  ],
+  "whenA": [
+    "The brand is food, farming, craft or wellness, where paper and moss read as honest",
+    "The page has photography of real things, which the palette supports instead of fighting",
+    "You want warmth without ornament — nothing is decorated, everything is just soft"
+  ],
+  "whenB": [
+    "The subject is hospitality, jewellery, cocktails or a launch with a sense of occasion",
+    "The page is a poster more than a document: few words, one strong frame",
+    "You want luxury expressed through spacing and metal rather than through imagery"
+  ],
+  "promptDelta": "Both prompts will produce a serif and a warm accent, so name the ground and the tracking. For organic: paper #f5f0e1, moss, 18px radii, tracking near zero. For deco: black, gold, radius 0, caps at 0.34em and a headline at 0.12em — that last number is what stops a model from setting Deco in normal tracking and producing a page that just looks like a warm serif site with gold text.",
+  "recipes": [
+    "portfolio",
+    "contact-page"
+  ]
+}

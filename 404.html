@@ -15,7 +15,8 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
             font-size: .8rem;
             letter-spacing: .12em;
-            color: #8b96a3;
+            color: var(--text-color);
+            opacity: .6;
             margin-bottom: .6rem;
         }
         .nf h1 { font-size: clamp(2rem, 5vw, 2.9rem); letter-spacing: -.03em; margin-bottom: .8rem; }
@@ -38,13 +39,125 @@
         }
         .nf-card:hover { border-color: var(--link-color); transform: translateY(-2px); text-decoration: none; }
         .nf-card strong { display: block; font-size: .95rem; margin-bottom: .2rem; color: var(--heading-color); }
-        .nf-card span { font-size: .82rem; color: #6b7785; }
-        .nf-email { font-size: .9rem; color: #6b7785; }
+        .nf-card span { font-size: .82rem; color: var(--text-color); opacity: .78; }
+        .nf-email { font-size: .9rem; color: var(--text-color); opacity: .78; }
         .nf-email a { color: var(--link-color); }
     </style>
 </head>
 <body>
-    <nav class="site-nav" aria-label="Primary">
+    <!-- build:page-theme -->
+    <script>
+    (function () {
+        var THEMES = [{"id":"skeuomorphism","name":"Skeuomorphism","font":"Playfair+Display:wght@400;700"},{"id":"swiss-style","name":"Swiss Style / International Typographic Style","font":null},{"id":"grunge","name":"Grunge Style","font":null},{"id":"modern-tech","name":"Modern Tech Style","font":"Poppins:wght@400;600;700"},{"id":"brutalism","name":"Brutalism","font":null},{"id":"retro-90s","name":"Retro - 90s Web","font":null},{"id":"retro-y2k","name":"Retro - Y2K Aesthetic","font":"Space+Mono:wght@400;700"},{"id":"retro-pixel","name":"Retro - Pixel Art","font":"Press+Start+2P"},{"id":"illustration","name":"Illustration Focused","font":"Lato:wght@400;700&family=Montserrat:wght@400;700"},{"id":"3d-interactive","name":"3D Elements / Interactive","font":null},{"id":"dark-mode","name":"Dark Mode","font":"Open+Sans:wght@400;600"},{"id":"bold-typography","name":"Bold Typography","font":"Montserrat:wght@400;700;800;900"},{"id":"glassmorphism","name":"Glassmorphism","font":"Poppins:wght@400;600;700"},{"id":"aurora-ui","name":"Aurora UI","font":null},{"id":"natural-organic","name":"Natural / Organic Style","font":"Lato:wght@400;700"},{"id":"monochromatic","name":"Monochromatic Design","font":"Roboto:wght@400;500;700"},{"id":"maximalism","name":"Maximalism / Collage","font":"Playfair+Display:wght@400;700"},{"id":"claymorphism","name":"Claymorphism","font":"Poppins:wght@400;600;700"},{"id":"abstract-geometric","name":"Abstract / Geometric Shapes","font":"Montserrat:wght@400;700;800"},{"id":"sustainable-green","name":"Sustainable / Green Design","font":null},{"id":"art-deco","name":"Art Deco Style","font":"Playfair+Display:wght@400;700"},{"id":"neomorphism","name":"Neomorphism","font":"Poppins:wght@400;600;700"},{"id":"bento-grid","name":"Bento Grid","font":null},{"id":"liquid-glass","name":"Liquid Glass","font":null},{"id":"editorial","name":"Editorial / Magazine","font":"Lato:wght@400;700&family=Playfair+Display:wght@400;700"},{"id":"neo-brutalism","name":"Neo-Brutalism","font":"Montserrat:wght@400;700;800"},{"id":"neo-swiss","name":"Neo-Swiss","font":null},{"id":"acid-graphics","name":"Acid Graphics","font":"Space+Mono:wght@400;700"}];
+        var ROOT = "/";
+        var RANDOM_ON_LOAD = true;
+        var STORE_KEY = 'aiwebstyle-theme';
+        var want = new URLSearchParams(location.search).get('style');
+        var chip, nameEl, button;
+        var current = null;
+
+        function byId(id) {
+            for (var i = 0; i < THEMES.length; i++) {
+                if (THEMES[i].id === id) return THEMES[i];
+            }
+            return null;
+        }
+
+        function remember(id) {
+            try {
+                sessionStorage.setItem(STORE_KEY, id);
+            } catch (e) { /* sessionStorage throws in private mode — ignore */ }
+        }
+
+        function recalled() {
+            try {
+                return byId(sessionStorage.getItem(STORE_KEY) || '');
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function ensureFont(font) {
+            if (!font) return;
+            var key = 'home-font-' + font.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+            if (document.getElementById(key)) return;
+            var link = document.createElement('link');
+            link.id = key;
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css2?family=' + font + '&display=swap';
+            document.head.appendChild(link);
+        }
+
+        function syncChip() {
+            if (!nameEl || !current) return;
+            nameEl.textContent = current.name;
+            nameEl.href = ROOT + 'styles/' + current.id + '.html';
+        }
+
+        function paint(theme) {
+            current = theme;
+            var body = document.body;
+            body.className = body.className
+                .replace(/\btheme-[a-z0-9-]+\b/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+            body.classList.add('theme-' + theme.id);
+            ensureFont(theme.font);
+            remember(theme.id);
+            syncChip();
+        }
+
+        function pickDifferent() {
+            if (THEMES.length < 2) return THEMES[0];
+            var next;
+            do {
+                next = THEMES[Math.floor(Math.random() * THEMES.length)];
+            } while (next === current);
+            return next;
+        }
+
+        function resolveStart() {
+            if (want === 'none') return null;
+            var forced = want ? byId(want) : null;
+            if (forced) return forced;
+            if (!RANDOM_ON_LOAD) {
+                var kept = recalled();
+                if (kept) return kept;
+            }
+            return pickDifferent();
+        }
+
+        // Paint immediately, before any content is parsed
+        var start = resolveStart();
+        if (start) {
+            paint(start);
+        } else {
+            // ?style=none: leave a marker class so script.js does not re-apply the remembered theme
+            document.body.classList.add('theme-none');
+            remember('none');
+        }
+
+        function setup() {
+            chip = document.getElementById('home-style-chip');
+            nameEl = document.getElementById('home-style-name');
+            button = document.getElementById('home-style-another');
+            if (!chip) return;
+            if (!start) { chip.hidden = true; return; }
+            syncChip();
+            if (button) {
+                button.addEventListener('click', function () { paint(pickDifferent()); });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setup);
+        } else {
+            setup();
+        }
+    })();
+    </script>
+    <!-- /build:page-theme -->
+<nav class="site-nav" aria-label="Primary">
         <div class="nav-inner">
             <a class="nav-brand" href="/index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
             <div class="nav-links">

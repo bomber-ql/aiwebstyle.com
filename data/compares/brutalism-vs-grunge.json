@@ -1,0 +1,90 @@
+{
+  "slug": "brutalism-vs-grunge",
+  "a": "brutalism",
+  "b": "grunge",
+  "title": "Brutalism vs Grunge",
+  "order": 15,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are described as raw. One is raw because nothing was added; the other is raw because something went wrong on purpose.",
+  "verdict": "Brutalism is clean and hard: 2px black borders, a 4px offset shadow with no blur, uppercase Arial at clamp(2.6rem, 8vw, 5.4rem). Grunge is dirty: Courier New, ink that looks misregistered, rust on ash, no borders at all.",
+  "brief": [
+    "Brutalism in this gallery is a system of refusals — no radius, no gradient, no soft shadow, one typeface. Depth is a 4px solid offset in pure black, which reads as a printed block rather than a floating card. Everything is uppercase and tightly tracked.",
+    "Grunge has no borders and no offsets. The \"misprint\" is a text-shadow pair at 2px and −1px in two different colours — a warm rust and a cold green — which imitates a second ink pass that did not line up. The depth cue is not geometry but imperfection, and the palette is ash, bone and one rust tone."
+  ],
+  "dimensions": [
+    {
+      "name": "Depth",
+      "a": "4px solid offset shadow, zero blur",
+      "b": "No shadow; offset text-shadow on type only",
+      "edge": "a"
+    },
+    {
+      "name": "Border",
+      "a": "2px solid #000 on blocks and buttons",
+      "b": "None",
+      "edge": "a"
+    },
+    {
+      "name": "Typeface",
+      "a": "Arial, unsmoothed",
+      "b": "Courier New",
+      "edge": "tie"
+    },
+    {
+      "name": "Type treatment",
+      "a": "Uppercase, tracking −0.03em",
+      "b": "Uppercase, text-shadow in rust and green",
+      "edge": "b"
+    },
+    {
+      "name": "Palette",
+      "a": "Black, white, one acid yellow",
+      "b": "Ash, bone, one rust",
+      "edge": "tie"
+    },
+    {
+      "name": "Hover",
+      "a": "Element translates into its own shadow",
+      "b": "No interaction styling",
+      "edge": "a"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Block",
+      "a": "border: 2px solid #000; box-shadow: 4px 4px 0 #000",
+      "b": "border: none; background: layered gradients"
+    },
+    {
+      "label": "Headline",
+      "a": "font-size: clamp(2.6rem, 8vw, 5.4rem)",
+      "b": "text-shadow: 3px 2px 0 rgba(120,50,35,.5), -2px -1px 0 rgba(60,80,70,.35)"
+    },
+    {
+      "label": "Label",
+      "a": "letter-spacing: .1em, uppercase",
+      "b": "letter-spacing: .22em, uppercase"
+    },
+    {
+      "label": "Font",
+      "a": "Arial",
+      "b": "'Courier New', Courier, monospace"
+    }
+  ],
+  "whenA": [
+    "The message is a statement and the page has very little to read",
+    "You want the structure itself to be the decoration — nothing hidden, nothing softened",
+    "The brand can afford to look like a printed notice rather than a product"
+  ],
+  "whenB": [
+    "The subject is music, zines, or anything with an actual subculture behind it",
+    "You want texture and era without committing to a bevel or a texture image",
+    "The content is short — grunge type at 17ch gets tiring over a long read"
+  ],
+  "promptDelta": "The distinguishing instruction is where the imperfection lives. For brutalism, put it in the box: 2px black border and a 4px offset shadow with zero blur. For grunge, put it in the type: two offset text-shadows in different colours and no border on anything. Ask for \"raw\" or \"brutalist grunge\" and a model will combine both — heavy borders plus smeared type — which reads as a rendering fault rather than a style.",
+  "recipes": [
+    "launch-page",
+    "portfolio"
+  ]
+}

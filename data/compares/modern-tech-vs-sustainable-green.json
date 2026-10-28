@@ -1,0 +1,90 @@
+{
+  "slug": "modern-tech-vs-sustainable-green",
+  "a": "modern-tech",
+  "b": "sustainable-green",
+  "title": "Modern Tech vs Sustainable Green",
+  "order": 19,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Two restrained pages, both white, both one accent. They disagree about whether restraint means precision or absence.",
+  "verdict": "Modern Tech expresses care through technique — a 56px grid fading out behind the hero, mono numerals, an 8px button radius and a 1px shadow. Sustainable Green expresses care by removing all of it: zero box-shadows on the page, system fonts, and 1px rules doing the work borders normally do.",
+  "brief": [
+    "Modern Tech is engineered. The hero sits on a two-axis grid of 1px lines at 56px spacing, masked to fade to nothing by 78% of the way down, so it reads as texture rather than graph paper. Numbers and labels are Roboto Mono, which makes digits align across rows — the detail that makes a product page feel built rather than styled.",
+    "Sustainable Green is subtractive. There is not a single box-shadow in the stylesheet. Sections are separated by 1px #dfe3e0 rules, service items are marked with a 2px left border in #1f7a4d instead of a card, and the only font family is the system stack. It is also the fastest page in the gallery, because there is nothing to download beyond one CSS file."
+  ],
+  "dimensions": [
+    {
+      "name": "Depth",
+      "a": "One 1px shadow on buttons; a masked grid behind the hero",
+      "b": "No shadow anywhere, at all",
+      "edge": "a"
+    },
+    {
+      "name": "Typefaces",
+      "a": "Inter plus Roboto Mono for numerals",
+      "b": "System stack only",
+      "edge": "tie"
+    },
+    {
+      "name": "Separation",
+      "a": "Cards at 8px radius with a hairline border",
+      "b": "1px rules and a 2px green left border",
+      "edge": "b"
+    },
+    {
+      "name": "Accent use",
+      "a": "Blue fills on primary buttons and tags",
+      "b": "One green, mostly as a 2px mark",
+      "edge": "tie"
+    },
+    {
+      "name": "Radii",
+      "a": "8px buttons, 999px tags",
+      "b": "4px buttons, 50% on the one circle",
+      "edge": "tie"
+    },
+    {
+      "name": "Headline measure",
+      "a": "Full container width",
+      "b": "max-width: 17ch",
+      "edge": "b"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Hero texture",
+      "a": "linear-gradient grid, background-size: 56px 56px, mask fades to 78%",
+      "b": "none"
+    },
+    {
+      "label": "Numerals",
+      "a": "font-family: 'Roboto Mono'",
+      "b": "inherits the system stack"
+    },
+    {
+      "label": "Service item",
+      "a": "card: 1px border, 8px radius",
+      "b": "border-left: 2px solid #1f7a4d; no card"
+    },
+    {
+      "label": "Shadow",
+      "a": "box-shadow: 0 1px 2px rgba(15,23,42,.12)",
+      "b": "box-shadow: none (0 occurrences in the file)"
+    }
+  ],
+  "whenA": [
+    "The page sells something technical and the precision is part of the pitch",
+    "There is real data — numbers, figures, statuses — that benefits from mono alignment",
+    "You want a designed feel without colour, imagery or ornament"
+  ],
+  "whenB": [
+    "Page weight and honesty are part of the brand: no webfont, no shadow, nothing decorative",
+    "The content is long and mostly text, so rules and whitespace are enough",
+    "The organisation is a public body, a co-op or a climate brand where restraint is expected"
+  ],
+  "promptDelta": "The deciding clause is whether shadows exist. Say \"one accent, system fonts, zero box-shadows, 1px rules between sections\" and you get the green page. Say \"a faint 56px grid behind the hero that fades out, mono numerals for all figures, 8px button radius with a 1px shadow\" and you get the tech page. A model asked for \"clean minimal white with a green accent\" will produce neither: it will add a webfont, a soft shadow, and land on a generic SaaS look.",
+  "recipes": [
+    "dashboard",
+    "pricing-page"
+  ]
+}

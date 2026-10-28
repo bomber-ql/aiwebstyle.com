@@ -1,0 +1,90 @@
+{
+  "slug": "editorial-vs-bold-typography",
+  "a": "editorial",
+  "b": "bold-typography",
+  "title": "Editorial vs Bold Typography",
+  "order": 13,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are pages where type is the entire design. One controls how far a line may run; the other controls how large a word may get.",
+  "verdict": "Editorial caps the measure — 17 characters for the headline, 46 for the standfirst. Bold typography caps nothing and pushes size instead: clamp(3rem, 10.5vw, 7.2rem) at line-height 0.86, in pure black on pure white.",
+  "brief": [
+    "Editorial is a reading style. The headline is 17ch and the standfirst 46ch, a serif display face over a sans body, and the sections are divided by 1px rules rather than cards. Nothing about it is loud; the whole design is the argument that a line of text has a correct length.",
+    "Bold typography is a display style. The headline goes to 7.2rem on wide screens with line-height 0.86, letter-spacing tight enough that words nearly touch, and a 12ch measure that forces three or four lines out of a short sentence. There is no second colour, no image, no card: the page is black text on white, and the only variable is scale."
+  ],
+  "dimensions": [
+    {
+      "name": "Headline size",
+      "a": "clamp(2.5rem, 6vw, 4.2rem)",
+      "b": "clamp(3rem, 10.5vw, 7.2rem)",
+      "edge": "b"
+    },
+    {
+      "name": "Headline measure",
+      "a": "17ch",
+      "b": "12ch",
+      "edge": "b"
+    },
+    {
+      "name": "Line height",
+      "a": "1.02",
+      "b": "0.86",
+      "edge": "b"
+    },
+    {
+      "name": "Typeface",
+      "a": "Serif display, sans body",
+      "b": "Helvetica Neue only",
+      "edge": "tie"
+    },
+    {
+      "name": "Palette",
+      "a": "Paper #fbfaf7, ink #14130f, one rust accent",
+      "b": "Pure #ffffff and #0a0a0a",
+      "edge": "tie"
+    },
+    {
+      "name": "Separation",
+      "a": "1px rules between sections",
+      "b": "2px rules and large white gaps",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Headline",
+      "a": "font-size: clamp(2.5rem, 6vw, 4.2rem); max-width: 17ch",
+      "b": "font-size: clamp(3rem, 10.5vw, 7.2rem); max-width: 12ch"
+    },
+    {
+      "label": "Leading",
+      "a": "line-height: 1.02",
+      "b": "line-height: .86"
+    },
+    {
+      "label": "Standfirst",
+      "a": "1.16rem, max-width: 46ch",
+      "b": "1.04rem, max-width: 40ch"
+    },
+    {
+      "label": "Font stack",
+      "a": "Playfair Display headings, Lato body",
+      "b": "'Helvetica Neue', Helvetica, Arial"
+    }
+  ],
+  "whenA": [
+    "The page is read in sequence and the reader should never lose their place",
+    "There is a deck or standfirst — a real one, not a subtitle repeating the headline",
+    "The content is long enough that fatigue is the enemy, not attention"
+  ],
+  "whenB": [
+    "The page has one sentence to deliver and no body copy worth reading",
+    "The brand is confident enough to spend an entire screen on four words",
+    "You want scale to do the work that imagery would normally do"
+  ],
+  "promptDelta": "Give the model a measure for editorial (17ch, 46ch) and a scale for bold typography (clamp up to 7rem, line-height under 0.9). Asked for \"big bold type\" without a line-height, a model will keep 1.5 and the block will look like a poster with the air let out of it. Asked for \"editorial\" without a measure, you get the browser default of roughly 140 characters — twice what a reader can track.",
+  "recipes": [
+    "blog",
+    "portfolio"
+  ]
+}

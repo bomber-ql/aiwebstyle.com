@@ -9,14 +9,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .legal { max-width: 760px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        /* Solid reading surface: a few themes paint the body with a pattern
+           (maximalism uses diagonal stripes), which makes long copy unreadable.
+           The fill is --page-bg, the exact pair the body-text contrast check covers. */
+        .legal {
+            max-width: 800px;
+            margin: 2.2rem auto 3.4rem;
+            padding: clamp(1.4rem, 3.2vw, 2.6rem);
+            background-color: var(--page-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-border-radius, 10px);
+            overflow-wrap: anywhere;
+        }
         .legal h2 { font-size: 1.35rem; margin: 2.2rem 0 .7rem; padding-bottom: .4rem; border-bottom: 1px solid var(--border-color); }
         .legal h2:first-of-type { margin-top: 0; }
         .legal h3 { font-size: 1.02rem; margin: 1.3rem 0 .35rem; }
         .legal p, .legal li { font-size: .95rem; line-height: 1.75; margin-bottom: .85rem; }
         .legal ul { padding-left: 1.4rem; margin-bottom: 1rem; }
         .legal li { margin-bottom: .5rem; }
-        .legal .meta { font-size: .85rem; color: #6c757d; margin-bottom: 2rem; }
+        .legal .meta { font-size: .85rem; color: var(--text-color); opacity: .72; margin-bottom: 2rem; }
         .legal a { color: var(--link-color); }
         .contact-box {
             background: var(--card-bg);
@@ -29,7 +40,8 @@
             font-size: .74rem;
             letter-spacing: .07em;
             text-transform: uppercase;
-            color: #6c757d;
+            color: var(--text-color);
+            opacity: .72;
             margin-bottom: .3rem;
         }
         .contact-box .address {
@@ -40,13 +52,14 @@
             word-break: break-all;
         }
         .contact-box .address:hover { color: var(--link-color); }
-        .contact-box p { margin: .6rem 0 0; font-size: .88rem; color: #5d6875; }
+        .contact-box p { margin: .6rem 0 0; font-size: .88rem; color: var(--text-color); opacity: .78; }
         .legal .note {
             font-size: .9rem;
             line-height: 1.7;
             border-left: 3px solid var(--border-color);
             padding: .1rem 0 .1rem 1rem;
-            color: #5d6875;
+            color: var(--text-color);
+            opacity: .78;
         }
     </style>
         <!-- build:adsense -->
@@ -66,6 +79,118 @@
     <!-- /build:seo -->
 </head>
 <body>
+    <!-- build:page-theme -->
+    <script>
+    (function () {
+        var THEMES = [{"id":"skeuomorphism","name":"Skeuomorphism","font":"Playfair+Display:wght@400;700"},{"id":"swiss-style","name":"Swiss Style / International Typographic Style","font":null},{"id":"grunge","name":"Grunge Style","font":null},{"id":"modern-tech","name":"Modern Tech Style","font":"Poppins:wght@400;600;700"},{"id":"brutalism","name":"Brutalism","font":null},{"id":"retro-90s","name":"Retro - 90s Web","font":null},{"id":"retro-y2k","name":"Retro - Y2K Aesthetic","font":"Space+Mono:wght@400;700"},{"id":"retro-pixel","name":"Retro - Pixel Art","font":"Press+Start+2P"},{"id":"illustration","name":"Illustration Focused","font":"Lato:wght@400;700&family=Montserrat:wght@400;700"},{"id":"3d-interactive","name":"3D Elements / Interactive","font":null},{"id":"dark-mode","name":"Dark Mode","font":"Open+Sans:wght@400;600"},{"id":"bold-typography","name":"Bold Typography","font":"Montserrat:wght@400;700;800;900"},{"id":"glassmorphism","name":"Glassmorphism","font":"Poppins:wght@400;600;700"},{"id":"aurora-ui","name":"Aurora UI","font":null},{"id":"natural-organic","name":"Natural / Organic Style","font":"Lato:wght@400;700"},{"id":"monochromatic","name":"Monochromatic Design","font":"Roboto:wght@400;500;700"},{"id":"maximalism","name":"Maximalism / Collage","font":"Playfair+Display:wght@400;700"},{"id":"claymorphism","name":"Claymorphism","font":"Poppins:wght@400;600;700"},{"id":"abstract-geometric","name":"Abstract / Geometric Shapes","font":"Montserrat:wght@400;700;800"},{"id":"sustainable-green","name":"Sustainable / Green Design","font":null},{"id":"art-deco","name":"Art Deco Style","font":"Playfair+Display:wght@400;700"},{"id":"neomorphism","name":"Neomorphism","font":"Poppins:wght@400;600;700"},{"id":"bento-grid","name":"Bento Grid","font":null},{"id":"liquid-glass","name":"Liquid Glass","font":null},{"id":"editorial","name":"Editorial / Magazine","font":"Lato:wght@400;700&family=Playfair+Display:wght@400;700"},{"id":"neo-brutalism","name":"Neo-Brutalism","font":"Montserrat:wght@400;700;800"},{"id":"neo-swiss","name":"Neo-Swiss","font":null},{"id":"acid-graphics","name":"Acid Graphics","font":"Space+Mono:wght@400;700"}];
+        var ROOT = "";
+        var RANDOM_ON_LOAD = false;
+        var STORE_KEY = 'aiwebstyle-theme';
+        var want = new URLSearchParams(location.search).get('style');
+        var chip, nameEl, button;
+        var current = null;
+
+        function byId(id) {
+            for (var i = 0; i < THEMES.length; i++) {
+                if (THEMES[i].id === id) return THEMES[i];
+            }
+            return null;
+        }
+
+        function remember(id) {
+            try {
+                sessionStorage.setItem(STORE_KEY, id);
+            } catch (e) { /* sessionStorage throws in private mode — ignore */ }
+        }
+
+        function recalled() {
+            try {
+                return byId(sessionStorage.getItem(STORE_KEY) || '');
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function ensureFont(font) {
+            if (!font) return;
+            var key = 'home-font-' + font.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+            if (document.getElementById(key)) return;
+            var link = document.createElement('link');
+            link.id = key;
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css2?family=' + font + '&display=swap';
+            document.head.appendChild(link);
+        }
+
+        function syncChip() {
+            if (!nameEl || !current) return;
+            nameEl.textContent = current.name;
+            nameEl.href = ROOT + 'styles/' + current.id + '.html';
+        }
+
+        function paint(theme) {
+            current = theme;
+            var body = document.body;
+            body.className = body.className
+                .replace(/\btheme-[a-z0-9-]+\b/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+            body.classList.add('theme-' + theme.id);
+            ensureFont(theme.font);
+            remember(theme.id);
+            syncChip();
+        }
+
+        function pickDifferent() {
+            if (THEMES.length < 2) return THEMES[0];
+            var next;
+            do {
+                next = THEMES[Math.floor(Math.random() * THEMES.length)];
+            } while (next === current);
+            return next;
+        }
+
+        function resolveStart() {
+            if (want === 'none') return null;
+            var forced = want ? byId(want) : null;
+            if (forced) return forced;
+            if (!RANDOM_ON_LOAD) {
+                var kept = recalled();
+                if (kept) return kept;
+            }
+            return pickDifferent();
+        }
+
+        // Paint immediately, before any content is parsed
+        var start = resolveStart();
+        if (start) {
+            paint(start);
+        } else {
+            // ?style=none: leave a marker class so script.js does not re-apply the remembered theme
+            document.body.classList.add('theme-none');
+            remember('none');
+        }
+
+        function setup() {
+            chip = document.getElementById('home-style-chip');
+            nameEl = document.getElementById('home-style-name');
+            button = document.getElementById('home-style-another');
+            if (!chip) return;
+            if (!start) { chip.hidden = true; return; }
+            syncChip();
+            if (button) {
+                button.addEventListener('click', function () { paint(pickDifferent()); });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setup);
+        } else {
+            setup();
+        }
+    })();
+    </script>
+    <!-- /build:page-theme -->
     <!-- build:nav -->
     <nav class="site-nav" aria-label="Primary">
         <div class="nav-inner">

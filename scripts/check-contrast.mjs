@@ -49,8 +49,18 @@ function resolve(vars, value, depth = 0) {
     return next ? resolve(vars, next, depth + 1) : value;
 }
 
+// 命名色（老主题里还留着 yellow / white 这种写法，不认就会静默算成 fallback，得到假数字）
+const NAMED = {
+    white: '#ffffff', black: '#000000', yellow: '#ffff00', red: '#ff0000', blue: '#0000ff',
+    lime: '#00ff00', green: '#008000', navy: '#000080', aqua: '#00ffff', cyan: '#00ffff',
+    fuchsia: '#ff00ff', magenta: '#ff00ff', silver: '#c0c0c0', gray: '#808080', grey: '#808080',
+    orange: '#ffa500', purple: '#800080', maroon: '#800000', olive: '#808000', teal: '#008080',
+    transparent: 'rgba(0,0,0,0)',
+};
+
 function parseColor(str) {
-    const s = String(str || '').trim().toLowerCase();
+    let s = String(str || '').trim().toLowerCase();
+    if (NAMED[s]) s = NAMED[s];
     let m = /^#([0-9a-f]{3})$/.exec(s);
     if (m) return { r: parseInt(m[1][0] + m[1][0], 16), g: parseInt(m[1][1] + m[1][1], 16), b: parseInt(m[1][2] + m[1][2], 16), a: 1 };
     m = /^#([0-9a-f]{6})$/.exec(s);
@@ -99,34 +109,41 @@ for (const [id, vars] of themes) {
     const headerText = parseColor(resolve(vars, vars['--header-text-color'] ?? '#000')) || { r: 0, g: 0, b: 0, a: 1 };
     const bodyText = parseColor(resolve(vars, vars['--text-color'] ?? '#000')) || { r: 0, g: 0, b: 0, a: 1 };
 
+    // 悬停反色：首页卡片 hover 时底=标题色、字=页面底色（可用 --flip-bg/--flip-fg 覆盖）
+    const flipBg = parseColor(resolve(vars, vars['--flip-bg'] ?? vars['--heading-color'] ?? '#111')) || { r: 0, g: 0, b: 0, a: 1 };
+    const flipFg = parseColor(resolve(vars, vars['--flip-fg'] ?? vars['--page-bg'] ?? '#fff')) || { r: 255, g: 255, b: 255, a: 1 };
+
     const heroBg = over(headerBg, base);
+    const hoverBg = over(flipBg, base);
     results.push({
         id,
         hero: +contrast(over(headerText, heroBg), heroBg).toFixed(2),
         body: +contrast(over(bodyText, base), base).toFixed(2),
+        flip: +contrast(over(flipFg, hoverBg), hoverBg).toFixed(2),
     });
 }
 
 /* ---------- 输出 ---------- */
 
-results.sort((a, b) => Math.min(a.hero, a.body) - Math.min(b.hero, b.body));
+results.sort((a, b) => Math.min(a.hero, a.body, a.flip) - Math.min(b.hero, b.body, b.flip));
 
-const bad = results.filter((r) => r.hero < MIN || r.body < MIN);
+const bad = results.filter((r) => r.hero < MIN || r.body < MIN || r.flip < MIN);
 
 for (const r of results) {
-    const mark = r.hero < MIN || r.body < MIN ? '  ✗' : '';
-    const weak = !mark && Math.min(r.hero, r.body) < MIN + 0.6 ? '  ·' : '';
+    const worst = Math.min(r.hero, r.body, r.flip);
+    const mark = worst < MIN ? '  ✗' : '';
+    const weak = !mark && worst < MIN + 0.6 ? '  ·' : '';
     if (mark || weak) {
         console.log(
-            `  ${r.id.padEnd(20)} hero ${String(r.hero).padStart(6)}  正文 ${String(r.body).padStart(6)}${mark || weak}`
+            `  ${r.id.padEnd(20)} hero ${String(r.hero).padStart(6)}  正文 ${String(r.body).padStart(6)}  反色 ${String(r.flip).padStart(6)}${mark || weak}`
         );
     }
 }
 
 if (bad.length) {
     console.error(
-        `\n✗ 主题对比度不足（阈值 ${MIN}:1）：${bad.map((b) => `${b.id} ${b.hero}/${b.body}`).join(', ')}` +
-            '\n  在 style.css 末尾的 “Theme contrast fixes” 区块里调 --header-text-color 或 --header-bg。\n'
+        `\n✗ 主题对比度不足（阈值 ${MIN}:1）：${bad.map((b) => `${b.id} ${b.hero}/${b.body}/${b.flip}`).join(', ')}` +
+            '\n  在 style.css 末尾的 “Theme contrast fixes” 区块里调 --header-text-color / --header-bg，或 --flip-bg / --flip-fg。\n'
     );
     process.exit(1);
 }
@@ -134,5 +151,5 @@ if (bad.length) {
 console.log(
     `✓ 主题对比度：${results.length} 套均 ≥ ${MIN}:1（最低 ${
         results[0].id
-    } ${Math.min(results[0].hero, results[0].body)}:1）`
+    } ${Math.min(results[0].hero, results[0].body, results[0].flip)}:1）`
 );

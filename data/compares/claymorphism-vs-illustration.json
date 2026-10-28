@@ -1,0 +1,90 @@
+{
+  "slug": "claymorphism-vs-illustration",
+  "a": "claymorphism",
+  "b": "illustration",
+  "title": "Claymorphism vs Illustration",
+  "order": 14,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are soft, both are warm, and both avoid the straight line. One gets there with shadow; the other gets there with geometry.",
+  "verdict": "Claymorphism rounds everything to a pill or a 26px card and lifts it with a paired shadow. Illustration keeps the corners but makes every one of them different — a radius like 240px 20px 220px 18px, so each block reads as a cut-out rather than a component.",
+  "brief": [
+    "Clay is a shadow style. Cards sit at 26px radius, buttons are 999px pills, and depth comes from two outer shadows — one cool grey offset down-right, one pure white offset up-left. Hovering lifts the card 2px and grows both. Nothing is insett; everything rests on the surface.",
+    "Illustration is a geometry style. The radii are deliberately unequal per corner, blocks carry a 2px outline in a soft tint (2px solid #a9d8bf, or #f0dcc0), and the whole page tilts by a single degree. There is no drop shadow at all — the hand-drawn impression comes from asymmetry, not from light."
+  ],
+  "dimensions": [
+    {
+      "name": "Corner treatment",
+      "a": "26px cards, 999px pills — uniform",
+      "b": "Unequal per corner, e.g. 240px / 20px / 220px / 18px",
+      "edge": "b"
+    },
+    {
+      "name": "Depth",
+      "a": "Two outer shadows, light and dark",
+      "b": "None — no drop shadow anywhere",
+      "edge": "a"
+    },
+    {
+      "name": "Outline",
+      "a": "None; shadow defines the edge",
+      "b": "2px solid in a soft tint",
+      "edge": "b"
+    },
+    {
+      "name": "Tilt",
+      "a": "None",
+      "b": "rotate(-1deg) on the brand mark",
+      "edge": "b"
+    },
+    {
+      "name": "Palette",
+      "a": "Blue, mint, pink, cream pastels",
+      "b": "Warm sand, sage, terracotta",
+      "edge": "tie"
+    },
+    {
+      "name": "Motion",
+      "a": "Hover lifts 2px, shadow grows",
+      "b": "None; the drawing is static",
+      "edge": "a"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Card",
+      "a": "border-radius: 26px; box-shadow: 6px 6px 14px rgba(140,160,200,.5), -5px -5px 12px #fff",
+      "b": "border-radius: 240px 20px 220px 18px / 18px 200px 20px 230px; border: 2px solid #f0dcc0"
+    },
+    {
+      "label": "Pill",
+      "a": "border-radius: 999px",
+      "b": "border-radius: 120px 18px 110px 16px / 16px 110px 18px 120px"
+    },
+    {
+      "label": "Shadow",
+      "a": "paired, outer, offset 6px",
+      "b": "none"
+    },
+    {
+      "label": "Tilt",
+      "a": "none",
+      "b": "transform: rotate(-1deg)"
+    }
+  ],
+  "whenA": [
+    "The interface has real controls and the softness should not remove the sense of a button being pressable",
+    "The audience is consumer or education, where pastel and lift read as friendly rather than childish",
+    "You need a system — one radius, two shadows — that a team can apply consistently"
+  ],
+  "whenB": [
+    "The page is a story or a small brand site with few components and a lot of personality",
+    "You want warmth without pastel, which the sand-and-sage palette gives you",
+    "Every block is unique anyway, so a per-corner radius costs nothing"
+  ],
+  "promptDelta": "Both prompts should say \"no straight lines\", which is why models produce similar output. The split is shadow: ask for a paired outer shadow with a 6px offset and you get clay; say explicitly that there is no shadow at all and the softness comes from unequal corner radii plus a 2px tinted outline, and you get illustration. A model given \"soft rounded cards\" will add a drop shadow by default and land on clay every time.",
+  "recipes": [
+    "onboarding-flow",
+    "contact-page"
+  ]
+}

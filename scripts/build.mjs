@@ -340,13 +340,27 @@ function injectNav(rel) {
   return true;
 }
 
-/* ---------- 5.5 首页随机风格 ----------
+/* ---------- 5.5 全站随机风格 ----------
    首页不锁死一个主题，每次加载随机挑一个（可用 ?style=xxx 指定，?style=none 关掉）。
+   信息页（about / privacy / terms / contact / 404）跟同一套主题走：
+   挑中的主题写进 sessionStorage，所以首页换肤后点进内页，配色是连贯的；
+   内页自己刷新不会跳色，只有首页刷新才换新的。
    这段脚本必须紧贴 <body> 之后同步执行：主题类是加在 body 上的，
    等 DOMContentLoaded 再改就会出现一次默认配色的闪动（FOUC）。
    字体按需加载：只有挑中的主题需要 webfont 时，才注入那一份 Google Fonts。 */
 
-function buildHomeTheme() {
+// randomOnLoad: 每次刷新重新掷骰子（首页）
+// root: 404 会在任意路径下被服务，所以它的站内链接必须用绝对路径
+const THEME_PAGES = [
+  { rel: 'index.html', root: '', randomOnLoad: true },
+  { rel: 'about.html', root: '' },
+  { rel: 'privacy.html', root: '' },
+  { rel: 'terms.html', root: '' },
+  { rel: 'contact.html', root: '' },
+  { rel: '404.html', root: '/', randomOnLoad: true },
+];
+
+function buildPageThemes() {
   const fontMap = site.themeFonts || {};
   const themes = styles.map((s) => ({
     id: s.id,
@@ -354,11 +368,35 @@ function buildHomeTheme() {
     font: fontMap[s.id] || null,
   }));
 
-  const code = `    (function () {
+  const codeFor = ({ root, randomOnLoad }) => `    (function () {
         var THEMES = ${JSON.stringify(themes)};
+        var ROOT = ${JSON.stringify(root)};
+        var RANDOM_ON_LOAD = ${randomOnLoad ? 'true' : 'false'};
+        var STORE_KEY = 'aiwebstyle-theme';
         var want = new URLSearchParams(location.search).get('style');
         var chip, nameEl, button;
         var current = null;
+
+        function byId(id) {
+            for (var i = 0; i < THEMES.length; i++) {
+                if (THEMES[i].id === id) return THEMES[i];
+            }
+            return null;
+        }
+
+        function remember(id) {
+            try {
+                sessionStorage.setItem(STORE_KEY, id);
+            } catch (e) { /* sessionStorage throws in private mode — ignore */ }
+        }
+
+        function recalled() {
+            try {
+                return byId(sessionStorage.getItem(STORE_KEY) || '');
+            } catch (e) {
+                return null;
+            }
+        }
 
         function ensureFont(font) {
             if (!font) return;
@@ -374,7 +412,7 @@ function buildHomeTheme() {
         function syncChip() {
             if (!nameEl || !current) return;
             nameEl.textContent = current.name;
-            nameEl.href = 'styles/' + current.id + '.html';
+            nameEl.href = ROOT + 'styles/' + current.id + '.html';
         }
 
         function paint(theme) {
@@ -386,6 +424,7 @@ function buildHomeTheme() {
                 .trim();
             body.classList.add('theme-' + theme.id);
             ensureFont(theme.font);
+            remember(theme.id);
             syncChip();
         }
 
@@ -399,10 +438,14 @@ function buildHomeTheme() {
         }
 
         function resolveStart() {
-            for (var i = 0; i < THEMES.length; i++) {
-                if (THEMES[i].id === want) return THEMES[i];
+            if (want === 'none') return null;
+            var forced = want ? byId(want) : null;
+            if (forced) return forced;
+            if (!RANDOM_ON_LOAD) {
+                var kept = recalled();
+                if (kept) return kept;
             }
-            return want === 'none' ? null : pickDifferent();
+            return pickDifferent();
         }
 
         // Paint immediately, before any content is parsed
@@ -412,6 +455,7 @@ function buildHomeTheme() {
         } else {
             // ?style=none: leave a marker class so script.js does not re-apply the remembered theme
             document.body.classList.add('theme-none');
+            remember('none');
         }
 
         function setup() {
@@ -431,19 +475,27 @@ function buildHomeTheme() {
         } else {
             setup();
         }
-    })();`
+    })();`;
 
-  const block = `    <!-- build:home-theme -->
+  const blockFor = (page) => `    <!-- build:page-theme -->
     <script>
-${code}
+${codeFor(page)}
     </script>
-    <!-- /build:home-theme -->`;
+    <!-- /build:page-theme -->`;
 
-  let html = read('index.html');
-  html = html.replace(/[ \t]*<!-- build:home-theme -->[\s\S]*?<!-- \/build:home-theme -->\n?/, '');
-  html = html.replace(/(<body[^>]*>)\s*\n?/, `$1\n${block}\n`);
-  write('index.html', html);
-  return themes.length;
+  let count = 0;
+  for (const page of THEME_PAGES) {
+    if (!exists(page.rel)) continue;
+    let html = read(page.rel);
+    html = html.replace(
+      /[ \t]*<!-- build:(?:home-theme|page-theme) -->[\s\S]*?<!-- \/build:(?:home-theme|page-theme) -->\n?/g,
+      ''
+    );
+    html = html.replace(/(<body[^>]*>)\s*\n?/, `$1\n${blockFor(page)}\n`);
+    write(page.rel, html);
+    count++;
+  }
+  return count;
 }
 
 /* ---------- 6. 动效索引渲染 ---------- */
@@ -663,16 +715,224 @@ function buildHomeNames() {
   return styles.length;
 }
 
+/* ---------- 8.8 相关链接（结构闭环） ----------
+   风格页此前是死胡同：正文只有「回画廊 / 看预览 / 下载」三条出路。
+   这里从既有数据反推关系，不新增任何手写内容：
+     · 对比页 a/b  → 这个风格和谁被放在一起比较
+     · 配方 styles[] → 哪些整页配方用到了它
+     · 共现次数     → 邻居风格（同一对比里出现、被同一配方引用）
+   对比页与动效页同样补上出口，让 100 个页面连成网而不是一棵树。 */
+
+function relatedIndex() {
+  const comparesByStyle = new Map();
+  for (const c of compareList) {
+    for (const side of ['a', 'b']) {
+      const id = c[side];
+      const other = side === 'a' ? c.b : c.a;
+      if (!comparesByStyle.has(id)) comparesByStyle.set(id, []);
+      comparesByStyle.get(id).push({ slug: c.slug, title: c.title, other });
+    }
+  }
+
+  const recipesByStyle = new Map();
+  for (const r of recipeList) {
+    for (const sid of r.styles || []) {
+      if (!recipesByStyle.has(sid)) recipesByStyle.set(sid, []);
+      recipesByStyle.get(sid).push({ slug: r.slug, name: r.name });
+    }
+  }
+
+  const recipesByMotion = new Map();
+  for (const r of recipeList) {
+    for (const m of r.motions || []) {
+      if (!recipesByMotion.has(m)) recipesByMotion.set(m, []);
+      recipesByMotion.get(m).push({ slug: r.slug, name: r.name });
+    }
+  }
+
+  // 邻居：共同出现在一次对比里算 2 分，被同一配方引用算 1 分
+  const neighbours = new Map();
+  const score = new Map();
+  const bump = (a, b, n) => {
+    if (!a || !b || a === b) return;
+    const k = a + '|' + b;
+    score.set(k, (score.get(k) || 0) + n);
+  };
+  for (const c of compareList) bump(c.a, c.b, 2);
+  for (const r of recipeList) {
+    const ids = r.styles || [];
+    for (const a of ids) for (const b of ids) bump(a, b, 1);
+  }
+  for (const s of styles) {
+    const ranked = styles
+      .map((o) => ({ id: o.id, name: o.name.en, score: score.get(s.id + '|' + o.id) || 0 }))
+      .filter((o) => o.id !== s.id)
+      .sort((x, y) => y.score - x.score);
+    neighbours.set(s.id, ranked);
+  }
+
+  return { comparesByStyle, recipesByStyle, recipesByMotion, neighbours };
+}
+
+function relatedList(items) {
+  return items.map((i) => `                        <li><a href="${i.href}">${escapeAttr(i.label)}</a></li>`).join('\n');
+}
+
+function relatedBlock(cols, heading, extraClass = '') {
+  const usable = cols.filter((c) => c.items.length);
+  if (!usable.length) return '';
+  return `        <!-- build:related -->
+        <section class="related${extraClass}" aria-labelledby="related-h">
+            <h2 class="related-h" id="related-h">${heading}</h2>
+            <div class="related-cols">
+${usable
+  .map(
+    (c) => `                <div class="related-col">
+                    <h3>${c.title}</h3>
+                    <ul>
+${relatedList(c.items)}
+                    </ul>
+                </div>`
+  )
+  .join('\n')}
+            </div>
+        </section>
+        <!-- /build:related -->`;
+}
+
+function buildRelated() {
+  const idx = relatedIndex();
+  const nameOf = new Map(styles.map((s) => [s.id, s.name.en]));
+  const RELATE_RE = /[ \t]*<!-- build:related -->[\s\S]*?<!-- \/build:related -->\n?/;
+  let stylePages = 0;
+  let comparePages = 0;
+  let motionPages = 0;
+
+  /* 风格详情页 */
+  for (const s of styles) {
+    const rel = `styles/${s.id}.html`;
+    if (!exists(rel)) continue;
+    let html = read(rel);
+
+    const compares = (idx.comparesByStyle.get(s.id) || []).slice(0, 3).map((c) => ({
+      href: `../compares/${c.slug}.html`,
+      label: c.title,
+    }));
+    const recipes = (idx.recipesByStyle.get(s.id) || []).slice(0, 3).map((r) => ({
+      href: `../recipes/${r.slug}.html`,
+      label: r.name,
+    }));
+    const near = (idx.neighbours.get(s.id) || [])
+      .slice(0, 3)
+      .map((n) => ({ href: `${n.id}.html`, label: n.name }));
+
+    const block = relatedBlock(
+      [
+        { title: 'Compared with', items: compares },
+        { title: 'Used in these page recipes', items: recipes },
+        { title: 'Neighbouring styles', items: near },
+      ],
+      'Related'
+    );
+    if (!block) continue;
+
+    html = RELATE_RE.test(html) ? html.replace(RELATE_RE, block + '\n') : html.replace(/(\s*<\/main>)/, `\n${block}$1`);
+    write(rel, html);
+    stylePages++;
+  }
+
+  /* 对比页：出口指向两侧的完整拆解 + 相关配方 */
+  for (const c of compareList) {
+    const rel = `compares/${c.slug}.html`;
+    if (!exists(rel)) continue;
+    let html = read(rel);
+
+    const block = relatedBlock(
+      [
+        {
+          title: 'Full breakdown',
+          items: [
+            { href: `../styles/${c.a}.html`, label: `${nameOf.get(c.a) || c.a} — tokens, CSS and prompt` },
+            { href: `../styles/${c.b}.html`, label: `${nameOf.get(c.b) || c.b} — tokens, CSS and prompt` },
+          ],
+        },
+        {
+          title: 'Page recipes that use them',
+          items: (c.recipes || [])
+            .filter((slug) => recipeList.some((r) => r.slug === slug))
+            .map((slug) => ({
+              href: `../recipes/${slug}.html`,
+              label: recipeList.find((r) => r.slug === slug).name,
+            })),
+        },
+      ],
+      'Go deeper',
+      ' related-standalone'
+    );
+    if (!block) continue;
+
+    html = RELATE_RE.test(html)
+      ? html.replace(RELATE_RE, block + '\n')
+      : html.replace(/(\s*<\/body>)/, `\n${block}$1`);
+    write(rel, html);
+    comparePages++;
+  }
+
+  /* 动效页：出口指向用到这个动效的配方 */
+  for (const m of motions) {
+    const rel = `motions/${m.slug}.html`;
+    if (!exists(rel)) continue;
+    let html = read(rel);
+    // 动效页在 motions/ 下，配方在 recipes/ 下，链接要跨一层目录
+    let items = (idx.recipesByMotion.get(m.slug) || []).map((r) => ({
+      href: `../recipes/${r.slug}.html`,
+      label: r.name,
+    }));
+    let title = 'Used in these page recipes';
+
+    // 有 7 个动效暂时没有被任何配方引用；退回到「同触发方式的其它动效」，
+    // 保证每个动效页都有出口，而不是留成死胡同。
+    if (!items.length) {
+      items = motions
+        .filter((o) => o.slug !== m.slug && o.trigger === m.trigger)
+        .slice(0, 3)
+        .map((o) => ({ href: `${o.slug}.html`, label: o.name }));
+      title = `Other patterns that fire on ${m.trigger}`;
+    }
+
+    // interaction / navigation 各只有一个，没有同类可退；再退到「其它动效」
+    if (!items.length) {
+      items = motions
+        .filter((o) => o.slug !== m.slug)
+        .slice(0, 3)
+        .map((o) => ({ href: `${o.slug}.html`, label: o.name }));
+      title = 'Other motion patterns';
+    }
+    if (!items.length) continue;
+    const block = relatedBlock([{ title, items }], 'Related', ' related-standalone');
+    if (!block) continue;
+
+    html = RELATE_RE.test(html)
+      ? html.replace(RELATE_RE, block + '\n')
+      : html.replace(/(\s*<nav class="m-next">)/, `\n${block}$1`);
+    write(rel, html);
+    motionPages++;
+  }
+
+  return { stylePages, comparePages, motionPages };
+}
+
 /* ---------- 10. 执行 ---------- */
 
 
-const homeThemes = buildHomeTheme();
+const themedPages = buildPageThemes();
 
 prerenderGallery();
 buildHomeStats();
 buildHomeNames();
 buildHomeSections();
 buildHomeFeatured();
+const related = buildRelated();
 
 const gallerySeo = seoBlock({
   desc: `All ${styles.length} documented web design styles with copy-ready AI prompts, design tokens and downloadable CSS. Each one links to a live preview built from identical markup.`,
@@ -1028,7 +1288,8 @@ for (const rel of allHtml) {
 
 buildSitemap();
 
-console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''} | 随机风格池：${homeThemes} 个`);
+console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''} | 随机风格池：${styles.length} 套 / 应用页：${themedPages} 个`);
+console.log(`✓ 相关链接：风格页 ${related.stylePages} / 对比页 ${related.comparePages} / 动效页 ${related.motionPages}`);
 console.log(`✓ 详情页 SEO：${n} 个`);
 console.log(`✓ 动效索引：${motions.length} 张卡片 | 动效页 SEO：${mn} 个`);
 console.log(`✓ 风格预览页：${pv} 个（含详情页入口）`);

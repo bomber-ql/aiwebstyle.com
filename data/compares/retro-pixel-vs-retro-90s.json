@@ -1,0 +1,90 @@
+{
+  "slug": "retro-pixel-vs-retro-90s",
+  "a": "retro-pixel",
+  "b": "retro-90s",
+  "title": "Retro Pixel vs Retro 90s",
+  "order": 16,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Two kinds of nostalgia, ten years apart and often confused. One imitates a screen; the other imitates a browser.",
+  "verdict": "Retro pixel is 8-bit: Press Start 2P, a headline that tops out at 1.9rem because bitmap type cannot scale, and a 3px neon border with a hard 4px offset. Retro 90s is HTML-era: Times New Roman on navy, bevels built from outset and ridge borders, and no radius anywhere.",
+  "brief": [
+    "Pixel is constrained by the typeface. Press Start 2P is a grid of blocks, so the headline is clamp(1rem, 3.4vw, 1.9rem) — deliberately small, because at 4rem the glyphs stop looking like letters. Line height runs near double, borders are 3px solid #39ff14 with a 4px 4px 0 #1a5c1a shadow, and the hover state translates the element 2px into its shadow.",
+    "Retro 90s is not a font choice, it is a reconstruction of defaults: Times New Roman, navy #000080, yellow body text, and bevels made from border-style outset and ridge rather than from gradients. Buttons carry 3px outset #ffffff and flip to inset on hover. Radius is 0 on every element, because rounded corners did not exist yet."
+  ],
+  "dimensions": [
+    {
+      "name": "Typeface",
+      "a": "Press Start 2P (bitmap)",
+      "b": "Times New Roman",
+      "edge": "tie"
+    },
+    {
+      "name": "Headline size",
+      "a": "clamp(1rem, 3.4vw, 1.9rem) — capped by the grid",
+      "b": "clamp(1.9rem, 5vw, 3.2rem)",
+      "edge": "b"
+    },
+    {
+      "name": "Depth",
+      "a": "3px border with 4px hard offset",
+      "b": "3px outset / ridge borders, four colours",
+      "edge": "a"
+    },
+    {
+      "name": "Palette",
+      "a": "Near-black with neon #39ff14",
+      "b": "Navy #000080 with yellow and silver #c0c0c0",
+      "edge": "tie"
+    },
+    {
+      "name": "Corner",
+      "a": "0",
+      "b": "0",
+      "edge": "tie"
+    },
+    {
+      "name": "Hover",
+      "a": "translate(2px, 2px), shadow drops to 2px",
+      "b": "border-style flips from outset to inset",
+      "edge": "a"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Font",
+      "a": "'Press Start 2P', cursive",
+      "b": "'Times New Roman', Times, serif"
+    },
+    {
+      "label": "Headline",
+      "a": "font-size: clamp(1rem, 3.4vw, 1.9rem); max-width: 22ch",
+      "b": "font-size: clamp(1.9rem, 5vw, 3.2rem); max-width: 24ch"
+    },
+    {
+      "label": "Bevel",
+      "a": "box-shadow: 4px 4px 0 #1a5c1a",
+      "b": "border: 3px outset #ffffff / 3px ridge #c0c0c0"
+    },
+    {
+      "label": "Body colour",
+      "a": "#39ff14 on #0a120a",
+      "b": "yellow on #000080"
+    }
+  ],
+  "whenA": [
+    "The subject is games, and the pixel reference is understood by the audience immediately",
+    "You want short labels and big blocks rather than paragraphs",
+    "The page is a landing screen or a teaser, not a document"
+  ],
+  "whenB": [
+    "The joke or the affection is specifically the early web — fan pages, guestbooks, under-construction banners",
+    "You want a page that reads as software from a period, bevels included",
+    "The content is short; Times on navy at long length is genuinely hard to read"
+  ],
+  "promptDelta": "Both prompts need a size cap, for different reasons: pixel type is unreadable above about 2rem, and 90s type gets loud fast. Name the face and the cap together — \"Press Start 2P, headline no larger than 1.9rem, line-height 2\" or \"Times New Roman, 3px outset borders, no border radius anywhere\". Ask for \"retro\" alone and a model returns Y2K chrome roughly half the time, because that is the better documented reference.",
+  "recipes": [
+    "system-pages",
+    "launch-page"
+  ]
+}

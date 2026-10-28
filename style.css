@@ -1842,9 +1842,19 @@ body.theme-aurora-ui { --home-surface: rgba(13, 17, 23, .9); }
     opacity: .6;
 }
 
+/* 悬停反色：底色取该主题的标题色，文字取页面底色。
+   但 h1-h6 有全局 color: var(--heading-color)，不显式接管就会「标题色压标题色」直接消失，
+   所以 h3 必须一起反。--flip-bg / --flip-fg 留给个别主题覆盖（见文末 Theme contrast fixes）。 */
 .home-feature:hover {
-    background-color: var(--heading-color);
-    color: var(--page-bg);
+    background-color: var(--flip-bg, var(--heading-color));
+    color: var(--flip-fg, var(--page-bg));
+}
+
+.home-feature:hover h3 {
+    color: var(--flip-fg, var(--page-bg));
+    /* 极繁主义给 h1-h3 套了一层洋红色块（见顶部主题块），在反色卡片里会和底色打架，这里摘掉 */
+    background-color: transparent;
+    padding: 0;
 }
 
 .home-feature:hover p,
@@ -1963,3 +1973,80 @@ body.theme-maximalism     { --header-text-color: #000000; }           /* 红字�
 body.theme-claymorphism   { --header-text-color: #3f3728; --clay-text: #5b5140; } /* 加深黏土墨色，正文也一并提高 */
 body.theme-natural-organic { --header-bg: #6f6250; }                  /* 底色压深一档，保住白字 */
 body.theme-monochromatic  { --header-bg: var(--mono-dark); }          /* 4.5 卡在阈值上，压深一档留余量 */
+
+/* --- 悬停反色的文字墨色 ---
+   首页「Recently added」卡片悬停时整块反色（底=标题色，字=页面底色）。
+   三套主题的标题色是中调，页面底色压上去只有 2.9–3.9:1，读不出来，
+   这里只换文字墨色、不动底色，保住每套主题的配色性格。 */
+body.theme-illustration       { --flip-fg: #1d1a16; }  /* 奶油色 → 暖黑，压橙底 5.6:1 */
+body.theme-abstract-geometric { --flip-fg: #000000; }  /* 奶油色 → 黑，压紫底 5.9:1 */
+body.theme-claymorphism       { --flip-fg: #f7ead9; }  /* 加深黏土深底上的浅字 5.4:1 */
+
+/* --- 像素字体压长文 ---
+   Press Start 2P 的字宽约为常规字体两倍，长文页（about / privacy / terms / contact）
+   按常规字号排会一行只剩二十来字、URL 还会顶出容器。只在长文容器里压字号，不动主题别处。 */
+body.theme-retro-pixel .legal p,
+body.theme-retro-pixel .legal li,
+body.theme-retro-pixel .legal td { font-size: .74rem; line-height: 2.05; }
+body.theme-retro-pixel .legal h2 { font-size: 1rem; line-height: 1.7; }
+body.theme-retro-pixel .legal h3 { font-size: .8rem; line-height: 1.7; }
+
+/* ===== Related links (build 注入) =====
+   风格页 / 对比页 / 动效页底部的出口。数据全部来自 compares 与 recipes，
+   不手写：加一条对比或配方，相关链接会自动出现在两侧页面上。 */
+.related {
+    margin: 3rem 0 1rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.related-h {
+    margin: 0 0 1.2rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: .72rem;
+    font-weight: 400;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity: .55;
+}
+
+.related-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.4rem 2rem;
+}
+
+.related-col h3 {
+    margin: 0 0 .5rem;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: -.005em;
+}
+
+.related-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.related-col li {
+    margin-bottom: .38rem;
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+.related-col li:last-child { margin-bottom: 0; }
+
+.related-col a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.related-col a:hover { text-decoration: underline; }
+
+/* 对比页与动效页没有 .container 包裹，这里自带宽度与边距 */
+.related-standalone {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    padding: 1.6rem 1.25rem 0;
+}

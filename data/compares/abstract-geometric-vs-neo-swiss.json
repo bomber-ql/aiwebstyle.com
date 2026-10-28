@@ -1,0 +1,90 @@
+{
+  "slug": "abstract-geometric-vs-neo-swiss",
+  "a": "abstract-geometric",
+  "b": "neo-swiss",
+  "title": "Abstract Geometric vs Neo-Swiss",
+  "order": 18,
+  "status": "published",
+  "updatedAt": "2026-10-28",
+  "lede": "Both are compositions made of circles, squares and type on a grid. One uses shape as the layout; the other uses columns and never draws a shape at all.",
+  "verdict": "Abstract geometric places a large circle and a rotated square as the structure itself, then fits the type against them. Neo-Swiss has no shapes: a 12-column grid, a headline across nine columns, a standfirst starting at column seven, and one red used twice.",
+  "brief": [
+    "The abstract page has geometry you can see. A circle at 50% radius, a square rotated 18 degrees with a 28px radius, pill buttons at 999px, cards at 24px with a 1px #ece6dd hairline. The headline is capped at 16ch because it has to sit in the gap the shapes leave, not because it needs a measure.",
+    "Neo-Swiss has geometry you can only infer. Everything is placed on repeat(12, 1fr): the headline takes 1 / span 9, the standfirst 7 / span 5, so the two blocks overlap across three columns. Corners are 0 everywhere, there are no shadows, and red appears exactly twice on the page."
+  ],
+  "dimensions": [
+    {
+      "name": "What you see",
+      "a": "Circles, rotated squares, pill buttons",
+      "b": "Columns and rules only",
+      "edge": "a"
+    },
+    {
+      "name": "Layout device",
+      "a": "Shapes define space; text fits around them",
+      "b": "12-column grid with deliberate overlap",
+      "edge": "tie"
+    },
+    {
+      "name": "Corner",
+      "a": "28px square, 24px cards, 999px pills",
+      "b": "0 everywhere",
+      "edge": "a"
+    },
+    {
+      "name": "Accent",
+      "a": "Pastel fills at low opacity, blending where they overlap",
+      "b": "One red, used twice",
+      "edge": "tie"
+    },
+    {
+      "name": "Typeface",
+      "a": "Montserrat, heavy",
+      "b": "Helvetica Neue, one family",
+      "edge": "tie"
+    },
+    {
+      "name": "Headline measure",
+      "a": "16ch",
+      "b": "grid-column: 1 / span 9",
+      "edge": "tie"
+    }
+  ],
+  "cssDelta": [
+    {
+      "label": "Structure",
+      "a": "shapes as blocks, text fitted against them",
+      "b": "grid-template-columns: repeat(12, 1fr)"
+    },
+    {
+      "label": "Headline",
+      "a": "max-width: 16ch",
+      "b": "grid-column: 1 / span 9"
+    },
+    {
+      "label": "Standfirst",
+      "a": "max-width: 50ch",
+      "b": "grid-column: 7 / span 5"
+    },
+    {
+      "label": "Decoration",
+      "a": "border-radius: 50% / rotate(18deg)",
+      "b": "border-radius: 0; no shapes"
+    }
+  ],
+  "whenA": [
+    "The page has few words and needs a composition to hold the eye",
+    "You want a modern, designed feel without photography",
+    "The brand is creative and can carry a pastel palette"
+  ],
+  "whenB": [
+    "The page carries several kinds of content and needs a system rather than a composition",
+    "The brand is institutional — finance, engineering, academia — where restraint reads as competence",
+    "You want the layout itself to look designed while staying entirely in black and white plus one red"
+  ],
+  "promptDelta": "The instruction that separates them is whether shapes are allowed. For abstract geometric, name the shapes and their sizes — one circle at 50%, one 28px square rotated 18 degrees — and say the text is fitted against them. For neo-Swiss, state the column spans for the headline and the standfirst explicitly and forbid decorative shapes entirely. A model asked for \"geometric layout\" will add circles to a Swiss grid, which produces neither: columns that justify nothing, decorated with shapes that align to nothing.",
+  "recipes": [
+    "portfolio",
+    "pricing-page"
+  ]
+}
