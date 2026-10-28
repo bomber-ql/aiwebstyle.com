@@ -16,7 +16,7 @@ import {
   validateRecipes,
   validateCompares,
 } from './lib/validate.mjs';
-import { clipMeta } from './lib/seo.mjs';
+import { BRAND, BRAND_ALT, clipMeta } from './lib/seo.mjs';
 import { brandLink, searchButton } from './lib/nav.mjs';
 import path from 'node:path';
 
@@ -194,8 +194,8 @@ function seoBlock({ desc, canonical, ogType = 'website', jsonLd }) {
     `<meta name="description" content="${escapeAttr(desc)}">`,
     `<link rel="canonical" href="${canonical}">`,
     `<meta property="og:type" content="${ogType}">`,
-    `<meta property="og:site_name" content="AI Website Style Gallery">`,
-    `<meta property="og:title" content="${escapeAttr(jsonLd ? jsonLd.title : 'AI Website Style Gallery')}">`,
+    `<meta property="og:site_name" content="${BRAND}">`,
+    `<meta property="og:title" content="${escapeAttr(jsonLd ? jsonLd.title : BRAND)}">`,
     `<meta property="og:description" content="${escapeAttr(desc)}">`,
     `<meta property="og:url" content="${canonical}">`,
     `<meta name="twitter:card" content="summary_large_image">`,
@@ -1089,7 +1089,7 @@ const gallerySeo = seoBlock({
       name: 'All Styles',
       description: `A library of ${styles.length} web design styles with AI prompts and CSS.`,
       url: `${SITE}/styles/index.html`,
-      isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+      isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
       mainEntity: {
         '@type': 'ItemList',
         numberOfItems: styles.length,
@@ -1108,20 +1108,47 @@ const siteSeo = seoBlock({
   desc: `Design styles, live previews, motion patterns and whole-page prompts for building websites with AI — ${styles.length} styles, ${motions.length} motion patterns and ${recipeList.length} page recipes.`,
   canonical: `${SITE}/`,
   jsonLd: {
-    title: 'AI Website Style Gallery',
+    // og:title 之前填的是站名，分享出去只有「AI Web Style」四个字，没有信息量；
+    // 与 <title> 对齐，用页面标题。
+    title: `${BRAND} — ${styles.length} styles, previews and prompts`,
     data: {
       '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'AI Website Style Gallery',
-      url: `${SITE}/`,
-      description: `A reference library of ${styles.length} web design styles, their live previews, ${motions.length} motion patterns and ${recipeList.length} whole-page prompts.`,
-      inLanguage: 'en',
-      hasPart: [
-        { '@type': 'CollectionPage', name: 'All Styles', url: `${SITE}/styles/index.html` },
-        { '@type': 'CollectionPage', name: 'Style Previews', url: `${SITE}/previews/index.html` },
-        { '@type': 'CollectionPage', name: 'Style Comparisons', url: `${SITE}/compares/index.html` },
-        { '@type': 'CollectionPage', name: 'Web Motion Library', url: `${SITE}/motions/index.html` },
-        { '@type': 'CollectionPage', name: 'Prompt Recipes', url: `${SITE}/recipes/index.html` },
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${SITE}/#website`,
+          name: BRAND,
+          alternateName: BRAND_ALT,
+          url: `${SITE}/`,
+          description: `A reference library of ${styles.length} web design styles, their live previews, ${motions.length} motion patterns and ${recipeList.length} whole-page prompts.`,
+          inLanguage: 'en',
+          publisher: { '@id': `${SITE}/#organization` },
+          hasPart: [
+            { '@type': 'CollectionPage', name: 'All Styles', url: `${SITE}/styles/index.html` },
+            { '@type': 'CollectionPage', name: 'Style Previews', url: `${SITE}/previews/index.html` },
+            { '@type': 'CollectionPage', name: 'Style Comparisons', url: `${SITE}/compares/index.html` },
+            { '@type': 'CollectionPage', name: 'Web Motion Library', url: `${SITE}/motions/index.html` },
+            { '@type': 'CollectionPage', name: 'Prompt Recipes', url: `${SITE}/recipes/index.html` },
+          ],
+        },
+        // 站内除了 Article.publisher 里内嵌的那个名字，没有独立的 Organization 实体。
+        // 独立出来之后各页的 publisher 可以指向同一个 @id，Google 才认得出「这些内容属于同一家」。
+        // sameAs 留空：仓库是私有的、也没有可关联的公开主页，指一个 404 反而减分。
+        {
+          '@type': 'Organization',
+          '@id': `${SITE}/#organization`,
+          name: BRAND,
+          alternateName: BRAND_ALT,
+          url: `${SITE}/`,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${SITE}/img/apple-touch-icon.png`,
+            width: 180,
+            height: 180,
+          },
+          email: site.contactEmail,
+          description: `An independent, ad-supported reference library of web design styles: ${styles.length} styles with tokens and failure cases, ${previews.length} live previews, ${motions.length} motion patterns and ${recipeList.length} whole-page prompts.`,
+        },
       ],
     },
   },
@@ -1149,7 +1176,7 @@ for (const s of styles) {
           headline: `${s.name.en}: Web Design Style, Prompt and CSS`,
           description: desc,
           about: { '@type': 'Thing', name: s.name.en },
-          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+          isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
         },
       },
     })
@@ -1209,7 +1236,7 @@ for (const m of motions) {
           name: m.name,
           description: m.summary,
           inLanguage: 'en',
-          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+          isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
           step: [
             { '@type': 'HowToStep', name: 'Copy the prompt', text: 'Paste the prompt from this page into your AI website builder.' },
             { '@type': 'HowToStep', name: 'Set the trigger', text: `Bind the effect to ${m.trigger} using ${m.tech}.` },
@@ -1297,7 +1324,7 @@ for (const p of previews) {
           description: desc,
           url: `${SITE}/${rel}`,
           about: { '@type': 'Thing', name: p.name },
-          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+          isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
         },
       },
     })
@@ -1341,7 +1368,7 @@ if (exists('previews/index.html')) {
 
 const legalSeo = {
   'about.html': {
-    desc: 'What AI Website Style Gallery is, how design styles are selected and documented, our editorial standards, and how to reach us.',
+    desc: 'What ${BRAND} is, how design styles are selected and documented, our editorial standards, and how to reach us.',
     type: 'AboutPage',
     title: 'About This Site',
   },
@@ -1351,12 +1378,12 @@ const legalSeo = {
     title: 'Privacy Policy',
   },
   'terms.html': {
-    desc: 'Terms for using AI Website Style Gallery: what you may do with the written prompts and downloadable CSS, warranty disclaimer, and third-party notices.',
+    desc: 'Terms for using ${BRAND}: what you may do with the written prompts and downloadable CSS, warranty disclaimer, and third-party notices.',
     type: 'WebPage',
     title: 'Terms of Use',
   },
   'contact.html': {
-    desc: 'How to reach AI Website Style Gallery: corrections, style submissions, licensing and reuse, privacy requests, and what to include in a message.',
+    desc: 'How to reach ${BRAND}: corrections, style submissions, licensing and reuse, privacy requests, and what to include in a message.',
     type: 'ContactPage',
     title: 'Contact',
   },
@@ -1370,14 +1397,14 @@ for (const [rel, meta] of Object.entries(legalSeo)) {
       desc: meta.desc,
       canonical: `${SITE}/${rel}`,
       jsonLd: {
-        title: `${meta.title} — AI Website Style Gallery`,
+        title: `${meta.title} — ${BRAND}`,
         data: {
           '@context': 'https://schema.org',
           '@type': meta.type,
           name: meta.title,
           description: meta.desc,
           url: `${SITE}/${rel}`,
-          isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+          isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
         },
       },
     })

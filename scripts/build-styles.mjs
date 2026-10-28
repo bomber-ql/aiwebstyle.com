@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import { Report, assertClean, validateNewStyles } from './lib/validate.mjs';
 import path from 'node:path';
+import { BRAND } from './lib/seo.mjs';
 import { execSync } from 'node:child_process';
 
 const ROOT = process.cwd();
@@ -120,7 +121,7 @@ ${whenNot}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="current-year"></span> AI Website Style Gallery</p>
+            <p>&copy; <span id="current-year"></span> ${BRAND}</p>
         </div>
     </footer>
     <script src="../script.js" defer></script>

@@ -246,10 +246,21 @@
     openOverlay();
   });
 
-  // 预取索引的空闲时机：用户很可能按 Cmd+K，等按了再请求会有 200ms 空窗
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(function () { loadIndex(); }, { timeout: 4000 });
-  } else {
-    setTimeout(function () { loadIndex(); }, 2500);
+  // 预取索引的空闲时机：用户很可能按 Cmd+K，等按了再请求会有 200ms 空窗。
+  // 但索引 26KB，每页都预取等于给每个只读一屏就走的访客多付一次带宽；
+  // 省流量模式与 2G 下不预取 —— 那时首屏本身更值钱，用户真按了 ⌘K 再拉也来得及。
+  function prefetchWorthIt() {
+    var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!c) return true;
+    if (c.saveData) return false;
+    return !/^(slow-)?2g$/.test(c.effectiveType || '');
+  }
+
+  if (prefetchWorthIt()) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function () { loadIndex(); }, { timeout: 4000 });
+    } else {
+      setTimeout(function () { loadIndex(); }, 2500);
+    }
   }
 })();

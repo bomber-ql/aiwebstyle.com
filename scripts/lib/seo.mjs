@@ -7,6 +7,11 @@
 
 export const SITE = 'https://www.aiwebstyle.com';
 export const BRAND = 'AI Web Style';
+// 旧站名。只在结构化数据里作为 WebSite.alternateName 出现：
+//   标题和导航早就换成 BRAND 了，但 og:site_name / 页脚 / isPartOf 一直是旧名，
+//   等于把「站点叫什么」这个信号劈成两半。保留成别名而不是删掉 —— 老外链和分享卡片
+//   仍可能用旧名指过来，给它一个 alternateName 比直接抹掉更安全。
+export const BRAND_ALT = 'AI Website Style Gallery';
 export const OG_DEFAULT = `${SITE}/img/og/default.jpg`;
 
 /** 描述文本：≤max 原样返回；否则先找句末，再退到词边界，都不补省略号 */

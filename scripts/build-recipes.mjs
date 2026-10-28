@@ -10,7 +10,7 @@
 
 import fs from 'node:fs';
 import { Report, assertClean, validateRecipes } from './lib/validate.mjs';
-import { clipMeta } from './lib/seo.mjs';
+import { BRAND, clipMeta } from './lib/seo.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -182,14 +182,14 @@ function seoBlock(r, desc) {
     description: desc,
     inLanguage: 'en',
     url,
-    isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+    isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
     step: r.sections.map((s) => ({ '@type': 'HowToStep', name: s.name, text: s.why })),
   };
   return `    <!-- build:seo -->
     <meta name="description" content="${esc(desc)}">
     <link rel="canonical" href="${url}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:site_name" content="${BRAND}">
     <meta property="og:title" content="${esc(r.name)} — Prompt Recipe">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${url}">
@@ -319,7 +319,7 @@ ${relatedHtml(r)}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+            <p>&copy; <span id="year"></span> ${BRAND}. Demo content on this site is fictional.</p>
         </div>
     </footer>
 
@@ -428,7 +428,7 @@ function indexPage() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prompt Recipes — Structured Prompts for Building Whole Pages | AI Website Style Gallery</title>
+    <title>Prompt Recipes — Structured Prompts for Building Whole Pages | ${BRAND}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -438,7 +438,7 @@ function indexPage() {
     <meta name="description" content="${esc(desc)}">
     <link rel="canonical" href="${SITE}/recipes/index.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:site_name" content="${BRAND}">
     <meta property="og:title" content="Prompt Recipes — Structured Prompts for Building Whole Pages">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${SITE}/recipes/index.html">
@@ -494,7 +494,7 @@ ${recipes.map(indexCard).join('\n')}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content on this site is fictional.</p>
+            <p>&copy; <span id="year"></span> ${BRAND}. Demo content on this site is fictional.</p>
         </div>
     </footer>
 

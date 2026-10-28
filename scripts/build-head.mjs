@@ -39,8 +39,11 @@ const previews = json('data/previews.json');
 
 const UPDATED = site.contentUpdated || '2026-10-28';
 const PUBLISHED = site.contentPublished || '2026-10-27';
+// @id 与首页 index.html 的 Organization 节点一致：全站每个 publisher 都指向同一个实体，
+// 而不是每页各写一遍同名的匿名 Organization。
 const ORG = {
   '@type': 'Organization',
+  '@id': `${SITE}/#organization`,
   name: BRAND,
   url: `${SITE}/`,
   logo: { '@type': 'ImageObject', url: `${SITE}/img/apple-touch-icon.png`, width: 180, height: 180 },

@@ -8,6 +8,7 @@
 import fs from 'node:fs';
 import { Report, assertClean, validatePreviews } from './lib/validate.mjs';
 import path from 'node:path';
+import { BRAND } from './lib/seo.mjs';
 
 const ROOT = process.cwd();
 const read = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -273,7 +274,7 @@ ${list.map(indexCard).join('\n')}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content is a fictional studio.</p>
+            <p>&copy; <span id="year"></span> ${BRAND}. Demo content is a fictional studio.</p>
         </div>
     </footer>
     <script src="../script.js" defer></script>

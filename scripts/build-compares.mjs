@@ -9,7 +9,7 @@
 
 import fs from 'node:fs';
 import { Report, assertClean, validateCompares } from './lib/validate.mjs';
-import { clipMeta } from './lib/seo.mjs';
+import { BRAND, clipMeta } from './lib/seo.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -122,7 +122,7 @@ function seoBlock(c, desc) {
     description: desc,
     inLanguage: 'en',
     url,
-    isPartOf: { '@type': 'WebSite', name: 'AI Website Style Gallery', url: `${SITE}/` },
+    isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
     about: [
       { '@type': 'Thing', name: nameOf(c.a) },
       { '@type': 'Thing', name: nameOf(c.b) },
@@ -132,7 +132,7 @@ function seoBlock(c, desc) {
     <meta name="description" content="${esc(desc)}">
     <link rel="canonical" href="${url}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:site_name" content="${BRAND}">
     <meta property="og:title" content="${esc(c.title)} — side-by-side comparison">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${url}">
@@ -160,7 +160,7 @@ function page(c, prev, next) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${esc(c.title)} — Side-by-Side Comparison | AI Website Style Gallery</title>
+    <title>${esc(c.title)} — Side-by-Side Comparison | ${BRAND}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -278,7 +278,7 @@ ${list(c.whenB)}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content is a fictional studio.</p>
+            <p>&copy; <span id="year"></span> ${BRAND}. Demo content is a fictional studio.</p>
         </div>
     </footer>
 
@@ -336,7 +336,7 @@ function indexPage() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Comparisons — Two Styles, One Page, Side by Side | AI Website Style Gallery</title>
+    <title>Style Comparisons — Two Styles, One Page, Side by Side | ${BRAND}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -346,7 +346,7 @@ function indexPage() {
     <meta name="description" content="${esc(desc)}">
     <link rel="canonical" href="${SITE}/compares/index.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="AI Website Style Gallery">
+    <meta property="og:site_name" content="${BRAND}">
     <meta property="og:title" content="Style Comparisons — side by side">
     <meta property="og:description" content="${esc(desc)}">
     <meta property="og:url" content="${SITE}/compares/index.html">
@@ -396,7 +396,7 @@ ${compares.map(card).join('\n')}
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> AI Website Style Gallery. Demo content is a fictional studio.</p>
+            <p>&copy; <span id="year"></span> ${BRAND}. Demo content is a fictional studio.</p>
         </div>
     </footer>
 
