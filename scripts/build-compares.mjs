@@ -9,6 +9,7 @@
 
 import fs from 'node:fs';
 import { Report, assertClean, validateCompares } from './lib/validate.mjs';
+import { clipMeta } from './lib/seo.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -145,7 +146,7 @@ function seoBlock(c, desc) {
 function page(c, prev, next) {
   const aName = nameOf(c.a);
   const bName = nameOf(c.b);
-  const desc = `${aName} or ${bName}? ${c.verdict} Side-by-side live previews, a six-row decision table and the CSS that actually differs.`.slice(0, 158);
+  const desc = clipMeta(`${aName} or ${bName}? ${c.verdict} Side-by-side live previews, a six-row decision table and the CSS that actually differs.`, 158);
 
   const chain = [
     prev ? `<a href="${esc(prev.slug)}.html">← ${esc(prev.title)}</a>` : '',
@@ -328,7 +329,7 @@ function card(c, i) {
 }
 
 function indexPage() {
-  const desc = `${compares.length} head-to-head style comparisons with side-by-side live previews, a decision table and the CSS that actually differs. Built for the choice you are about to make, not for a mood board.`;
+  const desc = clipMeta(`${compares.length} head-to-head style comparisons with side-by-side live previews, a decision table and the CSS that actually differs. Built for the choice you are about to make, not for a mood board.`, 158);
 
   return `<!DOCTYPE html>
 <html lang="en">

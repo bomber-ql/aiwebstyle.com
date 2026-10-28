@@ -16,6 +16,7 @@ import {
   validateRecipes,
   validateCompares,
 } from './lib/validate.mjs';
+import { clipMeta } from './lib/seo.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -661,7 +662,7 @@ function buildHomeFeatured() {
   const cards = featured
     .map(
       (s) => `                <a class="home-feature" href="styles/${s.id}.html">
-                    <h3>${escapeAttr(s.name.en)}</h3>
+                    <h2>${escapeAttr(s.name.en)}</h2>
                     <p>${escapeAttr(clip(s.description.en, 104))}</p>
                     <span class="home-go">Breakdown →</span>
                 </a>`
@@ -990,7 +991,7 @@ let n = 0;
 for (const s of styles) {
   const rel = `styles/${s.id}.html`;
 
-  let desc = clip(s.summaryLong || s.description.en, 158);
+  let desc = clipMeta(s.summaryLong || s.description.en, 158);
   injectSeo(
     rel,
     seoBlock({

@@ -82,7 +82,7 @@ footer { text-align: center; margin-top: 3rem; padding: 1.5rem 1rem; font-size: 
 
 /* --- Card Content Area Styles (Adjusted for No Image) --- */
 .card-content { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; z-index: 1; }
-.card-content h3 { margin-bottom: 0.5rem; font-size: 1.15em; font-weight: 700; line-height: 1.3; color: var(--heading-color); transition: color 0.3s ease; }
+.card-content h2, .card-content h3 { margin-bottom: 0.5rem; font-size: 1.15em; font-weight: 700; line-height: 1.3; color: var(--heading-color); transition: color 0.3s ease; }
 .card-content .prompt-label { font-weight: bold; font-size: 0.85em; margin-top: 0.5rem; margin-bottom: 0.2rem; color: inherit; opacity: 0.8; }
 .card-content .prompt-text { font-size: 0.85em; color: var(--prompt-text-color); background-color: var(--prompt-bg); background-image: var(--prompt-bg-image, none); /* For textures */ padding: 0.6em; border-radius: 4px; margin-bottom: 1.2rem; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; border: 1px solid transparent; transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; box-shadow: var(--prompt-shadow, none); }
 .card-buttons { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: space-between; }
@@ -629,7 +629,7 @@ body.theme-aurora-ui .card:hover {
 }
 
 /* Text Readability Enhancements for content within cards (Homepage) */
-body.theme-aurora-ui .card .card-content h3 { /* Assuming H3 for card titles */
+body.theme-aurora-ui .card .card-content h2, body.theme-aurora-ui .card .card-content h3 { /* Assuming H3 for card titles */
     color: var(--card-heading-color);
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
@@ -1024,7 +1024,7 @@ body.theme-art-deco .card[data-style-id="art-deco"] {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) { header h1 { font-size: 1.6em; } header p { font-size: 1em; } }
-@media (max-width: 480px) { .card-grid { gap: 1rem; } .card-content { padding: 0.8rem; } .card-content h3 { font-size: 1.1em; } .card-content .prompt-text { font-size: 0.8em; } .btn { font-size: 0.85em; padding: 0.5em 1em; } .btn-secondary { font-size: 0.75em; padding: 0.3em 0.6em; } header { padding: 1rem; } header h1 { font-size: 1.4em; } header p { font-size: 0.9em; } }
+@media (max-width: 480px) { .card-grid { gap: 1rem; } .card-content { padding: 0.8rem; } .card-content h2, .card-content h3 { font-size: 1.1em; } .card-content .prompt-text { font-size: 0.8em; } .btn { font-size: 0.85em; padding: 0.5em 1em; } .btn-secondary { font-size: 0.75em; padding: 0.3em 0.6em; } header { padding: 1rem; } header h1 { font-size: 1.4em; } header p { font-size: 0.9em; } }
 /* --- Style Detail Page Layout --- */
 .style-detail-container {
     padding-top: 1rem; /* 顶部留白 */
@@ -1818,7 +1818,7 @@ body.theme-aurora-ui { --home-surface: rgba(13, 17, 23, .9); }
     transition: background-color .18s ease, color .18s ease;
 }
 
-.home-feature h3 {
+.home-feature h2 {
     margin: 0;
     font-size: clamp(1.02rem, 1.7vw, 1.24rem);
     letter-spacing: -.015em;
@@ -1850,7 +1850,7 @@ body.theme-aurora-ui { --home-surface: rgba(13, 17, 23, .9); }
     color: var(--flip-fg, var(--page-bg));
 }
 
-.home-feature:hover h3 {
+.home-feature:hover h2, .home-feature:hover h3 {
     color: var(--flip-fg, var(--page-bg));
     /* 极繁主义给 h1-h3 套了一层洋红色块（见顶部主题块），在反色卡片里会和底色打架，这里摘掉 */
     background-color: transparent;

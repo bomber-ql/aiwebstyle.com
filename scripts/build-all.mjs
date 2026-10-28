@@ -6,6 +6,8 @@
 //   1.5) build-recipes     配方页（只写 recipes/*.html，不碰其他目录）
 //   2) build-styles        新风格的详情页 / 卡片样式 / 主题块 / zip（会重写 styles/*.html）
 //   3) build               预渲染画廊、首页、SEO、导航、sitemap（必须最后，否则注入会被覆盖）
+//   3.5) build-og         favicon 与 1200×630 社交图（截预览页首屏，Chrome 缺失时自动跳过）
+//   3.6) build-head       全站标题规范化、og:image、面包屑、结构化数据补全、字体按需
 //   4) validate-data --files  落地校验。必须在生成之后，兜住「数据加了、产物漏了」
 //   5) check-contrast      主题对比度。必须在生成之后，读的是最终 style.css
 //
@@ -21,6 +23,8 @@ const STEPS = [
     { script: 'build-recipes.mjs', label: '配方页' },
     { script: 'build-styles.mjs', label: '风格产物' },
     { script: 'build.mjs', label: '站点注入' },
+    { script: 'build-og.mjs', label: 'favicon 与社交图' },
+    { script: 'build-head.mjs', label: 'head 规范化（标题/图/面包屑）' },
     { script: 'validate-data.mjs', args: ['--files'], label: '数据校验（产物）' },
     { script: 'check-contrast.mjs', label: '主题对比度' },
 ];

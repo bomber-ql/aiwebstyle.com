@@ -10,6 +10,7 @@
 
 import fs from 'node:fs';
 import { Report, assertClean, validateRecipes } from './lib/validate.mjs';
+import { clipMeta } from './lib/seo.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -202,7 +203,7 @@ function seoBlock(r, desc) {
 function page(r, prev, next) {
   const defaults = defaultsFor(r);
   const baked = assemble(r, defaults);
-  const desc = `${r.summary} A structured prompt with ${r.controls.length} variables and the failure modes to watch for.`.slice(0, 158);
+  const desc = clipMeta(`${r.summary} A structured prompt with ${r.controls.length} variables and the failure modes to watch for.`, 158);
 
   const navParts = [];
   if (prev) navParts.push(`<a href="${esc(prev.slug)}.html">← ${esc(prev.name)}</a>`);
