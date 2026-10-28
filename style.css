@@ -1230,14 +1230,17 @@ body.theme-neomorphism {
     display: flex;
     align-items: center;
     gap: 1rem;
-    max-width: 1200px;
+    /* 宽度跟内容走：普通页面 = .container 的 1200；首页是全宽版式，见 body.page-home 覆盖。
+       两边不一致时，宽屏上会出现「内容铺满整屏、导航缩在 1200 中间」的错位。 */
+    max-width: var(--nav-max, 1200px);
     margin: 0 auto;
-    padding: .45rem 1rem;
+    padding: .45rem var(--nav-pad, 1rem);
     min-height: 56px;
 }
 .nav-brand {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: .55rem;
     line-height: 1.15;
     color: #eef2f7 !important;
     text-decoration: none !important;
@@ -1245,12 +1248,19 @@ body.theme-neomorphism {
     font-size: .98rem;
     letter-spacing: -.01em;
 }
-.nav-brand-sub {
-    font-size: .64rem;
-    font-weight: 400;
-    color: #7f8fa1;
-    letter-spacing: .06em;
-    margin-top: .1rem;
+
+/* 品牌标：内联 SVG，和 favicon / og:image 同一套方块形状。
+   导航条底色固定是近黑，这里用浅底深块的反相组合，直接嵌在条上也立得住。 */
+.nav-mark {
+    display: block;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+}
+
+.nav-brand-text {
+    display: block;
+    line-height: 1.2;
 }
 .nav-links {
     display: flex;
@@ -1288,7 +1298,6 @@ header h1 { font-size: 1.75em; margin-bottom: .35rem; }
 header p { font-size: 1em; }
 
 @media (max-width: 640px) {
-    .nav-brand-sub { display: none; }
     .nav-links a { padding: .4rem .55rem; font-size: .8rem; }
     .site-nav .nav-inner { min-height: 48px; gap: .5rem; }
     header h1 { font-size: 1.5em; }
@@ -1527,7 +1536,6 @@ body.theme-acid-graphics {
         min-height: 0;
     }
     .site-nav .nav-brand { width: 100%; }
-    .site-nav .nav-brand-sub { display: none; }
     .site-nav .nav-links {
         width: 100%;
         flex-wrap: wrap;
@@ -1550,6 +1558,13 @@ body.theme-acid-graphics {
    .card / .mx-card / .rc-card set display:block, which overrides the UA
    [hidden] { display:none } rule and silently breaks category filters. */
 [hidden] { display: none !important; }
+
+/* 首页是全宽版式（内容左右只留 --home-pad），导航跟着同一套边距走；
+   其他页面内容在 .container（1200）里，导航保持 1200 天然对齐。 */
+body.page-home {
+    --nav-max: none;
+    --nav-pad: var(--home-pad);
+}
 
 /* ===== Home page =====================================================
    版式原则：全宽铺满 + 大字 + 细线分隔，不用卡片框。

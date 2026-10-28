@@ -427,6 +427,17 @@ function trimFonts(rel, html, themeId) {
   };
 }
 
+/* ---------- 导航品牌标 ----------
+   原来是纯文字，宽屏上左端只有一个词，压不住整条导航。
+   这里换成「方块标 + 文字」的组合：标是内联 SVG（不额外发请求），
+   形状与 img/favicon.svg、og:image 同源，三处看到的是同一个记号。 */
+const NAV_MARK = `<svg class="nav-mark" viewBox="13 13 70 70" aria-hidden="true" focusable="false">
+                    <rect x="16" y="16" width="46" height="46" rx="10" fill="#7c5cff"/>
+                    <rect x="34" y="34" width="46" height="46" rx="10" fill="none" stroke="#f4f1ea" stroke-width="9"/>
+                </svg>`;
+const BRAND_INNER = `${NAV_MARK}<span class="nav-brand-text">AI Web Style</span>`;
+const BRAND_RE = /(<a class="nav-brand"[^>]*>)([\s\S]*?)(<\/a>)/;
+
 /* ---------- 主流程 ---------- */
 
 const skipDirs = new Set(['.git', 'node_modules', '.workbuddy', 'zips', 'img']);
@@ -443,6 +454,7 @@ const pages = [];
 let titles = 0;
 let heads = 0;
 let schemas = 0;
+let brands = 0;
 let fontsTrimmed = 0;
 let fontFamiliesBefore = 0;
 let fontFamiliesAfter = 0;
@@ -457,6 +469,13 @@ for (const rel of pages) {
   const nextTitle = `<title>${escAttr(meta.title)}</title>`;
   const cur = html.match(/<title>[\s\S]*?<\/title>/);
   if (cur && cur[0] !== nextTitle) { html = html.replace(cur[0], nextTitle); titles++; }
+
+  // 1.5) 导航品牌标
+  if (BRAND_RE.test(html)) {
+    const before = html;
+    html = html.replace(BRAND_RE, `$1${BRAND_INNER}$3`);
+    if (html !== before) brands++;
+  }
 
   // 2) favicon + 社交图 + 面包屑
   const crumb = breadcrumbLd(html, meta.crumb);
@@ -496,7 +515,7 @@ for (const rel of pages) {
   write(rel, html);
 }
 
-console.log(`✓ 标题规范化：改 ${titles} 个 | head 块：${heads} 页 | 结构化数据补全：${schemas} 处`);
+console.log(`✓ 标题规范化：改 ${titles} 个 | 品牌标：${brands} 页 | head 块：${heads} 页 | 结构化数据补全：${schemas} 处`);
 if (fontsTrimmed) {
   console.log(`✓ 字体按需：${fontsTrimmed} 个风格页，共 ${fontFamiliesBefore} → ${fontFamiliesAfter} 个字体家族`);
 }

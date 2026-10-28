@@ -31,11 +31,9 @@ const styleIds = [
 
 const icons = {
   'favicon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="AI Web Style">
-  <rect width="96" height="96" rx="21" fill="#0e1116"/>
-  <rect x="17" y="17" width="27" height="27" rx="5" fill="#f4f1ea"/>
-  <rect x="50" y="17" width="29" height="12" rx="5" fill="#7c5cff"/>
-  <rect x="50" y="36" width="29" height="8" rx="4" fill="#22d3ee"/>
-  <rect x="17" y="50" width="62" height="29" rx="5" fill="#f4f1ea"/>
+  <rect width="96" height="96" rx="22" fill="#000000"/>
+  <rect x="14" y="14" width="46" height="46" rx="10" fill="#7c5cff"/>
+  <rect x="36" y="36" width="46" height="46" rx="10" fill="none" stroke="#f4f1ea" stroke-width="10"/>
 </svg>
 `,
 };
@@ -76,22 +74,28 @@ for (const [name, svg] of Object.entries(icons)) {
   if (old !== svg) { fs.writeFileSync(p, svg); iconCount++; }
 }
 
-const svgUrl = 'file://' + path.join(ROOT, 'img', 'favicon.svg');
-const ico96 = path.join(ROOT, 'img', 'favicon-96.png');
-if (force || !fs.existsSync(ico96)) {
-  if (chromeShot(svgUrl, ico96, 96, 96, true)) iconCount++;
+// 直接对 .svg 文件截图会得到空白（Chrome 不保证 SVG 文档铺满视口），
+// 统一套一层定尺寸的 HTML 再截，稳定且可控。
+// 底色用图标自己的深色：圆角外与底色同色，视觉上仍是圆角块，同时不依赖透明通道。
+function renderIcon(size, file) {
+  const out = path.join(ROOT, 'img', file);
+  const tmpHtml = path.join(ROOT, 'img', `_icon-${size}.html`);
+  fs.writeFileSync(tmpHtml, `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;width:${size}px;height:${size}px;overflow:hidden;background:#0e1116}
+  svg{display:block;width:${size}px;height:${size}px}
+  </style></head><body>${icons['favicon.svg']}</body></html>`);
+  const okShot = chromeShot('file://' + tmpHtml, out, size, size);
+  fs.unlinkSync(tmpHtml);
+  if (!okShot) return false;
+  const bytes = fs.existsSync(out) ? fs.statSync(out).size : 0;
+  if (bytes < 1000) { console.log(`  ! ${file} 疑似空白（${bytes} 字节）`); return false; }
+  return true;
 }
 
-// apple-touch-icon 必须不透明（iOS 会自己套圆角，透明边会变黑）
-const apple = path.join(ROOT, 'img', 'apple-touch-icon.png');
-if (force || !fs.existsSync(apple)) {
-  const tmpHtml = path.join(ROOT, 'img', '_apple.html');
-  fs.writeFileSync(tmpHtml, `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-  html,body{margin:0;padding:0;background:#0e1116;width:180px;height:180px;overflow:hidden}
-  svg{display:block;width:180px;height:180px}
-  </style></head><body>${icons['favicon.svg']}</body></html>`);
-  if (chromeShot('file://' + tmpHtml, apple, 180, 180)) iconCount++;
-  fs.unlinkSync(tmpHtml);
+for (const [size, file] of [[96, 'favicon-96.png'], [180, 'apple-touch-icon.png']]) {
+  if (force || !fs.existsSync(path.join(ROOT, 'img', file))) {
+    if (renderIcon(size, file)) iconCount++;
+  }
 }
 
 /* ---------- 2. 每个风格的社交图（截预览页首屏） ---------- */
