@@ -1,0 +1,362 @@
+{
+  "compares/3d-interactive-vs-aurora-ui.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "1496c2eca98e0636"
+  },
+  "compares/abstract-geometric-vs-neo-swiss.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "43a594922d7bcf05"
+  },
+  "compares/acid-graphics-vs-neo-brutalism.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "10e2d471ec4b2b1d"
+  },
+  "compares/aurora-ui-vs-liquid-glass.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "7d136dbc88290644"
+  },
+  "compares/bento-grid-vs-editorial.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "31e591ee61a55c94"
+  },
+  "compares/bento-grid-vs-maximalism.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "c513301f9792b491"
+  },
+  "compares/bento-grid-vs-neo-swiss.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "b00a2b2ddb798cd7"
+  },
+  "compares/brutalism-vs-grunge.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "608e62766d018c74"
+  },
+  "compares/brutalism-vs-neo-brutalism.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "5f36964dde743f5e"
+  },
+  "compares/claymorphism-vs-illustration.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "62530f5c4a33c775"
+  },
+  "compares/editorial-vs-bold-typography.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "3555b0b74c790380"
+  },
+  "compares/editorial-vs-swiss-style.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "10a202fbcee30420"
+  },
+  "compares/liquid-glass-vs-glassmorphism.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "632b4f884071f179"
+  },
+  "compares/modern-tech-vs-sustainable-green.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "a8896356065311f3"
+  },
+  "compares/monochromatic-vs-dark-mode.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "fa49a75e19d148e2"
+  },
+  "compares/natural-organic-vs-art-deco.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "f694c5962621a9ca"
+  },
+  "compares/neomorphism-vs-claymorphism.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "e2dc6534f72b7c06"
+  },
+  "compares/retro-90s-vs-retro-y2k.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "729ea03a319ba6b2"
+  },
+  "compares/retro-pixel-vs-retro-90s.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "2422d0db4fb86c52"
+  },
+  "compares/skeuomorphism-vs-neomorphism.html": {
+    "published": "2026-10-28",
+    "modified": "2026-10-28",
+    "hash": "f1413c947c070d0f"
+  },
+  "motions/accordion.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "37424fd76cf3b77a"
+  },
+  "motions/aurora-background.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "315fd667eda51404"
+  },
+  "motions/card-spotlight.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "ee24ac4c3272c263"
+  },
+  "motions/count-up.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "ff8d8dba599b045a"
+  },
+  "motions/magnetic-button.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "ce9bc1f4ddf4efe5"
+  },
+  "motions/marquee.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "29216e017a9d837b"
+  },
+  "motions/scroll-progress.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "c511c43bfd11ce0a"
+  },
+  "motions/scroll-reveal.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "dcb371ac6baf2a1b"
+  },
+  "motions/sticky-scroll-story.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "6199639991bd08bc"
+  },
+  "motions/text-mask-reveal.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "7e99dbc436a328b8"
+  },
+  "motions/tilt-card.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "d6b811cc6f47382c"
+  },
+  "motions/view-transitions.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "42b9abe35a058890"
+  },
+  "recipes/blog.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "7b385ac1bced088d"
+  },
+  "recipes/careers-page.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "5040996acfaf04c0"
+  },
+  "recipes/contact-page.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "30561ba03f60b965"
+  },
+  "recipes/dashboard.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "1d6ff0f33c2225d1"
+  },
+  "recipes/docs-site.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "754e8fd5ca1d5519"
+  },
+  "recipes/launch-page.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "9c81b6e53b5e283d"
+  },
+  "recipes/onboarding-flow.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "d3da1b2d2bc223c1"
+  },
+  "recipes/portfolio.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "0980244f4c186496"
+  },
+  "recipes/pricing-page.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "ad3d29998d4792a6"
+  },
+  "recipes/product-page.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "1bb39d77b21c714d"
+  },
+  "recipes/saas-landing.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "fabe01211390a9ba"
+  },
+  "recipes/system-pages.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "c9eda83b9125b119"
+  },
+  "styles/3d-interactive.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "8d6aaa56ff5a6b7e"
+  },
+  "styles/abstract-geometric.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "8e28f02303a07b1c"
+  },
+  "styles/acid-graphics.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "d8dff6477d564a03"
+  },
+  "styles/art-deco.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "c3bdd56dc3959888"
+  },
+  "styles/aurora-ui.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "962c9a7d799c5a47"
+  },
+  "styles/bento-grid.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "89fda22037c40d65"
+  },
+  "styles/bold-typography.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "962a20e55df19932"
+  },
+  "styles/brutalism.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "6bb1d35300ad8e9c"
+  },
+  "styles/claymorphism.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "6d13610718dacd2a"
+  },
+  "styles/dark-mode.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "a03b7e8fdc0b4426"
+  },
+  "styles/editorial.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "df8a7933842cdb23"
+  },
+  "styles/glassmorphism.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "f09ddb4f337e4d4a"
+  },
+  "styles/grunge.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "cb5535b185b4b456"
+  },
+  "styles/illustration.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "4003eeb8da164a10"
+  },
+  "styles/liquid-glass.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "192f820642e2c15e"
+  },
+  "styles/maximalism.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "cad8aaf60ff59614"
+  },
+  "styles/modern-tech.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "cb39f703b5698d60"
+  },
+  "styles/monochromatic.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "669e943f6d35fe77"
+  },
+  "styles/natural-organic.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "922ceadd6b5ed1c4"
+  },
+  "styles/neo-brutalism.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "9f7b831049304137"
+  },
+  "styles/neo-swiss.html": {
+    "published": "2026-10-27",
+    "modified": "2026-10-28",
+    "hash": "53058c8df3475e31"
+  },
+  "styles/neomorphism.html": {
+    "published": "2025-05-07",
+    "modified": "2026-10-28",
+    "hash": "602203e7902cca7c"
+  },
+  "styles/retro-90s.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "d28a03320407af6a"
+  },
+  "styles/retro-pixel.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "30c7ca2a794a3591"
+  },
+  "styles/retro-y2k.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "a1ef91d209dab037"
+  },
+  "styles/skeuomorphism.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "b7e9e53f2dc57958"
+  },
+  "styles/sustainable-green.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "c53b3fae7f155097"
+  },
+  "styles/swiss-style.html": {
+    "published": "2025-05-06",
+    "modified": "2026-10-28",
+    "hash": "0cfb765288e0234f"
+  }
+}

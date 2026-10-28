@@ -1,5 +1,11 @@
 {
   "siteName": "AI Website Style Gallery",
+  "author": {
+    "name": "",
+    "jobTitle": "",
+    "url": "",
+    "sameAs": []
+  },
   "url": "https://www.aiwebstyle.com",
   "contactEmail": "hello@aiwebstyle.com",
   "adsenseClient": "ca-pub-6334847497116545",

@@ -2364,3 +2364,34 @@ html.search-open, html.search-open body { overflow: hidden; }
     }
 }
 
+
+/* ---------- 页面署名（build-head 注入）----------
+   作者 + 更新时间，放在 h1 下面。刻意不加透明度：这站的对比度检查把正文压在 ≥4.5:1，
+   .85rem 的小字更经不起再降一档，层级靠字号和字距做，不靠灰度。
+   时间与 JSON-LD 的 dateModified 同一份数据，两边不会对不上。 */
+.page-byline {
+    /* 不用 flex：风格页的 header 是居中的，recipe/compare 是左对齐的。
+       块级 + text-align: inherit 才能两种版式都跟着走，否则署名会挂在左边缘。 */
+    margin: .55rem 0 0;
+    font-size: .85rem;
+    line-height: 1.5;
+    letter-spacing: .01em;
+    text-align: inherit;
+    /* 用 inherit 而不是 --text-color：风格页的 header 是深底白字（--header-text-color），
+       正文墨色压上去只有 2:1 左右。inherit 让署名自动跟随所在版式的字色。 */
+    color: inherit;
+}
+
+.page-byline a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.page-byline time { font-variant-numeric: tabular-nums; }
+
+.page-byline-dot {
+    margin: 0 .5em;
+    opacity: .55;
+}

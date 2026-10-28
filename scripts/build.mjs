@@ -1133,7 +1133,8 @@ const siteSeo = seoBlock({
         },
         // 站内除了 Article.publisher 里内嵌的那个名字，没有独立的 Organization 实体。
         // 独立出来之后各页的 publisher 可以指向同一个 @id，Google 才认得出「这些内容属于同一家」。
-        // sameAs 留空：仓库是私有的、也没有可关联的公开主页，指一个 404 反而减分。
+        // sameAs 挂两个可验证的外部身份：GitHub 账号主页 + 公开仓库（2026-10-28 由私有转公开）。
+        // 私有仓库地址会 404，因此只在公开之后才写入。
         {
           '@type': 'Organization',
           '@id': `${SITE}/#organization`,
@@ -1147,6 +1148,7 @@ const siteSeo = seoBlock({
             height: 180,
           },
           email: site.contactEmail,
+          sameAs: ['https://github.com/bomber-ql', 'https://github.com/bomber-ql/aiwebstyle.com'],
           description: `An independent, ad-supported reference library of web design styles: ${styles.length} styles with tokens and failure cases, ${previews.length} live previews, ${motions.length} motion patterns and ${recipeList.length} whole-page prompts.`,
         },
       ],

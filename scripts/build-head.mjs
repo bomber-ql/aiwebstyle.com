@@ -11,6 +11,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { SITE, BRAND, OG_DEFAULT, fitTitle } from './lib/seo.mjs';
 import { brandInner, searchButton } from './lib/nav.mjs';
 
@@ -48,6 +50,114 @@ const ORG = {
   url: `${SITE}/`,
   logo: { '@type': 'ImageObject', url: `${SITE}/img/apple-touch-icon.png`, width: 180, height: 180 },
 };
+
+/* ---------- 真实日期 ----------
+   以前 datePublished / dateModified 一律填「站点最后更新日」，等于每次构建给全站盖今天，
+   日期不再携带任何信息。现在按页面内容指纹记账（data/page-dates.json）：
+     · 内容没变 → 沿用上次记录的日期，构建一百次也不动
+     · 内容变了 → 只把这一页的 dateModified 推到今天
+   指纹刻意排除日期字段与署名块，否则记账自己会把自己推翻（改日期 → 指纹变 → 再改日期）。
+   初始首发的 published 从 git 第一次提交那天取，比全站填同一个日子更接近事实。 */
+const TODAY = (() => {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+})();
+
+const DATES_FILE = 'data/page-dates.json';
+const dates = exists(DATES_FILE) ? json(DATES_FILE) : {};
+
+function readGitDates() {
+  const map = new Map();
+  try {
+    const out = execFileSync(
+      'git',
+      ['log', '--reverse', '--date=short', '--pretty=format:@%ad', '--name-only'],
+      { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    let cur = null;
+    for (const line of out.split('\n')) {
+      const s = line.trim();
+      if (!s) continue;
+      if (s.startsWith('@')) { cur = s.slice(1); continue; }
+      if (!cur) continue;
+      // --reverse：文件第一次出现即最早提交
+      if (!map.has(s)) map.set(s, { first: cur, last: cur });
+      else map.get(s).last = cur;
+    }
+  } catch {
+    /* 没有 git（或不是仓库）就退回默认日期 */
+  }
+  return map;
+}
+const gitDates = readGitDates();
+
+const DATE_FIELD_RE = /"(datePublished|dateModified)":"[^"]*"/g;
+// 摘除范围必须和插入时加的东西完全对称（换行 + 缩进 + 块），否则每跑一次就少一个换行，
+// 页面结构会一点点塌下去，指纹也就永远对不上。
+const BYLINE_RE = /\n[ \t]*<!-- build:byline -->[\s\S]*?<!-- \/build:byline -->/;
+const fingerprint = (html) =>
+  crypto
+    .createHash('sha256')
+    .update(html.replace(BYLINE_RE, '').replace(DATE_FIELD_RE, '"$1":""'))
+    .digest('hex')
+    .slice(0, 16);
+
+/** 一页的日期：没记录 → 用 git 首发日 + 今天；指纹没变 → 原样沿用；变了 → 只推 modified */
+function datesFor(rel, fp) {
+  const rec = dates[rel];
+  const git = gitDates.get(rel);
+  const first = (git && git.first) || PUBLISHED;
+  if (!rec) return { published: first, modified: TODAY, changed: true };
+  // 指纹只覆盖页面内容（日期与署名已排除），所以重建一百次也不会推动日期
+  if (rec.hash === fp) {
+    return { published: rec.published || first, modified: rec.modified || TODAY, changed: false };
+  }
+  return { published: rec.published || first, modified: TODAY, changed: true };
+}
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const humanDate = (iso) => {
+  const [y, m, d] = String(iso).split('-').map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+};
+
+/* ---------- 署名 ----------
+   站点是独立资料库，作者默认是组织（AI Web Style）。配了 data/site.json 的 author.name
+   就切成具名作者（Person + sameAs），署名块与 JSON-LD 用同一份信息，两边不会打架。 */
+const AUTHOR = (() => {
+  const a = site.author || {};
+  if (!a.name) return null;
+  const p = { '@type': 'Person', '@id': `${SITE}/#author`, name: a.name };
+  if (a.jobTitle) p.jobTitle = a.jobTitle;
+  p.url = a.url || `${SITE}/about.html`;
+  if (Array.isArray(a.sameAs) && a.sameAs.length) p.sameAs = a.sameAs;
+  return p;
+})();
+
+// 没有具名作者时，author 指向首页那个 Organization 实体（同一个 @id），
+// 而不是每页再写一个同名的匿名组织。
+const authorLd = () => AUTHOR || ORG;
+const authorInner = () =>
+  AUTHOR
+    ? `<span class="page-byline-by">By <a href="${escAttr(AUTHOR.url)}">${escAttr(AUTHOR.name)}</a></span>`
+    : `<span class="page-byline-by">Maintained by ${escAttr(BRAND)}</span>`;
+
+function injectByline(html, modified) {
+  const block = `<!-- build:byline --><p class="page-byline">${authorInner()}<span class="page-byline-dot" aria-hidden="true">·</span><time datetime="${modified}">Updated ${humanDate(modified)}</time></p><!-- /build:byline -->`;
+  // 每次都先摘掉旧块再按统一位置重放：位置只由「h1 + 导语」决定，
+  // 不会因为第一次插在哪就永远留在哪（改了规则也不会出现新旧两种排版并存）。
+  const clean = html.replace(BYLINE_RE, '');
+  if (/<\/h1>\s*<p[^>]*>[\s\S]*?<\/p>/.test(clean)) {
+    return clean.replace(/(<\/h1>\s*<p[^>]*>[\s\S]*?<\/p>)/, `$1\n            ${block}`);
+  }
+  return clean.replace(/(<\/h1>)/, `$1\n            ${block}`);
+}
+
+const applyDates = (html, published, modified) =>
+  html
+    .replace(/"datePublished":"[^"]*"/g, `"datePublished":"${published}"`)
+    .replace(/"dateModified":"[^"]*"/g, `"dateModified":"${modified}"`);
 
 const SECTIONS = {
   styles: { name: 'Styles', url: `${SITE}/styles/index.html` },
@@ -267,14 +377,17 @@ function enrichSchema(html, meta) {
 
     let changed = false;
     const put = (k, v) => { if (obj[k] === undefined && v) { obj[k] = v; changed = true; } };
+    // 作者与出版方由本脚本统一管理：改了 site.json 要能覆盖上一次写进去的值
+    const force = (k, v) => { if (JSON.stringify(obj[k]) !== JSON.stringify(v)) { obj[k] = v; changed = true; } };
 
     put('inLanguage', 'en');
     if (isArticle || isHowTo) {
       put('image', [meta.image]);
-      put('datePublished', PUBLISHED);
-      put('dateModified', meta.updatedAt || UPDATED);
-      put('author', { '@type': 'Organization', name: BRAND, url: `${SITE}/` });
-      put('publisher', ORG);
+      // 日期先填占位值，主循环算完指纹后再统一覆盖（applyDates）
+      put('datePublished', meta.published || PUBLISHED);
+      put('dateModified', meta.modified || UPDATED);
+      force('author', authorLd());
+      force('publisher', ORG);
       const canonical = canonicalOf(html);
       if (canonical) put('mainEntityOfPage', { '@type': 'WebPage', '@id': canonical });
     }
@@ -493,6 +606,8 @@ let titles = 0;
 let heads = 0;
 let schemas = 0;
 let brands = 0;
+let dated = 0;
+let bumped = 0;
 let fontsTrimmed = 0;
 let fontFamiliesBefore = 0;
 let fontFamiliesAfter = 0;
@@ -568,10 +683,29 @@ for (const rel of pages) {
     if (t.after < t.before) { fontsTrimmed++; fontFamiliesBefore += t.before; fontFamiliesAfter += t.after; }
   }
 
+  // 5) 真实日期 + 署名（只处理带发布日期的页面：Article / HowTo）
+  //    指纹在写入日期与署名之前算，且把这两块排除在外，所以「重建但不改内容」不会推动日期。
+  if (/"datePublished"/.test(html)) {
+    const fp = fingerprint(html);
+    const d = datesFor(rel, fp);
+    dates[rel] = { published: d.published, modified: d.modified, hash: fp };
+    html = injectByline(applyDates(html, d.published, d.modified), d.modified);
+    dated++;
+    if (d.changed) bumped++;
+  }
+
   write(rel, html);
 }
 
+// 台账只保留现存页面，删掉的页面不留在里面
+const ledger = {};
+for (const rel of Object.keys(dates).sort()) {
+  if (pages.includes(rel)) ledger[rel] = dates[rel];
+}
+write(DATES_FILE, `${JSON.stringify(ledger, null, 2)}\n`);
+
 console.log(`✓ 标题规范化：改 ${titles} 个 | 品牌标：${brands} 页 | head 块：${heads} 页 | 结构化数据补全：${schemas} 处`);
+console.log(`✓ 日期台账：${dated} 页带日期，本次内容有变 ${bumped} 页 | 作者：${AUTHOR ? AUTHOR.name : `${BRAND}（组织）`}`);
 if (fontsTrimmed) {
   console.log(`✓ 字体按需：${fontsTrimmed} 个风格页，共 ${fontFamiliesBefore} → ${fontFamiliesAfter} 个字体家族`);
 }
