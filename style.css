@@ -2065,3 +2065,172 @@ body.theme-retro-pixel .legal h3 { font-size: .8rem; line-height: 1.7; }
     margin: 0 auto 3rem;
     padding: 1.6rem 1.25rem 0;
 }
+
+/* ===== 站内搜索（search.js） =====
+   导航右侧一个触发按钮 + 全屏浮层。浮层用固定深色，不跟主题走：
+   它是「工具层」，跟着 28 套主题变会让结果列表的对比度不可控。 */
+.nav-search {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    margin-left: .45rem;
+    padding: .38rem .6rem;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .04);
+    color: #c2cedb;
+    font: inherit;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.nav-search:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .3); color: #fff; }
+.nav-search svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.nav-search kbd {
+    font: 600 .66rem/1 ui-monospace, monospace;
+    padding: .18rem .3rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .1);
+    color: #9fb0c2;
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12vh 1rem 2rem;
+    background: rgba(6, 9, 13, .72);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+.search-panel {
+    width: min(660px, 100%);
+    background: #10161d;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+    overflow: hidden;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.search-icon { width: 16px; height: 16px; flex: 0 0 auto; fill: none; stroke: #7f8fa1; stroke-width: 2; stroke-linecap: round; }
+.search-input {
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: 0;
+    outline: 0;
+    color: #eef2f7;
+    font: inherit;
+    font-size: 1rem;
+}
+.search-input::placeholder { color: #7f8fa1; }
+.search-close {
+    font: 600 .64rem/1 ui-monospace, monospace;
+    letter-spacing: .06em;
+    color: #93a4b6;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 5px;
+    padding: .3rem .42rem;
+    cursor: pointer;
+}
+.search-results { list-style: none; margin: 0; padding: .4rem; max-height: min(56vh, 430px); overflow: auto; }
+.search-item { border-radius: 9px; }
+.search-item.is-active { background: rgba(124, 92, 255, .16); }
+.search-link { display: block; padding: .55rem .7rem; text-decoration: none; }
+.search-link:hover { text-decoration: none; }
+.search-row { display: flex; align-items: center; gap: .55rem; }
+.search-title { color: #eef2f7; font-weight: 600; font-size: .95rem; }
+.search-title mark { background: rgba(124, 92, 255, .38); color: #fff; border-radius: 3px; padding: 0 .12em; }
+.search-badge {
+    font: 600 .62rem/1 ui-monospace, monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9fb0c2;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 4px;
+    padding: .2rem .32rem;
+    white-space: nowrap;
+}
+.search-desc { display: block; margin-top: .18rem; color: #93a4b6; font-size: .83rem; line-height: 1.45; }
+.search-empty { padding: 1rem .8rem; color: #93a4b6; font-size: .9rem; }
+.search-hint { margin: 0; padding: .55rem 1rem .75rem; color: #7f8fa1; font-size: .74rem; border-top: 1px solid rgba(255, 255, 255, .06); }
+html.search-open, html.search-open body { overflow: hidden; }
+
+@media (max-width: 760px) {
+    .site-nav .nav-inner { position: relative; }
+    .nav-search { position: absolute; top: .5rem; right: var(--home-pad, 1rem); margin: 0; padding: .42rem; }
+    .nav-search .nav-search-label, .nav-search kbd { display: none; }
+    .search-overlay { padding-top: 8vh; }
+    .search-results { max-height: 62vh; }
+}
+
+/* ===== 风格选择器（/styles/ 顶部） =====
+   三问三答给 3 个候选，用主题变量上色，所以随机主题下也不会翻车；
+   命中卡片只加一圈 outline，不隐藏其余卡片 —— 用户还能继续横向比较。 */
+.picker {
+    margin: 1.4rem 0 2.2rem;
+    padding: clamp(1.1rem, 2.4vw, 1.6rem);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-border-radius, 12px);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+.picker-kicker {
+    margin: 0 0 .35rem;
+    font: 600 .72rem/1 ui-monospace, monospace;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .62;
+}
+.picker-lede { margin: 0 0 1rem; font-size: .92rem; line-height: 1.6; opacity: .82; max-width: 62ch; }
+.picker-form { display: flex; flex-wrap: wrap; gap: .8rem; align-items: flex-end; }
+.picker-field {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    opacity: .8;
+}
+.picker-field select {
+    font: inherit;
+    font-size: .92rem;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: .45rem .55rem;
+    min-width: 11.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--page-bg);
+    color: var(--text-color);
+}
+.picker-actions { display: flex; align-items: center; gap: .7rem; }
+.picker-reset {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--link-color);
+    font: inherit;
+    font-size: .85rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.picker-out { margin: 1rem 0 0; font-size: .93rem; line-height: 1.6; }
+.picker-out a { color: var(--link-color); font-weight: 600; }
+.card.is-pick { outline: 2px solid var(--link-color); outline-offset: 3px; }
+
+@media (max-width: 680px) {
+    .picker-field { flex: 1 1 100%; }
+    .picker-field select { width: 100%; min-width: 0; }
+}

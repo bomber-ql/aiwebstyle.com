@@ -42,5 +42,8 @@
     "aurora-ui": null
   },
   "contentPublished": "2026-10-27",
-  "contentUpdated": "2026-10-28"
+  "contentUpdated": "2026-10-28",
+  "analytics": {
+    "provider": "vercel"
+  }
 }

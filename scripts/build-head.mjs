@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { SITE, BRAND, OG_DEFAULT, fitTitle } from './lib/seo.mjs';
+import { brandInner, searchButton } from './lib/nav.mjs';
 
 const ROOT = process.cwd();
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -427,15 +428,49 @@ function trimFonts(rel, html, themeId) {
   };
 }
 
+/* ---------- 访问统计 ----------
+   之前全站一条统计都没有，AdSense 只有收入没有行为数据。
+   Vercel Web Analytics：无 cookie、不采集个人信息，因此不需要额外的同意横幅。
+   换 Cloudflare Web Analytics 时把 site.json 的 provider 改成 cloudflare 并填 token 即可。
+   预览页（previews/*）是 iframe demo，不计入，避免一次访问算两遍。 */
+const ANALYTICS = site.analytics || { provider: 'none' };
+
+function analyticsBlock() {
+  if (ANALYTICS.provider === 'vercel') {
+    return [
+      '<!-- build:analytics -->',
+      `<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>`,
+      `<script defer src="/_vercel/insights/script.js"></script>`,
+      '<!-- /build:analytics -->',
+    ].join('\n    ');
+  }
+  if (ANALYTICS.provider === 'cloudflare' && ANALYTICS.token) {
+    return [
+      '<!-- build:analytics -->',
+      `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${ANALYTICS.token}"}'></script>`,
+      '<!-- /build:analytics -->',
+    ].join('\n    ');
+  }
+  return '';
+}
+
+const ANALYTICS_RE = /[ \t]*<!-- build:analytics -->[\s\S]*?<!-- \/build:analytics -->\n?/;
+
+/* ---------- 站内搜索 ----------
+   导航右侧一个触发按钮；索引与浮层逻辑在 /search.js，首次唤起的空闲时段才拉索引。
+   按钮放在 .nav-links 之后（同一行最右），手机端在媒体查询里浮到品牌行右侧。 */
+const SEARCH_BTN = searchButton();
+const NAV_LINKS_RE = /(<div class="nav-links">[\s\S]*?<\/div>)/;
+const SEARCH_SCRIPT = `<!-- build:search -->
+    <script src="/search.js" defer></script>
+    <!-- /build:search -->`;
+const SEARCH_SCRIPT_RE = /[ \t]*<!-- build:search -->[\s\S]*?<!-- \/build:search -->\n?/;
+
 /* ---------- 导航品牌标 ----------
    原来是纯文字，宽屏上左端只有一个词，压不住整条导航。
    这里换成「方块标 + 文字」的组合：标是内联 SVG（不额外发请求），
    形状与 img/favicon.svg、og:image 同源，三处看到的是同一个记号。 */
-const NAV_MARK = `<svg class="nav-mark" viewBox="13 13 70 70" aria-hidden="true" focusable="false">
-                    <rect x="16" y="16" width="46" height="46" rx="10" fill="#7c5cff"/>
-                    <rect x="34" y="34" width="46" height="46" rx="10" fill="none" stroke="#f4f1ea" stroke-width="9"/>
-                </svg>`;
-const BRAND_INNER = `${NAV_MARK}<span class="nav-brand-text">AI Web Style</span>`;
+const BRAND_INNER = brandInner();
 const BRAND_RE = /(<a class="nav-brand"[^>]*>)([\s\S]*?)(<\/a>)/;
 
 /* ---------- 主流程 ---------- */
@@ -475,6 +510,24 @@ for (const rel of pages) {
     const before = html;
     html = html.replace(BRAND_RE, `$1${BRAND_INNER}$3`);
     if (html !== before) brands++;
+  }
+
+  // 1.8) 访问统计（预览 demo 页不计）
+  const anBlock = rel.startsWith('previews/') ? '' : analyticsBlock();
+  if (ANALYTICS_RE.test(html)) {
+    html = html.replace(ANALYTICS_RE, anBlock ? `${anBlock}\n` : '');
+  } else if (anBlock) {
+    html = html.replace('</head>', `    ${anBlock}\n</head>`);
+  }
+
+  // 1.9) 站内搜索：导航按钮 + 脚本（预览 demo 页不需要）
+  if (!rel.startsWith('previews/')) {
+    if (html.indexOf('data-search-open') === -1 && NAV_LINKS_RE.test(html)) {
+      html = html.replace(NAV_LINKS_RE, `$1\n                ${SEARCH_BTN}`);
+    }
+    if (html.indexOf('/search.js') === -1) {
+      html = html.replace('</head>', `    ${SEARCH_SCRIPT}\n</head>`);
+    }
   }
 
   // 2) favicon + 社交图 + 面包屑

@@ -17,6 +17,7 @@ import {
   validateCompares,
 } from './lib/validate.mjs';
 import { clipMeta } from './lib/seo.mjs';
+import { brandLink, searchButton } from './lib/nav.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -319,7 +320,7 @@ function injectNav(rel) {
   const nav = `    <!-- build:nav -->
     <nav class="site-nav" aria-label="Primary">
         <div class="nav-inner">
-            <a class="nav-brand" href="${up}index.html">AI Web Style<span class="nav-brand-sub">gallery · motion · prompts</span></a>
+            ${brandLink(up)}
             <div class="nav-links">
                 <a href="${up}styles/index.html"${act(section === 'home' || section === 'styles')}>Styles</a>
                 <a href="${up}previews/index.html"${act(section === 'previews')}>Previews</a>
@@ -327,6 +328,7 @@ function injectNav(rel) {
                 <a href="${up}recipes/index.html"${act(section === 'recipes')}>Prompts</a>
                 <a href="${up}about.html"${act(section === 'about')}>About</a>
             </div>
+            ${searchButton()}
         </div>
     </nav>
     <!-- /build:nav -->`;
@@ -497,6 +499,146 @@ ${codeFor(page)}
     count++;
   }
   return count;
+}
+
+/* ---------- 5.6 风格选择器（/styles/ 页顶部） ----------
+   28 张卡片平铺，第一次来的人不知道从哪看起。三个问题各选一项，
+   给 3 个候选（不清空其余卡片，只是高亮 + 滚动过去）。
+   画像数据在 data/picker.json，加风格时补一条即可。 */
+
+function buildPicker() {
+  const rel = 'styles/index.html';
+  if (!exists(rel)) return 0;
+  if (!exists('data/picker.json')) return 0;
+
+  const traits = JSON.parse(read('data/picker.json'));
+  delete traits._note;
+  const known = new Set(styles.map((s) => s.id));
+  const map = {};
+  for (const [id, t] of Object.entries(traits)) if (known.has(id)) map[id] = t;
+  if (!Object.keys(map).length) return 0;
+
+  const block = `<!-- build:picker -->
+        <section class="picker" id="style-picker" aria-labelledby="picker-h">
+            <p class="picker-kicker" id="picker-h">Not sure which style?</p>
+            <p class="picker-lede">Three answers, three candidates. Everything else stays on the page — nothing is filtered out.</p>
+            <form class="picker-form" id="picker-form">
+                <label class="picker-field">
+                    <span>What are you building</span>
+                    <select name="fit">
+                        <option value="">Any</option>
+                        <option value="marketing">Landing / campaign</option>
+                        <option value="product">Product / dashboard</option>
+                        <option value="content">Content / blog</option>
+                        <option value="commerce">Shop / product page</option>
+                        <option value="portfolio">Portfolio / studio</option>
+                    </select>
+                </label>
+                <label class="picker-field">
+                    <span>How should it feel</span>
+                    <select name="tone">
+                        <option value="">Any</option>
+                        <option value="calm">Calm</option>
+                        <option value="bold">Bold</option>
+                        <option value="playful">Playful</option>
+                        <option value="refined">Refined</option>
+                    </select>
+                </label>
+                <label class="picker-field">
+                    <span>How much per screen</span>
+                    <select name="density">
+                        <option value="">Any</option>
+                        <option value="low">Sparse</option>
+                        <option value="medium">Balanced</option>
+                        <option value="high">Dense</option>
+                    </select>
+                </label>
+                <span class="picker-actions">
+                    <button class="btn btn-primary" type="submit">Show 3 matches</button>
+                    <button class="picker-reset" type="button" id="picker-reset">Reset</button>
+                </span>
+            </form>
+            <p class="picker-out" id="picker-out" hidden></p>
+        </section>
+        <script>
+        (function () {
+            var TRAITS = ${JSON.stringify(map)};
+            var form = document.getElementById('picker-form');
+            var out = document.getElementById('picker-out');
+            if (!form || !out) return;
+            var cards = [].slice.call(document.querySelectorAll('.card-grid .card'));
+
+            function cardOf(id) { return document.querySelector('.card[data-style-id="' + id + '"]'); }
+            function labelOf(id) {
+                var h = cardOf(id) && cardOf(id).querySelector('h2, h3');
+                return h ? h.textContent.trim() : id;
+            }
+            function score(t, want) {
+                var s = 0;
+                if (want.fit && (t.fit || []).indexOf(want.fit) > -1) s += 3;
+                if (want.tone && t.tone === want.tone) s += 2;
+                if (want.density && t.density === want.density) s += 1;
+                return s;
+            }
+            function clear() {
+                cards.forEach(function (c) { c.classList.remove('is-pick'); });
+                out.hidden = true;
+                out.innerHTML = '';
+            }
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var fd = new FormData(form);
+                var want = { fit: fd.get('fit'), tone: fd.get('tone'), density: fd.get('density') };
+                if (!want.fit && !want.tone && !want.density) { clear(); return; }
+
+                var ranked = Object.keys(TRAITS)
+                    .map(function (id) { return { id: id, s: score(TRAITS[id], want) }; })
+                    .filter(function (x) { return x.s > 0; })
+                    .sort(function (a, b) { return b.s - a.s; })
+                    .slice(0, 3);
+
+                cards.forEach(function (c) { c.classList.remove('is-pick'); });
+                ranked.forEach(function (x) {
+                    var c = cardOf(x.id);
+                    if (c) c.classList.add('is-pick');
+                });
+
+                if (!ranked.length) {
+                    out.textContent = 'No style matches all three — loosen one answer and try again.';
+                } else {
+                    // Build links as DOM nodes, not HTML strings: no escaping traps, and link checkers stop flagging the template
+                    out.textContent = 'Closest match' + (ranked.length > 1 ? 'es' : '') + ': ';
+                    ranked.forEach(function (x, i) {
+                        if (i) out.appendChild(document.createTextNode(' · '));
+                        var a = document.createElement('a');
+                        a.href = x.id + '.html';
+                        a.textContent = labelOf(x.id);
+                        out.appendChild(a);
+                    });
+                }
+                out.hidden = false;
+                var first = document.querySelector('.card.is-pick');
+                if (first && first.scrollIntoView) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+            document.getElementById('picker-reset').addEventListener('click', function () {
+                clear();
+                form.reset();
+            });
+        })();
+        </script>
+        <!-- /build:picker -->`;
+
+  let html = read(rel);
+  const PICK_RE = /[ \t]*<!-- build:picker -->[\s\S]*?<!-- \/build:picker -->\n?/;
+  if (PICK_RE.test(html)) {
+    html = html.replace(PICK_RE, block + '\n');
+  } else {
+    const at = html.indexOf('<!-- build:cards -->');
+    if (at === -1) return 0;
+    html = html.slice(0, at) + block + '\n        ' + html.slice(at);
+  }
+  write(rel, html);
+  return Object.keys(map).length;
 }
 
 /* ---------- 6. 动效索引渲染 ---------- */
@@ -933,6 +1075,7 @@ buildHomeStats();
 buildHomeNames();
 buildHomeSections();
 buildHomeFeatured();
+const pickerCount = buildPicker();
 const related = buildRelated();
 
 const gallerySeo = seoBlock({
@@ -1289,6 +1432,7 @@ for (const rel of allHtml) {
 
 buildSitemap();
 
+console.log(`✓ 风格选择器：${pickerCount} 个风格有画像`);
 console.log(`✓ 首页预渲染：${styles.length} 张卡片${cardLinks ? `（补 ${cardLinks} 个卡片样式链接）` : ''} | 随机风格池：${styles.length} 套 / 应用页：${themedPages} 个`);
 console.log(`✓ 相关链接：风格页 ${related.stylePages} / 对比页 ${related.comparePages} / 动效页 ${related.motionPages}`);
 console.log(`✓ 详情页 SEO：${n} 个`);

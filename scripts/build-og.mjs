@@ -103,17 +103,23 @@ for (const [size, file] of [[96, 'favicon-96.png'], [180, 'apple-touch-icon.png'
 // 按 mtime 比会把 29 张图全部重截一遍（每张一次 Chrome 启动，几十秒白花）。
 const MANIFEST = path.join(OG_DIR, '.manifest.json');
 const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : {};
-const cssStamp = fs.existsSync(path.join(ROOT, 'style.css'))
-  ? crypto.createHash('sha1').update(fs.readFileSync(path.join(ROOT, 'style.css'))).digest('hex').slice(0, 16)
-  : 'none';
+// 只对「该主题用到的 CSS」做指纹：整份 style.css 一改（比如调搜索框样式）
+// 就把 29 张社交图全部重截，纯属浪费。
+const STYLE_CSS = fs.existsSync(path.join(ROOT, 'style.css')) ? fs.readFileSync(path.join(ROOT, 'style.css'), 'utf8') : '';
+const globalStamp = crypto.createHash('sha1').update(STYLE_CSS.slice(0, 6000)).digest('hex').slice(0, 10);
+function themeStamp(id) {
+  const re = new RegExp('[^{}]*body\\.theme-' + id + '[^{}]*\\{[^{}]*\\}', 'g');
+  const parts = [...STYLE_CSS.matchAll(re)].map((m) => m[0]).join('\n');
+  return crypto.createHash('sha1').update(parts || 'none').digest('hex').slice(0, 10);
+}
 
 function fingerprint(parts) {
   return crypto.createHash('sha1').update(parts.join('\u0000')).digest('hex').slice(0, 16);
 }
 
 function styleHash(id) {
-  const parts = [fs.readFileSync(path.join(ROOT, 'previews', `${id}.html`), 'utf8'), String(cssStamp)];
-  const card = path.join(ROOT, 'card-styles', `${id}.css`);
+  const parts = [fs.readFileSync(path.join(ROOT, 'previews', `${id}.html`), 'utf8'), themeStamp(id)];
+  const card = path.join(ROOT, 'card-styles', `${id}-card.css`);
   if (fs.existsSync(card)) parts.push(fs.readFileSync(card, 'utf8'));
   return fingerprint(parts);
 }
@@ -136,7 +142,7 @@ for (const id of styleIds) {
 /* ---------- 3. 默认图（首页首屏，锁一套克制配色，缩略图里更耐看） ---------- */
 const defOut = path.join(OG_DIR, 'default.jpg');
 const defSrc = path.join(ROOT, 'index.html');
-const defHash = fingerprint([fs.readFileSync(defSrc, 'utf8'), String(cssStamp)]);
+const defHash = fingerprint([fs.readFileSync(defSrc, 'utf8'), globalStamp]);
 if (force || !fs.existsSync(defOut) || manifest.__default !== defHash) {
   const tmp = path.join(OG_DIR, '_default.png');
   const url = 'file://' + defSrc + '?style=editorial';

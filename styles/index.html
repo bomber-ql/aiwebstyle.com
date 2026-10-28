@@ -69,6 +69,13 @@
     <meta name="twitter:image:alt" content="All web design styles">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiwebstyle.com/"},{"@type":"ListItem","position":2,"name":"Styles","item":"https://www.aiwebstyle.com/styles/index.html"}]}</script>
     <!-- /build:head -->
+<!-- build:analytics -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- /build:analytics -->
+    <!-- build:search -->
+    <script src="/search.js" defer></script>
+    <!-- /build:search -->
 </head>
 <body>
     <!-- build:nav -->
@@ -85,6 +92,11 @@
                 <a href="../recipes/index.html">Prompts</a>
                 <a href="../about.html">About</a>
             </div>
+            <button class="nav-search" type="button" data-search-open aria-label="Search this site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.6 16.6 L21 21"/></svg>
+                    <span class="nav-search-label">Search</span>
+                    <kbd>/</kbd>
+                </button>
         </div>
     </nav>
     <!-- /build:nav --><header>
@@ -99,7 +111,116 @@
     <!-- Main content area where style cards will be loaded -->
     <!-- main needs both an id and a class -->
     <main class="container card-grid-container" id="main-content">
-<!-- build:cards -->
+<!-- build:picker -->
+        <section class="picker" id="style-picker" aria-labelledby="picker-h">
+            <p class="picker-kicker" id="picker-h">Not sure which style?</p>
+            <p class="picker-lede">Three answers, three candidates. Everything else stays on the page — nothing is filtered out.</p>
+            <form class="picker-form" id="picker-form">
+                <label class="picker-field">
+                    <span>What are you building</span>
+                    <select name="fit">
+                        <option value="">Any</option>
+                        <option value="marketing">Landing / campaign</option>
+                        <option value="product">Product / dashboard</option>
+                        <option value="content">Content / blog</option>
+                        <option value="commerce">Shop / product page</option>
+                        <option value="portfolio">Portfolio / studio</option>
+                    </select>
+                </label>
+                <label class="picker-field">
+                    <span>How should it feel</span>
+                    <select name="tone">
+                        <option value="">Any</option>
+                        <option value="calm">Calm</option>
+                        <option value="bold">Bold</option>
+                        <option value="playful">Playful</option>
+                        <option value="refined">Refined</option>
+                    </select>
+                </label>
+                <label class="picker-field">
+                    <span>How much per screen</span>
+                    <select name="density">
+                        <option value="">Any</option>
+                        <option value="low">Sparse</option>
+                        <option value="medium">Balanced</option>
+                        <option value="high">Dense</option>
+                    </select>
+                </label>
+                <span class="picker-actions">
+                    <button class="btn btn-primary" type="submit">Show 3 matches</button>
+                    <button class="picker-reset" type="button" id="picker-reset">Reset</button>
+                </span>
+            </form>
+            <p class="picker-out" id="picker-out" hidden></p>
+        </section>
+        <script>
+        (function () {
+            var TRAITS = {"skeuomorphism":{"fit":["product","portfolio"],"tone":"refined","density":"medium"},"swiss-style":{"fit":["content","marketing"],"tone":"calm","density":"medium"},"grunge":{"fit":["portfolio","marketing"],"tone":"bold","density":"high"},"modern-tech":{"fit":["product","marketing"],"tone":"calm","density":"medium"},"brutalism":{"fit":["portfolio","marketing"],"tone":"bold","density":"high"},"retro-90s":{"fit":["portfolio","content"],"tone":"playful","density":"high"},"retro-y2k":{"fit":["portfolio","marketing"],"tone":"playful","density":"high"},"retro-pixel":{"fit":["portfolio","commerce"],"tone":"playful","density":"high"},"illustration":{"fit":["content","commerce"],"tone":"playful","density":"medium"},"3d-interactive":{"fit":["marketing","product"],"tone":"bold","density":"medium"},"dark-mode":{"fit":["product","content"],"tone":"calm","density":"medium"},"bold-typography":{"fit":["marketing","portfolio"],"tone":"bold","density":"low"},"glassmorphism":{"fit":["product","marketing"],"tone":"calm","density":"medium"},"aurora-ui":{"fit":["product","marketing"],"tone":"calm","density":"low"},"natural-organic":{"fit":["content","commerce"],"tone":"calm","density":"medium"},"monochromatic":{"fit":["content","portfolio"],"tone":"refined","density":"low"},"maximalism":{"fit":["portfolio","content"],"tone":"playful","density":"high"},"claymorphism":{"fit":["product","commerce"],"tone":"playful","density":"medium"},"abstract-geometric":{"fit":["marketing","portfolio"],"tone":"bold","density":"medium"},"sustainable-green":{"fit":["content","commerce"],"tone":"calm","density":"medium"},"art-deco":{"fit":["portfolio","commerce"],"tone":"refined","density":"medium"},"neomorphism":{"fit":["product"],"tone":"calm","density":"low"},"bento-grid":{"fit":["product","content"],"tone":"calm","density":"medium"},"liquid-glass":{"fit":["product","marketing"],"tone":"refined","density":"low"},"editorial":{"fit":["content"],"tone":"refined","density":"medium"},"neo-brutalism":{"fit":["marketing","portfolio"],"tone":"bold","density":"high"},"neo-swiss":{"fit":["content","marketing"],"tone":"refined","density":"medium"},"acid-graphics":{"fit":["marketing","portfolio"],"tone":"bold","density":"high"}};
+            var form = document.getElementById('picker-form');
+            var out = document.getElementById('picker-out');
+            if (!form || !out) return;
+            var cards = [].slice.call(document.querySelectorAll('.card-grid .card'));
+
+            function cardOf(id) { return document.querySelector('.card[data-style-id="' + id + '"]'); }
+            function labelOf(id) {
+                var h = cardOf(id) && cardOf(id).querySelector('h2, h3');
+                return h ? h.textContent.trim() : id;
+            }
+            function score(t, want) {
+                var s = 0;
+                if (want.fit && (t.fit || []).indexOf(want.fit) > -1) s += 3;
+                if (want.tone && t.tone === want.tone) s += 2;
+                if (want.density && t.density === want.density) s += 1;
+                return s;
+            }
+            function clear() {
+                cards.forEach(function (c) { c.classList.remove('is-pick'); });
+                out.hidden = true;
+                out.innerHTML = '';
+            }
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var fd = new FormData(form);
+                var want = { fit: fd.get('fit'), tone: fd.get('tone'), density: fd.get('density') };
+                if (!want.fit && !want.tone && !want.density) { clear(); return; }
+
+                var ranked = Object.keys(TRAITS)
+                    .map(function (id) { return { id: id, s: score(TRAITS[id], want) }; })
+                    .filter(function (x) { return x.s > 0; })
+                    .sort(function (a, b) { return b.s - a.s; })
+                    .slice(0, 3);
+
+                cards.forEach(function (c) { c.classList.remove('is-pick'); });
+                ranked.forEach(function (x) {
+                    var c = cardOf(x.id);
+                    if (c) c.classList.add('is-pick');
+                });
+
+                if (!ranked.length) {
+                    out.textContent = 'No style matches all three — loosen one answer and try again.';
+                } else {
+                    // Build links as DOM nodes, not HTML strings: no escaping traps, and link checkers stop flagging the template
+                    out.textContent = 'Closest match' + (ranked.length > 1 ? 'es' : '') + ': ';
+                    ranked.forEach(function (x, i) {
+                        if (i) out.appendChild(document.createTextNode(' · '));
+                        var a = document.createElement('a');
+                        a.href = x.id + '.html';
+                        a.textContent = labelOf(x.id);
+                        out.appendChild(a);
+                    });
+                }
+                out.hidden = false;
+                var first = document.querySelector('.card.is-pick');
+                if (first && first.scrollIntoView) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+            document.getElementById('picker-reset').addEventListener('click', function () {
+                clear();
+                form.reset();
+            });
+        })();
+        </script>
+        <!-- /build:picker -->
+        <!-- build:cards -->
         <div class="card-grid">
             <div class="card" data-style-id="skeuomorphism">
                 <div class="card-content">

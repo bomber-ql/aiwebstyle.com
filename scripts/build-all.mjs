@@ -1,6 +1,7 @@
 // scripts/build-all.mjs
 // 统一构建入口。顺序有依赖，不要打乱：
 //   0) validate-data       结构校验。坏数据不进生成器，报错会指出是哪个条目缺哪个字段
+//   0.5) build-search      生成 search-index.json（⌘K 搜索用，纯前端读取）
 //   1) build-previews      预览页（build-styles 依赖它生成下载包）
 //   1.4) build-compares    对比页（依赖 previews/ 已存在）
 //   1.5) build-recipes     配方页（只写 recipes/*.html，不碰其他目录）
@@ -18,6 +19,7 @@ import process from 'node:process';
 
 const STEPS = [
     { script: 'validate-data.mjs', args: [], label: '数据校验（结构）' },
+    { script: 'build-search.mjs', label: '搜索索引' },
     { script: 'build-previews.mjs', label: '预览页' },
     { script: 'build-compares.mjs', label: '对比页' },
     { script: 'build-recipes.mjs', label: '配方页' },
