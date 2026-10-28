@@ -9,7 +9,7 @@
     box-shadow: 4px 4px 10px #a3b1c6, -4px -4px 10px #ffffff;
 }
 
-.theme-neomorphism .card[data-style-id='neomorphism'] h3 {
+.theme-neomorphism .card[data-style-id='neomorphism'] h2 {
     color: #5c5c5c;
 }
 

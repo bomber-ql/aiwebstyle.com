@@ -1,6 +1,6 @@
 /* Styles for Maximalism Card */
 .card[data-style-id="maximalism"] { background-color: #ffcc00; border: 3px dotted #ff00ff; border-radius: 0; box-shadow: 5px 5px 0 #00ffff; overflow: visible; }
-.card[data-style-id="maximalism"] h3 { font-family: var(--font-serif); color: #ff00ff; font-weight: bold; text-transform: uppercase; font-size: 1.3em; text-align: center; background-color: #00ff00; padding: 0.2em; }
+.card[data-style-id="maximalism"] h2 { font-family: var(--font-serif); color: #ff00ff; font-weight: bold; text-transform: uppercase; font-size: 1.3em; text-align: center; background-color: #00ff00; padding: 0.2em; }
 .card[data-style-id="maximalism"] .prompt-text { font-family: var(--font-mono); background-color: #fff; color: #000; border: 1px solid #000; font-size: 0.8em; line-height: 1.2; padding: 0.3em; }
 .card[data-style-id="maximalism"] .btn { font-family: var(--font-pixel); border-radius: 0; border: 2px solid #000; font-size: 0.8em; text-transform: uppercase; }
 .card[data-style-id="maximalism"] .btn:not(.btn-secondary) { background-color: #00ffff; color: #000 !important; }

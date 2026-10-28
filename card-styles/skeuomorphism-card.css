@@ -6,7 +6,7 @@
     border-radius: 6px;
     box-shadow: var(--skeuo-shadow-outset), 0 3px 5px rgba(0,0,0,0.2);
 }
-.card[data-style-id="skeuomorphism"] h3 { font-family: var(--font-serif); color: #5e3a1d; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
+.card[data-style-id="skeuomorphism"] h2 { font-family: var(--font-serif); color: #5e3a1d; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
 .card[data-style-id="skeuomorphism"] .prompt-text {
     background-color: #f5f5dc; /* Beige paper */
     color: #4a3c2a;

@@ -1,6 +1,6 @@
 /* Styles for Illustration Card */
 .card[data-style-id="illustration"] { background-color: #fffaf0; border: 2px dashed #f4a261; border-radius: 12px; }
-.card[data-style-id="illustration"] h3 { font-family: var(--font-montserrat); color: #e76f51; font-weight: 700; }
+.card[data-style-id="illustration"] h2 { font-family: var(--font-montserrat); color: #e76f51; font-weight: 700; }
 .card[data-style-id="illustration"] .prompt-text { background-color: #fefae0; color: #606c38; border: 1px solid #dda15e; }
 .card[data-style-id="illustration"] .btn { font-family: var(--font-montserrat); border-radius: 20px; }
 .card[data-style-id="illustration"] .btn:not(.btn-secondary) { background-color: #2a9d8f; color: white !important; }

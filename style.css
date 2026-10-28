@@ -2234,3 +2234,61 @@ html.search-open, html.search-open body { overflow: hidden; }
     .picker-field { flex: 1 1 100%; }
     .picker-field select { width: 100%; min-width: 0; }
 }
+
+/* ===== hero 两列：宽屏右侧「28 套配色一览」 =====
+   标题和正文都有 max-width，1920 下右半屏会空掉。这里放一块调色板：
+   每格是某套主题的底色 + 标题色，点进去就是对应风格页。
+   只在 ≥1080px 出现，窄屏保持原来的单列大字。 */
+.hero-palette { display: none; }
+
+@media (min-width: 1080px) {
+    .home-hero-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(300px, 23vw, 372px);
+        column-gap: clamp(2rem, 4vw, 4.5rem);
+        align-items: start;
+    }
+    .home-hero-top > * { grid-column: 1; }
+    /* 网格里默认会被拉满整列，chip 会变成一条长条 —— 让它按内容宽度靠左 */
+    .home-hero-top > .home-style-chip { justify-self: start; }
+    .home-hero-top > .hero-palette {
+        grid-column: 2;
+        grid-row: 1 / span 4;
+        align-self: center;
+        display: block;
+    }
+}
+
+.hero-palette-cap {
+    margin: 0 0 .7rem;
+    font: 600 .68rem/1.4 ui-monospace, monospace;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .55;
+}
+.hero-palette-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.hero-swatch {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    border-radius: 9px;
+    background: var(--sw-bg);
+    border: 1px solid rgba(128, 128, 128, .28);
+    transition: transform .16s ease, box-shadow .16s ease;
+}
+.hero-swatch::after {
+    content: '';
+    position: absolute;
+    inset: 32%;
+    border-radius: 3px;
+    background: var(--sw-fg);
+}
+.hero-swatch:hover { transform: translateY(-2px) scale(1.07); box-shadow: 0 6px 16px rgba(0, 0, 0, .2); }
+.hero-palette-more {
+    display: inline-block;
+    margin-top: .85rem;
+    font-size: .82rem;
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}

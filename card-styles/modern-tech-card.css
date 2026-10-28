@@ -5,7 +5,7 @@
     border-radius: 4px; /* Use new sharper radius */
     box-shadow: 0 3px 10px rgba(29, 35, 42, 0.08); /* Use new shadow */
 }
-.card[data-style-id="modern-tech"] h3 {
+.card[data-style-id="modern-tech"] h2 {
     font-family: var(--font-pop);
     color: #0b132b; /* Use new heading color */
     font-weight: 600;

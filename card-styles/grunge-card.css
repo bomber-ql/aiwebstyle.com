@@ -9,7 +9,7 @@
     transform: rotate(-0.5deg); /* Slight tilt */
 }
 .card[data-style-id="grunge"]:hover { transform: rotate(0.5deg) translateY(-3px); } /* Adjust hover */
-.card[data-style-id="grunge"] h3 {
+.card[data-style-id="grunge"] h2 {
     font-family: var(--font-grunge); color: #ccc; font-weight: normal;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5); text-transform: uppercase;
 }

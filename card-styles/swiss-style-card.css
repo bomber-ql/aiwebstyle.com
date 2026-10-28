@@ -2,7 +2,7 @@
 .card[data-style-id="swiss-style"] {
     background-color: #fff; border: 1px solid #e0e0e0; border-radius: 0; box-shadow: none;
 }
-.card[data-style-id="swiss-style"] h3 {
+.card[data-style-id="swiss-style"] h2 {
     font-family: var(--font-helvetica); font-weight: 700; /* Bold */
     font-size: 1.5em; line-height: 1.2; color: #111; text-transform: lowercase; /* Common in Swiss Style */
 }

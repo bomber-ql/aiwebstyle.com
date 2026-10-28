@@ -1,6 +1,6 @@
 /* Styles for Glassmorphism Card */
 .card[data-style-id="glassmorphism"] { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
-.card[data-style-id="glassmorphism"] h3,
+.card[data-style-id="glassmorphism"] h2,
 .card[data-style-id="glassmorphism"] .prompt-label { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .card[data-style-id="glassmorphism"] .prompt-text { background-color: rgba(0, 0, 0, 0.15); color: #f0f0f0; border-color: rgba(255, 255, 255, 0.1); }
 .card[data-style-id="glassmorphism"] .btn { border: 1px solid rgba(255, 255, 255, 0.3); }

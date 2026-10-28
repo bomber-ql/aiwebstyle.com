@@ -23,7 +23,7 @@
     z-index: 0;
 }
 .card[data-style-id="art-deco"] .card-content { z-index: 1; } /* Ensure content is above pattern */
-.card[data-style-id="art-deco"] h3 {
+.card[data-style-id="art-deco"] h2 {
     font-family: var(--font-pop); /* Use Poppins geometrically */
     font-weight: 600;
     color: #daa520; /* Goldenrod */

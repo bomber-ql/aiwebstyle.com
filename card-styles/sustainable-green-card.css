@@ -1,6 +1,6 @@
 /* Styles for Sustainable Green Card */
 .card[data-style-id="sustainable-green"] { background-color: #f0f4f0; border: 1px solid #c8d8c8; border-radius: 4px; box-shadow: none; }
-.card[data-style-id="sustainable-green"] h3 { font-family: var(--font-sans); color: #3c5242; font-weight: 400; }
+.card[data-style-id="sustainable-green"] h2 { font-family: var(--font-sans); color: #3c5242; font-weight: 400; }
 .card[data-style-id="sustainable-green"] .prompt-text { background-color: #e4eae4; color: #4a6a5a; border: none; font-size: 0.8em; }
 .card[data-style-id="sustainable-green"] .btn { font-family: var(--font-sans); border-radius: 4px; }
 .card[data-style-id="sustainable-green"] .btn:not(.btn-secondary) { background-color: #6b8e7a; color: white !important; }
