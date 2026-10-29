@@ -84,13 +84,13 @@ ${features}
 
         <section class="style-detail-section style-prompt">
             <h2>Example AI Prompt</h2>
-            <pre><code>${esc(s.prompt)}</code></pre>
+            <pre tabindex="0" role="region" aria-label="Example AI prompt, scrollable code block"><code>${esc(s.prompt)}</code></pre>
         </section>
 
         <section class="style-detail-section style-css">
             <h2>Theme CSS Snippets</h2>
             <p>${esc(s.cssNote)}</p>
-            <pre><code>${esc(s.themeCss)}</code></pre>
+            <pre tabindex="0" role="region" aria-label="Theme CSS variables, scrollable code block"><code>${esc(s.themeCss)}</code></pre>
         </section>
 
         <section class="style-detail-section style-fit">
